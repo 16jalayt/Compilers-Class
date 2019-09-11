@@ -11,7 +11,8 @@ Punctuation:
 :          
 (*       
 *)
-end_of_file
+NonExamples:
+{}&*[]
 
 Keywords:
 integer     
@@ -24,10 +25,23 @@ else
 not         
 and        
 or
-function  
+function
+NonExamples:
+Integer, bolean, while, potato
 
 Identifiers:
 main       
 print
+NonExamples:
+lambda, Main, truck
 
-Integers
+Integers:
+1
+457389
+-7
+NonExamples:
+1.3, float, >= 2^31
+
+end_of_file
+NonExamples:
+hello, \n, \r\n, \r
