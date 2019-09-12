@@ -1,22 +1,22 @@
 Punctuation:      RegEx:
-+               |       +
--               |       -
-*               |       *
-/               |       /
-<               |       <
-=               |       =
-(               |       "("(?!*)
-)               |       ")"
-,               |       ,
-:               |       :
-(*              |       (*
-*)              |       *)
++               Punctuation ::= + | - | * | / | < | =
+-                           | ( | ) | , | : | | (* | *)
+*
+/
+<
+=
+(
+)
+,
+:
+(*
+*)
 NonExamples:
 {}&*[]
 
 Keywords:
-integer         |      integer
-boolean    
+integer         Keywords ::= integer | boolean | true | false |if
+boolean                     | then | else | not | and | or | function
 true     
 false
 if          
@@ -29,14 +29,16 @@ function
 NonExamples:
 Integer, bolean, while, potato
 
-Identifiers:
+Identifiers:        Identifiers ::= main | print
 main       
 print
 NonExamples:
 lambda, Main, truck
 
 Integers:
-1                       | -?214748364[0-7]
+1                  Integers ::= ////////////////still a little fuzzy on this one
+
+                        | -?214748364[0-7]
                         | -?21474836[0-3][0-9] 
                         | -?2147483[0-5][0-9]{2}
                         | -?214748[0-2][0-9]{3}
