@@ -1,6 +1,6 @@
 Punctuation:      RegEx:
 +               Punctuation ::= + | - | * | / | < | =
--                           | ( | ) | , | : | | (* | *)
+-  (minus or neg)             | ( | ) | , | : | | (* | *)
 *
 /
 <
@@ -9,16 +9,12 @@ Punctuation:      RegEx:
 )
 ,
 :
-(*
-*)
 NonExamples:
 {}&*[]
 
 Keywords:
 integer         Keywords ::= integer | boolean | true | false |if
 boolean                     | then | else | not | and | or | function
-true     
-false
 if          
 then       
 else   
@@ -32,12 +28,13 @@ Integer, bolean, while, potato
 Identifiers:        Identifiers ::= main | print
 main       
 print
-NonExamples:
+true
+false
+
 lambda, Main, truck
 
 Integers:
-1                  Integers ::= ////////////////still a little fuzzy on this one
-                                | 214748364[0-7]{0, 1}
+1                  Integers ::=   214748364[0-7]{0, 1}
                                 | 21474836[0-3][0-9]{0, 1}
                                 | 2147483[7-9][0-9]{0, 1} 
                                 | 2147483[0-5][0-9]{0, 2}
