@@ -1,6 +1,6 @@
 Punctuation:      RegEx:
 +               Punctuation ::= + | - | * | / | < | =
--  (minus or neg)             | ( | ) | , | : | | (* | *)
+-  (minus or neg)             | ( | ) | , | :
 *
 /
 <
@@ -13,7 +13,7 @@ NonExamples:
 {}&*[]
 
 Keywords:
-integer         Keywords ::= integer | boolean | true | false |if
+integer         Keywords ::= integer | boolean  |if
 boolean                     | then | else | not | and | or | function
 if          
 then       
@@ -25,7 +25,7 @@ function
 NonExamples:
 Integer, bolean, while, potato
 
-Identifiers:        Identifiers ::= main | print
+Identifiers:        Identifiers ::= main | print | true | false
 main       
 print
 true
