@@ -19,7 +19,7 @@ public class Main
             String currentLine;
 
             while ((currentLine = br.readLine()) != null)
-                System.out.println(currentLine);
+                Scanner.getNextToken(currentLine);
         }
         catch (FileNotFoundException e)
         {
