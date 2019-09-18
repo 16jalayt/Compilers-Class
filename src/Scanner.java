@@ -74,4 +74,5 @@ public class Scanner
                 state0();
 
     }
+    //token class. type, value  string not enum. can do diff obj per type
 }
