@@ -17,9 +17,14 @@ public class Main
             BufferedReader br = new BufferedReader(new FileReader(file));
 
             String currentLine;
-
+            String fullFile = "";
+            //do pretty printing here
             while ((currentLine = br.readLine()) != null)
-                Scanner.getNextToken(currentLine);
+                fullFile += currentLine;
+
+            Scanner scan = new Scanner(fullFile);
+            System.out.println("Token returned: " + scan.next());
+
         }
         catch (FileNotFoundException e)
         {

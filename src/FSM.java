@@ -1,26 +1,26 @@
 public class FSM
 {
-    public static void state0( String word, int pos )
+    public static void state0( String prog, int pos )
     {
-        if ( pos >= word.length() )
-            System.out.println( "identifier " + word);
+        if ( pos >= prog.length() )
+            return;
         else
-            switch ( word.charAt(pos) )
+            switch ( prog.charAt(pos) )
             {
-                case 'i': state1( word, pos+1 ); break;
-                default: state0( word, pos+1 );
+                case 'i': state1( prog, pos+1 ); break;
+                default: state0( prog, pos+1 );
             }
     }
 
-    public static void state1( String word, int pos )
+    public static void state1( String prog, int pos )
     {
-        if ( pos >= word.length() )
-            System.out.println( "keyword if" );
+        if ( pos >= prog.length() )
+            return;
         else
-            switch ( word.charAt(pos) )
+            switch ( prog.charAt(pos) )
             {
-                case 'f': state1( word, pos+1 ); break;
-                default: state0( word, pos+1 );
+                case 'f': state1( prog, pos+1 ); break;
+                default: state0( prog, pos+1 );
             }
     }
 }
