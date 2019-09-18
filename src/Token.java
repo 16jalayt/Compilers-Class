@@ -1,11 +1,11 @@
 public class Token
 {//token class. type, value  string not enum. can do diff obj per type
-    public String value;
     public Type type;
     public enum Type
     {
         Punctuation, Keyword, Identifier, Integer, EOF, Uninit;
     }
+    public String value;
 
     public Token(Type typeInit, String valueInit)
     {

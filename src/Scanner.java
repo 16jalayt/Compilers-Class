@@ -41,19 +41,26 @@ public class Scanner
     //TODO: just create list to check?
     private static boolean isDelineater()
     {
-        //this code doesn't work for some reason
+        if ( pos >= prog.length() )
+        {
+            return true;
+        }
         if(prog.charAt(pos) == ' ')
             return true;
         else
             return false;
     }
-
-
+//TODO: figure out how to fail
+//0 is default state. Check positive criteria, then invalid tokens, then known valid. return identifier.
     private static void state0()
     {
         //purely to stop an exception from happening at end of file
         if ( pos >= prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
             return;
+        }
         else
             switch ( prog.charAt(pos) )
             {
@@ -62,11 +69,15 @@ public class Scanner
                 default: pos ++; state0();
             }
     }
-
+//i detected
     private static void state1()
     {
-        if ( pos >= prog.length() )
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
             return;
+        }
         else
             switch ( prog.charAt(pos) )
             {
@@ -77,8 +88,12 @@ public class Scanner
     //if accepted
     private static void state2()
     {
-        if ( pos >= prog.length() )
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
             return;
+        }
         else
             //if current char is whitespace accept if, otherwise could be iforsometing. Drop back to generic identifier.
             if(isDelineater())
@@ -95,16 +110,33 @@ public class Scanner
     //int accepted
     private static void state3()
     {
-        if ( pos >= prog.length() )
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
             return;
+        }
         else
             //TODO: make string builder here appening numbers until end
             if(isDelineater())
             {
+                //while loop looking forward with charAt() making sure not to go past prog.length
+                //use StringBuilder and append each digit as it is read
+                //put SB result in token.value
+                //make sure drop back to state 0 if find letter
+
                 //token.type = Token.Type.Intager;
                 //token.value = sb.toString();
                 return;
             }
+    }
+
+    //punctuation
+    private static void state4()
+    {
+        token.type = Token.Type.Punctuation;
+        token.value = String.valueOf(prog.charAt(pos));
+        return;
     }
 
 }
