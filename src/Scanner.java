@@ -176,5 +176,4 @@ public class Scanner
         token.value = String.valueOf(prog.charAt(pos-1));
         return;
     }
-
 }
