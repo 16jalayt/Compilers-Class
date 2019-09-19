@@ -1118,7 +1118,7 @@ public class Scanner
     }
     
     //Keyword function accepted
-    private static void state58()
+    private static void state57()
     {
         if ( pos > prog.length() )
         {
