@@ -93,6 +93,10 @@ public class Scanner
                 case '0': pos++; state26(); break;
                 case 'p': pos++; state28(); break;
                 case 't': pos++; state38(); break;
+
+                //non explicit identifiers
+
+                
                 default: pos ++; state0();
             }
     }
@@ -354,7 +358,6 @@ public class Scanner
             return;
         }
         else
-            //if current char is whitespace accept boolean
             if(isDelineater())
             {
                 token.type = Token.Type.Keyword;
@@ -426,7 +429,6 @@ public class Scanner
             return;
         }
         else
-            //if current char is whitespace accept boolean
             if(isDelineater())
             {
                 token.type = Token.Type.Keyword;
@@ -498,7 +500,6 @@ public class Scanner
             return;
         }
         else
-            //if current char is whitespace accept boolean
             if(isDelineater())
             {
                 token.type = Token.Type.Identifier;
@@ -553,7 +554,6 @@ public class Scanner
             return;
         }
         else
-            //if current char is whitespace accept boolean
             if(isDelineater())
             {
                 token.type = Token.Type.Keyword;
@@ -591,7 +591,6 @@ public class Scanner
             return;
         }
         else
-            //if current char is whitespace accept boolean
             if(isDelineater())
             {
                 token.type = Token.Type.Keyword;
@@ -680,7 +679,6 @@ public class Scanner
             return;
         }
         else
-            //if current char is whitespace accept boolean
             if(isDelineater())
             {
                 token.type = Token.Type.Identifier;
@@ -770,7 +768,6 @@ public class Scanner
             return;
         }
         else
-            //if current char is whitespace accept boolean
             if(isDelineater())
             {
                 token.type = Token.Type.Identifier;
@@ -843,7 +840,6 @@ public class Scanner
             return;
         }
         else
-            //if current char is whitespace accept boolean
             if(isDelineater())
             {
                 token.type = Token.Type.Keyword;
@@ -898,7 +894,6 @@ public class Scanner
             return;
         }
         else
-            //if current char is whitespace accept boolean
             if(isDelineater())
             {
                 token.type = Token.Type.Identifier;
@@ -1004,7 +999,6 @@ public class Scanner
             return;
         }
         else
-            //if current char is whitespace accept boolean
             if(isDelineater())
             {
                 token.type = Token.Type.Keyword;
@@ -1127,7 +1121,6 @@ public class Scanner
             return;
         }
         else
-            //if current char is whitespace accept boolean
             if(isDelineater())
             {
                 token.type = Token.Type.Keyword;
@@ -1136,5 +1129,39 @@ public class Scanner
             }
             else
                 state0();
-    }        
+    }    
+    
+    //accept non explicit identifier || have additional chr added to non explicit identifier
+    private static void state58()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+         if(isDelineater())
+         {
+             token.type = Token.Type.identifier;
+             token.value = "placeholder text for non explicit identifier";
+             return;
+         }
+            switch ( prog.charAt(pos) )
+            {
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_': 
+                pos++; state58(); break;
+                default: pos++; state0();
+            }
+    }
+           
 }
