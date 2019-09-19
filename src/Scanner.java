@@ -11,6 +11,7 @@ public class Scanner
         add(' '); add('+'); add('-'); add('*'); add('/');
         add('<'); add('='); add('('); add(')'); add(','); add(';');
     }};
+    private String intString = "";
 
     public Scanner(String file)
     {
@@ -79,7 +80,10 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'i': pos++; state1(); break;
+                //Check for integers.
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9: pos++; state3(); break;
+                //Check for punctuations.
+                case '+': case '-': case '*': case '/': case '<': case '=': case '(': case ')': case ',': case ':': pos++; state4(); break;
                 default: pos ++; state0();
             }
     }
@@ -124,32 +128,52 @@ public class Scanner
     //int accepted
     private static void state3()
     {
-        if ( pos > prog.length() )
-        {
-            token.type = Token.Type.EOF;
-            token.value = "";
-            return;
-        }
-        else
-            //TODO: make string builder here appening numbers until end
-            if(isDelineater())
-            {
-                //while loop looking forward with charAt() making sure not to go past prog.length
-                //use StringBuilder and append each digit as it is read
-                //put SB result in token.value
-                //make sure drop back to state 0 if find letter
+        //Adds the previous character to a string of integers
+        String tempString = intString.concat(prog.charAt(pos - 1));
+        intString = tempString;
 
-                //token.type = Token.Type.Intager;
-                //token.value = sb.toString();
-                return;
+        //If true, then return the token.
+        if (isDelineater()) {
+            token.type = Token.Type.Integer;
+            token.value = inString.toString();
+            inString = "";
+        }
+        else {
+            switch(prog.charAt(pos)) {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                    pos++;
+                    //If true, then this character was the last in the file, and is the end of the int token.
+                    if (pos > prog.length()){
+                        token.type = Token.Type.Integer;
+                        token.value = inString.toString();
+                        inString = "";
+                        break;
+                    }
+                    state3();
+                    break;
+                //This should call some sort of error, as no identifier can start with an int.
+                //For now, I just sent it back to state0().
+                default: pos++; state0();
             }
+        }
+        return;
     }
+
 
     //punctuation
     private static void state4()
     {
         token.type = Token.Type.Punctuation;
-        token.value = String.valueOf(prog.charAt(pos));
+        token.value = String.valueOf(prog.charAt(pos-1));
         return;
     }
 
