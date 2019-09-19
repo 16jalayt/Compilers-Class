@@ -86,12 +86,12 @@ public class Scanner
                 case '+': case '-': case '*': case '/': case '<': case '=': case '(': case ')': case ',': case ':': pos++; state4(); break;
                 case 'a': pos++; state5(); break;
                 case 'b': pos++; state8(); break;
-                //case 'e': pos++; state15(); break;
+                case 'e': pos++; state15(); break;
                 //case 'f': pos++; state33(); break;
-                //case 'm': pos++; state19(); break;
-                //case 'n': pos++; state23(); break;
-                //case '0': pos++; state26(); break;
-                //case 'p': pos++; state28(); break;
+                case 'm': pos++; state19(); break;
+                case 'n': pos++; state23(); break;
+                case '0': pos++; state26(); break;
+                case 'p': pos++; state28(); break;
                 //case 't': pos++; state38(); break;
                 default: pos ++; state0();
             }
@@ -342,7 +342,6 @@ public class Scanner
                 default: pos++; state0();
             }
     } 
- 
 
     //keyword boolean accepted
     private static void state14()
@@ -364,4 +363,330 @@ public class Scanner
             else
                 state0();
     } 
+
+    //l of else
+    private static void state15()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            switch ( prog.charAt(pos) )
+            {
+                case 'l': pos++; state16(); break;
+                default: pos++; state0();
+            }
+    }
+
+    //s of else
+    private static void state16()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            switch ( prog.charAt(pos) )
+            {
+                case 's': pos++; state17(); break;
+                default: pos++; state0();
+            }
+    }
+
+    //e of else
+    private static void state17()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            switch ( prog.charAt(pos) )
+            {
+                case 'e': pos++; state18(); break;
+                default: pos++; state0();
+            }
+    }
+
+    //keyword else accepted
+    private static void state18()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            //if current char is whitespace accept boolean
+            if(isDelineater())
+            {
+                token.type = Token.Type.Keyword;
+                token.value = "else";
+                return;
+            }
+            else
+                state0();
+    }
+
+    //a of main
+    private static void state19()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            switch ( prog.charAt(pos) )
+            {
+                case 'a': pos++; state20(); break;
+                default: pos++; state0();
+            }
+    }
+
+    //i of main
+    private static void state20()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            switch ( prog.charAt(pos) )
+            {
+                case 'i': pos++; state21(); break;
+                default: pos++; state0();
+            }
+    } 
+
+    //n of main
+    private static void state21()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            switch ( prog.charAt(pos) )
+            {
+                case 'n': pos++; state22(); break;
+                default: pos++; state0();
+            }
+    } 
+
+    //indentifier main accepted
+    private static void state22()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            //if current char is whitespace accept boolean
+            if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = "main";
+                return;
+            }
+            else
+                state0();
+    }
+
+    //o of not
+    private static void state23()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            switch ( prog.charAt(pos) )
+            {
+                case 'o': pos++; state24(); break;
+                default: pos++; state0();
+            }
+    } 
+
+    //t of not
+    private static void state24()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            switch ( prog.charAt(pos) )
+            {
+                case 't': pos++; state25(); break;
+                default: pos++; state0();
+            }
+    }
+    
+    //keyword not accepted
+    private static void state25()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            //if current char is whitespace accept boolean
+            if(isDelineater())
+            {
+                token.type = Token.Type.Keyword;
+                token.value = "not";
+                return;
+            }
+            else
+                state0();
+    }
+
+    //r of or
+    private static void state26()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            switch ( prog.charAt(pos) )
+            {
+                case 'r': pos++; state27(); break;
+                default: pos++; state0();
+            }
+    }
+    
+    //keyword or accepted
+    private static void state27()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            //if current char is whitespace accept boolean
+            if(isDelineater())
+            {
+                token.type = Token.Type.Keyword;
+                token.value = "or";
+                return;
+            }
+            else
+                state0();
+    }
+
+    //r of print
+    private static void state28()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            switch ( prog.charAt(pos) )
+            {
+                case 'r': pos++; state29(); break;
+                default: pos++; state0();
+            }
+    }
+
+    //i of print
+    private static void state29()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            switch ( prog.charAt(pos) )
+            {
+                case 'i': pos++; state30(); break;
+                default: pos++; state0();
+            }
+    }
+
+    //n of print
+    private static void state30()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            switch ( prog.charAt(pos) )
+            {
+                case 'n': pos++; state31(); break;
+                default: pos++; state0();
+            }
+    }
+
+    //t of print
+    private static void state31()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            switch ( prog.charAt(pos) )
+            {
+                case 't': pos++; state32(); break;
+                default: pos++; state0();
+            }
+    }
+    
+    //identifier print accepted
+    private static void state32()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            //if current char is whitespace accept boolean
+            if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = "print";
+                return;
+            }
+            else
+                state0();
+    }         
 }
