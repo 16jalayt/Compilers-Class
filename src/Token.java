@@ -3,7 +3,7 @@ public class Token
     public Type type;
     public enum Type
     {
-        Punctuation, Keyword, Identifier, Integer, EOF, Uninit;
+        Punctuation, Keyword, Identifier, Integer, EOF, Error;
     }
     public String value;
 
@@ -14,7 +14,7 @@ public class Token
     }
     public Token()
     {
-        type = Type.Uninit;
+        type = Type.Error;
         value = "";
     }
     public String toString()

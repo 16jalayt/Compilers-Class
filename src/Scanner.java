@@ -1,10 +1,17 @@
+import java.util.ArrayList;
+
 public class Scanner
 {
     private static String prog;
     private static int pos;
     private static Token token;
     private static Token lookAhead;
-//TODO: get ranges for types of states, so more seperated
+    private static ArrayList<Character> delim = new ArrayList<Character>()
+    {{
+        add(' '); add('+'); add('-'); add('*'); add('/');
+        add('<'); add('='); add('('); add(')'); add(','); add(';');
+    }};
+
     public Scanner(String file)
     {
         prog = file;
@@ -13,7 +20,7 @@ public class Scanner
     }
 
     public Token next()
-    {//TODO: put white space remover here too
+    {
         if(lookAhead != null)
         {
             Token tmp = lookAhead;
@@ -32,25 +39,32 @@ public class Scanner
 
     private Token getNext()
     {
+        //up front EOF check
+        if ( pos >= prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return token;
+        }
+        while(prog.charAt(pos) != ' ')
+        pos++;
+
         //clear token
         token = new Token();
+        //go to start state
         state0();
         return token;
     }
 
-    //TODO: just create list to check?
     private static boolean isDelineater()
     {
         if ( pos >= prog.length() )
-        {
             return true;
-        }
-        if(prog.charAt(pos) == ' ')
+        else if (delim.contains(prog.charAt(pos)))
             return true;
         else
             return false;
     }
-//TODO: figure out how to fail
 //0 is default state. Check positive criteria, then invalid tokens, then known valid. return identifier.
     private static void state0()
     {
