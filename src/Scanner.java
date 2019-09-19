@@ -11,13 +11,16 @@ public class Scanner
         add(' '); add('+'); add('-'); add('*'); add('/');
         add('<'); add('='); add('('); add(')'); add(','); add(';');
     }};
-    private String intString = "";
+
+    //put tokenSoFar += prog.charAt(pos); in any non final states and set the token value to toenSoFar when returning
+    private static String tokenSoFar;
 
     public Scanner(String file)
     {
         prog = file;
         pos = 0;
         token = new Token();
+        tokenSoFar = "";
     }
 
     public Token next()
@@ -28,13 +31,15 @@ public class Scanner
             lookAhead = null;
             return tmp;
         }
-       return getNext();
+        tokenSoFar = "";
+        return getNext();
     }
 
     public Token peek()
     {
         if(lookAhead == null)
             lookAhead = getNext();
+        tokenSoFar = "";
         return lookAhead;
     }
 
@@ -77,11 +82,12 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'i': pos++; state1(); break;
                 //Check for integers.
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9: pos++; state3(); break;
+                case '0': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':pos++; state3(); break;
                 //Check for punctuations.
                 case '+': case '-': case '*': case '/': case '<': case '=': case '(': case ')': case ',': case ':': pos++; state4(); break;
                 case 'a': pos++; state5(); break;
@@ -90,7 +96,7 @@ public class Scanner
                 case 'f': pos++; state33(); break;
                 case 'm': pos++; state19(); break;
                 case 'n': pos++; state23(); break;
-                case '0': pos++; state26(); break;
+                case 'o': pos++; state26(); break;
                 case 'p': pos++; state28(); break;
                 case 't': pos++; state38(); break;
 
@@ -110,6 +116,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'f': pos++; state2(); break;
@@ -120,6 +127,7 @@ public class Scanner
     //if accepted
     private static void state2()
     {
+
         if ( pos > prog.length() )
         {
             token.type = Token.Type.EOF;
@@ -131,7 +139,7 @@ public class Scanner
             if(isDelineater())
             {
                 token.type = Token.Type.Keyword;
-                token.value = "if";
+                token.value = tokenSoFar;
                 return;
             }
             else
@@ -142,34 +150,21 @@ public class Scanner
     //int accepted
     private static void state3()
     {
-        //Adds the previous character to a string of integers
-        String tempString = intString.concat(prog.charAt(pos - 1));
-        intString = tempString;
+        tokenSoFar += prog.charAt(pos);
 
         //If true, then return the token.
         if (isDelineater()) {
             token.type = Token.Type.Integer;
-            token.value = inString.toString();
-            inString = "";
+            token.value = tokenSoFar;
         }
         else {
             switch(prog.charAt(pos)) {
-                case 0:
-                case 1:
-                case 2:
-                case 3:
-                case 4:
-                case 5:
-                case 6:
-                case 7:
-                case 8:
-                case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                     pos++;
                     //If true, then this character was the last in the file, and is the end of the int token.
                     if (pos > prog.length()){
                         token.type = Token.Type.Integer;
-                        token.value = inString.toString();
-                        inString = "";
+                        token.value = tokenSoFar;
                         break;
                     }
                     state3();
@@ -1143,7 +1138,7 @@ public class Scanner
         else
          if(isDelineater())
          {
-             token.type = Token.Type.identifier;
+             //token.type = Token.Type.identifier;
              token.value = "placeholder text for non explicit identifier";
              return;
          }
