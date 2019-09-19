@@ -995,7 +995,7 @@ public class Scanner
     }
     
     //Keyword integer accepted
-    private static void state45()
+    private static void state50()
     {
         if ( pos > prog.length() )
         {
