@@ -84,6 +84,8 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9: pos++; state3(); break;
                 //Check for punctuations.
                 case '+': case '-': case '*': case '/': case '<': case '=': case '(': case ')': case ',': case ':': pos++; state4(); break;
+                case 'a': pos++; state5(); break;
+                case 'b': pos++; state8(); break;
                 default: pos ++; state0();
             }
     }
@@ -176,4 +178,233 @@ public class Scanner
         token.value = String.valueOf(prog.charAt(pos-1));
         return;
     }
+
+    //recognize n in and
+    private static void state5()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            switch ( prog.charAt(pos) )
+            {
+                case 'n': pos++; state6(); break;
+                default: pos++; state0();
+            }
+    }
+
+    //recognize d in and
+    private static void state6()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            switch ( prog.charAt(pos) )
+            {
+                case 'd': pos++; state7(); break;
+                default: pos++; state0();
+            }
+    }  
+
+    //keyword and accepted
+    private static void state7()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            //if current char is whitespace accept and
+            if(isDelineater())
+            {
+                token.type = Token.Type.Keyword;
+                token.value = "and";
+                return;
+            }
+            else
+                state0();
+    }
+    
+    //Just State
+    private static void state8()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            switch ( prog.charAt(pos) )
+            {
+                case 'o': pos++; state9(); break;
+                default: pos++; state0();
+            }
+    }  
+
+    //Just State
+    private static void state9()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            switch ( prog.charAt(pos) )
+            {
+                case 'o': pos++; state10(); break;
+                default: pos++; state0();
+            }
+    }  
+
+    //Just State
+    private static void state10()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            switch ( prog.charAt(pos) )
+            {
+                case 'l': pos++; state11(); break;
+                default: pos++; state0();
+            }
+    }  
+
+    //Just State
+    private static void state11()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            switch ( prog.charAt(pos) )
+            {
+                case 'e': pos++; state12(); break;
+                default: pos++; state0();
+            }
+    }  
+
+    //Just State
+    private static void state12()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            switch ( prog.charAt(pos) )
+            {
+                case 'a': pos++; state13(); break;
+                default: pos++; state0();
+            }
+    } 
+    
+    //Just State
+    private static void state12()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            switch ( prog.charAt(pos) )
+            {
+                case 'a': pos++; state13(); break;
+                default: pos++; state0();
+            }
+    } 
+    
+    //Just State
+    private static void state12()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            switch ( prog.charAt(pos) )
+            {
+                case 'a': pos++; state13(); break;
+                default: pos++; state0();
+            }
+    } 
+    
+    //Just State
+    private static void state12()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            switch ( prog.charAt(pos) )
+            {
+                case 'a': pos++; state13(); break;
+                default: pos++; state0();
+            }
+    } 
+    
+    //Just State
+    private static void state13()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            switch ( prog.charAt(pos) )
+            {
+                case 'n': pos++; state14(); break;
+                default: pos++; state0();
+            }
+    } 
+
+    //keyword boolean accepted
+    private static void state14()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+            //if current char is whitespace accept boolean
+            if(isDelineater())
+            {
+                token.type = Token.Type.Keyword;
+                token.value = "boolean";
+                return;
+            }
+            else
+                state0();
+    } 
 }
