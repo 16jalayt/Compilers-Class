@@ -86,6 +86,13 @@ public class Scanner
                 case '+': case '-': case '*': case '/': case '<': case '=': case '(': case ')': case ',': case ':': pos++; state4(); break;
                 case 'a': pos++; state5(); break;
                 case 'b': pos++; state8(); break;
+                //case 'e': pos++; state15(); break;
+                //case 'f': pos++; state33(); break;
+                //case 'm': pos++; state19(); break;
+                //case 'n': pos++; state23(); break;
+                //case '0': pos++; state26(); break;
+                //case 'p': pos++; state28(); break;
+                //case 't': pos++; state38(); break;
                 default: pos ++; state0();
             }
     }
@@ -234,7 +241,7 @@ public class Scanner
                 state0();
     }
     
-    //Just State
+    //first o of boolean
     private static void state8()
     {
         if ( pos > prog.length() )
@@ -251,7 +258,7 @@ public class Scanner
             }
     }  
 
-    //Just State
+    //second 0 of boolean
     private static void state9()
     {
         if ( pos > prog.length() )
@@ -268,7 +275,7 @@ public class Scanner
             }
     }  
 
-    //Just State
+    //l of boolean
     private static void state10()
     {
         if ( pos > prog.length() )
@@ -285,7 +292,7 @@ public class Scanner
             }
     }  
 
-    //Just State
+    //e of boolean
     private static void state11()
     {
         if ( pos > prog.length() )
@@ -302,7 +309,7 @@ public class Scanner
             }
     }  
 
-    //Just State
+    //a of boolean
     private static void state12()
     {
         if ( pos > prog.length() )
@@ -319,58 +326,7 @@ public class Scanner
             }
     } 
     
-    //Just State
-    private static void state12()
-    {
-        if ( pos > prog.length() )
-        {
-            token.type = Token.Type.EOF;
-            token.value = "";
-            return;
-        }
-        else
-            switch ( prog.charAt(pos) )
-            {
-                case 'a': pos++; state13(); break;
-                default: pos++; state0();
-            }
-    } 
-    
-    //Just State
-    private static void state12()
-    {
-        if ( pos > prog.length() )
-        {
-            token.type = Token.Type.EOF;
-            token.value = "";
-            return;
-        }
-        else
-            switch ( prog.charAt(pos) )
-            {
-                case 'a': pos++; state13(); break;
-                default: pos++; state0();
-            }
-    } 
-    
-    //Just State
-    private static void state12()
-    {
-        if ( pos > prog.length() )
-        {
-            token.type = Token.Type.EOF;
-            token.value = "";
-            return;
-        }
-        else
-            switch ( prog.charAt(pos) )
-            {
-                case 'a': pos++; state13(); break;
-                default: pos++; state0();
-            }
-    } 
-    
-    //Just State
+    //n of boolean
     private static void state13()
     {
         if ( pos > prog.length() )
@@ -386,6 +342,7 @@ public class Scanner
                 default: pos++; state0();
             }
     } 
+ 
 
     //keyword boolean accepted
     private static void state14()
