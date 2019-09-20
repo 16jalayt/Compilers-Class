@@ -24,7 +24,7 @@ public class Main
 
             Scanner scan = new Scanner(fullFile);
 
-            while (scan.peek().type != Token.Type.EOF)
+            while (scan.peek().type != Token.Type.EOF && scan.peek().type != Token.Type.Error)
                 System.out.println(scan.next().toString());
             //one last call to display EOF
             System.out.println(scan.next().toString());

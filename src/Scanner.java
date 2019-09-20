@@ -88,7 +88,7 @@ public class Scanner
                 //Check for integers.
                 case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':pos++; state3(); break;
                 //Check for punctuations.
-                case '+': case '-': case '*': case '/': case '<': case '=': case '(': case ')': case ',': case ':': pos++; state4(); break;
+                case '+': case '-': case '*': case '/': case '<': case '=': case '(': case ')': case ',': case ':': pos++; state59(); break;
                 case 'a': pos++; state5(); break;
                 case 'b': pos++; state8(); break;
                 case 'e': pos++; state15(); break;
@@ -138,7 +138,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
 
@@ -173,7 +173,7 @@ public class Scanner
                     case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                     case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                     case 'Y': case 'Z':
-                    case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                    case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                     case '_':
                     pos++; state58(); break;
                     default: pos++; state0();
@@ -239,7 +239,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0(); break;
@@ -269,7 +269,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -304,7 +304,7 @@ public class Scanner
                     case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                     case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                     case 'Y': case 'Z':
-                    case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                    case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                     case '_':
                     pos++; state58(); break;
                     default: pos++; state0();
@@ -333,7 +333,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -362,7 +362,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -391,7 +391,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -420,7 +420,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -449,7 +449,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -478,7 +478,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -512,7 +512,7 @@ public class Scanner
                     case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                     case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                     case 'Y': case 'Z':
-                    case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                    case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                     case '_':
                     pos++; state58(); break;
                     default: pos++; state0();
@@ -541,7 +541,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -571,7 +571,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -600,7 +600,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -634,7 +634,7 @@ public class Scanner
                     case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                     case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                     case 'Y': case 'Z':
-                    case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                    case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                     case '_':
                     pos++; state58(); break;
                     default: pos++; state0();
@@ -663,7 +663,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -692,7 +692,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -721,7 +721,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -755,7 +755,7 @@ public class Scanner
                     case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                     case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                     case 'Y': case 'Z':
-                    case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                    case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                     case '_':
                     pos++; state58(); break;
                     default: pos++; state0();
@@ -784,7 +784,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -813,7 +813,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -847,7 +847,7 @@ public class Scanner
                     case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                     case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                     case 'Y': case 'Z':
-                    case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                    case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                     case '_':
                     pos++; state58(); break;
                     default: pos++; state0();
@@ -876,7 +876,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -910,7 +910,7 @@ public class Scanner
                     case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                     case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                     case 'Y': case 'Z':
-                    case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                    case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                     case '_':
                     pos++; state58(); break;
                     default: pos++; state0();
@@ -939,7 +939,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -968,7 +968,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -997,7 +997,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -1026,7 +1026,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -1060,7 +1060,7 @@ public class Scanner
                     case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                     case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                     case 'Y': case 'Z':
-                    case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                    case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                     case '_':
                     pos++; state58(); break;
                     default: pos++; state0();
@@ -1090,7 +1090,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -1119,7 +1119,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -1148,7 +1148,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -1177,7 +1177,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -1211,7 +1211,7 @@ public class Scanner
                     case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                     case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                     case 'Y': case 'Z':
-                    case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                    case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                     case '_':
                     pos++; state58(); break;
                     default: pos++; state0();
@@ -1241,7 +1241,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -1270,7 +1270,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -1299,7 +1299,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -1333,7 +1333,7 @@ public class Scanner
                     case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                     case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                     case 'Y': case 'Z':
-                    case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                    case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                     case '_':
                     pos++; state58(); break;
                     default: pos++; state0();
@@ -1362,7 +1362,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -1391,7 +1391,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -1425,7 +1425,7 @@ public class Scanner
                     case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                     case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                     case 'Y': case 'Z':
-                    case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                    case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                     case '_':
                     pos++; state58(); break;
                     default: pos++; state0();
@@ -1454,7 +1454,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -1483,7 +1483,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -1512,7 +1512,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -1541,7 +1541,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -1570,7 +1570,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -1604,7 +1604,7 @@ public class Scanner
                     case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                     case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                     case 'Y': case 'Z':
-                    case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                    case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                     case '_':
                     pos++; state58(); break;
                     default: pos++; state0();
@@ -1633,7 +1633,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -1662,7 +1662,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -1691,7 +1691,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -1720,7 +1720,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -1749,7 +1749,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -1778,7 +1778,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_':
                 pos++; state58(); break;
                 default: pos++; state0();
@@ -1812,7 +1812,7 @@ public class Scanner
                     case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                     case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                     case 'Y': case 'Z':
-                    case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                    case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                     case '_':
                     pos++; state58(); break;
                     default: pos++; state0();
@@ -1845,11 +1845,54 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
-                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
                 case '_': 
                 pos++; state58(); break;
                 default: pos++; state0();
             }
+    }
+
+    //comments
+    private static void state59()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+        {
+            if(prog.charAt(pos-1) == '(')
+            {
+                if (prog.charAt(pos) == '*')
+                {
+                    int i = 2;
+                    System.out.println(prog.charAt(i) + " " + prog.charAt(i+1));
+                    while (prog.charAt(i+1) != ')' && prog.charAt(i) != '*')
+                    {
+                        System.out.println(prog.charAt(i) + " " + prog.charAt(i+1));
+                        i++;
+                        if (i > prog.length() -2)
+                        {
+                            System.out.println("WTF Fail");
+                            token.type = Token.Type.Error;
+                            token.value = "Unmatched comment block at " + pos;
+                            return;
+                        }
+                    }
+                    System.out.println(i);
+                    pos = i + 2;
+                    token.type = Token.Type.Comment;
+                    token.value = "";
+
+                }
+                else
+                    state4();
+            }
+            else
+                state4();
+        }
     }
            
 }
