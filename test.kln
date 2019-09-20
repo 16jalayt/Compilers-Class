@@ -1,3 +1,9 @@
-(*  This program returns the nth fibonacci number            *
- *  or 0 if the parameter is invalid.                        *
- *  Based on a program by Jonathan Paisley and Matt Wemmie.  *)
+(* ---------------------------------------------------------------
+
+   This program determines if its command-line argument, a number,
+   is "excellent": when split on half n=ab, b*b - a*a = n.  For
+   example, 48 is excellent, because 8**2 - 4**2 == 48.
+
+   http://programmingpraxis.com/2015/03/24/excellent-numbers/
+
+   --------------------------------------------------------------- *)

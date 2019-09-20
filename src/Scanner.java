@@ -1868,9 +1868,8 @@ public class Scanner
                 if (prog.charAt(pos) == '*')
                 {
                     int i = 2;
-                    while (prog.charAt(i) != '*' && prog.charAt(i+1) != ')')
+                    while (true)
                     {
-                        i++;
                         if (i > prog.length() -2)
                         {
                             //System.out.println("WTF Fail");
@@ -1878,6 +1877,12 @@ public class Scanner
                             token.value = "Unmatched comment block at " + pos;
                             return;
                         }
+
+                        if(prog.charAt(i) == '*')
+                            if(prog.charAt(i+1) == ')')
+                                break;
+                        i++;
+
                     }
                     //System.out.println(i);
                     pos = i + 2;
