@@ -8,8 +8,6 @@ Make sure to use sync when starting.
 Use commit when done with chunks of code.
 MAKE SURE YOU PUSH CHANGES and they show up in the repo.
 
-If dead state should print message and terminate
-
 Classes in this file:
 Main(): takes in a klein file name, calls Scanner.
 Scanner(): takes in a string containing a klein program. Produces tokens from that string. Calls token.
