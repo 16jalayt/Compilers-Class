@@ -53,7 +53,16 @@ public class Scanner
             return token;
         }
         while(prog.charAt(pos) == ' ')
+        {
             pos++;
+            if ( pos >= prog.length() )
+            {
+                token.type = Token.Type.EOF;
+                token.value = "";
+                return token;
+            }
+        }
+
         //clear token
         token = new Token();
         //go to start state
