@@ -81,13 +81,12 @@ public class Scanner
             return;
         }
         else
-
             tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'i': pos++; state1(); break;
                 //Check for integers.
-                case '0': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':pos++; state3(); break;
+                case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':pos++; state3(); break;
                 //Check for punctuations.
                 case '+': case '-': case '*': case '/': case '<': case '=': case '(': case ')': case ',': case ':': pos++; state4(); break;
                 case 'a': pos++; state5(); break;
@@ -184,8 +183,6 @@ public class Scanner
     //int accepted
     private static void state3()
     {
-        tokenSoFar += prog.charAt(pos);
-
         //If true, then return the token.
         if (isDelineater()) {
             token.type = Token.Type.Integer;
