@@ -139,6 +139,7 @@ public class Scanner
                 case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
                 case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
                 case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
 
@@ -232,7 +233,20 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'n': pos++; state6(); break;
-                default: pos++; state0();
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
+                default: pos++; state0(); break;
+
             }
     }
 
@@ -249,6 +263,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'd': pos++; state7(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }  
@@ -301,6 +327,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'o': pos++; state9(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }  
@@ -318,6 +356,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'o': pos++; state10(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }  
@@ -335,6 +385,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'l': pos++; state11(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }  
@@ -352,6 +414,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'e': pos++; state12(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }  
@@ -369,6 +443,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'a': pos++; state13(); break;
+                //non explicit identifier
+                case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     } 
@@ -386,6 +472,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'n': pos++; state14(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     } 
@@ -437,7 +535,20 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'l': pos++; state16(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
+                
             }
     }
 
@@ -454,6 +565,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 's': pos++; state17(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -471,6 +594,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'e': pos++; state18(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -522,6 +657,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'a': pos++; state20(); break;
+                //non explicit identifier
+                case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -539,6 +686,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'i': pos++; state21(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     } 
@@ -556,6 +715,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'n': pos++; state22(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     } 
@@ -607,6 +778,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'o': pos++; state24(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     } 
@@ -624,6 +807,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 't': pos++; state25(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -675,6 +870,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'r': pos++; state27(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -726,6 +933,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'r': pos++; state29(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -743,6 +962,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'i': pos++; state30(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -760,6 +991,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'n': pos++; state31(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -777,6 +1020,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 't': pos++; state32(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -829,6 +1084,18 @@ public class Scanner
             {
                 case 'a': pos++; state34(); break;
                 case 'u': pos++; state51(); break;
+                //non explicit identifier
+                case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -846,6 +1113,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'l': pos++; state35(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -863,6 +1142,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 's': pos++; state36(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -880,6 +1171,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'e': pos++; state37(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -932,6 +1235,18 @@ public class Scanner
             {
                 case 'h': pos++; state39(); break;
                 case 'r': pos++; state42(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -949,6 +1264,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'e': pos++; state40(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -966,6 +1293,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'n': pos++; state41(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -1017,6 +1356,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'u': pos++; state43(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     } 
@@ -1034,6 +1385,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'e': pos++; state44(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -1085,6 +1448,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 't': pos++; state46(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -1102,6 +1477,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'e': pos++; state47(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -1119,6 +1506,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'g': pos++; state48(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -1136,6 +1535,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'e': pos++; state49(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -1153,6 +1564,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'r': pos++; state50(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -1204,6 +1627,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'n': pos++; state52(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -1221,6 +1656,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'c': pos++; state53(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -1238,6 +1685,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 't': pos++; state54(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -1255,6 +1714,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'i': pos++; state55(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'j': case 'k': case 'l': case 'm': case 'n': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -1272,6 +1743,18 @@ public class Scanner
             switch ( prog.charAt(pos) )
             {
                 case 'o': pos++; state56(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'n': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
@@ -1288,7 +1771,19 @@ public class Scanner
         else
             switch ( prog.charAt(pos) )
             {
-                case 'r': pos++; state57(); break;
+                case 'n': pos++; state57(); break;
+                //non explicit identifier
+                case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
+                case 'i': case 'j': case 'k': case 'l': case 'm': case 'o': case 'p':
+                case 'q': case 'r': case 's': case 't': case 'u': case 'v': case 'w': case 'x':
+                case 'y': case 'z':
+                case 'A': case 'B': case 'C': case 'D': case 'E': case 'F': case 'G': case 'H':
+                case 'I': case 'J': case 'K': case 'L': case 'M': case 'N': case 'O': case 'P':
+                case 'Q': case 'R': case 'S': case 'T': case 'U': case 'V': case 'W': case 'X':
+                case 'Y': case 'Z':
+                case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
+                case '_':
+                pos++; state58(); break;
                 default: pos++; state0();
             }
     }
