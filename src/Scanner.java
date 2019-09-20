@@ -112,7 +112,7 @@ public class Scanner
                 pos++; state58(); break;
 
                 
-                default: pos ++; state0();
+                default: pos ++; state59();
             }
     }
 //f of if || n of integer
@@ -143,7 +143,7 @@ public class Scanner
                 case '_':
                 pos++; state58(); break;
 
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
     //if accepted
@@ -177,7 +177,7 @@ public class Scanner
                     case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                     case '_':
                     pos++; state58(); break;
-                    default: pos++; state0();
+                    default: pos++; state59();
                 }
     }
 
@@ -204,8 +204,8 @@ public class Scanner
                     state3();
                     break;
                 //This should call some sort of error, as no identifier can start with an int.
-                //For now, I just sent it back to state0().
-                default: pos++; state0();
+                //For now, I just sent it back to state59().
+                default: pos++; state59();
             }
         }
         return;
@@ -245,7 +245,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0(); break;
+                default: pos++; state59(); break;
 
             }
     }
@@ -275,7 +275,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }  
 
@@ -310,7 +310,7 @@ public class Scanner
                     case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                     case '_':
                     pos++; state58(); break;
-                    default: pos++; state0();
+                    default: pos++; state59();
                 }
     }
     
@@ -339,7 +339,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }  
 
@@ -368,7 +368,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }  
 
@@ -397,7 +397,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }  
 
@@ -426,7 +426,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }  
 
@@ -455,7 +455,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     } 
     
@@ -484,7 +484,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     } 
 
@@ -518,7 +518,7 @@ public class Scanner
                     case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                     case '_':
                     pos++; state58(); break;
-                    default: pos++; state0();
+                    default: pos++; state59();
                 }
     } 
 
@@ -547,7 +547,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
                 
             }
     }
@@ -577,7 +577,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
 
@@ -606,7 +606,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
 
@@ -640,7 +640,7 @@ public class Scanner
                     case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                     case '_':
                     pos++; state58(); break;
-                    default: pos++; state0();
+                    default: pos++; state59();
                 }
     }
 
@@ -669,7 +669,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
 
@@ -698,7 +698,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     } 
 
@@ -727,7 +727,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     } 
 
@@ -761,7 +761,7 @@ public class Scanner
                     case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                     case '_':
                     pos++; state58(); break;
-                    default: pos++; state0();
+                    default: pos++; state59();
                 }
     }
 
@@ -790,7 +790,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     } 
 
@@ -819,7 +819,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
     
@@ -853,7 +853,7 @@ public class Scanner
                     case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                     case '_':
                     pos++; state58(); break;
-                    default: pos++; state0();
+                    default: pos++; state59();
                 }
     }
 
@@ -882,7 +882,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
     
@@ -916,7 +916,7 @@ public class Scanner
                     case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                     case '_':
                     pos++; state58(); break;
-                    default: pos++; state0();
+                    default: pos++; state59();
                 }
     }
 
@@ -945,7 +945,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
 
@@ -974,7 +974,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
 
@@ -1003,7 +1003,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
 
@@ -1032,7 +1032,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
     
@@ -1066,7 +1066,7 @@ public class Scanner
                     case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                     case '_':
                     pos++; state58(); break;
-                    default: pos++; state0();
+                    default: pos++; state59();
                 }
     }
 
@@ -1096,7 +1096,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
 
@@ -1125,7 +1125,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
 
@@ -1154,7 +1154,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
 
@@ -1183,7 +1183,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
     
@@ -1217,7 +1217,7 @@ public class Scanner
                     case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                     case '_':
                     pos++; state58(); break;
-                    default: pos++; state0();
+                    default: pos++; state59();
                 }
     }
 
@@ -1247,7 +1247,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
 
@@ -1276,7 +1276,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
 
@@ -1305,7 +1305,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
     
@@ -1339,7 +1339,7 @@ public class Scanner
                     case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                     case '_':
                     pos++; state58(); break;
-                    default: pos++; state0();
+                    default: pos++; state59();
                 }
     } 
 
@@ -1368,7 +1368,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     } 
 
@@ -1397,7 +1397,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
     
@@ -1431,7 +1431,7 @@ public class Scanner
                     case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                     case '_':
                     pos++; state58(); break;
-                    default: pos++; state0();
+                    default: pos++; state59();
                 }
     } 
 
@@ -1460,7 +1460,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
 
@@ -1489,7 +1489,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
 
@@ -1518,7 +1518,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
 
@@ -1547,7 +1547,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
 
@@ -1576,7 +1576,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
     
@@ -1610,7 +1610,7 @@ public class Scanner
                     case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                     case '_':
                     pos++; state58(); break;
-                    default: pos++; state0();
+                    default: pos++; state59();
                 }
     }
     
@@ -1639,7 +1639,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
     
@@ -1668,7 +1668,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
     
@@ -1697,7 +1697,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
     
@@ -1726,7 +1726,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
     
@@ -1755,7 +1755,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
     
@@ -1784,7 +1784,7 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_':
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
             }
     }
     
@@ -1818,7 +1818,7 @@ public class Scanner
                     case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                     case '_':
                     pos++; state58(); break;
-                    default: pos++; state0();
+                    default: pos++; state59();
                 }
     }    
     
@@ -1851,8 +1851,31 @@ public class Scanner
                 case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9:
                 case '_': 
                 pos++; state58(); break;
-                default: pos++; state0();
+                default: pos++; state59();
+            }
+    }   
+    
+    //Is not any type of recognizeable token
+    private static void state59()
+    {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else
+         if(isDelineater())
+         {
+             token.type = Token.Type.Error;
+             token.value = "placeholder text for error";
+             return;
+         }
+            switch ( prog.charAt(pos) )
+            {
+                default: pos++; state59();
             }
     }
+        
            
 }
