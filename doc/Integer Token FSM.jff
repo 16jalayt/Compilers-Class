@@ -6,9 +6,10 @@
 			<x>305.0</x>
 			<y>136.0</y>
 		</state>
-		<state id="1" name="q1">
+		<state id="1" name="q3">
 			<x>142.0</x>
 			<y>131.0</y>
+			<final/>
 		</state>
 		<!--The list of transitions.-->
 		<transition>
