@@ -1932,12 +1932,9 @@ public class Scanner
                 default: pos++; state59();
             }
     }
-<<<<<<< HEAD
-        
-=======
 
     //comments
-    private static void state59()
+    private static void state60()
     {
         if ( pos > prog.length() )
         {
@@ -1978,6 +1975,5 @@ public class Scanner
                 state4();
         }
     }
->>>>>>> a197e4b40b1c9e1cd9f8f78521e8ca04baa2df23
            
 }
