@@ -63,4 +63,5 @@ State |  a  |  b  |  c  |  d  |  e  |  f  |  g  |  h  |  i  |  l  |  m  |  n  | 
   56  |     |     |     |     |     |     |     |     |     |     |     |  57 |     |     |     |     |     |     |
   57  |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |     |
   58  |   **This state will be where any character can go to or from to make an Identifier
-  59  |   **This state is where unrecognized chr go to make an error
+  59  |   **This state is where we filter out the comments
+  60  |   ***This is where errors go

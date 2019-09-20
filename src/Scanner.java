@@ -228,6 +228,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -259,6 +266,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -325,6 +339,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -355,6 +376,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -385,6 +413,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -415,6 +450,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -445,6 +487,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -475,6 +524,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -540,6 +596,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -571,6 +634,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -601,6 +671,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -666,6 +743,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -696,6 +780,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -726,6 +817,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -791,6 +889,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -821,6 +926,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -886,6 +998,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -951,6 +1070,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -981,6 +1107,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -1011,6 +1144,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -1041,6 +1181,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -1106,6 +1253,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -1137,6 +1291,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -1167,6 +1328,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -1197,6 +1365,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -1262,6 +1437,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -1293,6 +1475,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -1323,6 +1512,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -1388,6 +1584,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -1418,6 +1621,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -1483,6 +1693,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -1513,6 +1730,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -1543,6 +1767,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -1573,6 +1804,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -1603,6 +1841,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -1668,6 +1913,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -1698,6 +1950,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -1728,6 +1987,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -1758,6 +2024,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -1788,6 +2061,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
@@ -1818,6 +2098,13 @@ public class Scanner
                 return;
             }
             else
+                //if current char is whitespace accept tokenSoFar
+                if(isDelineater())
+            {
+                token.type = Token.Type.Identifier;
+                token.value = tokenSoFar;
+                return;
+            } else
                 tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
