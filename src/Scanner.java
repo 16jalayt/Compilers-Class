@@ -211,15 +211,7 @@ public class Scanner
                 tokenSoFar += prog.charAt(pos);
                 switch(prog.charAt(pos)) {
                     case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
-                        pos++;
-                        //If true, then this character was the last in the file, and is the end of the int token.
-                        if (pos > prog.length()){
-                            token.type = Token.Type.Integer;
-                            token.value = tokenSoFar;
-                            break;
-                        }
-                        //state3();
-                        break;
+                        pos++; state3(); break;
                     default: pos++; state60();
                 }
             }
