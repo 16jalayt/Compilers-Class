@@ -164,6 +164,7 @@ public class Scanner
                 return;
             }
             else
+                tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
                     case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
@@ -230,6 +231,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'n': pos++; state6(); break;
@@ -260,6 +262,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'd': pos++; state7(); break;
@@ -297,6 +300,7 @@ public class Scanner
                 return;
             }
             else
+                tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
                     case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
@@ -324,6 +328,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'o': pos++; state9(); break;
@@ -353,6 +358,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'o': pos++; state10(); break;
@@ -382,6 +388,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'l': pos++; state11(); break;
@@ -411,6 +418,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'e': pos++; state12(); break;
@@ -440,6 +448,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'a': pos++; state13(); break;
@@ -469,6 +478,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'n': pos++; state14(); break;
@@ -505,6 +515,7 @@ public class Scanner
                 return;
             }
             else
+                tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
                     case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
@@ -532,6 +543,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'l': pos++; state16(); break;
@@ -562,6 +574,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 's': pos++; state17(); break;
@@ -591,6 +604,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'e': pos++; state18(); break;
@@ -627,6 +641,7 @@ public class Scanner
                 return;
             }
             else
+                tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
                     case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
@@ -654,6 +669,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'a': pos++; state20(); break;
@@ -683,6 +699,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'i': pos++; state21(); break;
@@ -712,6 +729,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'n': pos++; state22(); break;
@@ -748,6 +766,7 @@ public class Scanner
                 return;
             }
             else
+                tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
                     case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
@@ -775,6 +794,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'o': pos++; state24(); break;
@@ -804,6 +824,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 't': pos++; state25(); break;
@@ -840,6 +861,7 @@ public class Scanner
                 return;
             }
             else
+                tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
                     case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
@@ -867,6 +889,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'r': pos++; state27(); break;
@@ -903,6 +926,7 @@ public class Scanner
                 return;
             }
             else
+                tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
                     case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
@@ -930,6 +954,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'r': pos++; state29(); break;
@@ -959,6 +984,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'i': pos++; state30(); break;
@@ -988,6 +1014,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'n': pos++; state31(); break;
@@ -1017,6 +1044,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 't': pos++; state32(); break;
@@ -1053,6 +1081,7 @@ public class Scanner
                 return;
             }
             else
+                tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
                     case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
@@ -1080,6 +1109,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'a': pos++; state34(); break;
@@ -1110,6 +1140,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'l': pos++; state35(); break;
@@ -1139,6 +1170,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 's': pos++; state36(); break;
@@ -1168,6 +1200,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'e': pos++; state37(); break;
@@ -1204,6 +1237,7 @@ public class Scanner
                 return;
             }
             else
+                tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
                     case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
@@ -1231,6 +1265,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'h': pos++; state39(); break;
@@ -1261,6 +1296,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'e': pos++; state40(); break;
@@ -1290,6 +1326,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'n': pos++; state41(); break;
@@ -1326,6 +1363,7 @@ public class Scanner
                 return;
             }
             else
+                tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
                     case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
@@ -1353,6 +1391,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'u': pos++; state43(); break;
@@ -1382,6 +1421,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'e': pos++; state44(); break;
@@ -1418,6 +1458,7 @@ public class Scanner
                 return;
             }
             else
+                tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
                     case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
@@ -1445,6 +1486,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 't': pos++; state46(); break;
@@ -1474,6 +1516,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'e': pos++; state47(); break;
@@ -1503,6 +1546,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'g': pos++; state48(); break;
@@ -1532,6 +1576,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'e': pos++; state49(); break;
@@ -1561,6 +1606,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'r': pos++; state50(); break;
@@ -1597,6 +1643,7 @@ public class Scanner
                 return;
             }
             else
+                tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
                     case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
@@ -1624,6 +1671,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'n': pos++; state52(); break;
@@ -1653,6 +1701,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'c': pos++; state53(); break;
@@ -1682,6 +1731,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 't': pos++; state54(); break;
@@ -1711,6 +1761,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'i': pos++; state55(); break;
@@ -1740,6 +1791,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'o': pos++; state56(); break;
@@ -1769,6 +1821,7 @@ public class Scanner
             return;
         }
         else
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'n': pos++; state57(); break;
@@ -1805,6 +1858,7 @@ public class Scanner
                 return;
             }
             else
+                tokenSoFar += prog.charAt(pos);
                 switch ( prog.charAt(pos) )
                 {
                     case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
@@ -1835,9 +1889,10 @@ public class Scanner
          if(isDelineater())
          {
              token.type = Token.Type.Identifier;
-             token.value = "placeholder text for non explicit identifier";
+             token.value = tokenSoFar;
              return;
          }
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 case 'a': case 'b': case 'c': case 'd': case 'e': case 'f': case 'g': case 'h':
@@ -1868,9 +1923,10 @@ public class Scanner
          if(isDelineater())
          {
              token.type = Token.Type.Error;
-             token.value = "placeholder text for error";
+             token.value = tokenSoFar;
              return;
          }
+            tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
                 default: pos++; state59();
