@@ -1,1 +1,3 @@
-(***)
+(*  This program returns the nth fibonacci number            *
+ *  or 0 if the parameter is invalid.                        *
+ *  Based on a program by Jonathan Paisley and Matt Wemmie.  *)

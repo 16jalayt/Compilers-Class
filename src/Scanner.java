@@ -1868,10 +1868,8 @@ public class Scanner
                 if (prog.charAt(pos) == '*')
                 {
                     int i = 2;
-                    System.out.println(prog.charAt(i) + " " + prog.charAt(i+1));
                     while (prog.charAt(i) != '*' && prog.charAt(i+1) != ')')
                     {
-                       // System.out.println(prog.charAt(i) + " " + prog.charAt(i+1));
                         i++;
                         if (i > prog.length() -2)
                         {
