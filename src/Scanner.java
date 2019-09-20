@@ -52,9 +52,8 @@ public class Scanner
             token.value = "";
             return token;
         }
-        while(prog.charAt(pos) != ' ')
-        pos++;
-
+        while(prog.charAt(pos) == ' ')
+            pos++;
         //clear token
         token = new Token();
         //go to start state
@@ -82,6 +81,7 @@ public class Scanner
             return;
         }
         else
+
             tokenSoFar += prog.charAt(pos);
             switch ( prog.charAt(pos) )
             {
