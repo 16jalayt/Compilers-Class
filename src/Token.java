@@ -3,7 +3,7 @@ public class Token
     public Type type;
     public enum Type
     {
-        Punctuation, Keyword, Identifier, Integer, EOF, Error;
+        Punctuation, Keyword, Identifier, Integer, EOF, Error, Comment;
     }
     public String value;
 
