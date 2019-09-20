@@ -9,7 +9,7 @@ public class Scanner
     private static ArrayList<Character> delim = new ArrayList<Character>()
     {{
         add(' '); add('+'); add('-'); add('*'); add('/');
-        add('<'); add('='); add('('); add(')'); add(','); add(';'); add(':');
+        add('<'); add('='); add('('); add(')'); add(','); add(';'); add(':'); add('\t'); add('\n'); add('\r');
     }};
 
     //put tokenSoFar += prog.charAt(pos); in any non final states and set the token value to toenSoFar when returning
@@ -52,7 +52,7 @@ public class Scanner
             token.value = "";
             return token;
         }
-        while(prog.charAt(pos) == ' ')
+        while(prog.charAt(pos) == ' ' || prog.charAt(pos) == '\t' || prog.charAt(pos) == '\n'|| prog.charAt(pos) == '\r')
         {
             pos++;
             if ( pos >= prog.length() )
