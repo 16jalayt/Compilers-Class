@@ -2219,24 +2219,22 @@ public class Scanner
                 {
                     if (prog.charAt(pos) == '*')
                     {
-                        int i = 2;
+                        int i = pos + 2;
                         while (true)
                         {
                             if (i > prog.length() -2)
                             {
-                                //System.out.println("WTF Fail");
                                 token.type = Token.Type.Error;
                                 token.value = "Unmatched comment block at " + pos;
                                 return;
                             }
                             
                             if(prog.charAt(i) == '*')
-                            if(prog.charAt(i+1) == ')')
-                            break;
+                                if(prog.charAt(i+1) == ')')
+                                    break;
                             i++;
                             
                         }
-                        //System.out.println(i);
                         pos = i + 2;
                         token.type = Token.Type.Comment;
                         token.value = "";
