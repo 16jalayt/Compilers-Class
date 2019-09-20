@@ -200,9 +200,8 @@ public class Scanner
                     }
                     state3();
                     break;
-                //This should call some sort of error, as no identifier can start with an int.
-                //For now, I just sent it back to state0().
-                default: pos++; state0();
+                //If it gets this far, then its an illegal token.
+                default: pos++; state60();
             }
         }
         return;
@@ -1897,5 +1896,20 @@ public class Scanner
                 state4();
         }
     }
+
+    //incorrect tokens/ errors.
+    private static void state60() {
+        if ( pos > prog.length() )
+        {
+            token.type = Token.Type.EOF;
+            token.value = "";
+            return;
+        }
+        else{
+            token.type = Token.type.Error;
+            token.value = "Klein: error, illegal token.";
+        }
+    }
+
            
 }
