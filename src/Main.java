@@ -23,11 +23,19 @@ public class Main
                 fullFile += currentLine;
 
             Scanner scan = new Scanner(fullFile);
+            Parser parse = new Parser();
 
+            Token tok;
             while (scan.peek().type != Token.Type.EOF && scan.peek().type != Token.Type.Error)
-                System.out.println(scan.next().toString());
+            {
+                tok = scan.next();
+                parse.run(tok);
+                System.out.println(tok.toString());
+            }
+
             //one last call to display EOF
-            System.out.println(scan.next().toString());
+            System.out.println(scan.peek().toString());
+            parse.run(scan.next());
         }
         catch (FileNotFoundException e)
         {
