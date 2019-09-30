@@ -1,0 +1,14 @@
+(*----------------------------------------------------------------------
+	This function attempts to pass a print statement to a function,
+	which should not pass our Parser
+-----------------------------------------------------------------------*)
+
+function test5 (z:boolean): boolean
+	if z = true
+	then tempFunction(print(true))
+	else false
+
+function tempFunction(x: boolean) : boolean
+	if x = not false
+	then true
+	else not true

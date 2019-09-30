@@ -1,0 +1,10 @@
+(*-------------------------------------------------------------------
+	This function uses the reserved words 'or' and 'and'
+	in an improper way, that may appear legal at first glance,
+	but would need a set of parenthesis to be a legal expression.
+--------------------------------------------------------------------*)
+
+function test3 (i: boolean, j:boolean) : boolean
+	if i = true
+	then i and j or false
+	else false

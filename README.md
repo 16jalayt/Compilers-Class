@@ -22,6 +22,3 @@ Our scanner function takes in a single parameter, a string containing the conten
 Scanner then goes through that string character by character, building tokens as it goes. 
 Main will print out the tokens produced by scanner, ending once scanner produces and End of File character OR
 if scanner produces an illegal token.
-
-Status/ Current Problems:
-Currently our scanner works, but we are having issues with it identifying tabs as whitespaces. 

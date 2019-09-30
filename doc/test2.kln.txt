@@ -1,0 +1,19 @@
+(*---------------------------------------------------------------
+	This function contains a series of nested if statements,
+	with the final statement missing its 'else' clause.
+	The purpose of this function is to test that our Parser 
+	can properly navigate through the first set of legally
+	nested statements, but still catches the missing 'else'
+	at the very end.
+----------------------------------------------------------------*)
+
+function test2(number: integer) : integer
+	print(number)
+	if number <10
+	then if number <5
+		then test2(number +1)
+		else if number = 5
+			then number
+			else test2(number-1)
+	else if number <20
+		then test2(number - 2)
