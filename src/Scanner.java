@@ -1390,6 +1390,7 @@ public class Scanner
                 return;
             } else
                 tokenSoFar += prog.charAt(pos);
+
                 switch ( prog.charAt(pos) )
                 {
                     case 'e': pos++; state37(); break;

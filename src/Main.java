@@ -20,12 +20,19 @@ public class Main
             String fullFile = "";
             //do pretty printing here
             while ((currentLine = br.readLine()) != null)
-                fullFile += currentLine;
-
+                //for some reason, concat removes newline. hack to fix issues. Should be removed down the line anyway
+                fullFile += currentLine + '\n';
             Scanner scan = new Scanner(fullFile);
             Parser parse = new Parser(scan);
+           /* if (parse.parse())
+                System.out.println("The program is: Valid");
+            else
+                System.out.println("The program is: Invalid");*/
 
-            parse.parse();
+            while (scan.peek().type != Token.Type.EOF && scan.peek().type != Token.Type.Error)
+                System.out.println(scan.next().toString());
+            //one last call to display EOF
+            System.out.println(scan.next().toString());
 
         }
         catch (FileNotFoundException e)
