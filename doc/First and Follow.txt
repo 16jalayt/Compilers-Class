@@ -1,0 +1,36 @@
+________________________________________________________________________________________________________________________________________
+                    |   First                                   | Follow
+PROGRAM             | FUNCTION                                  | $                                 
+DEFINITIONS         | FUNCTION ε                                | $ 
+DEFINITIONS'        | FUNCTION                                  | $ 
+DEF                 | FUNCTION                                  | FUNCTION
+FORMALS             | IDENTIFIER ε                              | )
+NONEMPTYFORMALS     | IDENTIFIER                                | )
+NONEMPTYFORMALS'    | IDENTIFIER                                | )
+FORMAL              | IDENTIFIER                                | , )
+BODY                | PRINT IF INDENTIFIER NOT - NUMBER BOOLEAN | FUNCTION PRINT IF INDENTIFIER NOT - NUMBER BOOLEAN ***?***
+PRINT-BODY          | PRINT                                     | FUNCTION PRINT IF INDENTIFIER NOT - NUMBER BOOLEAN ***?***
+TYPE                | integer boolean                           | FUNCTION PRINT IF INDENTIFIER NOT - NUMBER BOOLEAN ***?***
+EXPR                | IF INDENTIFIER NOT - NUMBER BOOLEAN       | < = then else )          
+EXPR-LESS           | IF INDENTIFIER NOT - NUMBER BOOLEAN       | < = then else )   ***?***                            
+EXPR-EQ             | IF INDENTIFIER NOT - NUMBER BOOLEAN       | < = then else )   ***?***        
+SIMPLE-EXPR         | IF INDENTIFIER NOT - NUMBER BOOLEAN       | or + -        
+SIMPLE-EXPR-OR      | IF INDENTIFIER NOT - NUMBER BOOLEAN       | or + -           ***?***             
+SIMPLE-EXPR-ADD     | IF INDENTIFIER NOT - NUMBER BOOLEAN       | or + -           ***?***             
+SIMPLE-EXPR-SUB     | IF INDENTIFIER NOT - NUMBER BOOLEAN       | or + -           ***?***             
+TERM                | IF INDENTIFIER NOT - NUMBER BOOLEAN       | and * /             
+TERM-AND            | IF INDENTIFIER NOT - NUMBER BOOLEAN       | and * /          ***?***                                      
+TERM-MUL            | IF INDENTIFIER NOT - NUMBER BOOLEAN       | and * /          ***?***                                    
+TERM-DIV            | IF INDENTIFIER NOT - NUMBER BOOLEAN       | and * /          ***?***                               
+FACTOR              | IF INDENTIFIER NOT - NUMBER BOOLEAN       | 
+NOT-FACTOR          | NOT                                       | 
+NEG-FACTOR          | -                                         |  
+IDENTIFIER-ACTUALS  | IDENTIFIER                                | 
+ACTUALS             | IF INDENTIFIER NOT - NUMBER BOOLEAN ε     |  
+NONEMPTYACTUALS     | IF INDENTIFIER NOT - NUMBER BOOLEAN       | 
+NONEMPTYACTUALS'    | IF INDENTIFIER NOT - NUMBER BOOLEAN       | 
+LITERAL             | NUMBER BOOLEAN                            | 
+PRINT-STATEMENT     | PRINT                                     | PRINT IF INDENTIFIER NOT - NUMBER BOOLEAN 
+
+LIST OF TERMINALS   | PRINT NUMBER BOOLEAN ε NOT AND OR IDENTIFIER ( ) + - / *  = < : IF THEN ELSE integer boolean , FUNCTION 
+ 

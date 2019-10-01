@@ -5,20 +5,18 @@
              <PROGRAM> ::= <DEFINITIONS>								|*| <PROGRAM> ::= <DEFINITIONS>
 																		|*|
         <DEFINITIONS> ::= ε												|*| <DEFINITIONS> ::= ε
-                        | <DEFINITIONS'>								|*|					| <DEF> <DEFINITIONS>
-																		|*|
-	   <DEFINITIONS'> ::= <DEF> <DEFINITIONS>							|*| 
-																		|*|					
+                        |  <DEF> <DEFINITIONS>							|*|					| <DEF> <DEFINITIONS>
+																		|*|																						
 				<DEF> ::= function <IDENTIFIER> ( <FORMALS> ) : <TYPE>  |*| <DEF> ::= function <IDENTIFIER> ( <FORMALS> ) : <TYPE>
                              <BODY>										|*|				<BODY>
 																		|*|
             <FORMALS> ::= ε												|*| <FORMALS> ::= ε
                         | <NONEMPTYFORMALS>								|*|				| <NONEMPTYFORMALS>
 																		|*|
-    <NONEMPTYFORMALS> ::= <FORMAL>										|*| <NONEMPTYFORMALS> ::= <FORMAL>
-                        | <NONEMPTYFORMALS'>							|*|						| <FORMAL> , <NONEMPTYFORMALS>
-																		|*|
-   <NONEMPTYFORMALS'> ::= <FORMAL> , <NONEMPTYFORMALS>					|*|
+    <NONEMPTYFORMALS> ::= <FORMAL>	<NEF-REST>							|*| <NONEMPTYFORMALS> ::= <FORMAL>
+                        												|*|						| <FORMAL> , <NONEMPTYFORMALS>
+   		   <NEF-REST> ::= , <NONEMPTYFORMALS>							|*|
+  						| ε												|*|
 																		|*|
              <FORMAL> ::= <IDENTIFIER> : <TYPE>							|*| <FORMAL> ::= <IDENTIFIER> : <TYPE>
 																		|*|
@@ -30,35 +28,35 @@
                <TYPE> ::= integer										|*| <TYPE> ::= integer
                         | boolean										|*| 		 | boolean
 																		|*| 
-               <EXPR> ::= <EXPR-ANOTHER>								|*| <EXPR> ::= <EXPR> < <SIMPLE-EXPR>
-                        | <EXPR-EQ>										|*|				| <EXPR> = <SIMPLE-EXPR>
+               <EXPR> ::= <SIMPLE-EXPR> <EXPR-LESS>						|*| <EXPR> ::= <EXPR> < <SIMPLE-EXPR>
+                        | <SIMPLE-EXPR> <EXPR-EQ>						|*|				| <EXPR> = <SIMPLE-EXPR>
                         | <SIMPLE-EXPR>									|*|				| <SIMPLE-EXPR>
 																		|*|
-	   <EXPR-ANOTHER> ::= <EXPR> < <SIMPLE-EXPR>						|*|
+	   	  <EXPR-LESS> ::= < <EXPR>										|*|
 																		|*|
-			<EXPR-EQ> ::= <EXPR> = <SIMPLE-EXPR>						|*|
+			<EXPR-EQ> ::= = <EXPR>										|*|
 																		|*|
-        <SIMPLE-EXPR> ::= <SIMPLE-EXPR-OR> 								|*| <SIMPLE-EXPR> ::= <SIMPLE-EXPR> or <TERM>
-                        | <SIMPLE-EXPR-ADD>								|*| 				| <SIMPLE-EXPR> + <TERM>
-                        | <SIMPLE-EXPR-SUB>								|*| 				| <SIMPLE-EXPR> - <TERM>
+        <SIMPLE-EXPR> ::= <TERM> <SIMPLE-EXPR-OR>						|*| <SIMPLE-EXPR> ::= <SIMPLE-EXPR> or <TERM>
+                        | <TERM> <SIMPLE-EXPR-ADD>						|*| 				| <SIMPLE-EXPR> + <TERM>
+                        | <TERM> <SIMPLE-EXPR-SUB>						|*| 				| <SIMPLE-EXPR> - <TERM>
                         | <TERM>										|*|					| <TERM>
 																		|*|
-	 <SIMPLE-EXPR-OR> ::= <SIMPLE-EXPR> or <TERM>						|*|
+	 <SIMPLE-EXPR-OR> ::= or <SIMPLE-EXPR>								|*|
 																		|*|
-	<SIMPLE-EXPR-ADD> ::= <SIMPLE-EXPR> + <TERM>						|*|
+	<SIMPLE-EXPR-ADD> ::= + <SIMPLE-EXPR>								|*|
 																		|*|
-	<SIMPLE-EXPR-SUB> ::= <SIMPLE-EXPR> - <TERM>						|*|
+	<SIMPLE-EXPR-SUB> ::=  - <SIMPLE-EXPR>								|*|
 																		|*|
-               <TERM> ::= <TERM-AND>									|*| <TERM> ::= <TERM> and <FACTOR>
-                        | <TERM-MUL>									|*| 			| <TERM> * <FACTOR>
-                        | <TERM-DIV>									|*| 			| <TERM> / <FACTOR>
+               <TERM> ::= <FACTOR> <TERM-AND>							|*| <TERM> ::= <TERM> and <FACTOR>
+                        | <FACTOR> <TERM-MUL>							|*| 			| <TERM> * <FACTOR>
+                        | <FACTOR> <TERM-DIV>							|*| 			| <TERM> / <FACTOR>
                         | <FACTOR>										|*|				| <FACTOR>
 																		|*|
-		   <TERM-AND> ::= <TERM> and <FACTOR>							|*| 
+		   <TERM-AND> ::= and <TERM>									|*| 
 																		|*|
-		   <TERM-MUL> ::= <TERM> * <FACTOR>								|*|
+		   <TERM-MUL> ::= * <TERM>										|*|
 																		|*|
-		   <TERM-DIV> ::= <TERM> / <FACTOR>								|*|
+		   <TERM-DIV> ::= / <TERM>										|*|
 																		|*|
              <FACTOR> ::= if <EXPR> then <EXPR> else <EXPR>				|*| <FACTOR> ::= if <EXPR> then <EXPR> else <EXPR>
                         | <NOT-FACTOR>									|*| 			| not <FACTOR>
@@ -77,12 +75,70 @@
             <ACTUALS> ::= ε												|*| <ACTUALS> ::= ε
                         | <NONEMPTYACTUALS>								|*|				| <NONEMPTYACTUALS>		
 																		|*|
-    <NONEMPTYACTUALS> ::= <EXPR>										|*| <NONEMPTYACTUALS> ::= <EXPR>
-                        | <NONEMPTYACTUALS'>							|*|						| <EXPR> , <NONEMPTYACTUALS>
-																		|*|
-   <NONEMPTYACTUALS'> ::= <EXPR> , <NONEMPTYACTUALS>					|*|
+    <NONEMPTYACTUALS> ::= <EXPR> <NEA-REST>								|*| <NONEMPTYACTUALS> ::= <EXPR>
+                    													|*|						| <EXPR> , <NONEMPTYACTUALS>
+   			<NEA-REST>::= , <NONEMPTYACTUALS>							|*|
+   						| ε												|*|
 																		|*|
             <LITERAL> ::= <NUMBER>										|*| <LITERAL> ::= <NUMBER>
                         | <BOOLEAN>										|*| 			| <BOOLEAN>
 																		|*|
     <PRINT-STATEMENT> ::= print ( <EXPR> )								|*| <PRINT-STATEMENT> ::= print ( <EXPR> )
+------------------------------------------------------------------------|*|------------------------------------------------------------------------
+			REFACTORED KLEIN GRAMMAR NUMBERED FOR PARSING TABLE		 	|*|
+------------------------------------------------------------------------|*|
+																		|*|
+1.           <PROGRAM> ::= <DEFINITIONS>								|*| 
+2.       <DEFINITIONS> ::= ε											|*| 
+3.                       | <DEFINITIONS'>								|*|					
+4.	   <DEFINITIONS'>  ::= <DEF> <DEFINITIONS>							|*| 
+5.				<DEF>  ::= function <IDENTIFIER> ( <FORMALS> ) : <TYPE> |*| 
+6.                           <BODY>										|*|				
+7.          <FORMALS>  ::= ε											|*|
+8.                       | <NONEMPTYFORMALS>							|*|				
+9.   <NONEMPTYFORMALS> ::= <FORMAL>										|*|
+10.                      | <NONEMPTYFORMALS'>							|*|						
+11. <NONEMPTYFORMALS'> ::= <FORMAL> , <NONEMPTYFORMALS>					|*|
+13.           <FORMAL> ::= <IDENTIFIER> : <TYPE>						|*| 
+14.             <BODY> ::= <PRINT-BODY>									|*| 
+15.                      | <EXPR>										|*|			 
+16.	      <PRINT-BODY> ::= <PRINT-STATEMENT> BODY						|*|							
+17.             <TYPE> ::= integer										|*| 
+18.                      | boolean										|*| 	
+19.             <EXPR> ::= <EXPR-LESS>								    |*| 
+20.                      | <EXPR-EQ>									|*|				
+21.                      | <SIMPLE-EXPR>								|*|				
+22.	       <EXPR-LESS> ::= <EXPR> < <SIMPLE-EXPR>						|*|
+23.	 	     <EXPR-EQ> ::= <EXPR> = <SIMPLE-EXPR>						|*|
+24.      <SIMPLE-EXPR> ::= <SIMPLE-EXPR-OR> 							|*|
+25.                      | <SIMPLE-EXPR-ADD>							|*| 				
+26.                      | <SIMPLE-EXPR-SUB>							|*| 				
+27.                      | <TERM>										|*|					
+28.	  <SIMPLE-EXPR-OR> ::= <SIMPLE-EXPR> or <TERM>						|*|
+29.	 <SIMPLE-EXPR-ADD> ::= <SIMPLE-EXPR> + <TERM>						|*|
+30.	 <SIMPLE-EXPR-SUB> ::= <SIMPLE-EXPR> - <TERM>						|*|
+40.             <TERM> ::= <TERM-AND>									|*|
+41.                      | <TERM-MUL>									|*| 			
+42.                      | <TERM-DIV>									|*| 			
+43.                      | <FACTOR>										|*|				
+44. 	    <TERM-AND> ::= <TERM> and <FACTOR>							|*| 
+45.		    <TERM-MUL> ::= <TERM> * <FACTOR>							|*|
+46.		    <TERM-DIV> ::= <TERM> / <FACTOR>							|*|
+47.           <FACTOR> ::= if <EXPR> then <EXPR> else <EXPR>			|*|
+50.                      | <NOT-FACTOR>									|*| 			
+51.                      | <IDENTIFIER-ACTUALS>							|*|				
+52.                      | <IDENTIFIER>									|*|				
+53.                      | <LITERAL>									|*|				
+54.                      | <NEG-FACTOR>									|*|				
+55.                      | ( <EXPR> )									|*|				
+56.	  	  <NOT-FACTOR> ::= not <FACTOR>									|*|
+57.		  <NEG-FACTOR> ::= - <FACTOR>									|*|
+58.<IDENTIFIER-ACTUALS> ::= <IDENTIFIER> ( <ACTUALS> )					|*|
+59           <ACTUALS> ::= ε											|*|
+60.                      | <NONEMPTYACTUALS>							|*|					
+61.   NONEMPTYACTUALS> ::= <EXPR>										|*|
+62.                      | <NONEMPTYACTUALS'>							|*|						
+63. <NONEMPTYACTUALS'> ::= <EXPR> , <NONEMPTYACTUALS>					|*|
+64.          <LITERAL> ::= <NUMBER>										|*| 
+65.                      | <BOOLEAN>									|*| 			
+66.   <PRINT-STATEMENT> ::= print ( <EXPR> )							|*|
