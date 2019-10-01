@@ -3,26 +3,38 @@ import java.util.HashMap;
 public class Parser
 {
     private static Scanner scan;
-    HashMap<String, Integer> map;
+    int table[][];
+    private final int tableX = 7;
+    private final int tableY = 7;
+
+    private enum rule
+    {
+        Punctuation, Keyword, Identifier, Integer, EOF, Error, Comment;
+    }
+    private enum nextTerminal
+    {
+        Punctuation, Keyword, Identifier, Integer, EOF, Error, Comment;
+    }
 
     public Parser(Scanner scan)
     {
         this.scan = scan;
-        map = new HashMap<>();
+        table = new int[tableX][tableY];
         createTable();
+
+
     }
 
     //TODO: return the tree
     public void parse()
     {
-        //example usage. should put if contains to throw error
-        System.out.println(map.get("Key"));
-
         Token tok;
         while (scan.peek().type != Token.Type.EOF && scan.peek().type != Token.Type.Error)
         {
-            tok = scan.peek();
-            System.out.println(map.get(tok.type.toString()));
+            tok = scan.next();
+            System.out.println(tok.type.toString() + tok.type.ordinal());
+            //not sure how to get first
+            System.out.println(table[3][tok.type.ordinal()]);
             //put token in tree
             //parse.run(tok);
             //System.out.println(tok.toString());
@@ -34,9 +46,15 @@ public class Parser
 
     private void createTable()
     {
-        map.put("Punctuation",0);
-        map.put("Keyword",1);
-        map.put("Identifier",2);
-        map.put("Integer",3);
+        for(int i=0; i<tableX; i++)
+        {
+            for(int j=0; j<tableY; j++)
+            {
+                table[i][j] = -1;
+            }
+        }
+
+        //actual states. Not zero indexed?
+        table[3][1] = 6;
     }
 }
