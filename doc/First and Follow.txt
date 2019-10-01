@@ -1,36 +1,39 @@
 ________________________________________________________________________________________________________________________________________
-                    |   First                                   | Follow
-PROGRAM             | FUNCTION                                  | $                                 
-DEFINITIONS         | FUNCTION ε                                | $ 
-DEFINITIONS'        | FUNCTION                                  | $ 
-DEF                 | FUNCTION                                  | FUNCTION
-FORMALS             | IDENTIFIER ε                              | )
-NONEMPTYFORMALS     | IDENTIFIER                                | )
-NONEMPTYFORMALS'    | IDENTIFIER                                | )
-FORMAL              | IDENTIFIER                                | , )
-BODY                | PRINT IF INDENTIFIER NOT - NUMBER BOOLEAN | FUNCTION PRINT IF INDENTIFIER NOT - NUMBER BOOLEAN ***?***
-PRINT-BODY          | PRINT                                     | FUNCTION PRINT IF INDENTIFIER NOT - NUMBER BOOLEAN ***?***
-TYPE                | integer boolean                           | FUNCTION PRINT IF INDENTIFIER NOT - NUMBER BOOLEAN ***?***
-EXPR                | IF INDENTIFIER NOT - NUMBER BOOLEAN       | < = then else )          
-EXPR-LESS           | IF INDENTIFIER NOT - NUMBER BOOLEAN       | < = then else )   ***?***                            
-EXPR-EQ             | IF INDENTIFIER NOT - NUMBER BOOLEAN       | < = then else )   ***?***        
-SIMPLE-EXPR         | IF INDENTIFIER NOT - NUMBER BOOLEAN       | or + -        
-SIMPLE-EXPR-OR      | IF INDENTIFIER NOT - NUMBER BOOLEAN       | or + -           ***?***             
-SIMPLE-EXPR-ADD     | IF INDENTIFIER NOT - NUMBER BOOLEAN       | or + -           ***?***             
-SIMPLE-EXPR-SUB     | IF INDENTIFIER NOT - NUMBER BOOLEAN       | or + -           ***?***             
-TERM                | IF INDENTIFIER NOT - NUMBER BOOLEAN       | and * /             
-TERM-AND            | IF INDENTIFIER NOT - NUMBER BOOLEAN       | and * /          ***?***                                      
-TERM-MUL            | IF INDENTIFIER NOT - NUMBER BOOLEAN       | and * /          ***?***                                    
-TERM-DIV            | IF INDENTIFIER NOT - NUMBER BOOLEAN       | and * /          ***?***                               
-FACTOR              | IF INDENTIFIER NOT - NUMBER BOOLEAN       | 
-NOT-FACTOR          | NOT                                       | 
-NEG-FACTOR          | -                                         |  
-IDENTIFIER-ACTUALS  | IDENTIFIER                                | 
-ACTUALS             | IF INDENTIFIER NOT - NUMBER BOOLEAN ε     |  
-NONEMPTYACTUALS     | IF INDENTIFIER NOT - NUMBER BOOLEAN       | 
-NONEMPTYACTUALS'    | IF INDENTIFIER NOT - NUMBER BOOLEAN       | 
-LITERAL             | NUMBER BOOLEAN                            | 
-PRINT-STATEMENT     | PRINT                                     | PRINT IF INDENTIFIER NOT - NUMBER BOOLEAN 
+                    |   First                                           | Follow
+PROGRAM             | FUNCTION   *****?***                              | $                                 
+DEFINITIONS         | FUNCTION ε                                        | $ 
+DEF                 | FUNCTION                                          | FUNCTION
+FORMALS             | IDENTIFIER ε                                      | )
+NONEMPTYFORMALS     | IDENTIFIER                                        | )
+NEF-REST            |  ε                                               | )
+FORMAL              | IDENTIFIER                                        |  ε
+BODY                | print if <IDENTIFIER> ( not <NUMBER> <BOOLEAN> -  | ε FUNCTION
+PRINT-BODY          | print                                             | ε FUNCTION 
+TYPE                | integer boolean                                   | print if <IDENTIFIER> ( not <NUMBER> <BOOLEAN> -  ε
+EXPR                | if <IDENTIFIER> ( not <NUMBER> <BOOLEAN> -        | ) , ε then else and * / function or + - < =          
+EXPR-LESS           | <                                                 | ) , ε then else and * / function or + - < =                           
+EXPR-EQ             | =                                                 | ) , ε then else and * / function or + - < =        
+SIMPLE-EXPR         | if <IDENTIFIER> ( not <NUMBER> <BOOLEAN> -        | ) , ε then else and * / function or + - < =
+SIMPLE-EXPR-OR      | or                                                | ) , ε then else and * / function or + - < =          
+SIMPLE-EXPR-ADD     | +                                                 | ) , ε then else and * / function or + - < =            
+SIMPLE-EXPR-SUB     | -                                                 | ) , ε then else and * / function or + - < =           
+TERM                | if <IDENTIFIER> ( not <NUMBER> <BOOLEAN> -        | ) , ε then else and * / function or + - < =           
+TERM-AND            | and                                               | ) , ε then else and * / function or + - < =                                     
+TERM-MUL            | *                                                 | ) , ε then else and * / function or + - < =                                    
+TERM-DIV            | /                                                 | ) , ε then else and * / function or + - < =                              
+FACTOR              | IF INDENTIFIER NOT - NUMBER BOOLEAN               | ) , ε then else and * / function or + - < =
+NOT-FACTOR          | NOT                                               | ) , ε then else and * / function or + - < =
+NEG-FACTOR          | -                                                 | ) , ε then else and * / function or + - < = 
+IDENTIFIER-ACTUALS  | IDENTIFIER                                        | ) , ε then else and * / function or + - < =
+ACTUALS             | ε if <IDENTIFIER> ( not <NUMBER> <BOOLEAN> -      | ) 
+NONEMPTYACTUALS     | if <IDENTIFIER> ( not <NUMBER> <BOOLEAN> -        | )
+NEA-REST            |  ε                                                | )
+LITERAL             | NUMBER BOOLEAN                                    | ) , ε then else and * / function or + - < =
+PRINT-STATEMENT     | print                                             | print if <IDENTIFIER> ( not <NUMBER> <BOOLEAN> -   *****?**** 
 
-LIST OF TERMINALS   | PRINT NUMBER BOOLEAN ε NOT AND OR IDENTIFIER ( ) + - / *  = < : IF THEN ELSE integer boolean , FUNCTION 
+LIST OF TERMINALS   | print NUMBER BOOLEAN ε not and or IDENTIFIER ( ) + - / *  = < : if then else integer boolean  FUNCTION 
  
+**********?********
+First and Follow generator answers which i've swapped out and noted with *****?****** above
+***FIRST**** <PROGRAM>	ε, function
+***FOLLOW*** <PRINT-STATEMENT>	BODY
