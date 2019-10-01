@@ -24,15 +24,15 @@ public class Main
                 fullFile += currentLine + '\n';
             Scanner scan = new Scanner(fullFile);
             Parser parse = new Parser(scan);
-           /* if (parse.parse())
+           if (parse.parse())
                 System.out.println("The program is: Valid");
             else
-                System.out.println("The program is: Invalid");*/
+                System.out.println("The program is: Invalid");
 
-            while (scan.peek().type != Token.Type.EOF && scan.peek().type != Token.Type.Error)
+            /*while (scan.peek().type != Token.Type.EOF && scan.peek().type != Token.Type.Error)
                 System.out.println(scan.next().toString());
             //one last call to display EOF
-            System.out.println(scan.next().toString());
+            System.out.println(scan.next().toString());*/
 
         }
         catch (FileNotFoundException e)

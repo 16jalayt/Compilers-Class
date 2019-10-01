@@ -1,6 +1,4 @@
-________________________________________________________________________________________________________________________________________
-                    |   First                                           | Follow
-PROGRAM             | FUNCTION   *****?***                              | $                                 
+PROGRAM             | FUNCTION   *****?***                              | $
 DEFINITIONS         | FUNCTION ε                                        | $ 
 DEF                 | FUNCTION                                          | FUNCTION
 FORMALS             | IDENTIFIER ε                                      | )
@@ -30,6 +28,8 @@ NONEMPTYACTUALS     | if <IDENTIFIER> ( not <NUMBER> <BOOLEAN> -        | )
 NEA-REST            |  ε                                                | )
 LITERAL             | NUMBER BOOLEAN                                    | ) , ε then else and * / function or + - < =
 PRINT-STATEMENT     | print                                             | print if <IDENTIFIER> ( not <NUMBER> <BOOLEAN> -   *****?**** 
+                    |   First                                           | Follow
+________________________________________________________________________________________________________________________________________
 
 LIST OF TERMINALS   | print NUMBER BOOLEAN ε not and or IDENTIFIER ( ) + - / *  = < : if then else integer boolean  FUNCTION 
  
