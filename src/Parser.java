@@ -6,14 +6,17 @@ public class Parser
 {   //TODO: on parole
     private enum Rule
     {
-        NULL, Formal, Body, Expression;
+        NULL, PROGRAM, DEFINITIONS, DEF, FORMALS, NONEMPTYFORMALS, NEFREST, FORMAL, BODY, PRINTBODY,
+        TYPE, EXPR, EXPRREST, SIMPLEEXPR, SIMPLEEXPRREST, TERM, TERMREST, FACTOR, NOTFACTOR, NEGFACTOR,
+        IDENTIFIERACTUALS, ACTUALS, NONEMPTYACTUALS, NEAREST, LITERAL, PRINTSTATEMENT;
     }
     //TODO:make all terminals
     //make into arraylist
-    /*private enum Terminals
+    private enum Terminals
     {
-        NULL, leftParen, rightParen;
-    }*/
+        NULL, print, NUMBER, BOOLEAN, not, and, or, IDENTIFIER, leftParen, rightParen, plus, minus,
+        equals, lessThan, colon, comma, If, then, Else, integer, Boolean, function;
+    }
     ArrayList<String> terminal = new ArrayList<String>(Arrays.asList(new String[]
             {"print", "("}));
     ArrayList<String> nonterminal = new ArrayList<String>(Arrays.asList(new String[]
