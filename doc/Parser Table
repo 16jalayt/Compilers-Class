@@ -1,0 +1,76 @@
+                    |  $  | print | NUMBER | BOOLEAN |  ε  | not | and | or  | IDENTIFIER |  ,  |  (  |  )  |  +  |  -  |  /  |  *  |  =  |  <  |  :  | if  | then | else | integer | boolean | function
+PROGRAM             |  1  |       |        |         |     |     |     |     |            |     |     |     |     |     |     |     |     |     |     |     |      |      |         |         | 1
+DEFINITIONS         |  2  |       |        |         |     |     |     |     |            |     |     |     |     |     |     |     |     |     |     |     |      |      |         |         | 3
+DEF                 |     |       |        |         |     |     |     |     |            |     |     |     |     |     |     |     |     |     |     |     |      |      |         |         | 4
+FORMALS             |     |       |        |         |     |     |     |     |      6     |     |     |  5  |     |     |     |     |     |     |     |     |      |      |         |         | 
+NONEMPTYFORMALS     |     |       |        |         |     |     |     |     |      7     |     |     |     |     |     |     |     |     |     |     |     |      |      |         |         |
+NEF-REST            |     |       |        |         |     |     |     |     |            |  8  |     |  9  |     |     |     |     |     |     |     |     |      |      |         |         |
+FORMAL              |     |       |        |         |     |     |     |     |      10    |     |     |     |     |     |     |     |     |     |     |     |      |      |         |         |
+BODY                |     |   11  | 12     | 12      |     |  12 |     |     |      12    |     | 12  |     |     |     |     |     |     |     |     |  12 |      |      |         |         |
+PRINT-BODY          |     |   13  |        |         |     |     |     |     |            |     |     |     |     |     |     |     |     |     |     |     |      |      |         |         |
+TYPE                |     |       |        |         |     |     |     |     |            |     |     |     |     |     |     |     |     |     |     |     |      |      | 14      | 15      |
+EXPR                |     |       | 16     | 16      |     |  16 |     |     |      16    |     | 16  |     |     |     |     |     |     |     |     |  16 |      |      |         |         |
+EXPR-REST           |     |       |        |         |     |     | 19  |     |            | 19  |     | 19  |     |     | 19  | 19  | 18  | 17  |     |     |  19  |  19  |         |         | 19
+SIMPLE-EXPR         |     |       | 20     | 20      |     |  20 |     |     |      20    |     | 20  |     |     |     |     |     |     |     |     |  20 |      |      |         |         |
+SIMPLE-EXPR-REST    |     |       |        |         |     |     |     | 21  |            |     |     |     | 22  | 23  |     |     | 24  | 24  |     |     |      |      |         |         |
+TERM                |     |       | 25     | 25      |     |  25 |     |     |      25    |     | 25  |     |     |     |     |     |     |     |     |  25 |      |      |         |         |
+TERM-REST           |     |       |        |         |     |     | 26  | 29  |            |     |     |     | 29  | 29  | 28  | 27  |     |     |     |     |      |      |         |         |
+FACTOR              |     |       | 34     | 34      |     |  31 |     |     |   32 33    |     | 36  |     |     | 35  |     |     |     |     |     |  30 |      |      |         |         |
+NOT-FACTOR          |     |       |        |         |     |  37 |     |     |            |     |     |     |     |     |     |     |     |     |     |     |      |      |         |         |
+NEG-FACTOR          |     |       |        |         |     |     |     |     |            |     |     |     |     | 38  |     |     |     |     |     |     |      |      |         |         |
+IDENTIFIER-ACTUALS  |     |       |        |         |     |     |     |     |      39    |     |     |     |     |     |     |     |     |     |     |     |      |      |         |         |
+ACTUALS             |     |       | 41     | 41      |     |  41 |     |     |      41    |     | 41  | 40  |     |     |     |     |     |     |     |  41 |      |      |         |         |
+NONEMPTYACTUALS     |     |       | 42     | 42      |     |  42 |     |     |      42    |     | 42  |     |     |     |     |     |     |     |     |  42 |      |      |         |         |
+NEA-REST            |     |       |        |         |     |     |     |     |            | 43  |     | 44  |     |     |     |     |     |     |     |     |      |      |         |         |
+LITERAL             |     |       | 45     | 46      |     |     |     |     |            |     |     |     |     |     |     |     |     |     |     |     |      |      |         |         |
+PRINT-STATEMENT     |     |   47  |        |         |     |     |     |     |            |     |     |     |     |     |     |     |     |     |     |     |      |      |         |         |
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+			NUMBERED KLEIN GRAMMAR FOR PARSER							          |*| TERMINALS FOR TABLE                        
+----------------------------------------------------------------------------------|*|
+1.              <PROGRAM> ::= <DEFINITIONS>								          |*| function $
+2.          <DEFINITIONS> ::= ε	                                                  |*| $
+3.                          | <DEF> <DEFINITIONS>							      |*| function
+4.    				<DEF> ::= function <IDENTIFIER> ( <FORMALS> ) : <TYPE> <BODY> |*| function										
+5.              <FORMALS> ::= ε	                                                  |*| )
+6.                          | <NONEMPTYFORMALS>								      |*| IDENTIFIER
+7.      <NONEMPTYFORMALS> ::= <FORMAL>	<NEF-REST>							      |*| IDENTIFIER 
+8.      	   <NEF-REST> ::= , <NONEMPTYFORMALS>                                 |*| ,
+9.                          | ε												      |*| )
+10.              <FORMAL> ::= <IDENTIFIER> : <TYPE>							      |*| IDENTIFIER
+11.                <BODY> ::= <PRINT-BODY>                                        |*| print
+12.                         | <EXPR>										      |*| if IDENTIFIER ( not NUMBER BOOLEAN -
+13. 		 <PRINT-BODY> ::= <PRINT-STATEMENT> BODY							  |*| print
+14.                <TYPE> ::= integer                                             |*| integer
+15.                         | boolean										      |*| boolean
+16.                <EXPR> ::= <SIMPLE-EXPR> <EXPR-REST>						      |*| if IDENTIFIER ( not NUMBER BOOLEAN -
+17. 		  <EXPR-REST> ::= < <EXPR>                                            |*| <
+18.                         | = <EXPR>                                            |*| =
+19.                         | ε												      |*| ) , then else and * / function
+20.         <SIMPLE-EXPR> ::= <TERM> <SIMPLE-EXPR-REST>						      |*| if IDENTIFIER ( not NUMBER BOOLEAN -
+21.    <SIMPLE-EXPR-REST> ::= or <SIMPLE-EXPR>                                    |*| or
+22.                         | + <SIMPLE-EXPR>                                     |*| +
+23.                         | - <SIMPLE-EXPR>                                     |*| -
+24.                         | ε												      |*| < =
+25.                <TERM> ::= <FACTOR> <TERM-REST>								  |*| if INDENTIFIER ( not NUMBER BOOLEAN -
+26. 		  <TERM-REST> ::= and <TERM>                                          |*| and
+27.                         | * <TERM>	                                          |*| *
+28.                         | / <TERM>	                                          |*| /
+29.                         | ε												      |*| or + - 
+30.              <FACTOR> ::= if <EXPR> then <EXPR> else <EXPR>	                  |*| if
+31.                         | <NOT-FACTOR>                                        |*| not
+32.                         | <IDENTIFIER-ACTUALS>                                |*| IDENTIFIER
+33.                         | <IDENTIFIER>                                        |*| IDENTIFIER ********?*********
+34.                         | <LITERAL>                                           |*| NUMBER BOOLEAN
+35.                         | <NEG-FACTOR>                                        |*| -
+36.                         | ( <EXPR> )									      |*| (
+37. 		 <NOT-FACTOR> ::= not <FACTOR>									      |*| not
+38. 		 <NEG-FACTOR> ::= - <FACTOR>									      |*| -
+39.  <IDENTIFIER-ACTUALS> ::= <IDENTIFIER> ( <ACTUALS> )		                  |*| IDENTIFIER		
+40.             <ACTUALS> ::= ε	                                                  |*| )
+41.                         | <NONEMPTYACTUALS>									  |*| if IDENTIFIER ( not NUMBER BOOLEAN -  
+42.     <NONEMPTYACTUALS> ::= <EXPR> <NEA-REST>								      |*| if IDENTIFIER ( not NUMBER BOOLEAN -  
+43.    			<NEA-REST>::= , <NONEMPTYACTUALS>                                 |*| ,
+44.                         | ε												      |*| )
+45.             <LITERAL> ::= <NUMBER>                                            |*| NUMBER
+46.                         | <BOOLEAN>										      |*| BOOLEAN
+47.     <PRINT-STATEMENT> ::= print ( <EXPR> )								      |*| print

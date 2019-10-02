@@ -28,35 +28,31 @@
                <TYPE> ::= integer										|*| <TYPE> ::= integer
                         | boolean										|*| 		 | boolean
 																		|*| 
-               <EXPR> ::= <SIMPLE-EXPR> <EXPR-LESS>						|*| <EXPR> ::= <EXPR> < <SIMPLE-EXPR>
-                        | <SIMPLE-EXPR> <EXPR-EQ>						|*|				| <EXPR> = <SIMPLE-EXPR>
-                        | <SIMPLE-EXPR>									|*|				| <SIMPLE-EXPR>
+               <EXPR> ::= <SIMPLE-EXPR> <EXPR-REST>						|*| <EXPR> ::= <EXPR> < <SIMPLE-EXPR>
+																		|*|				| <EXPR> = <SIMPLE-EXPR>
+																		|*|				| <SIMPLE-EXPR>
+		  <EXPR-REST> ::= < <EXPR>										|*|
+		  			    | = <EXPR>										|*|
+						| ε												|*|
+																		|*|																																				|*|
+        <SIMPLE-EXPR> ::= <TERM> <SIMPLE-EXPR-REST>						|*| <SIMPLE-EXPR> ::= <SIMPLE-EXPR> or <TERM>
+                        												|*| 				| <SIMPLE-EXPR> + <TERM>
+                        												|*| 				| <SIMPLE-EXPR> - <TERM>
+                        												|*|					| <TERM>
+   <SIMPLE-EXPR-REST> ::= or <SIMPLE-EXPR>								|*|
+						| + <SIMPLE-EXPR>								|*|
+						| - <SIMPLE-EXPR>								|*|
+						| ε												|*|
 																		|*|
-	   	  <EXPR-LESS> ::= < <EXPR>										|*|
+               <TERM> ::= <FACTOR> <TERM-REST>							|*| <TERM> ::= <TERM> and <FACTOR>
+                        												|*| 			| <TERM> * <FACTOR>
+                        												|*| 			| <TERM> / <FACTOR>
+                        												|*|				| <FACTOR>
 																		|*|
-			<EXPR-EQ> ::= = <EXPR>										|*|
-																		|*|
-        <SIMPLE-EXPR> ::= <TERM> <SIMPLE-EXPR-OR>						|*| <SIMPLE-EXPR> ::= <SIMPLE-EXPR> or <TERM>
-                        | <TERM> <SIMPLE-EXPR-ADD>						|*| 				| <SIMPLE-EXPR> + <TERM>
-                        | <TERM> <SIMPLE-EXPR-SUB>						|*| 				| <SIMPLE-EXPR> - <TERM>
-                        | <TERM>										|*|					| <TERM>
-																		|*|
-	 <SIMPLE-EXPR-OR> ::= or <SIMPLE-EXPR>								|*|
-																		|*|
-	<SIMPLE-EXPR-ADD> ::= + <SIMPLE-EXPR>								|*|
-																		|*|
-	<SIMPLE-EXPR-SUB> ::=  - <SIMPLE-EXPR>								|*|
-																		|*|
-               <TERM> ::= <FACTOR> <TERM-AND>							|*| <TERM> ::= <TERM> and <FACTOR>
-                        | <FACTOR> <TERM-MUL>							|*| 			| <TERM> * <FACTOR>
-                        | <FACTOR> <TERM-DIV>							|*| 			| <TERM> / <FACTOR>
-                        | <FACTOR>										|*|				| <FACTOR>
-																		|*|
-		   <TERM-AND> ::= and <TERM>									|*| 
-																		|*|
-		   <TERM-MUL> ::= * <TERM>										|*|
-																		|*|
-		   <TERM-DIV> ::= / <TERM>										|*|
+		  <TERM-REST> ::= and <TERM>									|*| 
+	     				| * <TERM>										|*|
+		   				| / <TERM>										|*|
+						| ε												|*|
 																		|*|
              <FACTOR> ::= if <EXPR> then <EXPR> else <EXPR>				|*| <FACTOR> ::= if <EXPR> then <EXPR> else <EXPR>
                         | <NOT-FACTOR>									|*| 			| not <FACTOR>
@@ -84,5 +80,3 @@
                         | <BOOLEAN>										|*| 			| <BOOLEAN>
 																		|*|
     <PRINT-STATEMENT> ::= print ( <EXPR> )								|*| <PRINT-STATEMENT> ::= print ( <EXPR> )
-------------------------------------------------------------------------|*|------------------------------------------------------------------------
-
