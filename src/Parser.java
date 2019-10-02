@@ -4,11 +4,14 @@ public class Parser
 {
     private enum Rule
     {
-        NULL, Formal, Body, Expression;
+        NULL, PROGRAM, DEFINITIONS, DEF, FORMALS, NONEMPTYFORMALS, NEFREST, FORMAL, BODY, PRINTBODY,
+        TYPE, EXPR, EXPRREST, SIMPLEEXPR, SIMPLEEXPRREST, TERM, TERMREST, FACTOR, NOTFACTOR, NEGFACTOR,
+        IDENTIFIERACTUALS, ACTUALS, NONEMPTYACTUALS, NEAREST, LITERAL, PRINTSTATEMENT;
     }
     private enum NextTerminal
     {
-        NULL, leftParen, rightParen;
+        NULL, print, NUMBER, BOOLEAN, not, and, or, IDENTIFIER, leftParen, rightParen, plus, minus, 
+        equals, lessThan, colon, comma, If, then, Else, integer, Boolean, function;
     }
 
     public Rule currentRule;
@@ -36,7 +39,7 @@ public class Parser
     {
         Token tok;
         //tmp. need default though
-        currentRule = Rule.Expression;
+        currentRule = Rule.EXPR;
         int nextFunc = 0;
         while (scan.peek().type != Token.Type.EOF && scan.peek().type != Token.Type.Error)
         {
