@@ -1,4 +1,4 @@
-                    |  $  | print | NUMBER | BOOLEAN |  ε  | not | and | or  | IDENTIFIER |  ,  |  (  |  )  |  +  |  -  |  /  |  *  |  =  |  <  |  :  | if  | then | else | integer | boolean | function
+                    |  $  | print | NUMBER | BOOLEAN |  ε  | not | and | or  | IDENTIFIER |  ,  |  (  |  )  |  +  |  -  |  /  |  *  |  =  |  <  |  :  | if  | then | else | integer | Boolean | Function
 PROGRAM             |  1  |       |        |         |     |     |     |     |            |     |     |     |     |     |     |     |     |     |     |     |      |      |         |         | 1
 DEFINITIONS         |  2  |       |        |         |     |     |     |     |            |     |     |     |     |     |     |     |     |     |     |     |      |      |         |         | 3
 DEF                 |     |       |        |         |     |     |     |     |            |     |     |     |     |     |     |     |     |     |     |     |      |      |         |         | 4

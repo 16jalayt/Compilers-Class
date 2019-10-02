@@ -4,10 +4,11 @@ public class Parser
 {
     public enum Terminals
     {
-        NULL(0), print(1), NUMBER(2), EOF(3), Error(4), Comment(5),
-        BOOLEAN(6), not(7), and(8), or(9), IDENTIFIER(10), leftParen(11), rightParen(12),
-        plus(13), minus(14), equals(15), lessThan(16), colon(17), comma(18), If(19),
-        then(20), Else(21), integer(22), Boolean(23), function(24);
+        NULL(0), EOF(1), print(2), Number(3),  BOOLEAN(4), Empty (5),
+        not(6), and(7), or(8), Identifier(9), comma(10),
+        leftParen(11), rightParen(12), plus(13), minus(14),
+        equals(15), lessThan(16), colon(17),  If(19), then(20),
+        Else(21), integer(22), Boolean(23), Function(24);
 
         private final int value;
         private static Map<Integer, Terminals> map = new HashMap<Integer, Terminals>();
