@@ -1,0 +1,47 @@
+-*- mode: org -*-
+* grammar
+
+    program ::= range assignments
+      range ::= number ELLIPSIS number
+assignments ::= assignment assignments
+              | epsilon
+ assignment ::= word EQUALS number
+       word ::= WORD
+     number ::= NUMBER
+
+* grammar, refactored
+
+  no need!
+
+* first
+
+    number      = { NUMBER }
+    word        = { WORD }
+    assignment  = { WORD }
+    assignments = { WORD, epsilon }
+    range       = { NUMBER }
+    program     = { NUMBER }
+
+* follow
+
+    program     = { $ }
+    range       = { WORD, $ }
+    assignments = { $ }
+    assignment  = { WORD, $ }
+    word        = { EQUALS }
+    number      = { ELLIPSIS, WORD, $ }
+
+* table
+
+                | NUMBER                 | WORD                   | $
+    =========== | =========================================================
+    program     | range assignments      | ---                    | ---
+    range       | number ELLIPSIS number | ---                    | ---
+    assignments | ---                    | assignment assignments | epsilon
+    assignment  | ---                    | word EQUALS number     | ---
+    word        | ---                    | WORD                   | ---
+    number      | NUMBER                 | ---                    | ---
+
+  The columns for ELLPSIS and EQUALS are empty.
+
+*

@@ -1,0 +1,153 @@
+-*- mode: org -*-
+
+Eugene Wallingford
+wallingf@cs.uni.edu
+
+A compiler for the Fizzbuzz language, as defined in "The Fastest
+FizzBuzz in the West":
+
+https://www.promptworks.com/blog/the-fastest-fizzbuzz-in-the-west
+
+I use this language and compiler as a Week 1 demo.  It is simple
+enough to read in one sitting, but the language can also be used
+to demonstrate more sophisticated techniques throughout the
+course.
+
+* Running the compiler
+
+The file "compiler.py" compiles a Fizzbuzz program to a Python
+program.  It takes one command-line argument, the name the
+Fizzbuzz program, and writes its output to stdout.  compiler.py
+calls the modules of the compiler as needed.
+
+Example:
+
+> python3.4 compiler.py programs/default.fb 
+for i in range(1, 16):
+  output = ""
+  if (i % 3) == 0:
+    output += "fizz"
+  if (i % 5) == 0:
+    output += "buzz"
+  if output == "":
+    output += str(i)
+  print(output)
+
+To write the compiled program to a file, redirect stdout:
+
+> python3.4 compiler.py programs/default.fb > fizzbuzz.py
+
+The file "tests.py" contains PyUnit tests for all the modules
+of the compiler.  Read it if you'd like to see examples of
+how to use the various modules.
+
+* Git repository
+
+The fizzbuzz-compiler/ directory is tracked by git.  You have
+access to the full history of commits to the project, including
+a few fumbles along the way.  For an abbreviated log of the
+commits, run:
+
+> git log --oneline
+
+*
+* Grammar
+
+    program ::= range assignments
+      range ::= number ELLIPSIS number
+assignments ::= assignment assignments
+              | ε
+ assignment ::= word EQUALS number
+       word ::= WORD
+     number ::= NUMBER
+
+* Scanner
+
+The scanner has two public methods, peek() and next_token().  The
+get_next_token() function does actual work of reading a token from
+the stream.
+
+A token is an object with a token type (an enum) and an optional
+semantic value.
+
+* Parser
+
+The parser uses recursive descent to build a program's AST.
+The public parse() method uses node-based helper methods:
+parse_program(), parse_range(), parse_assignments(), and
+parse_assignment().
+
+An abstract syntax tree consists of program, range, and assignment
+nodes.  A program node consists of a tuple containing a range node
+and a list of assignment nodes.  AST nodes know how to pretty-
+print themselves as a typical FizzBuzz problem statement,
+generalized for more than two special words.
+
+----
+
+A second parser, td_parser, uses a parse table to process the token
+stream without any function calls or recursion.  The current version
+only validates a program; it does not yet produce and AST.  We added
+this parser in Session 11, with an eye to a complete parser in a
+week or two.
+
+* Type checker
+
+range:  m...n
+  - 0 < m < n
+
+assignment:   word = k
+  - word must be unique
+  - m < k < n
+
+* Optimizer
+
+[ Is there anything to optimize?  Re-read the paper...  ]
+  - precompute the multiples -- or all strings?!
+
+* Code generator
+** Python generator
+
+This code generator produces a correct Python program of
+the form:
+
+  for i in range(1, 16):
+    output = ""
+    if (i % 3) == 0:
+      output += "fizz"
+    if (i % 5) == 0:
+      output += "buzz"
+    if output == "":
+      output += str(i)
+    print(output)
+
+The generated code uses an output string to accumulate words to
+print for multiples, adding the current number i to the string
+whenever it is not divisible by any of the keys.
+
+** TM generator
+
+This FizzBuzz language is amenable to implementation in TM
+assembly language.  Currently, the distribution does not
+include a TM generator.  I anticipate implementing one in
+my compiler course this fall.
+
+* 
+* On use as an example in class
+** scanner
+   - overly simple rules for numbers and words
+   - adding comments complicates the ad hoc mechanism
+** parser
+   - easily handled by recursive descent
+   - amenable to a simple table-driven approach, too
+** type checker
+   - the basic behavior is "action at a distance", similar to
+     that of more complex compilers
+   - ... but the actual type checking is unlike what a language
+     with a more interesting type system needs
+** code generator
+   - has a loop
+   - does not have a function call
+   - the code illustrates what students need for their project
+     but leaves them with some thinking to do
+* 
