@@ -4,7 +4,10 @@ public class Parser
 {
     public enum Terminals
     {
-        NULL(0), print(1), NUMBER(2), EOF(3);
+        NULL(0), print(1), NUMBER(2), EOF(3), Error(4), Comment(5),
+        BOOLEAN(6), not(7), and(8), or(9), IDENTIFIER(10), leftParen(11), rightParen(12),
+        plus(13), minus(14), equals(15), lessThan(16), colon(17), comma(18), If(19),
+        then(20), Else(21), integer(22), Boolean(23), function(24);
 
         private final int value;
         private static Map<Integer, Terminals> map = new HashMap<Integer, Terminals>();
@@ -37,7 +40,11 @@ public class Parser
     }
     public enum Rule
     {
-        NULL(100), PROGRAM(101), DEFINITIONS(102);
+        NULL(100), PROGRAM(101), DEFINITIONS(102), DEF(103), FORMALS(104), NONEMPTYFORMALS(105),
+        NEFREST(106), FORMAL(107), BODY(108), PRINTBODY(109), TYPE(110), EXPR(111),
+        EXPRREST(112), SIMPLEEXPR(113), SIMPLEEXPRREST(114), TERM(115), TERMREST(116), FACTOR(117),
+        NOTFACTOR(118), NEGFACTOR(119), IDENTIFIERACTUALS(120), ACTUALS(121), NONEMPTYACTUALS(122),
+        NEAREST(123), LITERAL(124), PRINTSTATEMENT(125);
 
         private final int value;
         private static Map map = new HashMap<>();
@@ -75,11 +82,7 @@ public class Parser
             return value;
         }
     }
-    //ArrayList<String> terminal = new ArrayList<String>(Arrays.asList(new String[]
-            //{"print", "("}));
-    //same as enum Rule above
-    //ArrayList<String> nonterminal = new ArrayList<String>(Arrays.asList(new String[]
-            //{"program", "definitions"}));
+
 
     public int currentRule;
     //public Terminals terminals;
