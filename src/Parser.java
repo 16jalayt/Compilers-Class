@@ -1,38 +1,27 @@
 import java.util.*;
 
 public class Parser
-{   //https://codingexplained.com/coding/java/enum-to-integer-and-integer-to-enum
-    private enum Rule
+{
+    public enum Terminals
     {
-        NULL, PROGRAM, DEFINITIONS, DEF, FORMALS, NONEMPTYFORMALS, NEFREST, FORMAL, BODY, PRINTBODY,
-        TYPE, EXPR, EXPRREST, SIMPLEEXPR, SIMPLEEXPRREST, TERM, TERMREST, FACTOR, NOTFACTOR, NEGFACTOR,
-        IDENTIFIERACTUALS, ACTUALS, NONEMPTYACTUALS, NEAREST, LITERAL, PRINTSTATEMENT;
+        NULL(0), print(1), NUMBER(2), EOF(3);
 
-        private int value;
-        private int count = 100;
+        private final int value;
         private static Map map = new HashMap<>();
 
-        private Rule() {
-            this.value = count;
-            count++;
+        Terminals(int number) {
+            this.value = number;
         }
-
-        static
-        {
-            for (Rule rule : Rule.values())
-            {
-                map.put(rule.value, rule);
+        static {
+            for (Terminals term : Terminals.values()) {
+                map.put(term.value, term);
             }
         }
 
-        public static Rule valueOf(int rule)
-        {
-            return (Rule) map.get(rule);
+        public static Terminals valueOf(int key) {
+            return (Terminals) map.get(key);
         }
-        public static int length()
-        {
-            return map.size();
-        }
+
         public static boolean contains(int obj)
         {
             if(map.containsValue(obj))
@@ -40,43 +29,31 @@ public class Parser
             else
                 return false;
         }
+
         public int getValue() {
             return value;
         }
     }
-    //TODO:make all terminals
-    //make into arraylist
-    private enum Terminals
+    public enum Rule
     {
-        Punctuation, Keyword, Identifier, Integer, EOF, Error, Comment,
-        NULL, print, NUMBER, BOOLEAN, not, and, or, IDENTIFIER, leftParen, rightParen, plus, minus,
-        equals, lessThan, colon, comma, If, then, Else, integer, Boolean, function;
+        NULL(0), PROGRAM(1), DEFINITIONS(2);
 
-        private int value;
-        private int count = 0;
+        private final int value;
         private static Map map = new HashMap<>();
 
-        private Terminals() {
-            this.value = count;
-            count++;
+        Rule(int number) {
+            this.value = number;
         }
-
-        static
-        {
-            for (Terminals terminals : Terminals.values())
-            {
-                map.put(terminals.value, terminals);
+        static {
+            for (Rule rule : Rule.values()) {
+                map.put(rule.value, rule);
             }
         }
 
-        public static Terminals valueOf(int terminals)
-        {
-            return (Terminals) map.get(terminals);
+        public static Rule valueOf(int key) {
+            return (Rule) map.get(key);
         }
-        public static int length()
-        {
-            return map.size();
-        }
+
         public static boolean contains(int obj)
         {
             if(map.containsValue(obj))
@@ -84,6 +61,15 @@ public class Parser
             else
                 return false;
         }
+        public static boolean containsType(Token obj)
+        {
+            if(map.containsKey(obj.type))
+                return true;
+            else
+                return false;
+        }
+
+
         public int getValue() {
             return value;
         }
@@ -94,10 +80,12 @@ public class Parser
     //ArrayList<String> nonterminal = new ArrayList<String>(Arrays.asList(new String[]
             //{"program", "definitions"}));
 
-    public Rule currentRule;
+    public int currentRule;
     //public Terminals terminals;
     private static Scanner scan;
     int table[][];
+    Map<Rule,Terminals> hm =
+            new HashMap< Rule,Terminals>();
     private final int tableX = 7;
     private final int tableY = 7;
 
@@ -107,7 +95,7 @@ public class Parser
     {
         this.scan = scan;
         table = new int[tableX][tableY];
-        currentRule = Rule.NULL;
+        currentRule = -1;
         //terminals = Terminals.NULL;
         createTable();
 
@@ -123,6 +111,7 @@ public class Parser
         int nextFunc = 0;
         //cant be type token because can be nonterminal
         Stack<Integer> stack = new Stack<>();
+
         stack.push(Terminals.EOF.getValue());
         Token next = new Token(Token.Type.Error,"");
         while (!stack.isEmpty())
@@ -132,9 +121,8 @@ public class Parser
             if(Terminals.contains(temp))
             {
                 next = scan.next();
-                //if(temp == next.type.ordinal())
-                //////////////////line where i get confused
-                if(temp == next.type.ordinal())
+
+                if(Parser.Terminals.valueOf(temp).toString().equals(next.type.toString()))
                     stack.pop();
                 else
                 {
@@ -146,11 +134,11 @@ public class Parser
             else if (Rule.contains(temp))
             {
                 next = scan.peek();
-                currentRule = Rule.valueOf(table[temp][next.type.ordinal()]);
-                if(currentRule.ordinal() != -1)
+                currentRule = table[temp][next.type.ordinal()];
+                if(currentRule != -1)
                 {
                     stack.pop();
-                    stack.push(currentRule.ordinal());
+                    stack.push(currentRule);
                 }
                 else
                 {
