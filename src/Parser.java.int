@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Parser
 {   //https://codingexplained.com/coding/java/enum-to-integer-and-integer-to-enum
-    private enum Rule
+    /*private enum Rule
     {
         NULL, PROGRAM, DEFINITIONS, DEF, FORMALS, NONEMPTYFORMALS, NEFREST, FORMAL, BODY, PRINTBODY,
         TYPE, EXPR, EXPRREST, SIMPLEEXPR, SIMPLEEXPRREST, TERM, TERMREST, FACTOR, NOTFACTOR, NEGFACTOR,
@@ -48,12 +48,11 @@ public class Parser
     //make into arraylist
     private enum Terminals
     {
-        Punctuation, Keyword, Identifier, Integer, EOF, Error, Comment,
         NULL, print, NUMBER, BOOLEAN, not, and, or, IDENTIFIER, leftParen, rightParen, plus, minus,
-        equals, lessThan, colon, comma, If, then, Else, integer, Boolean, function;
+        equals, lessThan, colon, comma, If, then, Else, integer, Boolean, function, EOF;
 
         private int value;
-        private int count = 0;
+        private int count = 200;
         private static Map map = new HashMap<>();
 
         private Terminals() {
@@ -87,14 +86,16 @@ public class Parser
         public int getValue() {
             return value;
         }
-    }
+    }*/
     //ArrayList<String> terminal = new ArrayList<String>(Arrays.asList(new String[]
             //{"print", "("}));
     //same as enum Rule above
     //ArrayList<String> nonterminal = new ArrayList<String>(Arrays.asList(new String[]
             //{"program", "definitions"}));
+    private static int Program = 101;
+    private static int NUMBER = 201;
 
-    public Rule currentRule;
+    //public Rule currentRule;
     //public Terminals terminals;
     private static Scanner scan;
     int table[][];
@@ -107,7 +108,7 @@ public class Parser
     {
         this.scan = scan;
         table = new int[tableX][tableY];
-        currentRule = Rule.NULL;
+        //currentRule = Rule.NULL;
         //terminals = Terminals.NULL;
         createTable();
 
@@ -123,13 +124,13 @@ public class Parser
         int nextFunc = 0;
         //cant be type token because can be nonterminal
         Stack<Integer> stack = new Stack<>();
-        stack.push(Terminals.EOF.getValue());
+        stack.push(-1);
         Token next = new Token(Token.Type.Error,"");
         while (!stack.isEmpty())
         {
             int temp = stack.peek();
             //if tmp is terminal
-            if(Terminals.contains(temp))
+            if(temp <= 300 && temp >= 200)
             {
                 next = scan.next();
                 //if(temp == next.type.ordinal())
@@ -143,14 +144,14 @@ public class Parser
                 }
             }
             //else if (nonterminal.contains(temp))
-            else if (Rule.contains(temp))
+            else if (temp <= 200 && temp >= 100)
             {
                 next = scan.peek();
-                currentRule = Rule.valueOf(table[temp][next.type.ordinal()]);
-                if(currentRule.ordinal() != -1)
+                int currentRule = table[temp][next.type.ordinal()];
+                if(currentRule != -1)
                 {
                     stack.pop();
-                    stack.push(currentRule.ordinal());
+                    stack.push(currentRule);
                 }
                 else
                 {
