@@ -63,9 +63,9 @@ public class Parser
             return (Rule) map.get(key);
         }
 
-        public static boolean contains(int obj)
+        public static boolean contains(int key)
         {
-            if(map.containsValue(obj))
+            if(map.get(key) != null)
                 return true;
             else
                 return false;
@@ -91,8 +91,8 @@ public class Parser
     int table[][];
     Map<Rule,Terminals> hm =
             new HashMap< Rule,Terminals>();
-    private final int tableX = 7;
-    private final int tableY = 7;
+    private final int tableX = 25;
+    private final int tableY = 26;
 
 
 
@@ -118,6 +118,7 @@ public class Parser
         Stack<Integer> stack = new Stack<>();
 
         stack.push(Terminals.EOF.getValue());
+        stack.push(Rule.PROGRAM.getValue());
         Token next = new Token(Token.Type.Error,"");
         while (!stack.isEmpty())
         {
@@ -139,7 +140,7 @@ public class Parser
             else if (Rule.contains(temp))
             {
                 next = scan.peek();
-                currentRule = table[temp][next.type.ordinal()];
+                currentRule = table[temp-100][next.type.ordinal()];
                 if(currentRule != -1)
                 {
                     stack.pop();
