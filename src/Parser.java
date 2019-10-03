@@ -90,8 +90,8 @@ public class Parser
     int table[][];
     Map<Rule,Terminals> hm =
             new HashMap< Rule,Terminals>();
-    private final int tableX = 7;
-    private final int tableY = 7;
+    private final int tableX = 25;
+    private final int tableY = 25;
 
 
 
@@ -177,6 +177,73 @@ public class Parser
         }
 
         //valid states. Starts counting from 1. Zero is invalid
-        table[3][1] = 6;
+        table[0][0]   = 1;
+        table[0][24]  = 1;
+        table[1][0]   = 2;
+        table[1][24]  = 3;
+        table[2][24]  = 4;
+        table[3][8]   = 6;
+        table[3][11]  = 5;
+        table[4][8]   = 7;
+        table[5][9]   = 8;
+        table[5][11]  = 9;
+        table[6][8]   = 10;
+        table[7][1]   = 11;
+        table[7][2]   = 12;
+        table[7][3]   = 12;
+        table[7][5]   = 12;
+        table[7][8]   = 12;
+        table[7][10]  = 12;
+        table[7][19]  = 12;
+        table[8][1]   = 13;
+        table[9][22]  = 14;
+        table[9][23]  = 15;
+        table[10][2]  = 16;
+        table[10][3]  = 16;
+        table[10][5]  = 16;
+        table[10][8]  = 16;
+        table[10][10] = 16;
+        table[10][19] = 16;
+        table[11][6]  = 19;
+        table[11][9]  = 19;
+        table[11][11] = 19;
+        table[11][14] = 19;
+        table[11][15] = 19;
+        table[11][16] = 18;
+        table[11][17] = 17;
+        table[11][20] = 19;
+        table[11][21] = 19;
+        table[11][24] = 19;
+        table[12][2]  = 20;
+        table[12][3]  = 20;
+        table[12][5]  = 20;
+        table[12][8]  = 20;
+        table[12][10] = 20;
+        table[12][19] = 20;
+        table[13][7]  = 21;
+        table[13][12] = 22;
+        table[13][13] = 23;
+        table[13][16] = 24;
+        table[13][17] = 24;
+        table[14][2]  = 25;
+        table[14][3]  = 25;
+        table[14][5]  = 25;
+        table[14][8]  = 25;
+        table[14][10] = 25;
+        table[14][19] = 25;
+        table[15][6]  = 26;
+        table[15][7]  = 29;
+        table[15][12] = 29;
+        table[15][13] = 29;
+        table[15][14] = 28;
+        table[15][15] = 27;
+        table[16][2]  = 33;
+        table[16][3]  = 33;
+        table[16][5]  = 31;
+        table[16][8] = 0;
+        table[16][10] = 36;
+        table[0][0] = 0;
+        table[0][0] = 0;
+        table[0][0] = 0;
     }
 }
