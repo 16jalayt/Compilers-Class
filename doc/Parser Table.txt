@@ -2,7 +2,7 @@
 PROGRAM             |  1  |       |        |         |     |     |     |     |            |     |     |     |     |     |     |     |     |     |     |     |      |      |         |         | 1
 DEFINITIONS         |  2  |       |        |         |     |     |     |     |            |     |     |     |     |     |     |     |     |     |     |     |      |      |         |         | 3
 DEF                 |     |       |        |         |     |     |     |     |            |     |     |     |     |     |     |     |     |     |     |     |      |      |         |         | 4
-FORMALS             |     |       |        |         |     |     |     |     |      6     |     |     |  5  |     |     |     |     |     |     |     |     |      |      |         |         | 
+FORMALS             |     |       |        |         |     |     |     |     |      6     |     |     |  5  |     |     |     |     |     |     |     |     |      |      |         |         |
 NONEMPTYFORMALS     |     |       |        |         |     |     |     |     |      7     |     |     |     |     |     |     |     |     |     |     |     |      |      |         |         |
 NEF-REST            |     |       |        |         |     |     |     |     |            |  8  |     |  9  |     |     |     |     |     |     |     |     |      |      |         |         |
 FORMAL              |     |       |        |         |     |     |     |     |      10    |     |     |     |     |     |     |     |     |     |     |     |      |      |         |         |
@@ -67,10 +67,10 @@ PRINT-STATEMENT     |     |   48  |        |         |     |     |     |     |  
 37. 		 <NEG-FACTOR> ::= - <FACTOR>									      |*| -
 38.     <IDENTIFIER-MAIN> ::= <IDENTIFIER> <IDENTIFIER-REST>	                  |*| IDENTIFIER
 39.	    <IDENTIFIER-REST> ::= (<ACTUALS>)                                         |*| (
-40.                         | ε                                                   |*| and * / 
+40.                         | ε                                                   |*| and * /
 41.             <ACTUALS> ::= ε	                                                  |*| )
-42.                         | <NONEMPTYACTUALS>									  |*| if IDENTIFIER ( not NUMBER BOOLEAN -  
-43.     <NONEMPTYACTUALS> ::= <EXPR> <NEA-REST>								      |*| if IDENTIFIER ( not NUMBER BOOLEAN -  
+42.                         | <NONEMPTYACTUALS>									  |*| if IDENTIFIER ( not NUMBER BOOLEAN -
+43.     <NONEMPTYACTUALS> ::= <EXPR> <NEA-REST>								      |*| if IDENTIFIER ( not NUMBER BOOLEAN -
 44.    			<NEA-REST>::= , <NONEMPTYACTUALS>                                 |*| ,
 45.                         | ε												      |*| )
 46.             <LITERAL> ::= <NUMBER>                                            |*| NUMBER
