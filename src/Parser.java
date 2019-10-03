@@ -43,8 +43,8 @@ public class Parser
         NULL(100), PROGRAM(101), DEFINITIONS(102), DEF(103), FORMALS(104), NONEMPTYFORMALS(105),
         NEFREST(106), FORMAL(107), BODY(108), PRINTBODY(109), TYPE(110), EXPR(111),
         EXPRREST(112), SIMPLEEXPR(113), SIMPLEEXPRREST(114), TERM(115), TERMREST(116), FACTOR(117),
-        NOTFACTOR(118), NEGFACTOR(119), IDENTIFIERACTUALS(120), ACTUALS(121), NONEMPTYACTUALS(122),
-        NEAREST(123), LITERAL(124), PRINTSTATEMENT(125);
+        NOTFACTOR(118), NEGFACTOR(119), IDENTIFIERMAIN(120), IDENTIFIERREST(121),
+        ACTUALS(122), NONEMPTYACTUALS(123), NEAREST(124), LITERAL(125), PRINTSTATEMENT(126);
 
         private final int value;
         private static Map map = new HashMap<>();
@@ -146,7 +146,7 @@ public class Parser
                 }
                 else
                 {
-                    System.out.println("Can not expand: " + temp + " on: " + next.type.toString());
+                    System.out.println("Can not expand: " + Rule.valueOf(temp) + " on: " + next.type.toString());
                     return false;
                 }
 
