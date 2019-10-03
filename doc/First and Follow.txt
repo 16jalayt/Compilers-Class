@@ -17,7 +17,8 @@ TERM-REST           | and * / ε                                         | or + 
 FACTOR              | if INDENTIFIER ( not - NUMBER BOOLEAN -           | and * / ε
 NOT-FACTOR          | not                                               | and * / ε
 NEG-FACTOR          | -                                                 | and * / ε 
-IDENTIFIER-ACTUALS  | IDENTIFIER                                        | and * / ε
+IDENTIFIER-MAIN     | IDENTIFIER                                        | and * / ε
+IDENTIFIER-REST     | ( ε                                               | and * / ε 
 ACTUALS             | ε if IDENTIFIER ( not NUMBER BOOLEAN -            | ) 
 NONEMPTYACTUALS     | if IDENTIFIER ( not NUMBER BOOLEAN -              | )
 NEA-REST            |  ε                                                | )

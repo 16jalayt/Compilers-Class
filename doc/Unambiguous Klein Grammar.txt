@@ -56,17 +56,20 @@
 																		|*|
              <FACTOR> ::= if <EXPR> then <EXPR> else <EXPR>				|*| <FACTOR> ::= if <EXPR> then <EXPR> else <EXPR>
                         | <NOT-FACTOR>									|*| 			| not <FACTOR>
-                        | <IDENTIFIER-ACTUALS>							|*|				| <IDENTIFIER> ( <ACTUALS> )
-                        | <IDENTIFIER>									|*|				| <IDENTIFIER>
-                        | <LITERAL>										|*|				| <LITERAL>
-                        | <NEG-FACTOR>									|*|				| - <FACTOR>
-                        | ( <EXPR> )									|*|				| ( <EXPR> )
+                        | <IDENTIFIER-MAIN>								|*|				| <IDENTIFIER> ( <ACTUALS> )
+                        | <LITERAL>										|*|				| <IDENTIFIER>
+						| <NEG-FACTOR>									|*|				| <LITERAL>
+                        | ( <EXPR> )									|*|				| - <FACTOR>
+                      													|*|				| ( <EXPR> )
 																		|*|
 		 <NOT-FACTOR> ::= not <FACTOR>									|*|
 																		|*|
 		 <NEG-FACTOR> ::= - <FACTOR>									|*|
 																		|*|
- <IDENTIFIER-ACTUALS> ::= <IDENTIFIER> ( <ACTUALS> )					|*|
+    <IDENTIFIER-MAIN> ::= <IDENTIFIER> <IDENTIFIER-REST>				|*|
+																		|*|
+    <IDENTIFIER-REST> ::= (<ACTUALS>)									|*|
+						| ε												|*|
 																		|*|
             <ACTUALS> ::= ε												|*| <ACTUALS> ::= ε
                         | <NONEMPTYACTUALS>								|*|				| <NONEMPTYACTUALS>		
