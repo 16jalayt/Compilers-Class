@@ -145,7 +145,7 @@ public class Scanner
                 switch ( prog.charAt(pos) )
                 {
                     case 'f': pos++; state2(); break;
-                    case 'n': pos++; state2(); break;
+                    case 'n': pos++; state45(); break;
                     //non explicit identifier
                     case 'a': case 'b': case 'c': case 'd': case 'e': case 'g': case 'h':
                     case 'i': case 'j': case 'k': case 'l': case 'm': case 'o': case 'p':
