@@ -104,8 +104,7 @@ public class Parser
         currentRule = -1;
         //terminals = Terminals.NULL;
         createTable();
-
-
+        createRuleList();
     }
 
     //TODO: return the tree
@@ -156,7 +155,12 @@ public class Parser
                 if(currentRule != -1)
                 {
                     stack.pop();
-                    stack.push(currentRule);
+                    //Get the list of strings from ruleList, loop over them and push to stack.
+                    //Strings in list should already be in reverse order.
+                    ArrayList<String> tempArrayList = ruleList.get(currentRule);
+                    for (String obj : tempArrayList) {
+                        stack.push(obj);
+                    }
                 }
                 else
                 {
@@ -340,6 +344,40 @@ public class Parser
         return s;
 
     }
+
+    private void createRuleList(){
+        //A list of lists, with each index of the first list corresponding to a rule number, and the nested list at
+        //that index containing a list of rule strings in reverse order.
+        ArrayList<ArrayList<String>> ruleList= new ArrayList<ArrayList<String>>();
+        ArrayList<String> tempList0 = new ArrayList<String>();
+        ArrayList<String> tempList1 = new ArrayList<String>();
+        ArrayList<String> tempList2 = new ArrayList<String>();
+        ArrayList<String> tempList3 = new ArrayList<String>();
+        ArrayList<String> tempList4 = new ArrayList<String>();
+        ArrayList<String> tempList5 = new ArrayList<String>();
+
+        //There is no rule 0, so index 0 is left blank
+        tempList0.add("");
+        ruleList.add(tempList0);
+        //Create a list for each index position, then add it on to the overall list of lists
+        tempList1.add("DEFINITIONS");
+        ruleList.add(tempList1);
+        tempList2.add("NULL");
+        ruleList.add(tempList2);
+        tempList3.add("DEFINITIONS");
+        tempList3.add("DEF");
+        ruleList.add(tempList3);
+        tempList4.add("BODY");
+        tempList4.add("TYPE");
+        tempList4.add("colon");
+        tempList4.add("rightParen");
+        tempList4.add("FORMALS");
+        tempList4.add("leftParen");
+        tempList4.add("IDENTIFIER");
+        tempList4.add("function");
+        ruleList.add(tempList4);
+        tempList5.add("NULL");
+        ruleList.add(tempList5);
 
     }
 }
