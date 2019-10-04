@@ -146,7 +146,7 @@ public class Parser
             {
                 next = scan.next();
 
-                if(Parser.Terminals.valueOf(temp).toString().equals(next.type.toString()))
+                if(temp.equals(next.type.toString()))
                     stack.pop();
                 else
                 {
@@ -154,29 +154,30 @@ public class Parser
                     return false;
                 }
             }
-            //else if (nonterminal.contains(temp))
-            else if (Rule.contains(temp))
+            else if (Rules.contains(temp))
             {
                 next = scan.peek();
                 //Get the ordinal number for the rules and terminals, use that as table index values
-                int row = Rule.getValue(temp);
+                int row = Rules.indexOf(temp);
                 String t = getColumn(next);
-                int column = Terminals.getValue(t);
+                int column = Terminals.indexOf(t);
 
+                //really should redo table type
                 int currentRule = table[row][column];
                 if(currentRule != -1)
                 {
                     stack.pop();
                     //Get the list of strings from ruleList, loop over them and push to stack.
                     //Strings in list should already be in reverse order.
-                    ArrayList<String> tempArrayList = ruleList.get(currentRule);
+                    ArrayList<String> tempArrayList = new ArrayList<String>();
+                    tempArrayList.add(Rules.get(currentRule));
                     for (String obj : tempArrayList) {
                         stack.push(obj);
                     }
                 }
                 else
                 {
-                    System.out.println("Can not expand: " + Rule.valueOf(temp) + " on: " + next.type.toString());
+                    System.out.println("Can not expand: " + temp + " on: " + next.type.toString());
                     return false;
                 }
 
