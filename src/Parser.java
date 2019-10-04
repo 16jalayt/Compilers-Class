@@ -175,10 +175,13 @@ public class Parser
                     stack.pop();
                     //Get the list of strings from ruleList, loop over them and push to stack.
                     //Strings in list should already be in reverse order.
-                    ArrayList<ArrayList<String>> tempArrayList = new ArrayList<>();
-                    tempArrayList.add(ruleList.get(currentRule));
-                    for ( String obj : ruleList.get(currentRule)) {
-                            stack.push(obj);
+                    ArrayList<String> tempArrayList = new ArrayList<String>();
+                    //returning sublist not string. see if addAll works
+                    tempArrayList.addAll(ruleList.get(currentRule));
+                    for (ArrayList<String> obj : ruleList.get(currentRule)) {
+                        for (String str : obj){
+                            stack.push(str);
+                        }
                     }
                     System.out.println("tempArrayList");
                     System.out.println(tempArrayList);
