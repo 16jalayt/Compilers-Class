@@ -86,7 +86,7 @@ public class Parser
     }*/
 
     ArrayList<String> Rules = new ArrayList<String>(Arrays.asList(
-            "NULL", "PROGRAM", "DEFINITIONS", "DEF", "FORMALS", "NONEMPTYFORMALS",
+            "PROGRAM", "DEFINITIONS", "DEF", "FORMALS", "NONEMPTYFORMALS",
             "NEFREST", "FORMAL", "BODY", "PRINTBODY", "TYPE", "EXPR",
             "EXPRREST", "SIMPLEEXPR", "SIMPLEEXPRREST", "TERM", "TERMREST", "FACTOR",
             "NOTFACTOR", "NEGFACTOR", "IDENTIFIERMAIN", "IDENTIFIERREST",
@@ -104,8 +104,8 @@ public class Parser
     //public Terminals terminals;
     private static Scanner scan;
     int table[][];
-    private final int tableX = 25;
-    private final int tableY = 25;
+    private final int tableX = 30;
+    private final int tableY = 30;
 
 
 
@@ -159,8 +159,12 @@ public class Parser
                 next = scan.peek();
                 //Get the ordinal number for the rules and terminals, use that as table index values
                 int row = Rules.indexOf(temp);
+                System.out.println("row: " + Rules.indexOf(temp));
                 String t = getColumn(next);
+                System.out.println("tok: " + next.getType());
+                System.out.println("column: " + t);
                 int column = Terminals.indexOf(t);
+                System.out.println("col: " + Terminals.indexOf(t));
 
                 //really should redo table type
                 int currentRule = table[row][column];
@@ -313,6 +317,10 @@ public class Parser
         else if (t.equals("Integer"))
         {
             s = "NUMBER";
+        }
+        else if (t.equals("EOF"))
+        {
+            s = "EOF";
         }
         else if (t.equals("Punctuation")) {
             String h = tok.getValue();
