@@ -178,10 +178,8 @@ public class Parser
                     ArrayList<String> tempArrayList = new ArrayList<String>();
                     //returning sublist not string. see if addAll works
                     tempArrayList.addAll(ruleList.get(currentRule));
-                    for (ArrayList<String> obj : ruleList.get(currentRule)) {
-                        for (String str : obj){
-                            stack.push(str);
-                        }
+                    for (String obj : ruleList.get(currentRule)) {
+                            stack.push(obj);
                     }
                     System.out.println("tempArrayList");
                     System.out.println(tempArrayList);
