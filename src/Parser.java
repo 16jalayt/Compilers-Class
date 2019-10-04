@@ -148,10 +148,14 @@ public class Parser
             {
                 next = scan.next();
 
-                if(temp.equals(getColumn(next)) || temp.equals("NULL"))
+                if (temp.equals("NULL")){
+                    stack.pop();
+                }
+                else if(temp.equals(getColumn(next)))
                     stack.pop();
                 else
                 {
+                    System.out.println("Stack: " + stack);
                     System.out.println("Token mismatch error: " + temp + " and: " + getColumn(next));
                     return false;
                 }
@@ -179,7 +183,12 @@ public class Parser
                     //returning sublist not string. see if addAll works
                     tempArrayList.addAll(ruleList.get(currentRule));
                     for (String obj : ruleList.get(currentRule)) {
+                        if (obj.equals("NULL")){
+                            continue;
+                        }
+                        else {
                             stack.push(obj);
+                        }
                     }
                     System.out.println("tempArrayList");
                     System.out.println(tempArrayList);
