@@ -99,6 +99,8 @@ public class Parser
             "colon", "If", "then", "Else", "integer", "Boolean",
             "function", "Error", "Comment"));
 
+    ArrayList<ArrayList<String>> ruleList= new ArrayList<ArrayList<String>>();
+
 
     //public int currentRule;
     //public Terminals terminals;
@@ -174,9 +176,11 @@ public class Parser
                     //Get the list of strings from ruleList, loop over them and push to stack.
                     //Strings in list should already be in reverse order.
                     ArrayList<String> tempArrayList = new ArrayList<String>();
-                    tempArrayList.add(Rules.get(currentRule));
-                    for (String obj : tempArrayList) {
-                        stack.push(obj);
+                    tempArrayList.add(ruleList.get(currentRule));
+                    for (ArrayList<String> obj : ruleList.get(currentRule)) {
+                        for (String str : obj){
+                            stack.push(str);
+                        }
                     }
                 }
                 else
@@ -369,13 +373,56 @@ public class Parser
     private void createRuleList(){
         //A list of lists, with each index of the first list corresponding to a rule number, and the nested list at
         //that index containing a list of rule strings in reverse order.
-        ArrayList<ArrayList<String>> ruleList= new ArrayList<ArrayList<String>>();
+
         ArrayList<String> tempList0 = new ArrayList<String>();
         ArrayList<String> tempList1 = new ArrayList<String>();
         ArrayList<String> tempList2 = new ArrayList<String>();
         ArrayList<String> tempList3 = new ArrayList<String>();
         ArrayList<String> tempList4 = new ArrayList<String>();
         ArrayList<String> tempList5 = new ArrayList<String>();
+        ArrayList<String> tempList6 = new ArrayList<String>();
+        ArrayList<String> tempList7 = new ArrayList<String>();
+        ArrayList<String> tempList8 = new ArrayList<String>();
+        ArrayList<String> tempList9 = new ArrayList<String>();
+        ArrayList<String> tempList10 = new ArrayList<String>();
+        ArrayList<String> tempList11 = new ArrayList<String>();
+        ArrayList<String> tempList12 = new ArrayList<String>();
+        ArrayList<String> tempList13 = new ArrayList<String>();
+        ArrayList<String> tempList14 = new ArrayList<String>();
+        ArrayList<String> tempList15 = new ArrayList<String>();
+        ArrayList<String> tempList16 = new ArrayList<String>();
+        ArrayList<String> tempList17 = new ArrayList<String>();
+        ArrayList<String> tempList18 = new ArrayList<String>();
+        ArrayList<String> tempList19 = new ArrayList<String>();
+        ArrayList<String> tempList20 = new ArrayList<String>();
+        ArrayList<String> tempList21 = new ArrayList<String>();
+        ArrayList<String> tempList22 = new ArrayList<String>();
+        ArrayList<String> tempList23 = new ArrayList<String>();
+        ArrayList<String> tempList24 = new ArrayList<String>();
+        ArrayList<String> tempList25 = new ArrayList<String>();
+        ArrayList<String> tempList26 = new ArrayList<String>();
+        ArrayList<String> tempList27 = new ArrayList<String>();
+        ArrayList<String> tempList28 = new ArrayList<String>();
+        ArrayList<String> tempList29 = new ArrayList<String>();
+        ArrayList<String> tempList30 = new ArrayList<String>();
+        ArrayList<String> tempList31 = new ArrayList<String>();
+        ArrayList<String> tempList32 = new ArrayList<String>();
+        ArrayList<String> tempList33 = new ArrayList<String>();
+        ArrayList<String> tempList34 = new ArrayList<String>();
+        ArrayList<String> tempList35 = new ArrayList<String>();
+        ArrayList<String> tempList36 = new ArrayList<String>();
+        ArrayList<String> tempList37 = new ArrayList<String>();
+        ArrayList<String> tempList38 = new ArrayList<String>();
+        ArrayList<String> tempList39 = new ArrayList<String>();
+        ArrayList<String> tempList40 = new ArrayList<String>();
+        ArrayList<String> tempList41 = new ArrayList<String>();
+        ArrayList<String> tempList42 = new ArrayList<String>();
+        ArrayList<String> tempList43 = new ArrayList<String>();
+        ArrayList<String> tempList44 = new ArrayList<String>();
+        ArrayList<String> tempList45 = new ArrayList<String>();
+        ArrayList<String> tempList46 = new ArrayList<String>();
+        ArrayList<String> tempList47 = new ArrayList<String>();
+        ArrayList<String> tempList48 = new ArrayList<String>();
 
         //There is no rule 0, so index 0 is left blank
         tempList0.add("");
@@ -399,6 +446,126 @@ public class Parser
         ruleList.add(tempList4);
         tempList5.add("NULL");
         ruleList.add(tempList5);
+        tempList6.add("NONEMPTYFORMALS");
+        ruleList.add(tempList6);
+        tempList7.add("NEFREST");
+        tempList7.add("FORMAL");
+        ruleList.add(tempList7);
+        tempList8.add("NONEMPTYFORMALS");
+        tempList8.add("comma");
+        ruleList.add(tempList8);
+        tempList9.add("NULL");
+        ruleList.add(tempList9);
+        tempList10.add("TYPE");
+        tempList10.add("colon");
+        tempList10.add("IDENTIFIER");
+        ruleList.add(tempList10);
+        tempList11.add("PRINTBODY");
+        ruleList.add(tempList11);
+        tempList12.add("EXPR");
+        ruleList.add(tempList12);
+        tempList13.add("BODY");
+        tempList13.add("PRINTSTATEMENT");
+        ruleList.add(tempList13);
+        tempList14.add("integer");
+        ruleList.add(tempList14);
+        tempList15.add("boolean");
+        ruleList.add(tempList15);
+        tempList16.add("EXPRREST");
+        tempList16.add("SIMPLEEXPR");
+        ruleList.add(tempList16);
+        tempList17.add("EXPR");
+        tempList17.add("lessThan");
+        ruleList.add(tempList17);
+        tempList18.add("EXPR");
+        tempList18.add("equals");
+        ruleList.add(tempList18);
+        tempList19.add("NULL");
+        ruleList.add(tempList19);
+        tempList20.add("SIMPLEEXPRREST");
+        tempList20.add("TERM");
+        ruleList.add(tempList20);
+        tempList21.add("SIMPLEEXPR");
+        tempList21.add("or");
+        ruleList.add(tempList21);
+        tempList22.add("SIMPLEEXPR");
+        tempList22.add("plus");
+        ruleList.add(tempList22);
+        tempList23.add("SIMPLEEXPR");
+        tempList23.add("minus");
+        ruleList.add(tempList23);
+        tempList24.add("NULL");
+        ruleList.add(tempList24);
+        tempList25.add("TERMREST");
+        tempList25.add("FACTOR");
+        ruleList.add(tempList25);
+        tempList26.add("TERM");
+        tempList26.add("and");
+        ruleList.add(tempList26);
+        tempList27.add("TERM");
+        tempList27.add("multiply");
+        ruleList.add(tempList27);
+        tempList28.add("TERM");
+        tempList28.add("divide");
+        ruleList.add(tempList28);
+        tempList29.add("NULL");
+        ruleList.add(tempList29);
+        tempList30.add("EXPR");
+        tempList30.add("else");
+        tempList30.add("EXPR");
+        tempList30.add("then");
+        tempList30.add("EXPR");
+        tempList30.add("if");
+        ruleList.add(tempList30);
+        tempList31.add("NOTFACTOR");
+        rulelist.add(tempList31);
+        tempList32.add("IDENTIFIERMAIN");
+        ruleList.add(tempList32);
+        tempList33.add("LITERAL");
+        ruleList.add(tempList33);
+        tempList34.add("NEGFACTOR");
+        ruleList.add(tempList34);
+        tempList35.add("rightParen");
+        tempList35.add("EXPR");
+        tempList35.add("leftParen");
+        ruleList.add(tempList35);
+        tempList36.add("FACTOR");
+        tempList36.add("not");
+        ruleList.add(tempList36);
+        tempList37.add("FACTOR");
+        tempList37.add("minus");
+        ruleList.add(tempList37);
+        tempList38.add("IDENTIFIERREST");
+        tempList38.add("IDENTIFIER");
+        ruleList.add(tempList38);
+        tempList39.add("rightParen");
+        tempList39.add("ACTUALS");
+        tempList39.add("leftParen");
+        ruleList.add(tempList39);
+        tempList40.add("NULL");
+        ruleList.add(tempList40);
+        tempList41.add("NULL");
+        ruleList.add(tempList41);
+        tempList42.add("NONEMPTYACTUALS");
+        ruleList.add(tempList42);
+        tempList43.add("NEAREST");
+        tempList43.add("EXPR");
+        ruleList.add(tempList43);
+        tempList44.add("NONEMPTYACTUALS");
+        tempList44.add("comma");
+        ruleList.add(tempList44);
+        tempList45.add("NULL");
+        ruleList.add(tempList45);
+        tempList46.add("NUMBER");
+        ruleList.add(tempList46);
+        tempList47.add("BOOLEAN");
+        ruleList.add(tempList47);
+        tempList48.add("rightParen");
+        tempList48.add("EXPR");
+        tempList48.add("leftParen");
+        tempList48.add("print");
+        ruleList.add(tempList48);
+
 
     }
 }
