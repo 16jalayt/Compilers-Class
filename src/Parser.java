@@ -162,6 +162,9 @@ public class Parser
             }
             else if (Rules.contains(temp))
             {
+                while (scan.peek().getType().equals("Comment")){
+                    Token skip = scan.next();
+                }
                 next = scan.peek();
                 //Get the ordinal number for the rules and terminals, use that as table index values
                 int row = Rules.indexOf(temp);
