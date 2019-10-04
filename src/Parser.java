@@ -148,11 +148,11 @@ public class Parser
             {
                 next = scan.next();
 
-                if(temp.equals(getColumn(next)))
+                if(temp.equals(getColumn(next)) || temp.equals("NULL"))
                     stack.pop();
                 else
                 {
-                    System.out.println("Token mismatch error: " + temp + " and: " + next.type.toString());
+                    System.out.println("Token mismatch error: " + temp + " and: " + getColumn(next));
                     return false;
                 }
             }
