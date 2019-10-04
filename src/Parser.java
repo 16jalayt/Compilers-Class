@@ -176,7 +176,8 @@ public class Parser
                     //Get the list of strings from ruleList, loop over them and push to stack.
                     //Strings in list should already be in reverse order.
                     ArrayList<String> tempArrayList = new ArrayList<String>();
-                    tempArrayList.add(ruleList.get(currentRule));
+                    //returning sublist not string. see if addAll works
+                    tempArrayList.addAll(ruleList.get(currentRule));
                     for (ArrayList<String> obj : ruleList.get(currentRule)) {
                         for (String str : obj){
                             stack.push(str);
@@ -518,7 +519,7 @@ public class Parser
         tempList30.add("if");
         ruleList.add(tempList30);
         tempList31.add("NOTFACTOR");
-        rulelist.add(tempList31);
+        ruleList.add(tempList31);
         tempList32.add("IDENTIFIERMAIN");
         ruleList.add(tempList32);
         tempList33.add("LITERAL");
