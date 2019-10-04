@@ -167,10 +167,11 @@ public class Parser
                 int row = Rules.indexOf(temp);
                 System.out.println("row: " + Rules.indexOf(temp));
                 String t = getColumn(next);
-                System.out.println("tok: " + next.getType());
+                System.out.println("tok: " + getColumn(next));
                 System.out.println("column: " + t);
                 int column = Terminals.indexOf(t);
                 System.out.println("col: " + Terminals.indexOf(t));
+                System.out.println("Stack: " + stack);
 
                 //really should redo table type
                 int currentRule = table[row][column];
@@ -197,7 +198,7 @@ public class Parser
                 }
                 else
                 {
-                    System.out.println("Can not expand: " + temp + " on: " + next.type.toString());
+                    System.out.println("Can not expand: " + temp + " on: " + getColumn(next));
                     return false;
                 }
 
