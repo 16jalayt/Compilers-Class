@@ -148,7 +148,7 @@ public class Parser
             {
                 next = scan.next();
 
-                if(temp.equals(next.value.toString()))
+                if(temp.equals(getColumn(next)))
                     stack.pop();
                 else
                 {
