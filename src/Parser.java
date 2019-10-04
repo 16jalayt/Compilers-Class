@@ -4,10 +4,11 @@ public class Parser
 {
     public enum Terminals
     {
-        NULL(0), print(1), NUMBER(2), EOF(3), Error(4), Comment(5),
-        BOOLEAN(6), not(7), and(8), or(9), IDENTIFIER(10), leftParen(11), rightParen(12),
-        plus(13), minus(14), equals(15), lessThan(16), colon(17), comma(18), If(19),
-        then(20), Else(21), integer(22), Boolean(23), function(24);
+        EOF(0), print(1), NUMBER(2), BOOLEAN(3), NULL(4), not(5), and(6),
+        or(7), IDENTIFIER(8), comma(9), leftParen(10), rightParen(11),
+        plus(12), minus(13), divide( 14), multiply(15), equals(16), lessThan(17),
+        colon(18), If(19), then(20), Else(21), integer(22), Boolean(23),
+        function(24), Error(25), Comment(26);
 
         private final int value;
         private static Map<Integer, Terminals> map = new HashMap<Integer, Terminals>();
@@ -25,26 +26,27 @@ public class Parser
             return (Terminals) map.get(key);
         }
 
-        public static boolean contains(int key)
+        public static boolean contains(String key)
         {
-            if(map.get(key) != null)
+            if(map.containsKey(key) != null)
                 return true;
             else
                 return false;
+
         }
 
-        public int getValue() {
-            return value;
+        public static int getValue(String name) {
+            return name.value;
         }
         public static void print() {System.out.println(map.toString());}
     }
     public enum Rule
     {
-        NULL(100), PROGRAM(101), DEFINITIONS(102), DEF(103), FORMALS(104), NONEMPTYFORMALS(105),
-        NEFREST(106), FORMAL(107), BODY(108), PRINTBODY(109), TYPE(110), EXPR(111),
-        EXPRREST(112), SIMPLEEXPR(113), SIMPLEEXPRREST(114), TERM(115), TERMREST(116), FACTOR(117),
-        NOTFACTOR(118), NEGFACTOR(119), IDENTIFIERMAIN(120), IDENTIFIERREST(121),
-        ACTUALS(122), NONEMPTYACTUALS(123), NEAREST(124), LITERAL(125), PRINTSTATEMENT(126);
+        NULL(100), PROGRAM(0), DEFINITIONS(1), DEF(2), FORMALS(3), NONEMPTYFORMALS(4),
+        NEFREST(5), FORMAL(6), BODY(7), PRINTBODY(8), TYPE(9), EXPR(10),
+        EXPRREST(11), SIMPLEEXPR(12), SIMPLEEXPRREST(13), TERM(14), TERMREST(15), FACTOR(16),
+        NOTFACTOR(17), NEGFACTOR(18), IDENTIFIERMAIN(19), IDENTIFIERREST(20),
+        ACTUALS(21), NONEMPTYACTUALS(22), NEAREST(23), LITERAL(24), PRINTSTATEMENT(25);
 
         private final int value;
         private static Map map = new HashMap<>();
@@ -62,9 +64,9 @@ public class Parser
             return (Rule) map.get(key);
         }
 
-        public static boolean contains(int obj)
+        public static boolean contains(String key)
         {
-            if(map.containsValue(obj))
+            if(map.containsKey(key))
                 return true;
             else
                 return false;
@@ -78,8 +80,8 @@ public class Parser
         }
 
 
-        public int getValue() {
-            return value;
+        public static int getValue(String name) {
+            return name.value;
         }
     }
 
@@ -113,14 +115,21 @@ public class Parser
         //tmp. need default though
         //currentRule = Rule.Expression;
         int nextFunc = 0;
-        //cant be type token because can be nonterminal
-        Stack<Integer> stack = new Stack<>();
 
-        stack.push(Terminals.EOF.getValue());
+        String EOFSymbol = "$";
+        String starter = "PROGRAM";
+
+        //cant be type token because can be nonterminal
+        Stack<String> stack = new Stack<>();
+
+        // push the EOF symbol and the String PROGRAM onto the stack
+        stack.push(EOFSymbol);
+        stack.push(starter);
         Token next = new Token(Token.Type.Error,"");
+
         while (!stack.isEmpty())
         {
-            int temp = stack.peek();
+            String temp = stack.peek();
             //if tmp is terminal
             if(Terminals.contains(temp))
             {
@@ -138,7 +147,12 @@ public class Parser
             else if (Rule.contains(temp))
             {
                 next = scan.peek();
-                currentRule = table[temp][next.type.ordinal()];
+                //Get the ordinal number for the rules and terminals, use that as table index values
+                int row = Rule.getValue(temp);
+                String t = getColumn(next);
+                int column = Terminals.getValue(t);
+
+                currentRule = table[row][column];
                 if(currentRule != -1)
                 {
                     stack.pop();
@@ -269,5 +283,63 @@ public class Parser
         table[24][2]  = 46;
         table[24][3]  = 47;
         table[25][1]  = 48;
+    }
+
+    private String getColumn(Token tok)
+    {
+        String t = tok.getType();
+        String s = "";
+        if (t.equals("Identifier"))
+        {
+            s = "IDENTIFIER";
+        }
+        else if (t.equals("Integer"))
+        {
+            s = "NUMBER";
+        }
+        else if (t.equals("Punctuation")) {
+            String h = tok.getValue();
+            if (h.equals(",")) {
+                s = "comma";
+            }
+            else if (h.equals("(")) {
+                s = "leftParen";
+            }
+            else if (h.equals(")")) {
+                s = "rightParen";
+            }
+            else if (h.equals("+")) {
+                s = "plus";
+            }
+            else if (h.equals("-")) {
+                s = "minus";
+            }
+            else if (h.equals("/")) {
+                s = "divide";
+            }
+            else if (h.equals("*")) {
+                s = "multiply";
+            }
+            else if (h.equals("=")) {
+                s = "equals";
+            }
+            else if (h.equals("<")) {
+                s = "lessThan";
+            }
+            else {
+                s = "colon";
+            }
+        }
+        else if (t.equals("Keyword")) {
+            s = tok.getValue();
+            if (s.equal("true") || s.equals("false")) {
+                s = "BOOLEAN";
+            }
+        }
+        // add in else for f token.type() is EOF error or comment
+        return s;
+
+    }
+
     }
 }
