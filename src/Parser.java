@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Parser
-{
+{/*
     public enum Terminals
     {
         EOF(0), print(1), NUMBER(2), BOOLEAN(3), NULL(4), not(5), and(6),
@@ -28,7 +28,7 @@ public class Parser
 
         public static boolean contains(String key)
         {
-            if(map.containsKey(key) != null)
+            if(map.containsKey(key))
                 return true;
             else
                 return false;
@@ -48,11 +48,11 @@ public class Parser
         NOTFACTOR(17), NEGFACTOR(18), IDENTIFIERMAIN(19), IDENTIFIERREST(20),
         ACTUALS(21), NONEMPTYACTUALS(22), NEAREST(23), LITERAL(24), PRINTSTATEMENT(25);
 
-        private final int value;
+        private final String value;
         private static Map map = new HashMap<>();
 
-        Rule(int number) {
-            this.value = number;
+        Rule(String st) {
+            this.value = st;
         }
         static {
             for (Rule rule : Rule.values()) {
@@ -83,15 +83,27 @@ public class Parser
         public static int getValue(String name) {
             return name.value;
         }
-    }
+    }*/
+
+    ArrayList<String> Rules = new ArrayList<String>(Arrays.asList(
+            "NULL", "PROGRAM", "DEFINITIONS", "DEF", "FORMALS", "NONEMPTYFORMALS",
+            "NEFREST", "FORMAL", "BODY", "PRINTBODY", "TYPE", "EXPR",
+            "EXPRREST", "SIMPLEEXPR", "SIMPLEEXPRREST", "TERM", "TERMREST", "FACTOR",
+            "NOTFACTOR", "NEGFACTOR", "IDENTIFIERMAIN", "IDENTIFIERREST",
+            "ACTUALS", "NONEMPTYACTUALS", "NEAREST", "LITERAL", "PRINTSTATEMENT"));
+
+    ArrayList<String> Terminals = new ArrayList<String>(Arrays.asList(
+            "EOF", "print", "NUMBER", "BOOLEAN", "NULL", "not", "and",
+            "or", "IDENTIFIER", "comma", "leftParen", "rightParen",
+            "plus", "minus", "divide", "multiply", "equals", "lessThan",
+            "colon", "If", "then", "Else", "integer", "Boolean",
+            "function", "Error", "Comment"));
 
 
-    public int currentRule;
+    //public int currentRule;
     //public Terminals terminals;
     private static Scanner scan;
     int table[][];
-    Map<Rule,Terminals> hm =
-            new HashMap< Rule,Terminals>();
     private final int tableX = 25;
     private final int tableY = 25;
 
@@ -101,7 +113,7 @@ public class Parser
     {
         this.scan = scan;
         table = new int[tableX][tableY];
-        currentRule = -1;
+        //currentRule = -1;
         //terminals = Terminals.NULL;
         createTable();
         createRuleList();
@@ -151,7 +163,7 @@ public class Parser
                 String t = getColumn(next);
                 int column = Terminals.getValue(t);
 
-                currentRule = table[row][column];
+                int currentRule = table[row][column];
                 if(currentRule != -1)
                 {
                     stack.pop();
@@ -336,7 +348,7 @@ public class Parser
         }
         else if (t.equals("Keyword")) {
             s = tok.getValue();
-            if (s.equal("true") || s.equals("false")) {
+            if (s.equals("true") || s.equals("false")) {
                 s = "BOOLEAN";
             }
         }
