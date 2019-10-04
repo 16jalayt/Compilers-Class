@@ -96,7 +96,7 @@ public class Parser
             "EOF", "print", "NUMBER", "BOOLEAN", "NULL", "not", "and",
             "or", "IDENTIFIER", "comma", "leftParen", "rightParen",
             "plus", "minus", "divide", "multiply", "equals", "lessThan",
-            "colon", "If", "then", "Else", "integer", "Boolean",
+            "colon", "If", "then", "Else", "integer", "boolean",
             "function", "Error", "Comment"));
 
     ArrayList<ArrayList<String>> ruleList= new ArrayList<ArrayList<String>>();
