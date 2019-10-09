@@ -6,7 +6,7 @@
 ------------------------------------------------------*)
 
 function test1(var : boolean) : boolean
-	if var = true
+	if var = true + -- +true
 	then print(true)
 	else false
 	

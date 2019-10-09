@@ -1,89 +1,7 @@
 import java.util.*;
 
 public class Parser
-{/*
-    public enum Terminals
-    {
-        EOF(0), print(1), NUMBER(2), BOOLEAN(3), NULL(4), not(5), and(6),
-        or(7), IDENTIFIER(8), comma(9), leftParen(10), rightParen(11),
-        plus(12), minus(13), divide( 14), multiply(15), equals(16), lessThan(17),
-        colon(18), If(19), then(20), Else(21), integer(22), Boolean(23),
-        function(24), Error(25), Comment(26);
-
-        private final int value;
-        private static Map<Integer, Terminals> map = new HashMap<Integer, Terminals>();
-
-        Terminals(int number) {
-            this.value = number;
-        }
-        static {
-            for (Terminals term : Terminals.values()) {
-                map.put(term.value, term);
-            }
-        }
-
-        public static Terminals valueOf(int key) {
-            return (Terminals) map.get(key);
-        }
-
-        public static boolean contains(String key)
-        {
-            if(map.containsKey(key))
-                return true;
-            else
-                return false;
-
-        }
-
-        public static int getValue(String name) {
-            return name.value;
-        }
-        public static void print() {System.out.println(map.toString());}
-    }
-    public enum Rule
-    {
-        NULL(100), PROGRAM(0), DEFINITIONS(1), DEF(2), FORMALS(3), NONEMPTYFORMALS(4),
-        NEFREST(5), FORMAL(6), BODY(7), PRINTBODY(8), TYPE(9), EXPR(10),
-        EXPRREST(11), SIMPLEEXPR(12), SIMPLEEXPRREST(13), TERM(14), TERMREST(15), FACTOR(16),
-        NOTFACTOR(17), NEGFACTOR(18), IDENTIFIERMAIN(19), IDENTIFIERREST(20),
-        ACTUALS(21), NONEMPTYACTUALS(22), NEAREST(23), LITERAL(24), PRINTSTATEMENT(25);
-
-        private final String value;
-        private static Map map = new HashMap<>();
-
-        Rule(String st) {
-            this.value = st;
-        }
-        static {
-            for (Rule rule : Rule.values()) {
-                map.put(rule.value, rule);
-            }
-        }
-
-        public static Rule valueOf(int key) {
-            return (Rule) map.get(key);
-        }
-
-        public static boolean contains(String key)
-        {
-            if(map.containsKey(key))
-                return true;
-            else
-                return false;
-        }
-        public static boolean containsType(Token obj)
-        {
-            if(map.containsKey(obj.type))
-                return true;
-            else
-                return false;
-        }
-
-
-        public static int getValue(String name) {
-            return name.value;
-        }
-    }*/
+{
 
     ArrayList<String> Rules = new ArrayList<String>(Arrays.asList(
             "PROGRAM", "DEFINITIONS", "DEF", "FORMALS", "NONEMPTYFORMALS",
@@ -96,8 +14,12 @@ public class Parser
             "EOF", "print", "NUMBER", "BOOLEAN", "NULL", "not", "and",
             "or", "IDENTIFIER", "comma", "leftParen", "rightParen",
             "plus", "minus", "divide", "multiply", "equals", "lessThan",
-            "colon", "If", "then", "Else", "integer", "boolean",
+            "colon", "if", "then", "else", "integer", "boolean",
             "function", "Error", "Comment"));
+
+    ArrayList<String> RulesWhichCanNull = new ArrayList<String>(Arrays.asList(
+            "DEFINITIONS", "FORMALS", "NEFREST", "EXPRREST", "SIMPLEEXPRREST",
+            "TERMREST", "IDENTIFIERREST"));
 
     ArrayList<ArrayList<String>> ruleList= new ArrayList<ArrayList<String>>();
 
@@ -142,6 +64,10 @@ public class Parser
 
         while (!stack.isEmpty())
         {
+            System.out.println("scan.peek type " + scan.peek().type + "--scan.peek value: " + scan.peek().value);
+            while (scan.peek().getType().equals("Comment")){
+                Token skip = scan.next();
+            }
             String temp = stack.peek();
             //if tmp is terminal
             if(Terminals.contains(temp))
@@ -151,8 +77,11 @@ public class Parser
                 if (temp.equals("NULL")){
                     stack.pop();
                 }
-                else if(temp.equals(getColumn(next)))
+                else if(temp.equals(getColumn(next))) {
+                    System.out.println("Stack before pop: " + stack);
                     stack.pop();
+                    System.out.println("Stack after pop: " + stack);
+                }
                 else
                 {
                     System.out.println("Stack: " + stack);
@@ -162,17 +91,21 @@ public class Parser
             }
             else if (Rules.contains(temp))
             {
-                while (scan.peek().getType().equals("Comment")){
-                    Token skip = scan.next();
-                }
                 next = scan.peek();
                 //Get the ordinal number for the rules and terminals, use that as table index values
                 int row = Rules.indexOf(temp);
                 System.out.println("row: " + Rules.indexOf(temp));
+                System.out.println("next.value: "+ next.value);
+                System.out.println("Terminals.contains(next.value.toString())"+ Terminals.contains(next.value.toString()));
+
                 String t = getColumn(next);
                 System.out.println("tok: " + getColumn(next));
                 System.out.println("column: " + t);
                 int column = Terminals.indexOf(t);
+//                if (Terminals.contains(next.value.toString())) {
+//                    System.out.println("terminal index: " + Terminals.indexOf(next.value.toString()));
+//                    column = Terminals.indexOf(next.value.toString());
+//                }
                 System.out.println("col: " + Terminals.indexOf(t));
                 System.out.println("Stack: " + stack);
 
@@ -180,6 +113,7 @@ public class Parser
                 int currentRule = table[row][column];
                 if(currentRule != -1)
                 {
+                    System.out.println("Current Rule: " + currentRule);
                     stack.pop();
                     //Get the list of strings from ruleList, loop over them and push to stack.
                     //Strings in list should already be in reverse order.
@@ -199,6 +133,9 @@ public class Parser
                     System.out.println("Stack");
                     System.out.println(stack);
                 }
+                else if(currentRule == -1 && RulesWhichCanNull.contains(temp)) {
+                    stack.pop();
+                }
                 else
                 {
                     System.out.println("Can not expand: " + temp + " on: " + getColumn(next));
@@ -206,9 +143,15 @@ public class Parser
                 }
 
             }
-            else
+            else if (temp.equals(EOFSymbol)  && next.type.equals(Token.Type.EOF))
             {
-                System.out.println("Invalid item on stack: " + temp);
+                return true;
+            }
+            else
+                {
+                    System.out.println("stack: " + stack);
+                    System.out.println("next.value " + next.value);
+                    System.out.println("Invalid item on stack: " + temp);
                 return false;
             }
         }
@@ -249,6 +192,7 @@ public class Parser
         table[7][5]   = 12;
         table[7][8]   = 12;
         table[7][10]  = 12;
+        table[7][13]  = 12;
         table[7][19]  = 12;
         table[8][1]   = 13;
         table[9][22]  = 14;
@@ -258,6 +202,7 @@ public class Parser
         table[10][5]  = 16;
         table[10][8]  = 16;
         table[10][10] = 16;
+        table[10][13] = 16;
         table[10][19] = 16;
         table[11][6]  = 19;
         table[11][9]  = 19;
@@ -274,6 +219,7 @@ public class Parser
         table[12][5]  = 20;
         table[12][8]  = 20;
         table[12][10] = 20;
+        table[12][13] = 20;
         table[12][19] = 20;
         table[13][7]  = 21;
         table[13][12] = 22;
@@ -285,6 +231,7 @@ public class Parser
         table[14][5]  = 25;
         table[14][8]  = 25;
         table[14][10] = 25;
+        table[14][13] = 25;
         table[14][19] = 25;
         table[15][6]  = 26;
         table[15][7]  = 29;
@@ -312,12 +259,14 @@ public class Parser
         table[21][8]  = 42;
         table[21][10] = 42;
         table[21][11] = 41;
+        table[21][13] = 42;
         table[21][19] = 42;
         table[22][2]  = 43;
         table[22][3]  = 43;
         table[22][5]  = 43;
         table[22][8]  = 43;
         table[22][10] = 43;
+        table[22][13] = 43;
         table[22][19] = 43;
         table[23][9]  = 44;
         table[23][11] = 45;
@@ -330,7 +279,11 @@ public class Parser
     {
         String t = tok.getType();
         String s = "";
-        if (t.equals("Identifier"))
+        String h = tok.getValue();
+        if (h.equals("print")){
+            s = "print";
+        }
+        else if (t.equals("Identifier"))
         {
             s = "IDENTIFIER";
         }
@@ -343,7 +296,6 @@ public class Parser
             s = "EOF";
         }
         else if (t.equals("Punctuation")) {
-            String h = tok.getValue();
             if (h.equals(",")) {
                 s = "comma";
             }

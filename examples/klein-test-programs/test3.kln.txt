@@ -5,6 +5,6 @@
 --------------------------------------------------------------------*)
 
 function test3 (i: boolean, j:boolean) : boolean
-	if i = true
-	then i and j or false
-	else false
+	if i = --------------1
+	then i and (j) or (false)
+	else false and 9 + (9) or -+ 9
