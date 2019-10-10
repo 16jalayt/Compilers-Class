@@ -1,5 +1,5 @@
-# from fb_token import Token, TokenType
-# from scanner  import Scanner
+# from fb_token import src.Token, TokenType
+# from scanner  import src.Scanner
 from ast      import *
 from errors   import SemanticError
 

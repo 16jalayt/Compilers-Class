@@ -1,7 +1,7 @@
 import sys
-from scanner      import Scanner
-from fb_token     import Token
-from parser       import Parser
+from scanner      import src.Scanner
+from fb_token     import src.Token
+from parser       import src.Parser
 from type_checker import TypeChecker
 from codegen      import PythonGenerator
 
@@ -9,8 +9,8 @@ filename = sys.argv[1]
 myfile   = open(filename)
 program  = myfile.read()
 
-scanner  = Scanner(program)
-parser   = Parser(scanner)
+scanner  = src.Scanner(program)
+parser   = src.Parser(scanner)
 gen      = PythonGenerator()
 
 tree     = parser.parse()

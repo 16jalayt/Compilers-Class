@@ -61,7 +61,7 @@ assignments ::= assignment assignments
        word ::= WORD
      number ::= NUMBER
 
-* Scanner
+* src.Scanner
 
 The scanner has two public methods, peek() and next_token().  The
 get_next_token() function does actual work of reading a token from
@@ -70,7 +70,7 @@ the stream.
 A token is an object with a token type (an enum) and an optional
 semantic value.
 
-* Parser
+* src.Parser
 
 The parser uses recursive descent to build a program's AST.
 The public parse() method uses node-based helper methods:

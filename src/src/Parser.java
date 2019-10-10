@@ -1,3 +1,5 @@
+package src;
+
 import java.util.*;
 
 public class Parser
@@ -46,7 +48,7 @@ public class Parser
     //TODO: return the tree
     public boolean parse()
     {
-        //Token tok;
+        //src.Token tok;
         //tmp. need default though
         //currentRule = Rule.Expression;
         int nextFunc = 0;
@@ -85,7 +87,7 @@ public class Parser
                 else
                 {
                     System.out.println("Stack: " + stack);
-                    System.out.println("Token mismatch error: " + temp + " and: " + getColumn(next));
+                    System.out.println("src.Token mismatch error: " + temp + " and: " + getColumn(next));
                     return false;
                 }
             }

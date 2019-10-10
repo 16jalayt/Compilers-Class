@@ -1,7 +1,7 @@
 (*------------------------------------------------------------
 	This function is missing a pair of parenthesis around
 	its '1+1' operation, which should cause it to fail
-	the Parser.
+	the src.Parser.
 -------------------------------------------------------------*)
 function test4(n:integer, m:integer) : boolean
 	if isTwelve(n*m/1+1)

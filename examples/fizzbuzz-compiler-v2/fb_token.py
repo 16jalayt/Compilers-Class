@@ -7,7 +7,7 @@ class TokenType(Enum):
     WORD     = 4
     EOF      = 5
 
-class Token:
+class src.Token:
     def __init__(self, token_type, token_value = None):
         self.token_type  = token_type
         self.token_value = token_value

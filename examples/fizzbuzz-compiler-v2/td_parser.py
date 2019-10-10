@@ -1,5 +1,5 @@
-from fb_token import Token, TokenType
-from scanner  import Scanner
+from fb_token import src.Token, TokenType
+from scanner  import src.Scanner
 from errors   import ParseError
 # from ast    import *
 
@@ -55,7 +55,7 @@ parse_table = {
 # parser
 # ---------------------------------
 
-class Parser:
+class src.Parser:
     'Validate a stream of tokens'
 
     def __init__(self, scanner):

@@ -1,6 +1,6 @@
 (*----------------------------------------------------------------------
 	This function attempts to pass a print statement to a function,
-	which should not pass our Parser
+	which should not pass our src.Parser
 -----------------------------------------------------------------------*)
 
 function test5 (z:boolean): boolean

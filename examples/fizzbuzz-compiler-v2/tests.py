@@ -1,8 +1,8 @@
 import unittest
-from fb_token     import Token, TokenType
-from scanner      import Scanner
+from fb_token     import src.Token, TokenType
+from scanner      import src.Scanner
 from ast          import *
-from parser       import Parser
+from parser       import src.Parser
 from type_checker import TypeChecker
 from errors       import LexicalError, ParseError, SemanticError
 
@@ -10,19 +10,19 @@ class ScannerTestCases(unittest.TestCase):
 
   def test_peek_past_whitespace(self):
     '''Find literal past whitespace.'''
-    s = Scanner('     ...= ')
+    s = src.Scanner('     ...= ')
     self.assertTrue(s.peek().is_ellipsis(), 'whitespace before ...')
 
   def test_literal_tokens_with_whitespace(self):
     '''Find two literals inside whitespace.'''
-    s = Scanner('     ...= ')
+    s = src.Scanner('     ...= ')
     self.assertTrue(s.next_token().is_ellipsis())
     self.assertTrue(s.next_token().is_equals())
     self.assertTrue(s.next_token().is_eof())
 
   def test_word_past_whitespace(self):
     '''Find word past whitespace.'''
-    s = Scanner('   aBc ')
+    s = src.Scanner('   aBc ')
     self.assertTrue(s.peek().is_word(),      'peek past whitespace')
     
     next_token = s.next_token()
@@ -33,14 +33,14 @@ class ScannerTestCases(unittest.TestCase):
 
   def test_word_within_iterals(self):
     '''Find word within two literals.'''
-    s = Scanner('...aBc=')
+    s = src.Scanner('...aBc=')
     self.assertTrue(s.next_token().is_ellipsis())
     self.assertTrue(s.next_token().is_word())
     self.assertTrue(s.next_token().is_equals())
 
   def test_two_words(self):
     '''Find two words.'''
-    s = Scanner(' eugene wallingford')
+    s = src.Scanner(' eugene wallingford')
     next_token = s.next_token()
     self.assertTrue (next_token.is_word(), 'first token right')
     self.assertEqual(next_token.value(),   'eugene')
@@ -50,14 +50,14 @@ class ScannerTestCases(unittest.TestCase):
 
   def test_one_number(self):
     '''Find number.'''
-    s = Scanner('42')
+    s = src.Scanner('42')
     next_token = s.next_token()
     self.assertTrue (next_token.is_number(), 'found right token')
     self.assertEqual(next_token.value(), 42)
 
   def test_two_numbers(self):
     '''Find two numbers in whitespace.'''
-    s = Scanner(' 3540  \n\t    4550      ')
+    s = src.Scanner(' 3540  \n\t    4550      ')
     next_token = s.next_token()
     self.assertTrue (next_token.is_number(), 'found right token')
     self.assertEqual(next_token.value(), 3540)
@@ -67,7 +67,7 @@ class ScannerTestCases(unittest.TestCase):
 
   def test_assignment(self):
     '''Recognize tokens in an assignment statement.'''
-    s = Scanner(' fizz=3\n')
+    s = src.Scanner(' fizz=3\n')
     next_token = s.next_token()
     self.assertTrue (next_token.is_word(), 'first token right')
     self.assertEqual(next_token.value(), 'fizz')
@@ -78,7 +78,7 @@ class ScannerTestCases(unittest.TestCase):
 
   def test_loop_spec(self):
     '''Recognize tokens in a loop specification.'''
-    s = Scanner(' 1...100\t')
+    s = src.Scanner(' 1...100\t')
     next_token = s.next_token()
     self.assertTrue (next_token.is_number(), 'found right token')
     self.assertEqual(next_token.value(), 1)
@@ -91,22 +91,22 @@ class ParserTestCases(unittest.TestCase):
 
   def test_match_literal_tokens(self):
     '''Match literal tokens.'''
-    s = Scanner('     ...= ')
-    p = Parser(s)
+    s = src.Scanner('     ...= ')
+    p = src.Parser(s)
     self.assertTrue(p.match(TokenType.ELLIPSIS))
     self.assertTrue(p.match(TokenType.EQUALS))
 
   def test_fail_to_match_literal_tokens(self):
     '''Match literal tokens.'''
     with self.assertRaises(ParseError) as context:
-      s = Scanner('     ...= ')
-      p = Parser(s)
+      s = src.Scanner('     ...= ')
+      p = src.Parser(s)
       p.match(TokenType.EQUALS)
 
   def test_parse_range_succeeds(self):
     '''Parse a valid range.'''
-    s = Scanner('1...15')
-    p = Parser(s)
+    s = src.Scanner('1...15')
+    p = src.Parser(s)
     fb_range = p.parse_range()
     self.assertTrue(isinstance(fb_range, Range_Node))
     self.assertEqual(fb_range.lower(), 1)
@@ -115,28 +115,28 @@ class ParserTestCases(unittest.TestCase):
   def test_parse_range_fails_on_lower_bound(self):
     '''Fail on an invalid range: bad lower bound.'''
     with self.assertRaises(ParseError) as context:
-      s = Scanner('Buzz...15')
-      p = Parser(s)
+      s = src.Scanner('Buzz...15')
+      p = src.Parser(s)
       fb_range = p.parse_range()
 
   def test_parse_range_fails_on_ellipsis(self):
     '''Fail on an invalid range.: missing the ellipsis.'''
     with self.assertRaises(ParseError) as context:
-      s = Scanner('1=15')
-      p = Parser(s)
+      s = src.Scanner('1=15')
+      p = src.Parser(s)
       fb_range = p.parse_range()
 
   def test_parse_range_fails_on_upper_bound(self):
     '''Fail on an invalid range: bad upper bound.'''
     with self.assertRaises(ParseError) as context:
-      s = Scanner('1...Fizz')
-      p = Parser(s)
+      s = src.Scanner('1...Fizz')
+      p = src.Parser(s)
       fb_range = p.parse_range()
 
   def test_parse_assignment_succeeds(self):
     '''Parse a valid assignment.'''
-    s = Scanner('fizz = 1')
-    p = Parser(s)
+    s = src.Scanner('fizz = 1')
+    p = src.Parser(s)
     assignment = p.parse_assignment()
     self.assertTrue(isinstance(assignment, Assignment_Node))
     self.assertEqual(assignment.word(), 'fizz')
@@ -145,28 +145,28 @@ class ParserTestCases(unittest.TestCase):
   def test_parse_assignment_fails_on_word(self):
     '''Fail on an invalid range: invalid word.'''
     with self.assertRaises(ParseError) as context:
-      s = Scanner('1 = 15')
-      p = Parser(s)
+      s = src.Scanner('1 = 15')
+      p = src.Parser(s)
       fb_range = p.parse_assignment()
 
   def test_parse_assignment_fails_on_equal_sign(self):
     '''Fail on an invalid range.: missing the equal sign.'''
     with self.assertRaises(ParseError) as context:
-      s = Scanner('buzz...15')
-      p = Parser(s)
+      s = src.Scanner('buzz...15')
+      p = src.Parser(s)
       fb_range = p.parse_assignment()
 
   def test_parse_assignment_fails_on_value(self):
     '''Fail on an invalid range: bad upper bound.'''
     with self.assertRaises(ParseError) as context:
-      s = Scanner('buzz=...')
-      p = Parser(s)
+      s = src.Scanner('buzz=...')
+      p = src.Parser(s)
       fb_range = p.parse_assignment()
 
   def test_parse_assignments_succeeds(self):
     '''Parse a valid set of assignment.'''
-    s = Scanner('fizz = 3\nbuzz=5')
-    p = Parser(s)
+    s = src.Scanner('fizz = 3\nbuzz=5')
+    p = src.Parser(s)
     assignment_list = p.parse_assignments()
     self.assertTrue(isinstance(assignment_list, list))
     self.assertEqual(assignment_list[0].word(), 'fizz')
@@ -177,14 +177,14 @@ class ParserTestCases(unittest.TestCase):
   def test_parse_assignments_fails_on_next_token(self):
     '''Fail on an invalid range: bad upper bound.'''
     with self.assertRaises(ParseError) as context:
-      s = Scanner('fizz = 3\nbuzz=5\n42')
-      p = Parser(s)
+      s = src.Scanner('fizz = 3\nbuzz=5\n42')
+      p = src.Parser(s)
       fb_range = p.parse_assignments()
 
   def test_parse_program_succeeds(self):
     '''Parse a valid program.'''
-    s = Scanner('1...15\nfizz=3\nbuzz=5')
-    p = Parser(s)
+    s = src.Scanner('1...15\nfizz=3\nbuzz=5')
+    p = src.Parser(s)
     program = p.parse_program()
     self.assertTrue(isinstance(program, Program_Node))
     self.assertTrue(isinstance(program.range(), Range_Node))
@@ -196,8 +196,8 @@ class TypeCheckerTestCases(unittest.TestCase):
 
   def test_check_valid_program_default(self):
     '''Pass for a valid program.'''
-    s  = Scanner('1...15\nfizz=3\nbuzz=5')
-    p  = Parser(s)
+    s  = src.Scanner('1...15\nfizz=3\nbuzz=5')
+    p  = src.Parser(s)
     tc = TypeChecker(p.parse_program())
     st = tc.type_check()
     self.assertTrue(isinstance(st, dict))
@@ -208,8 +208,8 @@ class TypeCheckerTestCases(unittest.TestCase):
 
   def test_check_valid_program_extended(self):
     '''Pass for a valid program.'''
-    s  = Scanner('1...15\nfizz=3\nbuzz=5 biff=7 boff=11')
-    p  = Parser(s)
+    s  = src.Scanner('1...15\nfizz=3\nbuzz=5 biff=7 boff=11')
+    p  = src.Parser(s)
     tc = TypeChecker(p.parse_program())
     st = tc.type_check()
     self.assertTrue(isinstance(st, dict))
@@ -224,32 +224,32 @@ class TypeCheckerTestCases(unittest.TestCase):
 
   def test_check_valid_range(self):
     '''Pass for the range on a valid program.'''
-    s  = Scanner('1...15\nfizz=3\nbuzz=5')
-    p  = Parser(s)
+    s  = src.Scanner('1...15\nfizz=3\nbuzz=5')
+    p  = src.Parser(s)
     tc = TypeChecker(p.parse_program())
     self.assertTrue(tc.check_range())
 
   def test_check_range_fails_on_upper_bound(self):
     '''Fail because upper bound is not > lower bound.'''
     with self.assertRaises(SemanticError) as context:
-      s  = Scanner('15...1\nfizz=3\nbuzz=5')
-      p  = Parser(s)
+      s  = src.Scanner('15...1\nfizz=3\nbuzz=5')
+      p  = src.Parser(s)
       tc = TypeChecker(p.parse_program())
       tc.check_range()
 
   def test_check_assignmentsfails_on_words_value_out_of_range(self):
     '''Fail because lower bound is not > 0.'''
     with self.assertRaises(SemanticError) as context:
-      s  = Scanner('1...15\nfizz=32\nbuzz=5')
-      p  = Parser(s)
+      s  = src.Scanner('1...15\nfizz=32\nbuzz=5')
+      p  = src.Parser(s)
       tc = TypeChecker(p.parse_program())
       tc.check_assignments()
 
   def test_check_assignments_fails_on_duplicate_words(self):
     '''Fail because a word is used twice.'''
     with self.assertRaises(SemanticError) as context:
-      s  = Scanner('1...15\nfizz=3\nfizz=5')
-      p  = Parser(s)
+      s  = src.Scanner('1...15\nfizz=3\nfizz=5')
+      p  = src.Parser(s)
       tc = TypeChecker(p.parse_program())
       tc.check_assignments()
 

@@ -1,9 +1,9 @@
 #! /Library/Frameworks/Python.framework/Versions/3.4/bin/python3.4
 
 import sys
-from scanner      import Scanner
-from fb_token     import Token
-from td_parser    import Parser
+from scanner      import src.Scanner
+from fb_token     import src.Token
+from td_parser    import src.Parser
 from errors       import LexicalError, ParseError
 
 try:
@@ -11,8 +11,8 @@ try:
     myfile   = open(filename)
     program  = myfile.read()
 
-    scanner  = Scanner(program)
-    parser   = Parser(scanner)
+    scanner  = src.Scanner(program)
+    parser   = src.Parser(scanner)
     is_valid = parser.parse()
 
     print(is_valid)

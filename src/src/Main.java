@@ -1,3 +1,5 @@
+package src;
+
 import java.io.*;
 
 public class Main
@@ -29,7 +31,7 @@ public class Main
             else
                 System.out.println("The program is: Invalid");
 
-            /*while (scan.peek().type != Token.Type.EOF && scan.peek().type != Token.Type.Error)
+            /*while (scan.peek().type != src.Token.Type.EOF && scan.peek().type != src.Token.Type.Error)
                 System.out.println(scan.next().toString());
             //one last call to display EOF
             System.out.println(scan.next().toString());*/

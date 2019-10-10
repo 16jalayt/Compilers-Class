@@ -31,7 +31,7 @@ print
 true
 false
 
-lambda, Main, truck
+lambda, src.Main, truck
 
 Integers:           no longer needed
 1                  Integers ::=   214748364[0-7]{0, 1}

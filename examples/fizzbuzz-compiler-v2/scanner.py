@@ -1,7 +1,7 @@
-from fb_token import Token, TokenType
+from fb_token import src.Token, TokenType
 from errors   import LexicalError
 
-class Scanner:
+class src.Scanner:
   'Read tokens from an input stream'
 
   def __init__(self, program_str):
@@ -28,23 +28,23 @@ class Scanner:
     self.skip_whitespace()
     
     if self.pos >= len(self.program_str):
-      return Token(TokenType.EOF)
+      return src.Token(TokenType.EOF)
 
     if self.program_str[self.pos] == '=':
       self.pos += 1
-      return Token(TokenType.EQUALS)
+      return src.Token(TokenType.EQUALS)
 
     if self.program_str[self.pos:].startswith('...'):
       self.pos += 3
-      return Token(TokenType.ELLIPSIS)
+      return src.Token(TokenType.ELLIPSIS)
 
     if self.program_str[self.pos].isalpha():
       word = self.get_word()
-      return Token(TokenType.WORD, word)
+      return src.Token(TokenType.WORD, word)
 
     if self.program_str[self.pos] in '123456789':
       number = self.get_number()
-      return Token(TokenType.NUMBER, number)
+      return src.Token(TokenType.NUMBER, number)
 
     # if no token matches, signal an error
 

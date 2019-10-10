@@ -1,3 +1,5 @@
+package src;
+
 public class Token
 {//token class. type, value  string not enum. can do diff obj per type
     public Type type;
@@ -19,7 +21,7 @@ public class Token
     }
     public String toString()
     {
-        return type.toString() + "      " + value;
+        return type.toString() + "     " + value;
     }
 
     public String getType() { return type.toString(); }

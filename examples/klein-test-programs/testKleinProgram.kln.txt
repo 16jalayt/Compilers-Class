@@ -31,7 +31,7 @@ function reduceProgram(x: integer, y: integer): integer
 		     x-1
 		else main(x-1, y)
 
-(*------------------------------------- Main Function ---------------------------------------------*)
+(*------------------------------------- src.Main Function ---------------------------------------------*)
 
 function main(x:integer, y:integer) : integer
 	if x<y or x=y

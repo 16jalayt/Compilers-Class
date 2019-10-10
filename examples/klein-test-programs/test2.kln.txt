@@ -1,7 +1,7 @@
 (*---------------------------------------------------------------
 	This function contains a series of nested if statements,
 	with the final statement missing its 'else' clause.
-	The purpose of this function is to test that our Parser 
+	The purpose of this function is to test that our src.Parser
 	can properly navigate through the first set of legally
 	nested statements, but still catches the missing 'else'
 	at the very end.
