@@ -1,0 +1,12 @@
+(*------------------------------------------------------
+	This program contains an illegal use of Klein's
+	print function, with the goal being that this
+	program would not pass our src.Parser as a legal
+	function.
+------------------------------------------------------*)
+
+function test1(var : boolean) : boolean
+	if var = true + -- +true
+	then print(true)
+	else false
+	
