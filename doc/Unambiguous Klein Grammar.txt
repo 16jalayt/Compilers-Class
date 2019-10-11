@@ -1,85 +1,92 @@
-------------------------------------------------------------------------|*|------------------------------------------------------------------------
-				REFACTORED KLEIN GRAMMAR								|*|                          ORIGINAL KLEIN GRAMMAR
-------------------------------------------------------------------------|*|------------------------------------------------------------------------
-																		|*|
-             <PROGRAM> ::= <DEFINITIONS>								|*| <PROGRAM> ::= <DEFINITIONS>
-																		|*|
-        <DEFINITIONS> ::= ε												|*| <DEFINITIONS> ::= ε
-                        |  <DEF> <DEFINITIONS>							|*|					| <DEF> <DEFINITIONS>
-																		|*|																						
-				<DEF> ::= function <IDENTIFIER> ( <FORMALS> ) : <TYPE>  |*| <DEF> ::= function <IDENTIFIER> ( <FORMALS> ) : <TYPE>
-                             <BODY>										|*|				<BODY>
-																		|*|
-            <FORMALS> ::= ε												|*| <FORMALS> ::= ε
-                        | <NONEMPTYFORMALS>								|*|				| <NONEMPTYFORMALS>
-																		|*|
-    <NONEMPTYFORMALS> ::= <FORMAL>	<NEF-REST>							|*| <NONEMPTYFORMALS> ::= <FORMAL>
-                        												|*|						| <FORMAL> , <NONEMPTYFORMALS>
-   		   <NEF-REST> ::= , <NONEMPTYFORMALS>							|*|
-  						| ε												|*|
-																		|*|
-             <FORMAL> ::= <IDENTIFIER> : <TYPE>							|*| <FORMAL> ::= <IDENTIFIER> : <TYPE>
-																		|*|
-               <BODY> ::= <PRINT-BODY>									|*| <BODY> ::= <PRINT-STATEMENT> <BODY>
-                        | <EXPR>										|*|			  | <EXPR>
-																		|*|
-		 <PRINT-BODY> ::= <PRINT-STATEMENT> BODY						|*|							
-																		|*|
-               <TYPE> ::= integer										|*| <TYPE> ::= integer
-                        | boolean										|*| 		 | boolean
-																		|*| 
-               <EXPR> ::= <SIMPLE-EXPR> <EXPR-REST>						|*| <EXPR> ::= <EXPR> < <SIMPLE-EXPR>
-																		|*|				| <EXPR> = <SIMPLE-EXPR>
-																		|*|				| <SIMPLE-EXPR>
-		  <EXPR-REST> ::= < <EXPR>										|*|
-		  			    | = <EXPR>										|*|
-						| ε												|*|
-																		|*|																																				|*|
-        <SIMPLE-EXPR> ::= <TERM> <SIMPLE-EXPR-REST>						|*| <SIMPLE-EXPR> ::= <SIMPLE-EXPR> or <TERM>
-                        												|*| 				| <SIMPLE-EXPR> + <TERM>
-                        												|*| 				| <SIMPLE-EXPR> - <TERM>
-                        												|*|					| <TERM>
-   <SIMPLE-EXPR-REST> ::= or <SIMPLE-EXPR>								|*|
-						| + <SIMPLE-EXPR>								|*|
-						| - <SIMPLE-EXPR>								|*|
-						| ε												|*|
-																		|*|
-               <TERM> ::= <FACTOR> <TERM-REST>							|*| <TERM> ::= <TERM> and <FACTOR>
-                        												|*| 			| <TERM> * <FACTOR>
-                        												|*| 			| <TERM> / <FACTOR>
-                        												|*|				| <FACTOR>
-																		|*|
-		  <TERM-REST> ::= and <TERM>									|*| 
-	     				| * <TERM>										|*|
-		   				| / <TERM>										|*|
-						| ε												|*|
-																		|*|
-             <FACTOR> ::= if <EXPR> then <EXPR> else <EXPR>				|*| <FACTOR> ::= if <EXPR> then <EXPR> else <EXPR>
-                        | <NOT-FACTOR>									|*| 			| not <FACTOR>
-                        | <IDENTIFIER-MAIN>								|*|				| <IDENTIFIER> ( <ACTUALS> )
-                        | <LITERAL>										|*|				| <IDENTIFIER>
-						| <NEG-FACTOR>									|*|				| <LITERAL>
-                        | ( <EXPR> )									|*|				| - <FACTOR>
-                      													|*|				| ( <EXPR> )
-																		|*|
-		 <NOT-FACTOR> ::= not <FACTOR>									|*|
-																		|*|
-		 <NEG-FACTOR> ::= - <FACTOR>									|*|
-																		|*|
-    <IDENTIFIER-MAIN> ::= <IDENTIFIER> <IDENTIFIER-REST>				|*|
-																		|*|
-    <IDENTIFIER-REST> ::= (<ACTUALS>)									|*|
-						| ε												|*|
-																		|*|
-            <ACTUALS> ::= ε												|*| <ACTUALS> ::= ε
-                        | <NONEMPTYACTUALS>								|*|				| <NONEMPTYACTUALS>		
-																		|*|
-    <NONEMPTYACTUALS> ::= <EXPR> <NEA-REST>								|*| <NONEMPTYACTUALS> ::= <EXPR>
-                    													|*|						| <EXPR> , <NONEMPTYACTUALS>
-   			<NEA-REST>::= , <NONEMPTYACTUALS>							|*|
-   						| ε												|*|
-																		|*|
-            <LITERAL> ::= <NUMBER>										|*| <LITERAL> ::= <NUMBER>
-                        | <BOOLEAN>										|*| 			| <BOOLEAN>
-																		|*|
-    <PRINT-STATEMENT> ::= print ( <EXPR> )								|*| <PRINT-STATEMENT> ::= print ( <EXPR> )
+------------------------------------------------------------------------------------		|*|------------------------------------------------------------------------|*|
+				REFACTORED KLEIN GRAMMAR													|*|                          ORIGINAL KLEIN GRAMMAR						   |*|
+------------------------------------------------------------------------------------		|*|------------------------------------------------------------------------|*|
+																							|*|																		   |*|
+           <PROGRAM> ::= <DEFINITIONS>														|*| <PROGRAM> ::= <DEFINITIONS>											   |*|
+																							|*|																		   |*|
+        <DEFINITIONS> ::= ε																	|*| <DEFINITIONS> ::= ε													   |*|
+                        |  <DEF> <DEFINITIONS>												|*| 				| <DEF> <DEFINITIONS>								   |*|
+																							|*|																		   |*|			
+@     			<DEF> ::= function <IDENTIFIER> ( <FORMALS> ) : <TYPE>  					|*|  <DEF> ::= function <IDENTIFIER> ( <FORMALS> ) : <TYPE>				   |*|
+                             <BODY>	make-<DEF>												|*|				<BODY>													   |*|
+																							|*|																		   |*|
+            <FORMALS> ::= ε																	|*|  <FORMALS> ::= ε
+                        | <NONEMPTYFORMALS>													|*|				| <NONEMPTYFORMALS>
+																							|*|																		   |*|
+@   <NONEMPTYFORMALS> ::= <FORMAL>	<NEF-REST> make-<NONEMPTYFORMALS>						|*|   <NONEMPTYFORMALS> ::= <FORMAL>
+	                       																	|*|	 					| <FORMAL> , <NONEMPTYFORMALS>
+  		   <NEF-REST> ::= , <NONEMPTYFORMALS>												|*|																		   |*|
+  						| ε																	|*|																		   |*|
+																							|*|																		   |*|
+@            <FORMAL> ::= <IDENTIFIER> : <TYPE>												|*|   <FORMAL> ::= <IDENTIFIER> : <TYPE>
+																							|*|																		   |*|
+               <BODY> ::= <PRINT-BODY>														|*|  <BODY> ::= <PRINT-STATEMENT> <BODY>
+                        | <EXPR>															|*|			  | <EXPR>
+																							|*|																		   |*|
+@		 <PRINT-BODY> ::= <PRINT-STATEMENT> BODY											|*|																		   |*|
+																							|*|																		   |*|
+@              <TYPE> ::= integer make-integer												|*|  <TYPE> ::= integer
+@                       | boolean make-boolean												|*|  		 | boolean
+																							|*| 																	   |*|
+               <EXPR> ::= <SIMPLE-EXPR> <EXPR-REST>											|*|      <EXPR> ::= <EXPR> < <SIMPLE-EXPR>
+																							|*| 				| <EXPR> = <SIMPLE-EXPR>
+																							|*|				| <SIMPLE-EXPR>
+@		  <EXPR-REST> ::= < <EXPR> make-<LESS-EXPR-REST> <EXPR-REST>						|*|																		   |*|
+@		  			    | = <EXPR> make-<EQ-EXPR-REST> <EXPR-REST>							|*|																		   |*|
+						| ε																	|*|																		   |*|
+																							|*|	    																   |*|
+                        																	|*|  				| <SIMPLE-EXPR> + <TERM>
+                        																	|*|  				| <SIMPLE-EXPR> - <TERM>
+                        																	|*|					| <TERM>
+@  <SIMPLE-EXPR-REST> ::= or <SIMPLE-EXPR>	make-<OR-SIMPLE-EXPR-REST> <SIMPLE-EXPR-REST> 		|*|																		   |*|
+@						| + <SIMPLE-EXPR>	make-<PLUS-SIMPLE-EXPR-REST> <SIMPLE-EXPR-REST> |*|																		   |*|
+@						| - <SIMPLE-EXPR>	make-<MINUS-SIMPLE-EXPR> <SIMPLE-EXPR-REST> 	|*|																		   |*|
+						| ε																	|*|																		   |*|
+																							|*|																		   |*|
+               <TERM> ::= <FACTOR> <TERM-REST>												|*|  <TERM> ::= <TERM> and <FACTOR>
+                        																	|*|  			| <TERM> * <FACTOR>
+                        																	|*|  			| <TERM> / <FACTOR>
+                        																	|*|				| <FACTOR>
+																							|*|																		   |*|
+@		  <TERM-REST> ::= and <TERM> make-<AND-TERM-REST> <TERM-REST>							|*|																		   |*|
+@	     				| * <TERM> make-<MUL-TERM-REST> <TERM-REST>								|*|																		   |*|
+@		   				| / <TERM> make-<DIV-TERM-REST> <TERM-REST>								|*|																		   |*|
+						| ε																	|*|																		   |*|
+																							|*|																		   |*|
+@	         <FACTOR> ::= if <EXPR> then <EXPR> else <EXPR> make-<if-EXP>					|*|  <FACTOR> ::= if <EXPR> then <EXPR> else <EXPR>
+	                    | <NOT-FACTOR>														|*|  			| not <FACTOR>
+	                    | <IDENTIFIER-MAIN>													|*|	 			| <IDENTIFIER> ( <ACTUALS> )
+                        | <LITERAL>															|*|	 			| <IDENTIFIER>
+						| <NEG-FACTOR>														|*|				| <LITERAL>
+@	                    | ( <EXPR> ) make-<PARAN-EXP>										|*|	 			| - <FACTOR>
+																							|*|																		   |*|
+        <SIMPLE-EXPR> ::= <TERM> <SIMPLE-EXPR-REST>											|*|  <SIMPLE-EXPR> ::= <SIMPLE-EXPR> or <TERM>
+                      																		|*|	 			| ( <EXPR> )
+																							|*|																		   |*|
+@		 <NOT-FACTOR> ::= not <FACTOR> make-<NOT-FACTOR>									|*|																		   |*|
+																							|*|																		   |*|
+@		 <NEG-FACTOR> ::= - <FACTOR> make-<NEG-FACTOR>										|*|																		   |*|
+																							|*|																		   |*|
+@	<IDENTIFIER-MAIN> ::= <IDENTIFIER> <IDENTIFIER-REST> make-<IDENTIFIER-MAIN> 			|*|																		   |*|
+																							|*|																		   |*|
+@	<IDENTIFIER-REST> ::= (<ACTUALS>) make-<IDENTIFIER-ACTUALS>								|*|																		   |*|
+						| ε																	|*|																		   |*|
+																							|*|																		   |*|
+	        <ACTUALS> ::= ε																	|*|  <ACTUALS> ::= ε
+                        | <NONEMPTYACTUALS>													|*|				| <NONEMPTYACTUALS>		
+																							|*|																		   |*|
+@   <NONEMPTYACTUALS> ::= <EXPR> <NEA-REST>	make-<NONEMPTYACTUALS>							|*|   <NONEMPTYACTUALS> ::= <EXPR>
+                    																		|*|	 					| <EXPR> , <NONEMPTYACTUALS>
+			<NEA-REST>::= , <NONEMPTYACTUALS>												|*|																		   |*|
+   						| ε																	|*|																		   |*|
+																							|*|																		   |*|
+@           <LITERAL> ::= <NUMBER> make-<NUMBER>											|*|  <LITERAL> ::= <NUMBER>
+@                       | <BOOLEAN>	make-<BOOLEAN>											|*|  			| <BOOLEAN>
+																							|*|																		   |*|
+@   <PRINT-STATEMENT> ::= print ( <EXPR> )	make-<PRINT-STATEMENT>							|*|   <PRINT-STATEMENT> ::= print ( <EXPR> )
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+***NOTE***
+The @ is for where nodes should be created and one being created for the program with the begining of parsing.
+List of Nodes for AST: Program, DEF, NONEMPTYFORMALS, FORMAL, PRINT-BODY, integer, boolean, LESS-EXP-REST, EQ-EXPR-REST, OR-SIMPLE-EXPR-REST, PLUS-SIMPLE-EXPR-REST,
+					   MINUS-SIMPLE-EXPR-REST, AND-TERM-REST, MUL-TERM-REST, DIV-TERM-REST, if-EXP, PARAN-EXP, NOT-FACTOR, NEG-FACTOR, IDENTIFIER-MAIN, 
+					   IDENTIFIER-ACTUALS, NONEMPTYACTUALS, NUMBER, BOOLEAN, PRINT-STATEMENT
