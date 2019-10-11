@@ -12,19 +12,10 @@ public class Main
             return;
         }
 
-        File file = new File(args[0]);
-
         try
         {
-            BufferedReader br = new BufferedReader(new FileReader(file));
 
-            String currentLine;
-            String fullFile = "";
-            //do pretty printing here
-            while ((currentLine = br.readLine()) != null)
-                //for some reason, concat removes newline. hack to fix issues. will be removed down the line anyway
-                //causes scanner issues without.
-                fullFile += currentLine + '\n';
+            String fullFile = new java.util.Scanner(new File(args[0])).useDelimiter("\\Z").next();
 
             //1 scanner, 2 parser,
             int debugStage = 2;
