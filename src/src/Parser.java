@@ -39,8 +39,6 @@ public class Parser
     {
         this.scan = scan;
         table = new int[tableX][tableY];
-        //currentRule = -1;
-        //terminals = Terminals.NULL;
         createTable();
         createRuleList();
     }
@@ -48,9 +46,6 @@ public class Parser
     //TODO: return the tree
     public boolean parse()
     {
-        //src.Token tok;
-        //tmp. need default though
-        //currentRule = Rule.Expression;
         int nextFunc = 0;
 
         String EOFSymbol = "$";
@@ -104,16 +99,13 @@ public class Parser
                 System.out.println("tok: " + getColumn(next));
                 System.out.println("column: " + t);
                 int column = Terminals.indexOf(t);
-//                if (Terminals.contains(next.value.toString())) {
-//                    System.out.println("terminal index: " + Terminals.indexOf(next.value.toString()));
-//                    column = Terminals.indexOf(next.value.toString());
-//                }
+
                 System.out.println("col: " + Terminals.indexOf(t));
                 System.out.println("Stack: " + stack);
 
                 //really should redo table type
                 int currentRule = table[row][column];
-                if(currentRule != -1)
+                if(currentRule != 0)
                 {
                     System.out.println("Current Rule: " + currentRule);
                     stack.pop();
@@ -135,7 +127,7 @@ public class Parser
                     System.out.println("Stack");
                     System.out.println(stack);
                 }
-                else if(currentRule == -1 && RulesWhichCanNull.contains(temp)) {
+                else if(currentRule == 0 && RulesWhichCanNull.contains(temp)) {
                     stack.pop();
                 }
                 else
@@ -167,14 +159,7 @@ public class Parser
 
     private void createTable()
     {
-        //Initialize table with all invalid states. could use null too
-        for(int i=0; i<tableX; i++)
-        {
-            for(int j=0; j<tableY; j++)
-            {
-                table[i][j] = -1;
-            }
-        }
+
 
         //valid states. Starts counting from 1. Zero is invalid
         table[0][0]   = 1;

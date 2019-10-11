@@ -57,10 +57,11 @@ class ScannerTest
             //for some reason, concat removes newline. hack to fix issues. Should be removed down the line anyway
             fullFile += currentLine + '\n';
         Scanner scan = new Scanner(fullFile);
+
         String out = new String();
         System.out.println(scan.peek().toString());
         while (scan.peek().type != src.Token.Type.EOF && scan.peek().type != src.Token.Type.Error)
-            out  =  scan.next().toString();
+            out  +=  scan.next().toString();
         //one last call to display EOF
         out += scan.next().toString();
         System.out.println(out);
