@@ -2,33 +2,33 @@
 				REFACTORED KLEIN GRAMMAR													|*|                          ORIGINAL KLEIN GRAMMAR						   |*|
 ------------------------------------------------------------------------------------		|*|------------------------------------------------------------------------|*|
 																							|*|																		   |*|
-           <PROGRAM> ::= <DEFINITIONS>														|*| <PROGRAM> ::= <DEFINITIONS>											   |*|
+           <PROGRAM> ::= <DEFINITIONS>	make-PROGRAM													|*| <PROGRAM> ::= <DEFINITIONS>											   |*|
 																							|*|																		   |*|
         <DEFINITIONS> ::= <DEF> <DEFINITIONS>												|*| <DEFINITIONS> ::= ε													   |*|
-                        | make-list_of_DEFs 											    |*| 				| <DEF> <DEFINITIONS>								   |*|
+                        | make-DEFINITIONS 											        |*| 				| <DEF> <DEFINITIONS>								   |*|
 																							|*|																		   |*|			
-      			<DEF> ::= function <IDENTIFIER> make-<IDENTIFIER> ( <FORMALS> ) : <TYPE>  	|*|  <DEF> ::= function <IDENTIFIER> ( <FORMALS> ) : <TYPE>				   |*|
-                             <BODY>															|*|				<BODY>													   |*|
+      			<DEF> ::= function <IDENTIFIER> make-IDENTIFIER ( <FORMALS> ) : <TYPE>  	|*|  <DEF> ::= function <IDENTIFIER> ( <FORMALS> ) : <TYPE>				   |*|
+                             <BODY>	make-BODY													|*|				<BODY>													   |*|
 																							|*|																		   |*|
-            <FORMALS> ::= ε																	|*|  <FORMALS> ::= ε
-                        | <NONEMPTYFORMALS>													|*|				| <NONEMPTYFORMALS>
+            <FORMALS> ::= <NONEMPTYFORMALS>													|*|  <FORMALS> ::= ε
+                        | make-FORMALS												        |*|				| <NONEMPTYFORMALS>
 																							|*|																		   |*|
-    <NONEMPTYFORMALS> ::= <FORMAL>	<NEF-REST> 												|*|   <NONEMPTYFORMALS> ::= <FORMAL>
+    <NONEMPTYFORMALS> ::= <FORMAL> make-FORMALS	<NEF-REST> 									|*|   <NONEMPTYFORMALS> ::= <FORMAL>
 	                       																	|*|	 					| <FORMAL> , <NONEMPTYFORMALS>
-  		   <NEF-REST> ::= , <NONEMPTYFORMALS> make-<NONEMPTYFORMALS> <NEF-REST>				|*|																		   |*|
-  						| ε																	|*|																		   |*|
+  		   <NEF-REST> ::= , <NONEMPTYFORMALS> make-NONEMPTYFORMALS <NEF-REST>				|*|																		   |*|
+  						| make-NEF-REST														|*|																		   |*|
 																							|*|																		   |*|
-             <FORMAL> ::= <IDENTIFIER> : <TYPE>												|*|   <FORMAL> ::= <IDENTIFIER> : <TYPE>
+             <FORMAL> ::= <IDENTIFIER> make-IDENTIFIER : <TYPE>												|*|   <FORMAL> ::= <IDENTIFIER> : <TYPE>
 																							|*|																		   |*|
                <BODY> ::= <PRINT-BODY>														|*|  <BODY> ::= <PRINT-STATEMENT> <BODY>
                         | <EXPR> 															|*|			  | <EXPR>
 																							|*|																		   |*|
- 		 <PRINT-BODY> ::= <PRINT-STATEMENT> BODY make-<BODY>								|*|																		   |*|
+ 		 <PRINT-BODY> ::= <PRINT-STATEMENT> BODY								|*|																		   |*|
 																							|*|																		   |*|
                <TYPE> ::= integer make-integer												|*|  <TYPE> ::= integer
                         | boolean make-boolean												|*|  		 | boolean
 																							|*| 																	   |*|
-               <EXPR> ::= <SIMPLE-EXPR> <EXPR-REST>											|*|      <EXPR> ::= <EXPR> < <SIMPLE-EXPR>
+               <EXPR> ::= <SIMPLE-EXPR> <EXPR-REST>	 make-EXPR										|*|      <EXPR> ::= <EXPR> < <SIMPLE-EXPR>
 																							|*| 				| <EXPR> = <SIMPLE-EXPR>
 																							|*|				| <SIMPLE-EXPR>
  		  <EXPR-REST> ::= < <EXPR> make-<BINARY-FACTOR> <EXPR-REST>						|*|																		   |*|
@@ -83,8 +83,8 @@
             <LITERAL> ::= <NUMBER> make-<NUMBER>											|*|  <LITERAL> ::= <NUMBER>
                         | <BOOLEAN>	make-<BOOLEAN>											|*|  			| <BOOLEAN>
 																							|*|																		   |*|
-    <PRINT-STATEMENT> ::= print ( <EXPR> )	make-<PRINT-STATEMENT>							|*|   <PRINT-STATEMENT> ::= print ( <EXPR> )
+    <PRINT-STATEMENT> ::= print ( <EXPR> )	make-<Function call>							|*|   <PRINT-STATEMENT> ::= print ( <EXPR> )
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 ***NOTE***
-List of Nodes for AST: NONEMPTYFORMALS, BODY, integer, boolean, BINARY-FACTOR, if-EXP, UNARY-FACTOR, IDENTIFIER,
-					   IDENTIFIER-ACTUALS, NONEMPTYACTUALS, NUMBER, BOOLEAN, PRINT-STATEMENT
+List of Nodes for AST: PROGRAM, DEFINITIONS, BODY, IDENTIFIER, FORMALS, NONEMPTYFORMALS, IDENTIFIER, integer, boolean, EXPR, BINARY-FACTOR, if-EXP, UNARY-FACTOR,
+					   BINARY-TERM, IDENTIFIER-ACTUALS, NONEMPTYACTUALS, FunctionCall
