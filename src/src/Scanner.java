@@ -1,3 +1,5 @@
+package src;
+
 import java.util.ArrayList;
 
 public class Scanner
@@ -12,7 +14,6 @@ public class Scanner
         add('<'); add('='); add('('); add(')'); add(','); add(';'); add(':'); add('\t'); add('\n'); add('\r');
     }};
 
-    //put tokenSoFar += prog.charAt(pos); in any non final states and set the token value to toenSoFar when returning
     private static String tokenSoFar;
 
     public Scanner(String file)

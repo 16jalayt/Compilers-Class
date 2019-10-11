@@ -1,7 +1,10 @@
+package src;
+
 import java.util.*;
 
 public class Parser
 {
+    //TODO: generate tree as private variable. make instance method to access tree. This way it wont break the true/false tests
 
     ArrayList<String> Rules = new ArrayList<String>(Arrays.asList(
             "PROGRAM", "DEFINITIONS", "DEF", "FORMALS", "NONEMPTYFORMALS",
@@ -24,8 +27,6 @@ public class Parser
     ArrayList<ArrayList<String>> ruleList= new ArrayList<ArrayList<String>>();
 
 
-    //public int currentRule;
-    //public Terminals terminals;
     private static Scanner scan;
     int table[][];
     private final int tableX = 30;
@@ -37,18 +38,13 @@ public class Parser
     {
         this.scan = scan;
         table = new int[tableX][tableY];
-        //currentRule = -1;
-        //terminals = Terminals.NULL;
         createTable();
         createRuleList();
     }
 
-    //TODO: return the tree
     public boolean parse()
     {
-        //Token tok;
-        //tmp. need default though
-        //currentRule = Rule.Expression;
+
         int nextFunc = 0;
 
         String EOFSymbol = "$";
@@ -102,16 +98,12 @@ public class Parser
                 System.out.println("tok: " + getColumn(next));
                 System.out.println("column: " + t);
                 int column = Terminals.indexOf(t);
-//                if (Terminals.contains(next.value.toString())) {
-//                    System.out.println("terminal index: " + Terminals.indexOf(next.value.toString()));
-//                    column = Terminals.indexOf(next.value.toString());
-//                }
                 System.out.println("col: " + Terminals.indexOf(t));
                 System.out.println("Stack: " + stack);
 
                 //really should redo table type
                 int currentRule = table[row][column];
-                if(currentRule != -1)
+                if(currentRule != 0)
                 {
                     System.out.println("Current Rule: " + currentRule);
                     stack.pop();
@@ -133,7 +125,7 @@ public class Parser
                     System.out.println("Stack");
                     System.out.println(stack);
                 }
-                else if(currentRule == -1 && RulesWhichCanNull.contains(temp)) {
+                else if(RulesWhichCanNull.contains(temp)) {
                     stack.pop();
                 }
                 else
@@ -165,16 +157,7 @@ public class Parser
 
     private void createTable()
     {
-        //Initialize table with all invalid states. could use null too
-        for(int i=0; i<tableX; i++)
-        {
-            for(int j=0; j<tableY; j++)
-            {
-                table[i][j] = -1;
-            }
-        }
-
-        //valid states. Starts counting from 1. Zero is invalid
+        //valid states.
         table[0][0]   = 1;
         table[0][24]  = 1;
         table[1][0]   = 2;
@@ -338,7 +321,8 @@ public class Parser
 
     }
 
-    private void createRuleList(){
+    private void createRuleList()
+    {
         //A list of lists, with each index of the first list corresponding to a rule number, and the nested list at
         //that index containing a list of rule strings in reverse order.
 
@@ -533,7 +517,5 @@ public class Parser
         tempList48.add("leftParen");
         tempList48.add("print");
         ruleList.add(tempList48);
-
-
     }
 }

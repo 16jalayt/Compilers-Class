@@ -1,3 +1,5 @@
+package src;
+
 public class Token
 {//token class. type, value  string not enum. can do diff obj per type
     public Type type;

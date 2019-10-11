@@ -4,8 +4,8 @@
 																							|*|																		   |*|
            <PROGRAM> ::= <DEFINITIONS>														|*| <PROGRAM> ::= <DEFINITIONS>											   |*|
 																							|*|																		   |*|
-        <DEFINITIONS> ::= ε																	|*| <DEFINITIONS> ::= ε													   |*|
-                        |  <DEF> <DEFINITIONS>												|*| 				| <DEF> <DEFINITIONS>								   |*|
+        <DEFINITIONS> ::= <DEF> <DEFINITIONS>												|*| <DEFINITIONS> ::= ε													   |*|
+                        | make-list_of_DEFs 											    |*| 				| <DEF> <DEFINITIONS>								   |*|
 																							|*|																		   |*|			
       			<DEF> ::= function <IDENTIFIER> make-<IDENTIFIER> ( <FORMALS> ) : <TYPE>  	|*|  <DEF> ::= function <IDENTIFIER> ( <FORMALS> ) : <TYPE>				   |*|
                              <BODY>															|*|				<BODY>													   |*|
@@ -86,5 +86,5 @@
     <PRINT-STATEMENT> ::= print ( <EXPR> )	make-<PRINT-STATEMENT>							|*|   <PRINT-STATEMENT> ::= print ( <EXPR> )
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 ***NOTE***
-List of Nodes for AST: Program, NONEMPTYFORMALS, BODY, integer, boolean, BINARY-FACTOR, if-EXP, UNARY-FACTOR, IDENTIFIER, 
+List of Nodes for AST: NONEMPTYFORMALS, BODY, integer, boolean, BINARY-FACTOR, if-EXP, UNARY-FACTOR, IDENTIFIER,
 					   IDENTIFIER-ACTUALS, NONEMPTYACTUALS, NUMBER, BOOLEAN, PRINT-STATEMENT
