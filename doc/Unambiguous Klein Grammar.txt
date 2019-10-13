@@ -1,46 +1,46 @@
-------------------------------------------------------------------------------------		|*|------------------------------------------------------------------------|*|
+--------------------------------------------------------------------------------------------|*|------------------------------------------------------------------------|*|
 				REFACTORED KLEIN GRAMMAR													|*|                          ORIGINAL KLEIN GRAMMAR						   |*|
-------------------------------------------------------------------------------------		|*|------------------------------------------------------------------------|*|
+--------------------------------------------------------------------------------------------|*|------------------------------------------------------------------------|*|
 																							|*|																		   |*|
-           <PROGRAM> ::= <DEFINITIONS>	make-PROGRAM													|*| <PROGRAM> ::= <DEFINITIONS>											   |*|
+           <PROGRAM> ::= <DEFINITIONS>	make-PROGRAM										|*| <PROGRAM> ::= <DEFINITIONS>											   |*|
 																							|*|																		   |*|
         <DEFINITIONS> ::= <DEF> <DEFINITIONS>												|*| <DEFINITIONS> ::= ε													   |*|
-                        | make-DEFINITIONS 											        |*| 				| <DEF> <DEFINITIONS>								   |*|
+                        | ε														  	        |*| 				| <DEF> <DEFINITIONS>								   |*|
 																							|*|																		   |*|			
       			<DEF> ::= function <IDENTIFIER> make-IDENTIFIER ( <FORMALS> ) : <TYPE>  	|*|  <DEF> ::= function <IDENTIFIER> ( <FORMALS> ) : <TYPE>				   |*|
-                             <BODY>	make-BODY													|*|				<BODY>													   |*|
+                             <BODY>	make-DEF												|*|				<BODY>													   |*|
 																							|*|																		   |*|
             <FORMALS> ::= <NONEMPTYFORMALS>													|*|  <FORMALS> ::= ε
                         | make-FORMALS												        |*|				| <NONEMPTYFORMALS>
 																							|*|																		   |*|
-    <NONEMPTYFORMALS> ::= <FORMAL> make-FORMALS	<NEF-REST> 									|*|   <NONEMPTYFORMALS> ::= <FORMAL>
+    <NONEMPTYFORMALS> ::= <FORMAL> <NEF-REST> 												|*|   <NONEMPTYFORMALS> ::= <FORMAL>
 	                       																	|*|	 					| <FORMAL> , <NONEMPTYFORMALS>
   		   <NEF-REST> ::= , <NONEMPTYFORMALS> make-NONEMPTYFORMALS <NEF-REST>				|*|																		   |*|
-  						| make-NEF-REST														|*|																		   |*|
+  						| ε																	|*|																		   |*|
 																							|*|																		   |*|
-             <FORMAL> ::= <IDENTIFIER> make-IDENTIFIER : <TYPE>												|*|   <FORMAL> ::= <IDENTIFIER> : <TYPE>
+             <FORMAL> ::= <IDENTIFIER> make-IDENTIFIER : <TYPE> make-FORMAL 				|*|   <FORMAL> ::= <IDENTIFIER> : <TYPE>
 																							|*|																		   |*|
                <BODY> ::= <PRINT-BODY>														|*|  <BODY> ::= <PRINT-STATEMENT> <BODY>
-                        | <EXPR> 															|*|			  | <EXPR>
+                        | <EXPR> make-BODY													|*|			  | <EXPR>
 																							|*|																		   |*|
- 		 <PRINT-BODY> ::= <PRINT-STATEMENT> BODY								|*|																		   |*|
+ 		 <PRINT-BODY> ::= <PRINT-STATEMENT> BODY											|*|																		   |*|
 																							|*|																		   |*|
                <TYPE> ::= integer make-integer												|*|  <TYPE> ::= integer
                         | boolean make-boolean												|*|  		 | boolean
 																							|*| 																	   |*|
-               <EXPR> ::= <SIMPLE-EXPR> <EXPR-REST>	 make-EXPR										|*|      <EXPR> ::= <EXPR> < <SIMPLE-EXPR>
+               <EXPR> ::= <SIMPLE-EXPR> <EXPR-REST>											|*|      <EXPR> ::= <EXPR> < <SIMPLE-EXPR>
 																							|*| 				| <EXPR> = <SIMPLE-EXPR>
 																							|*|				| <SIMPLE-EXPR>
- 		  <EXPR-REST> ::= < <EXPR> make-<BINARY-FACTOR> <EXPR-REST>						|*|																		   |*|
- 		  			    | = <EXPR> make-<BINARY-FACTOR> <EXPR-REST>							|*|																		   |*|
-						| ε																	|*|																		   |*|
+ 		  <EXPR-REST> ::= < <EXPR> make-BINARY-EXP <EXPR-REST>								|*|																		   |*|
+ 		  			    | = <EXPR> make-BINARY-EXP <EXPR-REST>								|*|																		   |*|
+						| make-EXPR															|*|																		   |*|
 																							|*|	    																   |*|
                         																	|*|  				| <SIMPLE-EXPR> + <TERM>
                         																	|*|  				| <SIMPLE-EXPR> - <TERM>
                         																	|*|					| <TERM>
-   <SIMPLE-EXPR-REST> ::= or <SIMPLE-EXPR>	make-<BINARY-FACTOR> <SIMPLE-EXPR-REST> 		|*|																		   |*|
- 						| + <SIMPLE-EXPR>	make-<BINARY-FACTOR> <SIMPLE-EXPR-REST> |*|																		   |*|
- 						| - <SIMPLE-EXPR>	make-<BINARY-FACTOR> <SIMPLE-EXPR-REST> 	|*|																		   |*|
+   <SIMPLE-EXPR-REST> ::= or <SIMPLE-EXPR>	make-BINARY-BOOLEAN <SIMPLE-EXPR-REST> 			|*|																		   |*|
+ 						| + <SIMPLE-EXPR>	make-BINARY-FACTOR <SIMPLE-EXPR-REST> 			|*|																		   |*|
+ 						| - <SIMPLE-EXPR>	make-BINARY-FACTOR <SIMPLE-EXPR-REST> 			|*|																		   |*|
 						| ε																	|*|																		   |*|
 																							|*|																		   |*|
                <TERM> ::= <FACTOR> <TERM-REST>												|*|  <TERM> ::= <TERM> and <FACTOR>
@@ -48,12 +48,12 @@
                         																	|*|  			| <TERM> / <FACTOR>
                         																	|*|				| <FACTOR>
 																							|*|																		   |*|
- 		  <TERM-REST> ::= and <TERM> make-<BINARY-TERM> <TERM-REST>							|*|																		   |*|
- 	     				| * <TERM> make-<BINARY-TERM> <TERM-REST>								|*|																		   |*|
- 		   				| / <TERM> make-<BINARY-TERM> <TERM-REST>								|*|																		   |*|
+ 		  <TERM-REST> ::= and <TERM> make-BINARY-BOOLEAN <TERM-REST>		     			|*|																		   |*|
+ 	     				| * <TERM> make-BINARY-FACTOR <TERM-REST>							|*|																		   |*|
+ 		   				| / <TERM> make-BINARY-FACTOR <TERM-REST>							|*|																		   |*|
 						| ε																	|*|																		   |*|
 																							|*|																		   |*|
- 	         <FACTOR> ::= if <EXPR> then <EXPR> else <EXPR> make-<if-EXP>					|*|  <FACTOR> ::= if <EXPR> then <EXPR> else <EXPR>
+ 	         <FACTOR> ::= if <EXPR> then <EXPR> else <EXPR> make-if-EXPR					|*|  <FACTOR> ::= if <EXPR> then <EXPR> else <EXPR>
 	                    | <NOT-FACTOR>														|*|  			| not <FACTOR>
 	                    | <IDENTIFIER-MAIN>													|*|	 			| <IDENTIFIER> ( <ACTUALS> )
                         | <LITERAL>															|*|	 			| <IDENTIFIER>
@@ -63,13 +63,13 @@
         <SIMPLE-EXPR> ::= <TERM> <SIMPLE-EXPR-REST>											|*|  <SIMPLE-EXPR> ::= <SIMPLE-EXPR> or <TERM>
                       																		|*|	 			| ( <EXPR> )
 																							|*|																		   |*|
- 		 <NOT-FACTOR> ::= not <FACTOR> make-<UNARY-FACTOR>									|*|																		   |*|
+ 		 <NOT-FACTOR> ::= not <FACTOR> make-UNARY-BOOLEAN									|*|																		   |*|
 																							|*|																		   |*|
- 		 <NEG-FACTOR> ::= - <FACTOR> make-<UNARY-FACTOR>									|*|																		   |*|
+ 		 <NEG-FACTOR> ::= - <FACTOR> make-UNARY-FACTOR										|*|																		   |*|
 																							|*|																		   |*|
- 	<IDENTIFIER-MAIN> ::= <IDENTIFIER> make-<IDENTIFIER> <IDENTIFIER-REST> 					|*|																		   |*|
+ 	<IDENTIFIER-MAIN> ::= <IDENTIFIER> make-IDENTIFIER <IDENTIFIER-REST> 					|*|																		   |*|
 																							|*|																		   |*|
- 	<IDENTIFIER-REST> ::= (<ACTUALS>) make-<IDENTIFIER-ACTUALS>								|*|																		   |*|
+ 	<IDENTIFIER-REST> ::= (<ACTUALS>) make-IDENTIFIER-ACTUALS								|*|																		   |*|
 						| ε																	|*|																		   |*|
 																							|*|																		   |*|
 	        <ACTUALS> ::= ε																	|*|  <ACTUALS> ::= ε
@@ -77,14 +77,14 @@
 																							|*|																		   |*|
     <NONEMPTYACTUALS> ::= <EXPR> <NEA-REST>													|*|   <NONEMPTYACTUALS> ::= <EXPR>
                     																		|*|	 					| <EXPR> , <NONEMPTYACTUALS>
-			<NEA-REST>::= , <NONEMPTYACTUALS> make-<NONEMPTYACTUALS> <NEA-REST>				|*|																		   |*|
+			<NEA-REST>::= , <NONEMPTYACTUALS> make-NONEMPTYACTUALS <NEA-REST>				|*|																		   |*|
    						| ε																	|*|																		   |*|
 																							|*|																		   |*|
-            <LITERAL> ::= <NUMBER> make-<NUMBER>											|*|  <LITERAL> ::= <NUMBER>
-                        | <BOOLEAN>	make-<BOOLEAN>											|*|  			| <BOOLEAN>
+            <LITERAL> ::= <NUMBER> make-NUMBER												|*|  <LITERAL> ::= <NUMBER>
+                        | <BOOLEAN>	make-BOOLEAN											|*|  			| <BOOLEAN>
 																							|*|																		   |*|
-    <PRINT-STATEMENT> ::= print ( <EXPR> )	make-<Function call>							|*|   <PRINT-STATEMENT> ::= print ( <EXPR> )
+    <PRINT-STATEMENT> ::= print ( <EXPR> )	make-Function-Call								|*|   <PRINT-STATEMENT> ::= print ( <EXPR> )
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 ***NOTE***
-List of Nodes for AST: PROGRAM, DEFINITIONS, BODY, IDENTIFIER, FORMALS, NONEMPTYFORMALS, IDENTIFIER, integer, boolean, EXPR, BINARY-FACTOR, if-EXP, UNARY-FACTOR,
-					   BINARY-TERM, IDENTIFIER-ACTUALS, NONEMPTYACTUALS, FunctionCall
+List of Nodes for AST: PROGRAM, DEF, BODY, IDENTIFIER, FORMALS, NONEMPTYFORMALS, IDENTIFIER, integer, boolean, EXPR, BINARY-FACTOR, if-EXP, UNARY-FACTOR,
+					   IDENTIFIER-ACTUALS, NONEMPTYACTUALS, Function-Call

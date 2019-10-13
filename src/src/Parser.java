@@ -24,7 +24,13 @@ public class Parser
             "DEFINITIONS", "FORMALS", "NEFREST", "EXPRREST", "SIMPLEEXPRREST",
             "TERMREST", "IDENTIFIERREST"));
 
-    ArrayList<ArrayList<String>> ruleList= new ArrayList<ArrayList<String>>();
+    ArrayList<ArrayList<String>> ruleList= new ArrayList<ArrayList<String>>(Arrays.asList(
+        "make-PROGRAM", "make-DEFINITIONS", "make-IDENTIFIER", "make-FORMALS", 
+        "make-NONEMPTYFORMALS", "make-integer", "make-boolean", "make-EXPR", 
+        "make-BINARY-EXPR", "make-BINARY-BOOLEAN", "make-BINARY-FACTOR", 
+        "make-UNARY-BOOLEAN", "make-UNARY-FACTOR", "make-if-EXPR", "make-IDENTIFIER-ACTUALS",
+        "make-NONEMPTYACTUALS", "make-NUMBER", "make-BOOLEAN", "make-Function-Call"
+    ));
 
 
     private static Scanner scan;
@@ -380,6 +386,7 @@ public class Parser
         tempList0.add("");
         ruleList.add(tempList0);
         //Create a list for each index position, then add it on to the overall list of lists
+        tempList1.add("make-PROGRAM")
         tempList1.add("DEFINITIONS");
         ruleList.add(tempList1);
         tempList2.add("NULL");
@@ -387,15 +394,18 @@ public class Parser
         tempList3.add("DEFINITIONS");
         tempList3.add("DEF");
         ruleList.add(tempList3);
+        tempList4.add("make-DEF")
         tempList4.add("BODY");
         tempList4.add("TYPE");
         tempList4.add("colon");
         tempList4.add("rightParen");
         tempList4.add("FORMALS");
         tempList4.add("leftParen");
+        tempList4.add("make-IDENTIFIER");
         tempList4.add("IDENTIFIER");
         tempList4.add("function");
         ruleList.add(tempList4);
+        tempList5.add("make-FORMALS");
         tempList5.add("NULL");
         ruleList.add(tempList5);
         tempList6.add("NONEMPTYFORMALS");
@@ -403,46 +413,64 @@ public class Parser
         tempList7.add("NEFREST");
         tempList7.add("FORMAL");
         ruleList.add(tempList7);
+        tempList8.add("NEA-REST");
+        tempList8.add("make-NONEMPTYFORMALS");
         tempList8.add("NONEMPTYFORMALS");
         tempList8.add("comma");
         ruleList.add(tempList8);
         tempList9.add("NULL");
         ruleList.add(tempList9);
+        tempList10.add("make-FORMAL");
         tempList10.add("TYPE");
         tempList10.add("colon");
+        tempList10.add("make-IDENTIFIER");
         tempList10.add("IDENTIFIER");
         ruleList.add(tempList10);
         tempList11.add("PRINTBODY");
         ruleList.add(tempList11);
+        tempList12.add("make-BODY");
         tempList12.add("EXPR");
         ruleList.add(tempList12);
         tempList13.add("BODY");
         tempList13.add("PRINTSTATEMENT");
         ruleList.add(tempList13);
+        tempList14.add("make-integer");
         tempList14.add("integer");
         ruleList.add(tempList14);
+        tempList15.add("make-boolean");
         tempList15.add("boolean");
         ruleList.add(tempList15);
         tempList16.add("EXPRREST");
         tempList16.add("SIMPLEEXPR");
         ruleList.add(tempList16);
+        tempList17.add("EXPRREST");
+        tempList17.add("make-BINARY-EXPR");
         tempList17.add("EXPR");
         tempList17.add("lessThan");
         ruleList.add(tempList17);
+        tempList18.add("EXPRREST");
+        tempList18.add("make-BINARY-EXPR");
         tempList18.add("EXPR");
         tempList18.add("equals");
         ruleList.add(tempList18);
+        tempList19.add("make-EXPR");
         tempList19.add("NULL");
         ruleList.add(tempList19);
         tempList20.add("SIMPLEEXPRREST");
         tempList20.add("TERM");
         ruleList.add(tempList20);
+        tempList21.add("SIMPLEEXPRREST");
+        tempList21.add("make-BINARY-BOOLEAN");
         tempList21.add("SIMPLEEXPR");
         tempList21.add("or");
         ruleList.add(tempList21);
+        tempList22.add("SIMPLEEXPRREST");
+        tempList22.add("make-BINARY-FACTOR");
         tempList22.add("SIMPLEEXPR");
         tempList22.add("plus");
         ruleList.add(tempList22);
+        tempList23.add("SIMPLEEXPRREST");
+        tempList23.add("make-BINARY-FACTOR");
         tempList23.add("SIMPLEEXPR");
         tempList23.add("minus");
         ruleList.add(tempList23);
@@ -451,17 +479,24 @@ public class Parser
         tempList25.add("TERMREST");
         tempList25.add("FACTOR");
         ruleList.add(tempList25);
+        tempList26.add("TERMREST");
+        tempList26.add("make-BINARY-BOOLEAN");
         tempList26.add("TERM");
         tempList26.add("and");
         ruleList.add(tempList26);
+        tempList27.add("TERMREST");
+        tempList27.add("make-BINARY-FACTOR");
         tempList27.add("TERM");
         tempList27.add("multiply");
         ruleList.add(tempList27);
+        tempList28.add("TERMREST");
+        tempList28.add("make-BINARY-FACTOR");
         tempList28.add("TERM");
         tempList28.add("divide");
         ruleList.add(tempList28);
         tempList29.add("NULL");
         ruleList.add(tempList29);
+        tempList30.add("make-if-EXPR");
         tempList30.add("EXPR");
         tempList30.add("else");
         tempList30.add("EXPR");
@@ -481,15 +516,19 @@ public class Parser
         tempList35.add("EXPR");
         tempList35.add("leftParen");
         ruleList.add(tempList35);
+        tempList36.add("make-UNARY-BOOLEAN");
         tempList36.add("FACTOR");
         tempList36.add("not");
         ruleList.add(tempList36);
+        tempList37.add("make-UNARY-FACTOR");
         tempList37.add("FACTOR");
         tempList37.add("minus");
         ruleList.add(tempList37);
         tempList38.add("IDENTIFIERREST");
+        tempList38.add("make-IDENTIFIER");
         tempList38.add("IDENTIFIER");
         ruleList.add(tempList38);
+        tempList39.add("make-IDENTIFIER-ACTUALS");
         tempList39.add("rightParen");
         tempList39.add("ACTUALS");
         tempList39.add("leftParen");
@@ -503,15 +542,20 @@ public class Parser
         tempList43.add("NEAREST");
         tempList43.add("EXPR");
         ruleList.add(tempList43);
+        tempList44.add("NEA-REST");
+        tempList44.add("make-NONEMPTYACTUALS");
         tempList44.add("NONEMPTYACTUALS");
         tempList44.add("comma");
         ruleList.add(tempList44);
         tempList45.add("NULL");
         ruleList.add(tempList45);
+        tempList46.add("make-NUMBER");
         tempList46.add("NUMBER");
         ruleList.add(tempList46);
+        tempList47.add("make-BOOLEAN");
         tempList47.add("BOOLEAN");
         ruleList.add(tempList47);
+        tempList48.add("make-Function-Call");
         tempList48.add("rightParen");
         tempList48.add("EXPR");
         tempList48.add("leftParen");
