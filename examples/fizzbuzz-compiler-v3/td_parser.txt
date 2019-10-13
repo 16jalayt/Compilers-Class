@@ -1,0 +1,59 @@
+-*- mode: org -*-
+* grammar
+
+    program ::= range assignments
+      range ::= number ELLIPSIS number
+assignments ::= assignment assignments
+              | ε
+ assignment ::= word EQUALS number
+       word ::= WORD
+     number ::= NUMBER
+
+* grammar, refactored
+
+  no need!
+
+* first
+
+    number      → NUMBER
+    word        → WORD
+    assignment  → WORD
+    assignments → WORD, ε
+    range       → NUMBER
+    program     → NUMBER
+
+* follow
+
+    program     → $
+    range       → WORD, $
+    assignments → $
+    assignment  → WORD, $
+    word        → EQUALS
+    number      → ELLIPSIS, WORD, $
+
+* grammar, with semantic actions
+
+    program ::= range assignments [make_program]
+      range ::= number ELLIPSIS number [make_range]
+assignments ::= assignment assignments
+              | [make_assignments]            //  used to be ε
+ assignment ::= word EQUALS number [make_assignment]
+       word ::= WORD
+     number ::= NUMBER
+
+* table
+
+                NUMBER                     WORD                       $
+    program     → range assignments        ---                        ---
+    range       → number ELLIPSIS number   ---                        ---
+    assignments ---                        → assignment assignments   → ε
+    assignment  ---                        → word EQUALS number       ---
+    word        ---                        → WORD                     ---
+    number      → NUMBER                   ---                        ---
+
+  The columns for ELLPSIS and EQUALS are empty.
+
+  I put the semantic actions into the table rules at the same
+  points they appear in the grammar.
+
+*

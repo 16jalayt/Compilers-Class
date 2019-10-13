@@ -1,0 +1,6 @@
+#! /bin/sh
+rm .DS_store
+/bin/rm -r __pycache__
+rm -f *~
+rm -f programs/*~
+rm -f programs/.DS_store

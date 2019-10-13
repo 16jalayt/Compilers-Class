@@ -48,11 +48,7 @@ public class Main
         catch (FileNotFoundException e)
         {
             System.out.println("The specified file could not be found.");
-        } catch (IOException e)
-        {
-            System.out.println("The specified file could not be opened.");
         }
-
         System.out.println("Exiting...");
     }
 }

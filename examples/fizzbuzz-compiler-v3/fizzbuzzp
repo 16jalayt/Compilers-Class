@@ -1,0 +1,24 @@
+#! /Library/Frameworks/Python.framework/Versions/3.4/bin/python3.4
+
+import sys
+from scanner      import Scanner
+from fb_token     import Token
+from td_parser    import Parser
+from errors       import LexicalError, ParseError
+
+try:
+    filename = sys.argv[1]
+    myfile   = open(filename)
+    program  = myfile.read()
+
+    scanner  = Scanner(program)
+    parser   = Parser(scanner)
+    tree     = parser.parse()
+
+    print('\n', tree.pretty_print(), end='\n\n')
+except LexicalError as le:
+    print('Lexical error: ' + str(le))
+except ParseError as le:
+    print('Parse error: ' + str(le))
+except Exception as exc:
+    print('Something went wrong: ' + str(exc))
