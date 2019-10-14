@@ -24,13 +24,12 @@ public class Parser
             "DEFINITIONS", "FORMALS", "NEFREST", "EXPRREST", "SIMPLEEXPRREST",
             "TERMREST", "IDENTIFIERREST"));
 
-    ArrayList<ArrayList<String>> ruleList= new ArrayList<ArrayList<String>>(Arrays.asList(
+    ArrayList<String> ruleList= new ArrayList<String>(Arrays.asList(
         "make-PROGRAM", "make-DEFINITIONS", "make-IDENTIFIER", "make-FORMALS", 
         "make-NONEMPTYFORMALS", "make-integer", "make-boolean", "make-EXPR", 
         "make-BINARY-EXPR", "make-BINARY-BOOLEAN", "make-BINARY-FACTOR", 
         "make-UNARY-BOOLEAN", "make-UNARY-FACTOR", "make-if-EXPR", "make-IDENTIFIER-ACTUALS",
-        "make-NONEMPTYACTUALS", "make-NUMBER", "make-BOOLEAN", "make-Function-Call"
-    ));
+        "make-NONEMPTYACTUALS", "make-NUMBER", "make-BOOLEAN", "make-Function-Call"));
 
 
     private static Scanner scan;
@@ -367,7 +366,7 @@ public class Parser
         tempList0.add("");
         ruleList.add(tempList0);
         //Create a list for each index position, then add it on to the overall list of lists
-        tempList1.add("make-PROGRAM")
+        tempList1.add("make-PROGRAM");
         tempList1.add("DEFINITIONS");
         ruleList.add(tempList1);
         tempList2.add("NULL");
@@ -375,7 +374,7 @@ public class Parser
         tempList3.add("DEFINITIONS");
         tempList3.add("DEF");
         ruleList.add(tempList3);
-        tempList4.add("make-DEF")
+        tempList4.add("make-DEF");
         tempList4.add("BODY");
         tempList4.add("TYPE");
         tempList4.add("colon");

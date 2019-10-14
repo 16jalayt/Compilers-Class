@@ -9,11 +9,11 @@ Use commit when done with chunks of code.
 MAKE SURE YOU PUSH CHANGES and they show up in the repo.
 
 Classes in this file:
-Main(): takes in a klein file name, calls Scanner.
-Scanner(): takes in a string containing a klein program. Produces tokens from that string. Calls token.
+Main(): Takes in a klein file name, calls Scanner.
 Token(): Creates the token object type, which has a token.type (keyword, identifier, punctuation, etc.)
-         and token.value which is the token itself as a string. 
-Parser(): uses scanner() to take in token after token from a given program, comparing them to Klein grammar rules to 
+         and token.value which is the token itself as a string.
+Scanner(): Takes in a string containing a klein program. Produces tokens from that string. Calls token.
+Parser(): Uses scanner() to take in token after token from a given program, comparing them to Klein grammar rules to 
           determine whether or not the program is valid in klein. If the parser reaches the end of the file, finds
           the End Of File character, and has not encounter any errors, it returns true. 
 
@@ -25,6 +25,11 @@ Our scanner function takes in a single parameter, a string containing the conten
 Scanner then goes through that string character by character, building tokens as it goes. 
 Main then calls Parser.parse(), and if it returns true then Main prints out "The program is: valid", else it
     declares that the program is invalid.
+    
+To build: The repo comes with an intellij project. Launching the project is the fastest way to get started. 
+Alternativly, you can cd into the src/src folder and compile with javac Main.java Scanner.java Token.java... 
+and so on for all of the source files in the directory. To lauch, you call java Main test.kln where test is 
+the klein program with path.
 
 Current Problems: Our parser currently has a problem where it attempts to call a rule that does not exist
     in our Parser Table. We believe that this is caused by a mistake in our FIRST and FOLLOW file, which 
