@@ -31,8 +31,8 @@
                <EXPR> ::= <SIMPLE-EXPR> <EXPR-REST>											|*|      <EXPR> ::= <EXPR> < <SIMPLE-EXPR>
 																							|*| 				| <EXPR> = <SIMPLE-EXPR>
 																							|*|				| <SIMPLE-EXPR>
- 		  <EXPR-REST> ::= < <EXPR> make-BINARY-EXP <EXPR-REST>								|*|																		   |*|
- 		  			    | = <EXPR> make-BINARY-EXP <EXPR-REST>								|*|																		   |*|
+ 		  <EXPR-REST> ::= < <EXPR> make-BINARY-EXPR <EXPR-REST>								|*|																		   |*|
+ 		  			    | = <EXPR> make-BINARY-EXPR <EXPR-REST>								|*|																		   |*|
 						| make-EXPR															|*|																		   |*|
 																							|*|	    																   |*|
                         																	|*|  				| <SIMPLE-EXPR> + <TERM>
@@ -86,5 +86,5 @@
     <PRINT-STATEMENT> ::= print ( <EXPR> )	make-Function-Call								|*|   <PRINT-STATEMENT> ::= print ( <EXPR> )
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 ***NOTE***
-List of Nodes for AST: PROGRAM, DEF, BODY, IDENTIFIER, FORMALS, NONEMPTYFORMALS, IDENTIFIER, integer, boolean, EXPR, BINARY-FACTOR, if-EXP, UNARY-FACTOR,
-					   IDENTIFIER-ACTUALS, NONEMPTYACTUALS, Function-Call
+List of Nodes for AST: PROGRAM, DEF, BODY, IDENTIFIER, FORMALS, NONEMPTYFORMALS, IDENTIFIER, integer, boolean, EXPR, BINARY-EXPR, BINARY-FACTOR, 
+					   BINARY-FACTOR, if-EXPR, UNARY-BOOLEAN, UNARY-FACTOR, IDENTIFIER-ACTUALS, NONEMPTYACTUALS, Function-Call
