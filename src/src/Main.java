@@ -4,6 +4,13 @@ import java.io.*;
 
 public class Main
 {
+    //-1 production, 1 scanner, 3 parser,
+    //even with debug prints, odd no prints
+    static int debugStage = 1;
+
+    //can use this line in the code and will mute the debug print
+    //if (Main.debugStage>=2) {System.out.println("The stack is: " + stack.toString());}
+
     public static void main(String[] args)
     {
         if(args.length != 1)
@@ -14,11 +21,8 @@ public class Main
 
         try
         {
-
             String fullFile = new java.util.Scanner(new File(args[0])).useDelimiter("\\Z").next();
 
-            //1 scanner, 2 parser,
-            int debugStage = 2;
             //scanner
             if(debugStage == 1)
             {

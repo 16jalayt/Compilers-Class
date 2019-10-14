@@ -196,13 +196,7 @@ class ParserTest
 
     private String readFile(String fileName) throws Exception
     {
-        BufferedReader br = new BufferedReader(new FileReader(new File(fileName)));
-        String currentLine;
-        String fullFile = "";
-        //do pretty printing here
-        while ((currentLine = br.readLine()) != null)
-            //for some reason, concat removes newline. hack to fix issues. Should be removed down the line anyway
-            fullFile += currentLine + '\n';
+        String fullFile = new java.util.Scanner(new File(fileName)).useDelimiter("\\Z").next();
         return fullFile;
     }
 

@@ -26,6 +26,6 @@ public class Token
 
     public String getType() { return type.toString(); }
 
-    public String getValue() { return value.toString(); }
+    public String getValue() { return value; }
 
 }
