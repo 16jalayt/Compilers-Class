@@ -66,7 +66,6 @@ public class Parser
 
         while (!stack.isEmpty())
         {
-            System.out.println("scan.peek type " + scan.peek().type + "--scan.peek value: " + scan.peek().value);
             while (scan.peek().getType().equals("Comment")){
                 Token skip = scan.next();
             }
@@ -80,13 +79,10 @@ public class Parser
                     stack.pop();
                 }
                 else if(temp.equals(getColumn(next))) {
-                    System.out.println("Stack before pop: " + stack);
                     stack.pop();
-                    System.out.println("Stack after pop: " + stack);
                 }
                 else
                 {
-                    System.out.println("Stack: " + stack);
                     System.out.println("Token mismatch error: " + temp + " and: " + getColumn(next));
                     return false;
                 }
@@ -96,22 +92,13 @@ public class Parser
                 next = scan.peek();
                 //Get the ordinal number for the rules and terminals, use that as table index values
                 int row = Rules.indexOf(temp);
-                System.out.println("row: " + Rules.indexOf(temp));
-                System.out.println("next.value: "+ next.value);
-                System.out.println("Terminals.contains(next.value.toString())"+ Terminals.contains(next.value.toString()));
-
                 String t = getColumn(next);
-                System.out.println("tok: " + getColumn(next));
-                System.out.println("column: " + t);
                 int column = Terminals.indexOf(t);
-                System.out.println("col: " + Terminals.indexOf(t));
-                System.out.println("Stack: " + stack);
 
                 //really should redo table type
                 int currentRule = table[row][column];
                 if(currentRule != 0)
                 {
-                    System.out.println("Current Rule: " + currentRule);
                     stack.pop();
                     //Get the list of strings from ruleList, loop over them and push to stack.
                     //Strings in list should already be in reverse order.
@@ -126,10 +113,6 @@ public class Parser
                             stack.push(obj);
                         }
                     }
-                    System.out.println("tempArrayList");
-                    System.out.println(tempArrayList);
-                    System.out.println("Stack");
-                    System.out.println(stack);
                 }
                 else if(RulesWhichCanNull.contains(temp)) {
                     stack.pop();
@@ -147,8 +130,6 @@ public class Parser
             }
             else
                 {
-                    System.out.println("stack: " + stack);
-                    System.out.println("next.value " + next.value);
                     System.out.println("Invalid item on stack: " + temp);
                 return false;
             }
