@@ -6,7 +6,7 @@ public class Main
 {
     //-1 production, 1 scanner, 3 parser,
     //even with debug prints, odd no prints
-    static int debugStage = 4;
+    static int debugStage = 6;
 
     //can use this line in the code and will mute the debug print
     //if (Main.debugStage>=2) {System.out.println("The stack is: " + stack.toString());}
@@ -41,8 +41,8 @@ public class Main
                 //one last call to display EOF
                 System.out.println(scan.next().toString());
             }
-            //parser
-            if(debugStage == 2)
+            //parser tf
+            if(debugStage == 3)
             {
                 Scanner scan = new Scanner(fullFile);
                 Parser parse = new Parser(scan);
@@ -51,11 +51,19 @@ public class Main
                 else
                     System.out.println("The program is: Invalid");
             }
+            //parser tree
+            if(debugStage == 5)
+            {
+                Scanner scan = new Scanner(fullFile);
+                Parser parse = new Parser(scan);
+                System.out.println(parse.getTree().toString());
+            }
             //production - full pipeline
             if(debugStage == -1)
             {
                 Scanner scan = new Scanner(fullFile);
                 Parser parse = new Parser(scan);
+                //parse.getTree()
             }
         }
         catch (FileNotFoundException e)

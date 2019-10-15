@@ -33,11 +33,14 @@ public class Parser
         "make-UNARY-FACTOR", "make-if-EXPR", "make-ACTUALS",
         "make-NUMBER", "make-BOOLEAN", "make-Function-Call"));
 
-/////////////////////////make-boolean vs make-BOOLEAN in list above. also NUMBER vs integer
     private static Scanner scan;
     int table[][];
     private final int tableX = 30;
     private final int tableY = 30;
+
+    private Node tree;
+
+    public Node getTree() { return tree; }
 
     public Parser(Scanner scan)
     {
@@ -57,6 +60,7 @@ public class Parser
 
         //cant be type token because can be nonterminal
         Stack<String> stack = new Stack<>();
+        Stack<String> semanticStack = new Stack<>();
 
         // push the EOF symbol and the String PROGRAM onto the stack
         stack.push(EOFSymbol);
