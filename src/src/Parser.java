@@ -359,7 +359,7 @@ public class Parser
         ArrayList<String> tempList46 = new ArrayList<String>();
         ArrayList<String> tempList47 = new ArrayList<String>();
         ArrayList<String> tempList48 = new ArrayList<String>();
-/*
+
         //There is no rule 0, so index 0 is left blank
         tempList0.add("");
         ruleList.add(tempList0);
@@ -534,6 +534,6 @@ public class Parser
         tempList48.add("EXPR");
         tempList48.add("leftParen");
         tempList48.add("print");
-        ruleList.add(tempList48);*/
+        ruleList.add(tempList48);
     }
 }
