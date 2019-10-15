@@ -15,7 +15,7 @@
 																							|*|																		   |*|
     <NONEMPTYFORMALS> ::= <FORMAL> <NEF-REST> 												|*|   <NONEMPTYFORMALS> ::= <FORMAL>
 	                       																	|*|	 					| <FORMAL> , <NONEMPTYFORMALS>
-  		   <NEF-REST> ::= , <NONEMPTYFORMALS> make-NONEMPTYFORMALS <NEF-REST>				|*|																		   |*|
+  		   <NEF-REST> ::= , <NONEMPTYFORMALS> 												|*|																		   |*|
   						| ε																	|*|																		   |*|
 																							|*|																		   |*|
              <FORMAL> ::= <IDENTIFIER> make-IDENTIFIER : <TYPE> make-FORMAL 				|*|   <FORMAL> ::= <IDENTIFIER> : <TYPE>
@@ -69,7 +69,7 @@
 																							|*|																		   |*|
  	<IDENTIFIER-MAIN> ::= <IDENTIFIER> make-IDENTIFIER <IDENTIFIER-REST> 					|*|																		   |*|
 																							|*|																		   |*|
- 	<IDENTIFIER-REST> ::= (<ACTUALS>) make-IDENTIFIER-ACTUALS								|*|																		   |*|
+ 	<IDENTIFIER-REST> ::= (<ACTUALS>) 														|*|																		   |*|
 						| ε																	|*|																		   |*|
 																							|*|																		   |*|
 	        <ACTUALS> ::= ε																	|*|  <ACTUALS> ::= ε
@@ -77,8 +77,8 @@
 																							|*|																		   |*|
     <NONEMPTYACTUALS> ::= <EXPR> <NEA-REST>													|*|   <NONEMPTYACTUALS> ::= <EXPR>
                     																		|*|	 					| <EXPR> , <NONEMPTYACTUALS>
-			<NEA-REST>::= , <NONEMPTYACTUALS> make-NONEMPTYACTUALS <NEA-REST>				|*|																		   |*|
-   						| ε																	|*|																		   |*|
+			<NEA-REST>::= , <NONEMPTYACTUALS> 												|*|																		   |*|
+   						| make-ACTUALS														|*|																		   |*|
 																							|*|																		   |*|
             <LITERAL> ::= <NUMBER> make-NUMBER												|*|  <LITERAL> ::= <NUMBER>
                         | <BOOLEAN>	make-BOOLEAN											|*|  			| <BOOLEAN>
@@ -87,4 +87,4 @@
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 ***NOTE***
 List of Nodes for AST: PROGRAM, DEF, BODY, IDENTIFIER, FORMALS, NONEMPTYFORMALS, IDENTIFIER, integer, boolean, EXPR, BINARY-EXPR, BINARY-FACTOR, 
-					   BINARY-FACTOR, if-EXPR, UNARY-BOOLEAN, UNARY-FACTOR, IDENTIFIER-ACTUALS, NONEMPTYACTUALS, Function-Call
+					   BINARY-FACTOR, if-EXPR, UNARY-BOOLEAN, UNARY-FACTOR, ACTUALS, Function-Call

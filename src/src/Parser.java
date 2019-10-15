@@ -26,10 +26,10 @@ public class Parser
 
     ArrayList<String> ruleList= new ArrayList<String>(Arrays.asList(
         "make-PROGRAM", "make-DEFINITIONS", "make-IDENTIFIER", "make-FORMALS", 
-        "make-NONEMPTYFORMALS", "make-integer", "make-boolean", "make-EXPR", 
-        "make-BINARY-EXPR", "make-BINARY-BOOLEAN", "make-BINARY-FACTOR", 
-        "make-UNARY-BOOLEAN", "make-UNARY-FACTOR", "make-if-EXPR", "make-IDENTIFIER-ACTUALS",
-        "make-NONEMPTYACTUALS", "make-NUMBER", "make-BOOLEAN", "make-Function-Call"));
+        "make-integer", "make-boolean", "make-EXPR", "make-BINARY-EXPR", 
+        "make-BINARY-BOOLEAN", "make-BINARY-FACTOR", "make-UNARY-BOOLEAN", 
+        "make-UNARY-FACTOR", "make-if-EXPR", "make-ACTUALS",
+        "make-NUMBER", "make-BOOLEAN", "make-Function-Call"));
 
 
     private static Scanner scan;
@@ -393,8 +393,6 @@ public class Parser
         tempList7.add("NEFREST");
         tempList7.add("FORMAL");
         ruleList.add(tempList7);
-        tempList8.add("NEA-REST");
-        tempList8.add("make-NONEMPTYFORMALS");
         tempList8.add("NONEMPTYFORMALS");
         tempList8.add("comma");
         ruleList.add(tempList8);
@@ -508,7 +506,6 @@ public class Parser
         tempList38.add("make-IDENTIFIER");
         tempList38.add("IDENTIFIER");
         ruleList.add(tempList38);
-        tempList39.add("make-IDENTIFIER-ACTUALS");
         tempList39.add("rightParen");
         tempList39.add("ACTUALS");
         tempList39.add("leftParen");
@@ -522,11 +519,10 @@ public class Parser
         tempList43.add("NEAREST");
         tempList43.add("EXPR");
         ruleList.add(tempList43);
-        tempList44.add("NEA-REST");
-        tempList44.add("make-NONEMPTYACTUALS");
         tempList44.add("NONEMPTYACTUALS");
         tempList44.add("comma");
         ruleList.add(tempList44);
+        tempList45.add("make-ACTUALS");
         tempList45.add("NULL");
         ruleList.add(tempList45);
         tempList46.add("make-NUMBER");

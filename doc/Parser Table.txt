@@ -67,13 +67,13 @@ PRINT-STATEMENT     |     |   48  |        |         |     |     |     |     |  
 36. 		 <NOT-FACTOR> ::= not <FACTOR> make-UNARY-BOOLEAN								                    |*| not
 37. 		 <NEG-FACTOR> ::= - <FACTOR> make-UNARY-FACTOR									                    |*| -
 38.     <IDENTIFIER-MAIN> ::= <IDENTIFIER> make-IDENTIFIER <IDENTIFIER-REST>	                                |*| IDENTIFIER
-39.	    <IDENTIFIER-REST> ::= (<ACTUALS>) make-IDENTIFIER-ACTUALS                                               |*| (
+39.	    <IDENTIFIER-REST> ::= (<ACTUALS>)                                                                       |*| (
 40.                         | ε                                                                                 |*| and * /
 41.             <ACTUALS> ::= ε	                                                                                |*| )
 42.                         | <NONEMPTYACTUALS>									                                |*| if IDENTIFIER ( not NUMBER BOOLEAN -
 43.     <NONEMPTYACTUALS> ::= <EXPR> <NEA-REST>								                                    |*| if IDENTIFIER ( not NUMBER BOOLEAN -
-44.    			<NEA-REST>::= , <NONEMPTYACTUALS> make-NONEMPTYACTUALS <NEA-REST>                               |*| ,
-45.                         | ε												                                    |*| )
+44.    			<NEA-REST>::= , <NONEMPTYACTUALS>                                                               |*| ,
+45.                         | make-ACTUALS								                                        |*| )
 46.             <LITERAL> ::= <NUMBER> make-NUMBER                                                              |*| NUMBER
 47.                         | <BOOLEAN>	make-BOOLEAN									                        |*| BOOLEAN
 48.     <PRINT-STATEMENT> ::= print ( <EXPR> ) make-Function-Call								                |*| print
