@@ -31,13 +31,11 @@ public class Parser
         "make-UNARY-FACTOR", "make-if-EXPR", "make-ACTUALS",
         "make-NUMBER", "make-BOOLEAN", "make-Function-Call"));
 
-
+/////////////////////////make-boolean vs make-BOOLEAN in list above. also NUMBER vs integer
     private static Scanner scan;
     int table[][];
     private final int tableX = 30;
     private final int tableY = 30;
-
-
 
     public Parser(Scanner scan)
     {
@@ -361,7 +359,7 @@ public class Parser
         ArrayList<String> tempList46 = new ArrayList<String>();
         ArrayList<String> tempList47 = new ArrayList<String>();
         ArrayList<String> tempList48 = new ArrayList<String>();
-
+/*
         //There is no rule 0, so index 0 is left blank
         tempList0.add("");
         ruleList.add(tempList0);
@@ -536,6 +534,6 @@ public class Parser
         tempList48.add("EXPR");
         tempList48.add("leftParen");
         tempList48.add("print");
-        ruleList.add(tempList48);
+        ruleList.add(tempList48);*/
     }
 }

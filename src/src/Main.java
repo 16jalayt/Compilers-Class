@@ -11,6 +11,15 @@ public class Main
     //can use this line in the code and will mute the debug print
     //if (Main.debugStage>=2) {System.out.println("The stack is: " + stack.toString());}
 
+    private static void test()
+    {
+        //testing
+        Node.Binary bin = new Node.Binary('g');
+        Node nd = bin;
+        bin.value= 'h';
+        System.out.println(bin.value);
+    }
+
     public static void main(String[] args)
     {
         if(args.length != 1)
