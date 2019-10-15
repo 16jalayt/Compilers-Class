@@ -24,7 +24,9 @@ public class Parser
             "DEFINITIONS", "FORMALS", "NEFREST", "EXPRREST", "SIMPLEEXPRREST",
             "TERMREST", "IDENTIFIERREST"));
 
-    ArrayList<String> ruleList= new ArrayList<String>(Arrays.asList(
+    ArrayList<String> ruleList= new ArrayList<String>(Arrays.asList());
+
+    ArrayList<String> semanticActionsList= new ArrayList<String>(Arrays.asList(
         "make-PROGRAM", "make-DEFINITIONS", "make-IDENTIFIER", "make-FORMALS", 
         "make-integer", "make-boolean", "make-EXPR", "make-BINARY-EXPR", 
         "make-BINARY-BOOLEAN", "make-BINARY-FACTOR", "make-UNARY-BOOLEAN", 
