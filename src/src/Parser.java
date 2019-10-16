@@ -1,7 +1,7 @@
 package src;
 
 import java.util.*;
-
+import src.Node;
 public class Parser
 {
     //TODO: generate tree as private variable. make instance method to access tree. This way it wont break the true/false tests
@@ -118,6 +118,10 @@ public class Parser
                     }
                 }
                 else if(RulesWhichCanNull.contains(temp)) {
+                    stack.pop();
+                }
+                else if(semanticActionsList.contains(temp)){
+                    Node semanticNode = new Node(temp);
                     stack.pop();
                 }
                 else
