@@ -14,14 +14,16 @@ public class Main
     private static void test()
     {
         //testing
-        Node.Binary bin = new Node.Binary('g');
+        Node.Binary bin = new Node.Binary('g',null);
         Node nd = bin;
         bin.value= 'h';
         System.out.println(bin.value);
+        Node test = new Node(new Node[]{bin, nd});
     }
 
     public static void main(String[] args)
     {
+        test();
         if(args.length != 1)
         {
             System.out.println("Correct usage is: program filename.kln");

@@ -23,133 +23,133 @@ class ParserTest
     @Test
     public void circularPrime() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-programs/circular-prime.kln")));
+        Parser parser = new Parser(new Scanner(readFile("./tests/Wallingford/circular-prime.kln")));
         assertTrue(parser.parse(), "circular-prime invalid");
     }
 
     @Test
     public void divide() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-programs/divide.kln")));
+        Parser parser = new Parser(new Scanner(readFile("./tests/Wallingford/divide.kln")));
         assertTrue(parser.parse(), "divide invalid");
     }
 
     @Test
     public void divisibleBySeven() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-programs/divisible-by-seven.kln")));
+        Parser parser = new Parser(new Scanner(readFile("./tests/Wallingford/divisible-by-seven.kln")));
         assertTrue(parser.parse(), "divisible-by-seven invalid");
     }
 
     @Test
     public void euclid() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-programs/euclid.kln")));
+        Parser parser = new Parser(new Scanner(readFile("./tests/Wallingford/euclid.kln")));
         assertTrue(parser.parse(), "euclid invalid");
     }
 
     @Test
     public void factors() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-programs/factors.kln")));
+        Parser parser = new Parser(new Scanner(readFile("./tests/Wallingford/factors.kln")));
         assertTrue(parser.parse(), "factors invalid");
     }
 
     @Test
     public void farey() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-programs/farey.kln")));
+        Parser parser = new Parser(new Scanner(readFile("./tests/Wallingford/farey.kln")));
         assertTrue(parser.parse(), "farey invalid");
     }
 
     @Test
     public void fibonacci() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-programs/fibonacci.kln")));
+        Parser parser = new Parser(new Scanner(readFile("./tests/Wallingford/fibonacci.kln")));
         assertTrue(parser.parse(), "fibonacci invalid");
     }
 
     @Test
     public void generateExcellent() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-programs/generate-excellent.kln")));
+        Parser parser = new Parser(new Scanner(readFile("./tests/Wallingford/generate-excellent.kln")));
         assertTrue(parser.parse(), "generate-excellent invalid");
     }
 
     @Test
     public void horner() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-programs/horner.kln")));
+        Parser parser = new Parser(new Scanner(readFile("./tests/Wallingford/horner.kln")));
         assertTrue(parser.parse(), "horner invalid");
     }
 
     @Test
     public void hornerParam() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-programs/horner-param.kln")));
+        Parser parser = new Parser(new Scanner(readFile("./tests/Wallingford/horner-param.kln")));
         assertTrue(parser.parse(), "horner-param invalid");
     }
 
     @Test
     public void isExcellent() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-programs/is-excellent.kln")));
+        Parser parser = new Parser(new Scanner(readFile("./tests/Wallingford/is-excellent.kln")));
         assertTrue(parser.parse(), "is-excellent invalid");
     }
 
     @Test
     public void lib() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-programs/lib.kln")));
+        Parser parser = new Parser(new Scanner(readFile("./tests/Wallingford/lib.kln")));
         assertTrue(parser.parse(), "lib invalid");
     }
 
     @Test
     public void modulusByHand() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-programs/modulus-by-hand.kln")));
+        Parser parser = new Parser(new Scanner(readFile("./tests/Wallingford/modulus-by-hand.kln")));
         assertTrue(parser.parse(), "modulus-by-hand invalid");
     }
 
     @Test
     public void palindrome() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-programs/palindrome.kln")));
+        Parser parser = new Parser(new Scanner(readFile("./tests/Wallingford/palindrome.kln")));
         assertTrue(parser.parse(), "palindrome invalid");
     }
 
     @Test
     public void printOne() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-programs/print-one.kln")));
+        Parser parser = new Parser(new Scanner(readFile("./tests/Wallingford/print-one.kln")));
         assertTrue(parser.parse(), "print-one invalid");
     }
 
     @Test
     public void publicPrivate() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-programs/public-private.kln")));
+        Parser parser = new Parser(new Scanner(readFile("./tests/Wallingford/public-private.kln")));
         assertTrue(parser.parse(), "public-private invalid");
     }
 
     @Test
     public void russianPeasant() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-programs/russian-peasant.kln")));
+        Parser parser = new Parser(new Scanner(readFile("./tests/Wallingford/russian-peasant.kln")));
         assertTrue(parser.parse(), "russian-peasant invalid");
     }
 
     @Test
     public void sieve() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-programs/sieve.kln")));
+        Parser parser = new Parser(new Scanner(readFile("./tests/Wallingford/sieve.kln")));
         assertTrue(parser.parse(), "sieve invalid");
     }
 
     @Test
     public void squareRoot() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-programs/square-root.kln")));
+        Parser parser = new Parser(new Scanner(readFile("./tests/Wallingford/square-root.kln")));
         assertTrue(parser.parse(), "square-root invalid");
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
