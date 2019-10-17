@@ -25,6 +25,25 @@ public class Node
                 children.add(child);
         }
     }
+
+    //Will probably need to tweak to get the indenting correct, but otherwise should work
+    public void Iterate()
+    {
+        //for (Node child : this.children)
+        for (int i=0; i < this.children.size(); i++)
+        {
+            Node child = this.children.get(i);
+            System.out.print(child.name);
+            System.out.print(" ");
+            System.out.println(child.value);
+
+            if(child.children != null)
+            {
+                child.Iterate();
+            }
+        }
+
+    }
     public static class Program extends Node
     {
         public Program() {
