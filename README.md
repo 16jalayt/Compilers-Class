@@ -1,5 +1,5 @@
 # Compilers-Class
-A group project for College
+Team Argonaut: Layton*, Litterer, Riggs
 
 Git notes:
 To create project, click checkout from git, then paste in https://github.com/16jalayt/Compilers-Class.git
@@ -15,7 +15,8 @@ Token(): Creates the token object type, which has a token.type (keyword, identif
 Scanner(): Takes in a string containing a klein program. Produces tokens from that string. Calls token.
 Parser(): Uses scanner() to take in token after token from a given program, comparing them to Klein grammar rules to 
           determine whether or not the program is valid in klein. If the parser reaches the end of the file, finds
-          the End Of File character, and has not encounter any errors, it returns true. 
+          the End Of File character, and has not encounter any errors, it returns an AST.
+Node(): Our custom node class. Contains an Iterate() method that iterates through and prints out an AST.
 
 How to Use:
 Our main function takes in a single parameter as input, that being a klein file name as a string. 

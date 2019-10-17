@@ -26,20 +26,24 @@ public class Node
         }
     }
 
-    //Will probably need to tweak to get the indenting correct, but otherwise should work
-    public void Iterate()
+    //Will probably need to tweak to get the indenting correct, but otherwise should work. n is # of indents
+    public void Iterate(int n)
     {
-        //for (Node child : this.children)
         for (int i=0; i < this.children.size(); i++)
         {
             Node child = this.children.get(i);
+            //Indents each child
+            for (int m=0; m<n; m++)
+            {
+                System.out.print("\t");
+            }
             System.out.print(child.name);
             System.out.print(" ");
             System.out.println(child.value);
 
             if(child.children != null)
             {
-                child.Iterate();
+                child.Iterate(n+1);
             }
         }
 
