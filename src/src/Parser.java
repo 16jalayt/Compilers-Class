@@ -33,12 +33,15 @@ public class Parser
         "make-<UNARY-FACTOR>", "make-<if-EXPR>", "make-<ACTUALS>",
         "make-<NUMBER>", "make-<BOOLEAN>", "make-Function-Call"));
 
+    //TODO: if structure for all symantic atctions. node type hardcoded
+    //move saction branch up a level?
+
     private static Scanner scan;
     int table[][];
     private final int tableX = 30;
     private final int tableY = 30;
 
-    private Node tree;
+    private Node tree = new Node.Program();
 
     public Node getTree() { return tree; }
 
@@ -121,7 +124,7 @@ public class Parser
                     stack.pop();
                 }
                 else if(semanticActionsList.contains(temp)){
-                    Node semanticNode = new Node(temp);
+                    //Node semanticNode = new Node(temp);
                     stack.pop();
                 }
                 else

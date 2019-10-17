@@ -26,7 +26,7 @@ public class Node
     }
     public static class Program extends Node
     {
-        public Program(Node[] children) { super(children); }
+
     }
     public static class Definitions extends Node
     {
