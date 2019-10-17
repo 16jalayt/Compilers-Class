@@ -156,41 +156,41 @@ class ParserTest
     @Test
     public void test1() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-test-programs/test1.kln.txt")));
+        Parser parser = new Parser(new Scanner(readFile("./examples/klein-test-programs/test1.kln")));
         assertTrue(parser.parse(), "test1 invalid");
     }
     @Test
     public void test2() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-test-programs/test2.kln.txt")));
+        Parser parser = new Parser(new Scanner(readFile("./examples/klein-test-programs/test2.kln")));
         assertTrue(parser.parse(), "test2 invalid");
     }
     @Test
     public void test3() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-test-programs/test3.kln.txt")));
+        Parser parser = new Parser(new Scanner(readFile("./examples/klein-test-programs/test3.kln")));
         assertTrue(parser.parse(), "test3 invalid");
     }
 
     @Test
     public void test4() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-test-programs/test4.kln.txt")));
+        Parser parser = new Parser(new Scanner(readFile("./examples/klein-test-programs/test4.kln")));
         assertTrue(parser.parse(), "test4 invalid");
     }
 
     @Test
     public void test5() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-test-programs/test5.kln.txt")));
+        Parser parser = new Parser(new Scanner(readFile("./examples/klein-test-programs/test5.kln")));
         assertTrue(parser.parse(), "test5 invalid");
     }
 
     @Test
     public void testKleinProgram() throws Exception
     {
-        Parser parser = new Parser(new Scanner(readFile("./examples/klein-test-programs/testKleinProgram.kln.txt")));
-        assertTrue(parser.parse(), "testKleinProgram invalid");
+        Parser parser = new Parser(new Scanner(readFile("./examples/klein-test-programs/testKleinProgram.kln")));
+        assertTrue(parser.parse(), "testKleinProgram.kln invalid");
     }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
