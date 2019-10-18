@@ -31,16 +31,16 @@
                <EXPR> ::= <SIMPLE-EXPR> <EXPR-REST>											|*|      <EXPR> ::= <EXPR> < <SIMPLE-EXPR>
 																							|*| 				| <EXPR> = <SIMPLE-EXPR>
 																							|*|				| <SIMPLE-EXPR>
- 		  <EXPR-REST> ::= < <EXPR> make-<BINARY-EXPR> <EXPR-REST>							|*|																		   |*|
- 		  			    | = <EXPR> make-<BINARY-EXPR> <EXPR-REST>							|*|																		   |*|
-						| make-<EXPR>														|*|																		   |*|
+ 		  <EXPR-REST> ::= < <EXPR> make-<BINARY> <EXPR-REST>								|*|																		   |*|
+ 		  			    | = <EXPR> make-<BINARY> <EXPR-REST>								|*|																		   |*|
+						| 	ε																|*|																		   |*|
 																							|*|	    																   |*|
                         																	|*|  				| <SIMPLE-EXPR> + <TERM>
                         																	|*|  				| <SIMPLE-EXPR> - <TERM>
                         																	|*|					| <TERM>
-   <SIMPLE-EXPR-REST> ::= or <SIMPLE-EXPR>	make-<BINARY-BOOLEAN> <SIMPLE-EXPR-REST> 		|*|																		   |*|
- 						| + <SIMPLE-EXPR>	make-<BINARY-FACTOR> <SIMPLE-EXPR-REST> 		|*|																		   |*|
- 						| - <SIMPLE-EXPR>	make-<BINARY-FACTOR> <SIMPLE-EXPR-REST>			|*|																		   |*|
+   <SIMPLE-EXPR-REST> ::= or <SIMPLE-EXPR>	make-<BINARY> <SIMPLE-EXPR-REST> 				|*|																		   |*|
+ 						| + <SIMPLE-EXPR>	make-<BINARY> <SIMPLE-EXPR-REST> 				|*|																		   |*|
+ 						| - <SIMPLE-EXPR>	make-<BINARY> <SIMPLE-EXPR-REST>				|*|																		   |*|
 						| ε																	|*|																		   |*|
 																							|*|																		   |*|
                <TERM> ::= <FACTOR> <TERM-REST>												|*|  <TERM> ::= <TERM> and <FACTOR>
@@ -48,9 +48,9 @@
                         																	|*|  			| <TERM> / <FACTOR>
                         																	|*|				| <FACTOR>
 																							|*|																		   |*|
- 		  <TERM-REST> ::= and <TERM> make-<BINARY-BOOLEAN> <TERM-REST>		     			|*|																		   |*|
- 	     				| * <TERM> make-<BINARY-FACTOR> <TERM-REST>							|*|																		   |*|
- 		   				| / <TERM> make-<BINARY-FACTOR> <TERM-REST>							|*|																		   |*|
+ 		  <TERM-REST> ::= and <TERM> make-<BINARY> <TERM-REST>		     					|*|																		   |*|
+ 	     				| * <TERM> make-<BINARY> <TERM-REST>								|*|																		   |*|
+ 		   				| / <TERM> make-<BINARY> <TERM-REST>								|*|																		   |*|
 						| ε																	|*|																		   |*|
 																							|*|																		   |*|
  	         <FACTOR> ::= if <EXPR> then <EXPR> else <EXPR> make-<if-EXPR>					|*|  <FACTOR> ::= if <EXPR> then <EXPR> else <EXPR>
@@ -63,9 +63,9 @@
         <SIMPLE-EXPR> ::= <TERM> <SIMPLE-EXPR-REST>											|*|  <SIMPLE-EXPR> ::= <SIMPLE-EXPR> or <TERM>
                       																		|*|	 			| ( <EXPR> )
 																							|*|																		   |*|
- 		 <NOT-FACTOR> ::= not <FACTOR> make-<UNARY-BOOLEAN>									|*|																		   |*|
+ 		 <NOT-FACTOR> ::= not <FACTOR> make-<UNARY>											|*|																		   |*|
 																							|*|																		   |*|
- 		 <NEG-FACTOR> ::= - <FACTOR> make-<UNARY-FACTOR>									|*|																		   |*|
+ 		 <NEG-FACTOR> ::= - <FACTOR> make-<UNARY>											|*|																		   |*|
 																							|*|																		   |*|
  	<IDENTIFIER-MAIN> ::= <IDENTIFIER> make-<IDENTIFIER> <IDENTIFIER-REST> 					|*|																		   |*|
 																							|*|																		   |*|
@@ -86,5 +86,5 @@
     <PRINT-STATEMENT> ::= print ( <EXPR> )	make-Function-Call								|*|   <PRINT-STATEMENT> ::= print ( <EXPR> )
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 ***NOTE***
-List of Nodes for AST: <PROGRAM>, <DEF>, <BODY>, <IDENTIFIER>, <FORMALS>, <NONEMPTYFORMALS>, <IDENTIFIER>, integer, boolean, <EXPR>, <BINARY-EXPR>, <BINARY-FACTOR>,
-					   <BINARY-FACTOR>, <if-EXPR>, <UNARY-BOOLEAN>, <UNARY-FACTOR>, <ACTUALS>, Function-Call
+List of Nodes for AST: <PROGRAM>, <DEF>, <BODY>, <IDENTIFIER>, <FORMALS>, <NONEMPTYFORMALS>, <IDENTIFIER>, integer, boolean,
+					   <BINARY>, <if-EXPR>, <UNARY>, <ACTUALS>, Function-Call

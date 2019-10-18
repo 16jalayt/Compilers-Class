@@ -36,7 +36,7 @@ PRINT-STATEMENT     |     |   48  |        |         |     |     |     |     |  
 5.              <FORMALS> ::= make-<FORMALS>                                                                    |*| )
 6.                          | <NONEMPTYFORMALS>								                                    |*| IDENTIFIER
 7.      <NONEMPTYFORMALS> ::= <FORMAL>	<NEF-REST>							                                    |*| IDENTIFIER 
-8.      	   <NEF-REST> ::= , <NONEMPTYFORMALS> make-<NONEMPTYFORMALS> <NEA-REST>                             |*| ,
+8.      	   <NEF-REST> ::= , <NONEMPTYFORMALS>  <NEA-REST>                                                   |*| ,
 9.                          | ε												                                    |*| )
 10.              <FORMAL> ::= <IDENTIFIER> make-<IDENTIFIER> : <TYPE> make-<FORMAL>                             |*| IDENTIFIER
 11.                <BODY> ::= <PRINT-BODY>                                                                      |*| print
@@ -45,18 +45,18 @@ PRINT-STATEMENT     |     |   48  |        |         |     |     |     |     |  
 14.                <TYPE> ::= integer make-integer                                                              |*| integer
 15.                         | boolean make-boolean									                            |*| boolean
 16.                <EXPR> ::= <SIMPLE-EXPR> <EXPR-REST>						                                    |*| if IDENTIFIER ( not NUMBER BOOLEAN -
-17. 		  <EXPR-REST> ::= < <EXPR> make-<BINARY-EXPR> <EXPR-REST>                                           |*| <
-18.                         | = <EXPR> make-<BINARY-EXPR> <EXPR-REST>                                           |*| =
-19.                         | make-<EXPR>												                        |*| ) , then else and * / function
+17. 		  <EXPR-REST> ::= < <EXPR> make-<BINARY> <EXPR-REST>                                                |*| <
+18.                         | = <EXPR> make-<BINARY> <EXPR-REST>                                                |*| =
+19.                         | ε												                                    |*| ) , then else and * / function
 20.         <SIMPLE-EXPR> ::= <TERM> <SIMPLE-EXPR-REST>						                                    |*| if IDENTIFIER ( not NUMBER BOOLEAN -
-21.    <SIMPLE-EXPR-REST> ::= or <SIMPLE-EXPR> make-<BOOLEAN-FACTOR> <SIMPLE-EXPR-REST>                         |*| or
-22.                         | + <SIMPLE-EXPR>  make-<BINARY-FACTOR> <SIMPLE-EXPR-REST>                          |*| +
-23.                         | - <SIMPLE-EXPR>  make-<BINARY-FACTOR> <SIMPLE-EXPR-REST>                          |*| -
+21.    <SIMPLE-EXPR-REST> ::= or <SIMPLE-EXPR> make-<BINARY> <SIMPLE-EXPR-REST>                                 |*| or
+22.                         | + <SIMPLE-EXPR>  make-<BINARY> <SIMPLE-EXPR-REST>                                 |*| +
+23.                         | - <SIMPLE-EXPR>  make-<BINARY> <SIMPLE-EXPR-REST>                                 |*| -
 24.                         | ε												                                    |*| < =
 25.                <TERM> ::= <FACTOR> <TERM-REST>								                                |*| if INDENTIFIER ( not NUMBER BOOLEAN -
-26. 		  <TERM-REST> ::= and <TERM> make-<BINARY-BOOLEAN> <TERM-REST>                                      |*| and
-27.                         | * <TERM> make-<BINARY-FACTOR> <TERM-REST> 	                                    |*| *
-28.                         | / <TERM> make-<BINARY-FACTOR> <TERM-REST> 	                                    |*| /
+26. 		  <TERM-REST> ::= and <TERM> make-<BINARY> <TERM-REST>                                              |*| and
+27.                         | * <TERM> make-<BINARY> <TERM-REST> 	                                            |*| *
+28.                         | / <TERM> make-<BINARY> <TERM-REST> 	                                            |*| /
 29.                         | ε												                                    |*| or + - 
 30.              <FACTOR> ::= if <EXPR> then <EXPR> else <EXPR>	make-<if-EXPR>                                  |*| if
 31.                         | <NOT-FACTOR>                                                                      |*| not
@@ -64,8 +64,8 @@ PRINT-STATEMENT     |     |   48  |        |         |     |     |     |     |  
 33.                         | <LITERAL>                                                                         |*| NUMBER BOOLEAN
 34.                         | <NEG-FACTOR>                                                                      |*| -
 35.                         | ( <EXPR> )									                                    |*| (
-36. 		 <NOT-FACTOR> ::= not <FACTOR> make-<UNARY-BOOLEAN>								                    |*| not
-37. 		 <NEG-FACTOR> ::= - <FACTOR> make-<UNARY-FACTOR>								                    |*| -
+36. 		 <NOT-FACTOR> ::= not <FACTOR> make-<UNARY>								                            |*| not
+37. 		 <NEG-FACTOR> ::= - <FACTOR> make-<UNARY>								                            |*| -
 38.     <IDENTIFIER-MAIN> ::= <IDENTIFIER> make-<IDENTIFIER> <IDENTIFIER-REST>	                                |*| IDENTIFIER
 39.	    <IDENTIFIER-REST> ::= (<ACTUALS>)                                                                       |*| (
 40.                         | ε                                                                                 |*| and * /

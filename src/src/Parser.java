@@ -27,10 +27,9 @@ public class Parser
     ArrayList<ArrayList<String>> ruleList= new ArrayList<ArrayList<String>>();
 
     ArrayList<String> semanticActionsList= new ArrayList<String>(Arrays.asList(
-        "make-<PROGRAM>", "make-<DEFINITIONS>", "make-<IDENTIFIER>", "make-<FORMALS>", 
-        "make-integer", "make-boolean", "make-<EXPR>", "make-<BINARY-EXPR>", 
-        "make-<BINARY-BOOLEAN>", "make-<BINARY-FACTOR>", "make-<UNARY-BOOLEAN>", 
-        "make-<UNARY-FACTOR>", "make-<if-EXPR>", "make-<ACTUALS>",
+        "make-<PROGRAM>", "make-<DEF>", "make-<IDENTIFIER>", "make-<FORMALS>", 
+        "make-integer", "make-boolean", "make-<BINARY>", 
+        "make-<UNARY>", "make-<if-EXPR>", "make-<ACTUALS>",
         "make-<NUMBER>", "make-<BOOLEAN>", "make-Function-Call"));
 
     //TODO: if structure for all symantic atctions. node type hardcoded
@@ -137,7 +136,7 @@ public class Parser
                     case "make-<PROGRAM>":
                         tree.children.add(NodeStack.pop());
                         return true;
-                    case "make-<DEFINITIONS>":
+                    case "make-<DEF>":
                         NodeStack.push(new Node.Definitions(new Node[]{NodeStack.pop()}));
                         break;
                     case "make-<IDENTIFIER>":
@@ -155,22 +154,10 @@ public class Parser
                         else
                             NodeStack.push(new Node.Boolean(false));
                         break;
-                    // case "make-<EXPR>":   NO EXPR NODE in file!!!
-                    //NodeStack.push(new Node.Ex(new Node[]{NodeStack.pop()}));
-                    //break;
-                    case "make-<BINARY-EXPR>":
+                    case "make-<BINARY>":
                         NodeStack.push(new Node.Binary(semanticStack.pop().charAt(0), new Node[]{NodeStack.pop(), NodeStack.pop()}));
                         break;
-                   // case "make-<BINARY-BOOLEAN>":
-                        //NodeStack.push(new Node.Boolean(new Node[]{NodeStack.pop()}));
-                        //break;
-                    //case "make-<BINARY-FACTOR>": //dont have node for
-                        //NodeStack.push(new Node.Formals(new Node[]{NodeStack.pop()}));
-                        //break;
-                    //case "make-<UNARY-BOOLEAN>": dont have node for
-                       // NodeStack.push(new Node.Formals(new Node[]{NodeStack.pop()}));
-                        //break;
-                    case "make-<UNARY-FACTOR>":
+                    case "make-<UNARY>":
                         NodeStack.push(new Node.Unary(semanticStack.pop().charAt(0), new Node[]{NodeStack.pop()}));
                         break;
                     case "make-<if-EXPR>":
@@ -491,33 +478,32 @@ public class Parser
         tempList16.add("SIMPLEEXPR");
         ruleList.add(tempList16);
         tempList17.add("EXPRREST");
-        tempList17.add("make-<BINARY-EXPR>");
+        tempList17.add("make-<BINARY>");
         tempList17.add("EXPR");
         tempList17.add("lessThan");
         ruleList.add(tempList17);
         tempList18.add("EXPRREST");
-        tempList18.add("make-<BINARY-EXPR>");
+        tempList18.add("make-<BINARY>");
         tempList18.add("EXPR");
         tempList18.add("equals");
         ruleList.add(tempList18);
-        tempList19.add("make-<EXPR>");
         tempList19.add("NULL");
         ruleList.add(tempList19);
         tempList20.add("SIMPLEEXPRREST");
         tempList20.add("TERM");
         ruleList.add(tempList20);
         tempList21.add("SIMPLEEXPRREST");
-        tempList21.add("make-<BINARY-BOOLEAN>");
+        tempList21.add("make-<BINARY>");
         tempList21.add("SIMPLEEXPR");
         tempList21.add("or");
         ruleList.add(tempList21);
         tempList22.add("SIMPLEEXPRREST");
-        tempList22.add("make-<BINARY-FACTOR>");
+        tempList22.add("make-<BINARY>");
         tempList22.add("SIMPLEEXPR");
         tempList22.add("plus");
         ruleList.add(tempList22);
         tempList23.add("SIMPLEEXPRREST");
-        tempList23.add("make-<BINARY-FACTOR>");
+        tempList23.add("make-<BINARY>");
         tempList23.add("SIMPLEEXPR");
         tempList23.add("minus");
         ruleList.add(tempList23);
@@ -527,17 +513,17 @@ public class Parser
         tempList25.add("FACTOR");
         ruleList.add(tempList25);
         tempList26.add("TERMREST");
-        tempList26.add("make-<BINARY-BOOLEAN>");
+        tempList26.add("make-<BINARY>");
         tempList26.add("TERM");
         tempList26.add("and");
         ruleList.add(tempList26);
         tempList27.add("TERMREST");
-        tempList27.add("make-<BINARY-FACTOR>");
+        tempList27.add("make-<BINARY>");
         tempList27.add("TERM");
         tempList27.add("multiply");
         ruleList.add(tempList27);
         tempList28.add("TERMREST");
-        tempList28.add("make-<BINARY-FACTOR>");
+        tempList28.add("make-<BINARY>");
         tempList28.add("TERM");
         tempList28.add("divide");
         ruleList.add(tempList28);
@@ -563,11 +549,11 @@ public class Parser
         tempList35.add("EXPR");
         tempList35.add("leftParen");
         ruleList.add(tempList35);
-        tempList36.add("make-<UNARY-BOOLEAN>");
+        tempList36.add("make-<UNARY>");
         tempList36.add("FACTOR");
         tempList36.add("not");
         ruleList.add(tempList36);
-        tempList37.add("make-<UNARY-FACTOR>");
+        tempList37.add("make-<UNARY>");
         tempList37.add("FACTOR");
         tempList37.add("minus");
         ruleList.add(tempList37);
