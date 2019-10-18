@@ -603,7 +603,6 @@ public class Parser
         tempList44.add("comma");
         ruleList.add(tempList44);
         tempList45.add("make-<ACTUALS>");
-        tempList45.add("NULL");
         ruleList.add(tempList45);
         tempList46.add("make-<NUMBER>");
         tempList46.add("NUMBER");
