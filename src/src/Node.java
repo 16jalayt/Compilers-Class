@@ -141,7 +141,21 @@ public class Node
 
     @Override
     public String toString()
-    {//print out ?  TODO: give leaves their own toString
-        return String.format("Im a genaric node");
+    {
+        StringBuilder sb = new StringBuilder();
+        for (int i=0; i < this.children.size(); i++)
+        {
+            Node child = this.children.get(i);
+            //Indents each child
+            sb.append(child.name);
+            sb.append(" ");
+            //sb.append(child.value);
+
+            if(child.children != null)
+            {
+                sb.append(child.toString());
+            }
+        }
+        return String.format(sb.toString());
     }
 }
