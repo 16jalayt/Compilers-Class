@@ -34,6 +34,7 @@ public class Main
         try
         {
             String fullFile = new java.util.Scanner(new File(args[0])).useDelimiter("\\Z").next();
+            System.out.println("Debug state:" + debugStage);
 
             //scanner
             if(debugStage == 1)
@@ -62,11 +63,12 @@ public class Main
                 System.out.println(parse.getTree().toString());
             }
             //production - full pipeline
-            if(debugStage == -1)
+            if(debugStage == 6)
             {
+                System.out.println("Started full pipeline");
                 Scanner scan = new Scanner(fullFile);
                 Parser parse = new Parser(scan);
-                //parse.getTree()
+                parse.getTree();
             }
         }
         catch (FileNotFoundException e)
