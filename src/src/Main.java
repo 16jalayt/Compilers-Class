@@ -69,6 +69,7 @@ public class Main
                 System.out.println("Started full pipeline");
                 Scanner scan = new Scanner(fullFile);
                 Parser parse = new Parser(scan);
+                parse.parse();
                 parse.getTree();
             }
         }
