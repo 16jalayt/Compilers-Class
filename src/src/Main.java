@@ -11,6 +11,7 @@ public class Main
     //can use this line in the code and will mute the debug print
     //if (Main.debugStage>=2) {System.out.println("The stack is: " + stack.toString());}
 
+    //just type testing
     private static void test()
     {
         //testing
@@ -23,7 +24,7 @@ public class Main
 
     public static void main(String[] args)
     {
-        test();
+        //test();
         if(args.length != 1)
         {
             System.out.println("Correct usage is: program filename.kln");

@@ -39,7 +39,7 @@ public class Node
             }
             System.out.print(child.name);
             System.out.print(" ");
-            System.out.println(child.value);
+            //System.out.println(child.value);
 
             if(child.children != null)
             {
@@ -79,9 +79,8 @@ public class Node
     {
         public int value;
 
-        public Integer(int value, Node[] children)
+        public Integer(int value)
         {
-            super(children);
             this.value = value;
             this.name = "Integer";
         }
@@ -90,9 +89,8 @@ public class Node
     {
         public boolean value;
 
-        public Boolean(boolean value, Node[] children)
+        public Boolean(boolean value)
         {
-            super(children);
             this.value = value;
             this.name = "Boolean";
         }

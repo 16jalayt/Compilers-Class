@@ -64,6 +64,7 @@ public class Parser
         //cant be type token because can be nonterminal
         Stack<String> stack = new Stack<>();
         Stack<String> semanticStack = new Stack<>();
+        Stack<Node> NodeStack = new Stack<>();
 
         // push the EOF symbol and the String PROGRAM onto the stack
         stack.push(EOFSymbol);
@@ -123,16 +124,73 @@ public class Parser
                 else if(RulesWhichCanNull.contains(temp)) {
                     stack.pop();
                 }
-                else if(semanticActionsList.contains(temp)){
-                    //Node semanticNode = new Node(temp);
-                    stack.pop();
-                }
                 else
                 {
                     System.out.println("Can not expand: " + temp + " on: " + getColumn(next));
                     return false;
                 }
-
+            }
+            else if(semanticActionsList.contains(temp))
+            {
+                switch(temp) {
+                    //there is staic prog node at top, need to set that
+                    case "make-<PROGRAM>":
+                        tree.children.add(NodeStack.pop());
+                        return true;
+                    case "make-<DEFINITIONS>":
+                        NodeStack.push(new Node.Definitions(new Node[]{NodeStack.pop()}));
+                        break;
+                    case "make-<IDENTIFIER>":
+                        NodeStack.push(new Node.Identifier(new Node[]{NodeStack.pop()}));
+                        break;
+                    case "make-<FORMALS>":
+                        NodeStack.push(new Node.Formals(new Node[]{NodeStack.pop()}));
+                        break;
+                    case "make-integer":
+                        NodeStack.push(new Node.Integer(Integer.getInteger(stack.pop())));
+                        break;
+                    case "make-boolean":
+                        if (stack.pop().equals("true"))
+                            NodeStack.push(new Node.Boolean(true));
+                        else
+                            NodeStack.push(new Node.Boolean(false));
+                        break;
+                    // case "make-<EXPR>":   NO EXPR NODE in file!!!
+                    //NodeStack.push(new Node.Ex(new Node[]{NodeStack.pop()}));
+                    //break;
+                    case "make-<BINARY-EXPR>":
+                        NodeStack.push(new Node.Binary(semanticStack.pop().charAt(0), new Node[]{NodeStack.pop(), NodeStack.pop()}));
+                        break;
+                   // case "make-<BINARY-BOOLEAN>":
+                        //NodeStack.push(new Node.Boolean(new Node[]{NodeStack.pop()}));
+                        //break;
+                    //case "make-<BINARY-FACTOR>": //dont have node for
+                        //NodeStack.push(new Node.Formals(new Node[]{NodeStack.pop()}));
+                        //break;
+                    //case "make-<UNARY-BOOLEAN>": dont have node for
+                       // NodeStack.push(new Node.Formals(new Node[]{NodeStack.pop()}));
+                        //break;
+                    case "make-<UNARY-FACTOR>":
+                        NodeStack.push(new Node.Unary(semanticStack.pop().charAt(0), new Node[]{NodeStack.pop()}));
+                        break;
+                    case "make-<if-EXPR>":
+                        NodeStack.push(new Node.If(new Node[]{NodeStack.pop()}));
+                        break;
+                    case "make-<ACTUALS>":
+                        NodeStack.push(new Node.Actuals(new Node[]{NodeStack.pop()}));
+                        break;
+                    //case "make-<NUMBER>":     No node for
+                        //NodeStack.push(new Node.(new Node[]{NodeStack.pop()}));
+                        //break;
+                    //case "make-<BOOLEAN>":
+                        //NodeStack.push(new Node.Formals(new Node[]{NodeStack.pop()}));
+                        //break;
+                    case "make-Function-Call":
+                        NodeStack.push(new Node.FunctionCall(new Node[]{NodeStack.pop()}));
+                        break;
+                    default:
+                        System.out.println("Unknown rule: " + temp);
+                }
             }
             else if (temp.equals(EOFSymbol)  && next.type.equals(Token.Type.EOF))
             {
