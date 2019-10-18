@@ -85,6 +85,7 @@ public class Parser
                     stack.pop();
                 }
                 else if(temp.equals(getColumn(next))) {
+                    semanticStack.push(next.value.toString());
                     stack.pop();
                 }
                 else
