@@ -79,6 +79,7 @@ public class Parser
             //if tmp is terminal
             if(Terminals.contains(temp))
             {
+                System.out.println("Terminals.contains(temp)" + Terminals.contains(temp));
                 next = scan.next();
 
                 if (temp.equals("NULL")){
@@ -96,6 +97,7 @@ public class Parser
             }
             else if (Rules.contains(temp))
             {
+                System.out.println("Rules.contains(temp)" + Rules.contains(temp));
                 next = scan.peek();
                 //Get the ordinal number for the rules and terminals, use that as table index values
                 int row = Rules.indexOf(temp);
@@ -132,6 +134,7 @@ public class Parser
             }
             else if(semanticActionsList.contains(temp))
             {
+                System.out.println("semanticActionsList.contains(temp)" + semanticActionsList.contains(temp));
                 switch(temp) {
                     //there is staic prog node at top, need to set that
                     case "make-<PROGRAM>":
@@ -147,13 +150,12 @@ public class Parser
                         NodeStack.push(new Node.Formals(new Node[]{NodeStack.pop()}));
                         break;
                     case "make-integer":
-                        NodeStack.push(new Node.Integer(Integer.getInteger(stack.pop())));
+                        semanticStack.pop();
+                        NodeStack.push(new Node.Integer());
                         break;
                     case "make-boolean":
-                        if (stack.pop().equals("true"))
-                            NodeStack.push(new Node.Boolean(true));
-                        else
-                            NodeStack.push(new Node.Boolean(false));
+                        semanticStack.pop();
+                        NodeStack.push(new Node.BooleanType());
                         break;
                     case "make-<BINARY>":
                         NodeStack.push(new Node.Binary(semanticStack.pop().charAt(0), new Node[]{NodeStack.pop(), NodeStack.pop()}));
@@ -167,12 +169,15 @@ public class Parser
                     case "make-<ACTUALS>":
                         NodeStack.push(new Node.Actuals(new Node[]{NodeStack.pop()}));
                         break;
-                    //case "make-<NUMBER>":     No node for
-                        //NodeStack.push(new Node.(new Node[]{NodeStack.pop()}));
-                        //break;
-                    //case "make-<BOOLEAN>":
-                        //NodeStack.push(new Node.Formals(new Node[]{NodeStack.pop()}));
-                        //break;
+                    case "make-<NUMBER>":
+                        NodeStack.push(new Node.Number(Integer.parseInt(semanticStack.pop())));
+                        break;
+                    case "make-<BOOLEAN>":
+                        if (semanticStack.pop().equals("true"))
+                            NodeStack.push(new Node.BooleanValue(true));
+                        else
+                            NodeStack.push(new Node.BooleanValue(false));
+                        break;
                     case "make-Function-Call":
                         NodeStack.push(new Node.FunctionCall(new Node[]{NodeStack.pop()}));
                         break;

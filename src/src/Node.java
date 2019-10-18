@@ -75,24 +75,39 @@ public class Node
             this.name = "Formals";
         }
     }
-    public static class Integer extends Node
+    public static class Number extends Node
     {
         public int value;
 
-        public Integer(int value)
+        public Number(int value)
         {
             this.value = value;
             this.name = "Integer";
         }
     }
-    public static class Boolean extends Node
+    public static class BooleanValue extends Node
     {
         public boolean value;
 
-        public Boolean(boolean value)
+        public BooleanValue(boolean value)
         {
             this.value = value;
-            this.name = "Boolean";
+            this.name = "BooleanValue";
+        }
+    }
+    public static class Integer extends Node
+    {
+
+        public Integer()
+        {
+            this.name = "integer";
+        }
+    }
+    public static class BooleanType extends Node
+    {
+        public BooleanType()
+        {
+            this.name = "boolean";
         }
     }
     public static class Binary extends Node
