@@ -10,6 +10,7 @@ public class Node
     public String name;
     public Object value;
     public List<Node> children = new LinkedList<Node>();
+
     //need empty as default
     public Node()
     {
@@ -23,40 +24,38 @@ public class Node
             children = null;
         else
         {
-            for (Node child : children_array)
-                children.add(child);
+            children.addAll(Arrays.asList(children_array));
         }
     }
 
-    //Will probably need to tweak to get the indenting correct, but otherwise should work. n is # of indents
+    //n is number of indents for children.
     public void Iterate(int n)
     {
+        //Indents children
+        for (int m=0; m<n; m++)
+        {
+            System.out.print("\t");
+        }
+
+        //print out current nodes name and value, if applicable
+        System.out.print(this.name);
+        if (this.value != null) {
+            System.out.print(" ");
+            System.out.println(this.value);
+        }
+        else{
+            System.out.println("");
+        }
+
+        //Recursively Iterates for each child.
         for (int i=0; i < this.children.size(); i++)
         {
             Node child = this.children.get(i);
-            //Indents each child
-            for (int m=0; m<n; m++)
-            {
-                System.out.print("\t");
-            }
-            System.out.print(child.name);
-
-            if (child.value != null) {
-                System.out.print(" ");
-                System.out.println(child.value);
-            }
-            else
-            {
-                System.out.println(" ");
-            }
-
-            if(child.children != null)
-            {
-                child.Iterate(n+1);
-            }
+            System.out.println("Child size is:" + this.children.size());
+            child.Iterate(n+1);
         }
-
     }
+
     public static class Program extends Node
     {
         public Program() {
@@ -80,7 +79,6 @@ public class Node
     }
     public static class Identifier extends Node
     {
-        public String value;
 
         public Identifier(String value) {
             this.value = value;
@@ -101,7 +99,6 @@ public class Node
     }
     public static class Number extends Node
     {
-        public int value;
 
         public Number(int value)
         {
@@ -111,7 +108,6 @@ public class Node
     }
     public static class BooleanValue extends Node
     {
-        public boolean value;
 
         public BooleanValue(boolean value)
         {
@@ -136,7 +132,6 @@ public class Node
     }
     public static class Binary extends Node
     {
-        public char value;
 
         public Binary(char value, Node[] children)
         {
@@ -147,7 +142,6 @@ public class Node
     }
     public static class Unary extends Node
     {
-        public char value;
 
         public Unary(char value, Node[] children)
         {
