@@ -62,10 +62,19 @@ public class Node
             this.name = "Def";
         }
     }
+    public static class Body extends Node
+    {
+        public Body(Node[] children) {
+            super(children);
+            this.name = "Body";
+        }
+    }
     public static class Identifier extends Node
     {
-        public Identifier(Node[] children) {
-            super(children);
+        public String value;
+
+        public Identifier(String value) {
+            this.value = value;
             this.name = "Identifier";
         }
     }
@@ -73,6 +82,12 @@ public class Node
     {
         public Formals(Node[] children) { super(children);
             this.name = "Formals";
+        }
+    }
+        public static class Formal extends Node
+    {
+        public Formal(Node[] children) { super(children);
+            this.name = "Formal";
         }
     }
     public static class Number extends Node

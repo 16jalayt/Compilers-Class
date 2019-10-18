@@ -27,9 +27,9 @@ public class Parser
     ArrayList<ArrayList<String>> ruleList= new ArrayList<ArrayList<String>>();
 
     ArrayList<String> semanticActionsList= new ArrayList<String>(Arrays.asList(
-        "make-<PROGRAM>", "make-<DEF>", "make-<IDENTIFIER>", "make-<FORMALS>", 
-        "make-integer", "make-boolean", "make-<BINARY>", 
-        "make-<UNARY>", "make-<if-EXPR>", "make-<ACTUALS>",
+        "make-<PROGRAM>", "make-<DEF>", "make-<IDENTIFIER>", "make-<BODY>", 
+        "make-<FORMALS>", "make-<FORMAL>", "make-integer", "make-boolean", 
+        "make-<BINARY>", "make-<UNARY>", "make-<if-EXPR>", "make-<ACTUALS>",
         "make-<NUMBER>", "make-<BOOLEAN>", "make-Function-Call"));
 
     //TODO: if structure for all symantic atctions. node type hardcoded
@@ -46,15 +46,22 @@ public class Parser
 
     public Parser(Scanner scan)
     {
+        System.out.println("Starting Parser of Scan");
         this.scan = scan;
+        System.out.println("Set Scan");
+
         table = new int[tableX][tableY];
+        System.out.println("make the table");
         createTable();
+        System.out.println("creatTable()");
         createRuleList();
+        System.out.println("createRuleLIst()");
+
     }
 
     public boolean parse()
     {
-
+        System.out.println("Starting boolean Parse");    
         int nextFunc = 0;
 
         String EOFSymbol = "$";
@@ -76,7 +83,9 @@ public class Parser
                 Token skip = scan.next();
             }
             String temp = stack.peek();
+            System.out.println("temp: " + temp);
             //if tmp is terminal
+            System.out.println("stack:" + stack);
             if(Terminals.contains(temp))
             {
                 System.out.println("Terminals.contains(temp)" + Terminals.contains(temp));
@@ -135,6 +144,7 @@ public class Parser
             else if(semanticActionsList.contains(temp))
             {
                 System.out.println("semanticActionsList.contains(temp)" + semanticActionsList.contains(temp));
+                System.out.println("semanticStack: " + semanticStack);
                 switch(temp) {
                     //there is staic prog node at top, need to set that
                     case "make-<PROGRAM>":
@@ -143,11 +153,17 @@ public class Parser
                     case "make-<DEF>":
                         NodeStack.push(new Node.Def(new Node[]{NodeStack.pop()}));
                         break;
+                    case "make-<BODY>":
+                        NodeStack.push(new Node.Body(new Node[]{NodeStack.pop()}));
+                        break;
                     case "make-<IDENTIFIER>":
-                        NodeStack.push(new Node.Identifier(new Node[]{NodeStack.pop()}));
+                        NodeStack.push(new Node.Identifier(semanticStack.pop()));
                         break;
                     case "make-<FORMALS>":
                         NodeStack.push(new Node.Formals(new Node[]{NodeStack.pop()}));
+                        break;
+                    case "make-<FORMAL>":
+                        NodeStack.push(new Node.Formal(new Node[]{NodeStack.pop()}));
                         break;
                     case "make-integer":
                         semanticStack.pop();
@@ -184,6 +200,7 @@ public class Parser
                     default:
                         System.out.println("Unknown rule: " + temp);
                 }
+                stack.pop();
             }
             else if (temp.equals(EOFSymbol)  && next.type.equals(Token.Type.EOF))
             {
@@ -592,7 +609,7 @@ public class Parser
         tempList47.add("make-<BOOLEAN>");
         tempList47.add("BOOLEAN");
         ruleList.add(tempList47);
-        tempList48.add("make-<Function-Call>");
+        tempList48.add("make-Function-Call");
         tempList48.add("rightParen");
         tempList48.add("EXPR");
         tempList48.add("leftParen");
