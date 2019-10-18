@@ -51,7 +51,7 @@ public class Node
         for (int i=0; i < this.children.size(); i++)
         {
             Node child = this.children.get(i);
-            System.out.println("Child size is:" + this.children.size());
+            //System.out.println("Child size is:" + this.children.size());
             child.Iterate(n+1);
         }
     }
