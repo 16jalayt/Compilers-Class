@@ -77,6 +77,13 @@ public class Node
             this.name = "Body";
         }
     }
+    public static class Expr extends Node
+    {
+        public Expr(Node[] children) {
+            super(children);
+            this.name = "Expr";
+        }
+    }
     public static class Identifier extends Node
     {
 

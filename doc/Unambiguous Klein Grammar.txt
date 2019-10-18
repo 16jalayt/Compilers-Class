@@ -23,7 +23,7 @@
                <BODY> ::= <PRINT-BODY>														|*|  <BODY> ::= <PRINT-STATEMENT> <BODY>
                         | <EXPR> make-<BODY>												|*|			  | <EXPR>
 																							|*|																		   |*|
- 		 <PRINT-BODY> ::= <PRINT-STATEMENT> BODY											|*|																		   |*|
+ 		 <PRINT-BODY> ::= <PRINT-STATEMENT> <BODY>											|*|																		   |*|
 																							|*|																		   |*|
                <TYPE> ::= integer make-integer												|*|  <TYPE> ::= integer
                         | boolean make-boolean												|*|  		 | boolean
@@ -33,7 +33,7 @@
 																							|*|				| <SIMPLE-EXPR>
  		  <EXPR-REST> ::= < <EXPR> make-<BINARY> <EXPR-REST>								|*|																		   |*|
  		  			    | = <EXPR> make-<BINARY> <EXPR-REST>								|*|																		   |*|
-						| 	ε																|*|																		   |*|
+						|  make-<EXPR>														|*|																		   |*|
 																							|*|	    																   |*|
                         																	|*|  				| <SIMPLE-EXPR> + <TERM>
                         																	|*|  				| <SIMPLE-EXPR> - <TERM>
@@ -86,5 +86,5 @@
     <PRINT-STATEMENT> ::= print ( <EXPR> )	make-Function-Call								|*|   <PRINT-STATEMENT> ::= print ( <EXPR> )
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 ***NOTE***
-List of Nodes for AST: <PROGRAM>, <DEF>, <BODY>, <IDENTIFIER>, <FORMALS>, <NONEMPTYFORMALS>, <IDENTIFIER>, integer, boolean,
+List of Nodes for AST: <PROGRAM>, <DEF>, <BODY>, <IDENTIFIER>, <FORMALS>, <NONEMPTYFORMALS>, <IDENTIFIER>, integer, boolean, <EXPR>
 					   <BINARY>, <if-EXPR>, <UNARY>, <ACTUALS>, Function-Call

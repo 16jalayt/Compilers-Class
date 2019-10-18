@@ -41,13 +41,13 @@ PRINT-STATEMENT     |     |   48  |        |         |     |     |     |     |  
 10.              <FORMAL> ::= <IDENTIFIER> make-<IDENTIFIER> : <TYPE> make-<FORMAL>                             |*| IDENTIFIER
 11.                <BODY> ::= <PRINT-BODY>                                                                      |*| print
 12.                         | <EXPR> make-<BODY>								                                |*| if IDENTIFIER ( not NUMBER BOOLEAN -
-13. 		 <PRINT-BODY> ::= <PRINT-STATEMENT> BODY							                                |*| print
+13. 		 <PRINT-BODY> ::= <PRINT-STATEMENT> <BODY>							                                |*| print
 14.                <TYPE> ::= integer make-integer                                                              |*| integer
 15.                         | boolean make-boolean									                            |*| boolean
 16.                <EXPR> ::= <SIMPLE-EXPR> <EXPR-REST>						                                    |*| if IDENTIFIER ( not NUMBER BOOLEAN -
 17. 		  <EXPR-REST> ::= < <EXPR> make-<BINARY> <EXPR-REST>                                                |*| <
 18.                         | = <EXPR> make-<BINARY> <EXPR-REST>                                                |*| =
-19.                         | ε												                                    |*| ) , then else and * / function
+19.                         | make-<EXPR>									                                    |*| ) , then else and * / function
 20.         <SIMPLE-EXPR> ::= <TERM> <SIMPLE-EXPR-REST>						                                    |*| if IDENTIFIER ( not NUMBER BOOLEAN -
 21.    <SIMPLE-EXPR-REST> ::= or <SIMPLE-EXPR> make-<BINARY> <SIMPLE-EXPR-REST>                                 |*| or
 22.                         | + <SIMPLE-EXPR>  make-<BINARY> <SIMPLE-EXPR-REST>                                 |*| +

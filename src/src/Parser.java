@@ -30,7 +30,7 @@ public class Parser
         "make-<PROGRAM>", "make-<DEF>", "make-<IDENTIFIER>", "make-<BODY>", 
         "make-<FORMALS>", "make-<FORMAL>", "make-integer", "make-boolean", 
         "make-<BINARY>", "make-<UNARY>", "make-<if-EXPR>", "make-<ACTUALS>",
-        "make-<NUMBER>", "make-<BOOLEAN>", "make-Function-Call"));
+        "make-<NUMBER>", "make-<BOOLEAN>", "make-Function-Call", "make-<EXPR>"));
 
     //TODO: if structure for all symantic atctions. node type hardcoded
     //move saction branch up a level?
@@ -153,7 +153,7 @@ public class Parser
                         tree.children.add(NodeStack.pop());
                         return true;
                     case "make-<DEF>":
-                        NodeStack.push(new Node.Def(new Node[]{NodeStack.pop()}));
+                        NodeStack.push(new Node.Def(new Node[]{NodeStack.pop(), NodeStack.pop(), NodeStack.pop(), NodeStack.pop()}));
                         break;
                     case "make-<BODY>":
                         NodeStack.push(new Node.Body(new Node[]{NodeStack.pop()}));
@@ -165,7 +165,7 @@ public class Parser
                         NodeStack.push(new Node.Formals(new Node[]{NodeStack.pop()}));
                         break;
                     case "make-<FORMAL>":
-                        NodeStack.push(new Node.Formal(new Node[]{NodeStack.pop()}));
+                        NodeStack.push(new Node.Formal(new Node[]{NodeStack.pop(), NodeStack.pop()}));
                         break;
                     case "make-integer":
                         semanticStack.pop();
@@ -175,6 +175,9 @@ public class Parser
                         semanticStack.pop();
                         NodeStack.push(new Node.BooleanType());
                         break;
+                    case "make-<EXPR>":
+                        NodeStack.push(new Node.Expr(new Node[]{NodeStack.pop()}));
+                        break;
                     case "make-<BINARY>":
                         NodeStack.push(new Node.Binary(semanticStack.pop().charAt(0), new Node[]{NodeStack.pop(), NodeStack.pop()}));
                         break;
@@ -182,7 +185,7 @@ public class Parser
                         NodeStack.push(new Node.Unary(semanticStack.pop().charAt(0), new Node[]{NodeStack.pop()}));
                         break;
                     case "make-<if-EXPR>":
-                        NodeStack.push(new Node.If(new Node[]{NodeStack.pop()}));
+                        NodeStack.push(new Node.If(new Node[]{NodeStack.pop(), NodeStack.pop(), NodeStack.pop()}));
                         break;
                     case "make-<ACTUALS>":
                         NodeStack.push(new Node.Actuals(new Node[]{NodeStack.pop()}));
@@ -512,7 +515,7 @@ public class Parser
         tempList18.add("EXPR");
         tempList18.add("equals");
         ruleList.add(tempList18);
-        tempList19.add("NULL");
+        tempList19.add("make-<EXPR>");
         ruleList.add(tempList19);
         tempList20.add("SIMPLEEXPRREST");
         tempList20.add("TERM");
