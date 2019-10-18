@@ -55,11 +55,11 @@ public class Node
             this.name = "Program";
         }
     }
-    public static class Definitions extends Node
+    public static class Def extends Node
     {
-        public Definitions(Node[] children) {
+        public Def(Node[] children) {
             super(children);
-            this.name = "Definitions";
+            this.name = "Def";
         }
     }
     public static class Identifier extends Node

@@ -137,7 +137,7 @@ public class Parser
                         tree.children.add(NodeStack.pop());
                         return true;
                     case "make-<DEF>":
-                        NodeStack.push(new Node.Definitions(new Node[]{NodeStack.pop()}));
+                        NodeStack.push(new Node.Def(new Node[]{NodeStack.pop()}));
                         break;
                     case "make-<IDENTIFIER>":
                         NodeStack.push(new Node.Identifier(new Node[]{NodeStack.pop()}));
