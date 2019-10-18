@@ -8,11 +8,13 @@ public class Node
 {
     public Node parent;
     public String name;
+    public Object value;
     public List<Node> children = new LinkedList<Node>();
     //need empty as default
     public Node()
     {
         this.parent = null;
+        this.value = null;
     }
 
     public Node(Node[] children_array)
@@ -38,8 +40,15 @@ public class Node
                 System.out.print("\t");
             }
             System.out.print(child.name);
-            System.out.print(" ");
-            //System.out.println(child.value);
+
+            if (child.value != null) {
+                System.out.print(" ");
+                System.out.println(child.value);
+            }
+            else
+            {
+                System.out.println(" ");
+            }
 
             if(child.children != null)
             {
