@@ -33,7 +33,7 @@ public class Parser
         "make-<NUMBER>", "make-<BOOLEAN>", "make-Function-Call"));
 
     //TODO: if structure for all symantic atctions. node type hardcoded
-    //move saction branch up a level?
+    //move section branch up a level?
 
     private static Scanner scan;
     int table[][];
@@ -48,22 +48,22 @@ public class Parser
 
     public Parser(Scanner scan)
     {
-        System.out.println("Starting Parser of Scan");
+        //System.out.println("Starting Parser of Scan");
         this.scan = scan;
-        System.out.println("Set Scan");
+        //System.out.println("Set Scan");
 
         table = new int[tableX][tableY];
-        System.out.println("make the table");
+        //System.out.println("make the table");
         createTable();
-        System.out.println("creatTable()");
+        //System.out.println("creatTable()");
         createRuleList();
-        System.out.println("createRuleLIst()");
+        //System.out.println("createRuleLIst()");
 
     }
 
     public boolean parse()
     {
-        System.out.println("Starting boolean Parse");    
+        //System.out.println("Starting boolean Parse");
         int nextFunc = 0;
 
         String EOFSymbol = "$";
@@ -85,12 +85,13 @@ public class Parser
                 Token skip = scan.next();
             }
             String temp = stack.peek();
-            System.out.println("temp: " + temp);
+            //System.out.println("temp: " + temp);
+            //System.out.println("stack:" + stack);
+
             //if tmp is terminal
-            System.out.println("stack:" + stack);
             if(Terminals.contains(temp))
             {
-                System.out.println("Terminals.contains(temp)" + Terminals.contains(temp));
+                //System.out.println("Terminals.contains(temp)" + Terminals.contains(temp));
                 next = scan.next();
 
                 if (temp.equals("NULL")){
@@ -108,7 +109,7 @@ public class Parser
             }
             else if (Rules.contains(temp))
             {
-                System.out.println("Rules.contains(temp)" + Rules.contains(temp));
+                //System.out.println("Rules.contains(temp)" + Rules.contains(temp));
                 next = scan.peek();
                 //Get the ordinal number for the rules and terminals, use that as table index values
                 int row = Rules.indexOf(temp);
@@ -145,8 +146,8 @@ public class Parser
             }
             else if(semanticActionsList.contains(temp))
             {
-                System.out.println("semanticActionsList.contains(temp)" + semanticActionsList.contains(temp));
-                System.out.println("semanticStack: " + semanticStack);
+                /*System.out.println("semanticActionsList.contains(temp)" + semanticActionsList.contains(temp));
+                System.out.println("semanticStack: " + semanticStack);*/
                 switch(temp) {
                     //there is static prog node at top, need to set that
                     case "make-<PROGRAM>":

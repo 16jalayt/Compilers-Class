@@ -66,7 +66,7 @@ public class Main
             //production - full pipeline
             if(debugStage == 6)
             {
-                System.out.println("Started full pipeline");
+                //System.out.println("Started full pipeline");
                 Scanner scan = new Scanner(fullFile);
                 Parser parse = new Parser(scan);
                 parse.parse();
