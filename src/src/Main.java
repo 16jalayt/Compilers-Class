@@ -58,9 +58,10 @@ public class Main
             //parser tree
             if(debugStage == 5)
             {
+
                 Scanner scan = new Scanner(fullFile);
                 Parser parse = new Parser(scan);
-                System.out.println(parse.getTree().toString());
+                parse.getTree();
             }
             //production - full pipeline
             if(debugStage == 6)

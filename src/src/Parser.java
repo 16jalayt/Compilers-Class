@@ -42,7 +42,9 @@ public class Parser
 
     private Node tree = new Node.Program();
 
-    public Node getTree() { return tree; }
+    public void getTree() {
+        tree.Iterate(0);
+    }
 
     public Parser(Scanner scan)
     {
@@ -136,7 +138,7 @@ public class Parser
             {
                 System.out.println("semanticActionsList.contains(temp)" + semanticActionsList.contains(temp));
                 switch(temp) {
-                    //there is staic prog node at top, need to set that
+                    //there is static prog node at top, need to set that
                     case "make-<PROGRAM>":
                         tree.children.add(NodeStack.pop());
                         return true;
