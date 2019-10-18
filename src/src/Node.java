@@ -97,7 +97,7 @@ public class Node
         public Number(int value)
         {
             this.value = value;
-            this.name = "Integer";
+            this.name = "Number";
         }
     }
     public static class BooleanValue extends Node
