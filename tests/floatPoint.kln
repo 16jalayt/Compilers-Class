@@ -1,0 +1,30 @@
+(*The purpose of this program is to print out the numbers following the decimal point of a 
+    floating point number. As Klein does cannot handle floating point values, I thought it would
+    be interesting and challenging to write a program that can print those numbers out. As    
+    Klein's Syntax does not specify whether or not the print statement prints onto a new line
+    or continues printing on the same line, I am operating on the assumption that the integers
+    printed by this function are all printed on the same line, such that the function call 
+    floatPoint(10, 3) would produce 33333333... and so on. I used the MOD function provided
+    in class as helper code. *)
+function floatPoint(x : integer, y : integer) : boolean
+if x-y = y
+then printNum( 0 )
+else 
+	if 0 < x-y < y
+	then 
+		if 0 = MOD((x-y)*10, y)
+		then printNum(((x-y)*10)/y)
+		else printNumRecurse(((x-y)*10), y)
+	else floatPoint( x-y, y)
+
+function printNum(n : integer) : boolean
+print( n )
+True
+
+function printNumRecurse(n : integer, m : integer) : boolean
+print( n/m )
+floatPoint(n, m)
+
+function MOD( m : integer,  n : integer) : integer
+(* standard library function *)
+m - m/n * n
