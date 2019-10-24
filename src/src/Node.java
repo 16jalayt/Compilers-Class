@@ -35,7 +35,8 @@ public class Node
 
     public void addChild(Node child)
     {
-        children.add(child);
+        //add in reversed order
+        children.add(0,child);
     }
 
     //n is number of indents for children.
