@@ -179,7 +179,7 @@ public class Parser
                         System.out.println("FORMALS");
                         System.out.println("NodeStack: " + NodeStack);
                         Node tmp = new Node.Formals();
-                        while(NodeStack.peek().name == "Formal")
+                        while(NodeStack.peek().name.equals("Formal"))
                         {
                             tmp.addChild(NodeStack.pop());
                         }
@@ -235,7 +235,7 @@ public class Parser
                         System.out.println("ACTUALS");
                         System.out.println("NodeStack: " + NodeStack);
                         Node tmp2 = new Node.Actuals();
-                        while(NodeStack.peek().name == "Formal")
+                        while(NodeStack.peek().name.equals("Formal"))
                         {
                             tmp2.addChild(NodeStack.pop());
                         }
