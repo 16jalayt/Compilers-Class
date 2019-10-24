@@ -183,7 +183,7 @@ public class Parser
                         {
                             tmp.addChild(NodeStack.pop());
                         }
-                        //NodeStack.push(new Node.Formals(new Node[]{NodeStack.pop()}));
+                        NodeStack.push(tmp);
                         break;
                     case "make-<FORMAL>":
                         System.out.println("FORMAL");
@@ -239,7 +239,7 @@ public class Parser
                         {
                             tmp2.addChild(NodeStack.pop());
                         }
-                        //NodeStack.push(new Node.Actuals(new Node[]{NodeStack.pop()}));
+                        NodeStack.push(tmp2);
                         break;
                     case "make-<NUMBER>":
                         System.out.println("NUMBER");
@@ -528,7 +528,6 @@ public class Parser
         tempList4.add("function");
         ruleList.add(tempList4);
         tempList5.add("make-<FORMALS>");
-        tempList5.add("NULL");
         ruleList.add(tempList5);
         tempList6.add("NONEMPTYFORMALS");
         ruleList.add(tempList6);
@@ -538,7 +537,7 @@ public class Parser
         tempList8.add("NONEMPTYFORMALS");
         tempList8.add("comma");
         ruleList.add(tempList8);
-        tempList9.add("NULL");
+        tempList9.add("make-<FORMALS>");
         ruleList.add(tempList9);
         tempList10.add("make-<FORMAL>");
         tempList10.add("TYPE");
