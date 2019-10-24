@@ -60,6 +60,7 @@ public class Main
 
                 Scanner scan = new Scanner(fullFile);
                 Parser parse = new Parser(scan);
+                parse.parse();
                 parse.getTree();
             }
             //production - full pipeline

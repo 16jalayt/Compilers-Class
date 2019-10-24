@@ -151,9 +151,13 @@ public class Parser
                 switch(temp) {
                     //there is static prog node at top, need to set that
                     case "make-<PROGRAM>":
+                        System.out.println("PROGRAM");
+                        System.out.println("NodeStack: " + NodeStack);
                         tree.children.add(NodeStack.pop());
                         return true;
                     case "make-<DEF>":
+                        System.out.println("DEF");
+                        System.out.println("NodeStack: " + NodeStack);
                         Node def_one = NodeStack.pop();
                         Node def_two = NodeStack.pop();
                         Node def_three = NodeStack.pop();
@@ -161,12 +165,19 @@ public class Parser
                         NodeStack.push(new Node.Def(new Node[]{def_four, def_three, def_two, def_one}));
                         break;
                     case "make-<BODY>":
+                        System.out.println("BODY");
+                        System.out.println("NodeStack: " + NodeStack);
                         NodeStack.push(new Node.Body(new Node[]{NodeStack.pop()}));
                         break;
                     case "make-<IDENTIFIER>":
+                        System.out.println("IDENTIFIER");
+                        System.out.println("SemanticStack:" + semanticStack);
+                        System.out.println("NodeStack: " + NodeStack);
                         NodeStack.push(new Node.Identifier(semanticStack.pop()));
                         break;
                     case "make-<FORMALS>":
+                        System.out.println("FORMALS");
+                        System.out.println("NodeStack: " + NodeStack);
                         Node tmp = new Node.Formals();
                         while(NodeStack.peek().name == "Formal")
                         {
@@ -175,36 +186,54 @@ public class Parser
                         //NodeStack.push(new Node.Formals(new Node[]{NodeStack.pop()}));
                         break;
                     case "make-<FORMAL>":
+                        System.out.println("FORMAL");
+                        System.out.println("NodeStack: " + NodeStack);
                         Node form_one = NodeStack.pop();
                         Node form_two = NodeStack.pop();
                         NodeStack.push(new Node.Formal(new Node[]{form_two, form_one}));
                         break;
                     case "make-integer":
+                        System.out.println("integer");
+                        System.out.println("NodeStack: " + NodeStack);
                         semanticStack.pop();
                         NodeStack.push(new Node.Integer());
                         break;
                     case "make-boolean":
+                        System.out.println("boolean");
+                        System.out.println("NodeStack: " + NodeStack);
                         semanticStack.pop();
                         NodeStack.push(new Node.BooleanType());
                         break;
                     case "make-<EXPR>":
+                        System.out.println("EXPR");
+                        System.out.println("NodeStack: " + NodeStack);
                         NodeStack.push(new Node.Expr(new Node[]{NodeStack.pop()}));
                         break;
                     case "make-<BINARY>":
+                        System.out.println("BINARY");
+                        System.out.println("SemanticStack:" + semanticStack);
+                        System.out.println("NodeStack: " + NodeStack);
                         Node bin_one = NodeStack.pop();
                         Node bin_two = NodeStack.pop();
                         NodeStack.push(new Node.Binary(semanticStack.pop().charAt(0), new Node[]{bin_two, bin_one}));
                         break;
                     case "make-<UNARY>":
+                        System.out.println("UNARY");
+                        System.out.println("SemanticStack:" + semanticStack);
+                        System.out.println("NodeStack: " + NodeStack);
                         NodeStack.push(new Node.Unary(semanticStack.pop().charAt(0), new Node[]{NodeStack.pop()}));
                         break;
                     case "make-<if-EXPR>":
+                        System.out.println("if-EXPR");
+                        System.out.println("NodeStack: " + NodeStack);
                         Node expr_one = NodeStack.pop();
                         Node expr_two = NodeStack.pop();
                         Node expr_three = NodeStack.pop();
                         NodeStack.push(new Node.If(new Node[]{expr_three, expr_two, expr_one}));
                         break;
                     case "make-<ACTUALS>":
+                        System.out.println("ACTUALS");
+                        System.out.println("NodeStack: " + NodeStack);
                         Node tmp2 = new Node.Actuals();
                         while(NodeStack.peek().name == "Formal")
                         {
@@ -213,15 +242,22 @@ public class Parser
                         //NodeStack.push(new Node.Actuals(new Node[]{NodeStack.pop()}));
                         break;
                     case "make-<NUMBER>":
+                        System.out.println("NUMBER");
+                        System.out.println("SemanticStack:" + semanticStack);
+                        System.out.println("NodeStack: " + NodeStack);
                         NodeStack.push(new Node.Number(Integer.parseInt(semanticStack.pop())));
                         break;
                     case "make-<BOOLEAN>":
+                        System.out.println("BOOLEAN");
+                        System.out.println("NodeStack: " + NodeStack);
                         if (semanticStack.pop().equals("true"))
                             NodeStack.push(new Node.BooleanValue(true));
                         else
                             NodeStack.push(new Node.BooleanValue(false));
                         break;
                     case "make-Function-Call":
+                        System.out.println("FUNCTION-CALL");
+                        System.out.println("NodeStack: " + NodeStack);
                         NodeStack.push(new Node.FunctionCall(new Node[]{NodeStack.pop()}));
                         break;
                     default:
