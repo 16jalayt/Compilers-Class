@@ -177,8 +177,8 @@ public class Node
     }
     public static class Actuals extends Node
     {
-        public Actuals(Node[] children) {
-            super(children);
+        public Actuals() {
+            super();
             this.name = "Actuals";
         }
     }

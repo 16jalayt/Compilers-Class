@@ -205,7 +205,12 @@ public class Parser
                         NodeStack.push(new Node.If(new Node[]{expr_three, expr_two, expr_one}));
                         break;
                     case "make-<ACTUALS>":
-                        NodeStack.push(new Node.Actuals(new Node[]{NodeStack.pop()}));
+                        Node tmp2 = new Node.Actuals();
+                        while(NodeStack.peek().name == "Formal")
+                        {
+                            tmp2.addChild(NodeStack.pop());
+                        }
+                        //NodeStack.push(new Node.Actuals(new Node[]{NodeStack.pop()}));
                         break;
                     case "make-<NUMBER>":
                         NodeStack.push(new Node.Number(Integer.parseInt(semanticStack.pop())));
