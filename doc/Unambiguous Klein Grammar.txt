@@ -16,7 +16,7 @@
     <NONEMPTYFORMALS> ::= <FORMAL> <NEF-REST> 												|*|   <NONEMPTYFORMALS> ::= <FORMAL>
 	                       																	|*|	 					| <FORMAL> , <NONEMPTYFORMALS>
   		   <NEF-REST> ::= , <NONEMPTYFORMALS> 												|*|																		   |*|
-  						| ε																	|*|																		   |*|
+  						| make-<FORMALS>													|*|																		   |*|
 																							|*|																		   |*|
              <FORMAL> ::= <IDENTIFIER> make-<IDENTIFIER> : <TYPE> make-<FORMAL> 			|*|   <FORMAL> ::= <IDENTIFIER> : <TYPE>
 																							|*|																		   |*|
