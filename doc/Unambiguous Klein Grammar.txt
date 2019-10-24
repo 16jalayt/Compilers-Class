@@ -16,7 +16,7 @@
     <NONEMPTYFORMALS> ::= <FORMAL> <NEF-REST> 												|*|   <NONEMPTYFORMALS> ::= <FORMAL>
 	                       																	|*|	 					| <FORMAL> , <NONEMPTYFORMALS>
   		   <NEF-REST> ::= , <NONEMPTYFORMALS> 												|*|																		   |*|
-  						| ε																	|*|																		   |*|
+  						| make-<FORMALS>													|*|																		   |*|
 																							|*|																		   |*|
              <FORMAL> ::= <IDENTIFIER> make-<IDENTIFIER> : <TYPE> make-<FORMAL> 			|*|   <FORMAL> ::= <IDENTIFIER> : <TYPE>
 																							|*|																		   |*|
@@ -35,9 +35,10 @@
  		  			    | = <EXPR> make-<BINARY> <EXPR-REST>								|*|																		   |*|
 						|  make-<EXPR>														|*|																		   |*|
 																							|*|	    																   |*|
+        <SIMPLE-EXPR> ::= <TERM> <SIMPLE-EXPR-REST>											|*|  <SIMPLE-EXPR> ::= <SIMPLE-EXPR> or <TERM>
                         																	|*|  				| <SIMPLE-EXPR> + <TERM>
-                        																	|*|  				| <SIMPLE-EXPR> - <TERM>
-                        																	|*|					| <TERM>
+                        																	|*|					| <SIMPLE-EXPR> - <TERM>
+                        																	|*|  				| <TERM>																							
    <SIMPLE-EXPR-REST> ::= or <SIMPLE-EXPR>	make-<BINARY> <SIMPLE-EXPR-REST> 				|*|																		   |*|
  						| + <SIMPLE-EXPR>	make-<BINARY> <SIMPLE-EXPR-REST> 				|*|																		   |*|
  						| - <SIMPLE-EXPR>	make-<BINARY> <SIMPLE-EXPR-REST>				|*|																		   |*|
@@ -59,9 +60,7 @@
                         | <LITERAL>															|*|	 			| <IDENTIFIER>
 						| <NEG-FACTOR>														|*|				| <LITERAL>
  	                    | ( <EXPR> ) 														|*|	 			| - <FACTOR>
-																							|*|																		   |*|
-        <SIMPLE-EXPR> ::= <TERM> <SIMPLE-EXPR-REST>											|*|  <SIMPLE-EXPR> ::= <SIMPLE-EXPR> or <TERM>
-                      																		|*|	 			| ( <EXPR> )
+																							|*|				| ( <EXPR> )											   |*|
 																							|*|																		   |*|
  		 <NOT-FACTOR> ::= not <FACTOR> make-<UNARY>											|*|																		   |*|
 																							|*|																		   |*|
