@@ -20,12 +20,22 @@ public class Node
 
     public Node(Node[] children_array)
     {
+        addChildren(children_array);
+    }
+
+    public void addChildren(Node[] children_array)
+    {
         if(children_array == null)
             children = null;
         else
         {
             children.addAll(Arrays.asList(children_array));
         }
+    }
+
+    public void addChild(Node child)
+    {
+        children.add(child);
     }
 
     //n is number of indents for children.
@@ -94,7 +104,7 @@ public class Node
     }
     public static class Formals extends Node
     {
-        public Formals(Node[] children) { super(children);
+        public Formals() { super();
             this.name = "Formals";
         }
     }

@@ -167,7 +167,12 @@ public class Parser
                         NodeStack.push(new Node.Identifier(semanticStack.pop()));
                         break;
                     case "make-<FORMALS>":
-                        NodeStack.push(new Node.Formals(new Node[]{NodeStack.pop()}));
+                        Node tmp = new Node.Formals();
+                        while(NodeStack.peek().name == "Formal")
+                        {
+                            tmp.addChild(NodeStack.pop());
+                        }
+                        //NodeStack.push(new Node.Formals(new Node[]{NodeStack.pop()}));
                         break;
                     case "make-<FORMAL>":
                         Node form_one = NodeStack.pop();
