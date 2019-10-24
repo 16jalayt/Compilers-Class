@@ -34,10 +34,9 @@ public class Main
         try
         {
             String fullFile = new java.util.Scanner(new File(args[0])).useDelimiter("\\Z").next();
-            System.out.println("Debug state:" + debugStage);
 
             //scanner
-            if(debugStage == 1)
+            if(debugStage == 1 || debugStage == 2)
             {
                 Scanner scan = new Scanner(fullFile);
                 while (scan.peek().type != Token.Type.EOF && scan.peek().type != Token.Type.Error)
@@ -46,7 +45,7 @@ public class Main
                 System.out.println(scan.next().toString());
             }
             //parser tf
-            if(debugStage == 3)
+            if(debugStage == 3 || debugStage == 4)
             {
                 Scanner scan = new Scanner(fullFile);
                 Parser parse = new Parser(scan);
@@ -56,7 +55,7 @@ public class Main
                     System.out.println("The program is: Invalid");
             }
             //parser tree
-            if(debugStage == 5)
+            if(debugStage == 5 || debugStage == 6)
             {
 
                 Scanner scan = new Scanner(fullFile);
@@ -64,7 +63,7 @@ public class Main
                 parse.getTree();
             }
             //production - full pipeline
-            if(debugStage == 6)
+            if(debugStage == -1)
             {
                 //System.out.println("Started full pipeline");
                 Scanner scan = new Scanner(fullFile);
