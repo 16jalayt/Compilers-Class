@@ -146,15 +146,19 @@ public class Parser
             }
             else if(semanticActionsList.contains(temp))
             {
-                /*System.out.println("semanticActionsList.contains(temp)" + semanticActionsList.contains(temp));
-                System.out.println("semanticStack: " + semanticStack);*/
+                //System.out.println("semanticActionsList.contains(temp)" + semanticActionsList.contains(temp));
+                //System.out.println("semanticStack: " + semanticStack);
                 switch(temp) {
                     //there is static prog node at top, need to set that
                     case "make-<PROGRAM>":
                         tree.children.add(NodeStack.pop());
                         return true;
                     case "make-<DEF>":
-                        NodeStack.push(new Node.Def(new Node[]{NodeStack.pop(), NodeStack.pop(), NodeStack.pop(), NodeStack.pop()}));
+                        Node def_one = NodeStack.pop();
+                        Node def_two = NodeStack.pop();
+                        Node def_three = NodeStack.pop();
+                        Node def_four = NodeStack.pop();
+                        NodeStack.push(new Node.Def(new Node[]{def_four, def_three, def_two, def_one}));
                         break;
                     case "make-<BODY>":
                         NodeStack.push(new Node.Body(new Node[]{NodeStack.pop()}));
@@ -166,7 +170,9 @@ public class Parser
                         NodeStack.push(new Node.Formals(new Node[]{NodeStack.pop()}));
                         break;
                     case "make-<FORMAL>":
-                        NodeStack.push(new Node.Formal(new Node[]{NodeStack.pop(), NodeStack.pop()}));
+                        Node form_one = NodeStack.pop();
+                        Node form_two = NodeStack.pop();
+                        NodeStack.push(new Node.Formal(new Node[]{form_two, form_one}));
                         break;
                     case "make-integer":
                         semanticStack.pop();
@@ -180,13 +186,18 @@ public class Parser
                         NodeStack.push(new Node.Expr(new Node[]{NodeStack.pop()}));
                         break;
                     case "make-<BINARY>":
-                        NodeStack.push(new Node.Binary(semanticStack.pop().charAt(0), new Node[]{NodeStack.pop(), NodeStack.pop()}));
+                        Node bin_one = NodeStack.pop();
+                        Node bin_two = NodeStack.pop();
+                        NodeStack.push(new Node.Binary(semanticStack.pop().charAt(0), new Node[]{bin_two, bin_one}));
                         break;
                     case "make-<UNARY>":
                         NodeStack.push(new Node.Unary(semanticStack.pop().charAt(0), new Node[]{NodeStack.pop()}));
                         break;
                     case "make-<if-EXPR>":
-                        NodeStack.push(new Node.If(new Node[]{NodeStack.pop(), NodeStack.pop(), NodeStack.pop()}));
+                        Node expr_one = NodeStack.pop();
+                        Node expr_two = NodeStack.pop();
+                        Node expr_three = NodeStack.pop();
+                        NodeStack.push(new Node.If(new Node[]{expr_three, expr_two, expr_one}));
                         break;
                     case "make-<ACTUALS>":
                         NodeStack.push(new Node.Actuals(new Node[]{NodeStack.pop()}));
