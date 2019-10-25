@@ -156,6 +156,7 @@ public class Parser
                         System.out.println("NodeStack: " + NodeStack);
                         programNode.children.add(NodeStack.pop());
                         tree.children.add(programNode);
+                        //programNode keeps getting overwritten, thus only the last function in a file is made into AST
                         programNode = new Node();
                         return true;
                     case "make-<DEF>":
