@@ -82,7 +82,8 @@ public class Node
     public static class Program extends Node
     {
         public Program() {
-
+            if(Main.debugStage == 6)
+                System.out.println("PROGRAM");
             this.name = "Program";
         }
     }
@@ -90,6 +91,8 @@ public class Node
     {
         public Def(Node[] children) {
             super(children);
+            if(Main.debugStage == 6)
+                System.out.println("Def");
             this.name = "Def";
         }
     }
@@ -97,6 +100,8 @@ public class Node
     {
         public Body(Node[] children) {
             super(children);
+            if(Main.debugStage == 6)
+                System.out.println("Body");
             this.name = "Body";
         }
     }
@@ -104,6 +109,8 @@ public class Node
     {
         public Expr(Node[] children) {
             super(children);
+            if(Main.debugStage == 6)
+                System.out.println("Expr");
             this.name = "Expr";
         }
     }
@@ -111,19 +118,27 @@ public class Node
     {
 
         public Identifier(String value) {
+            if(Main.debugStage == 6)
+                System.out.println("Identifier");
             this.value = value;
             this.name = "Identifier";
         }
     }
     public static class Formals extends Node
     {
-        public Formals() { super();
+        public Formals()
+        {
+            super();
+            if(Main.debugStage == 6)
+                System.out.println("Formals");
             this.name = "Formals";
         }
     }
         public static class Formal extends Node
     {
         public Formal(Node[] children) { super(children);
+            if(Main.debugStage == 6)
+                System.out.println("Node");
             this.name = "Formal";
         }
     }
@@ -132,6 +147,8 @@ public class Node
 
         public Number(int value)
         {
+            if(Main.debugStage == 6)
+                System.out.println("Number");
             this.value = value;
             this.name = "Number";
         }
@@ -141,6 +158,8 @@ public class Node
 
         public BooleanValue(boolean value)
         {
+            if(Main.debugStage == 6)
+                System.out.println("Boolean");
             this.value = value;
             this.name = "BooleanValue";
         }
@@ -150,6 +169,8 @@ public class Node
 
         public Integer()
         {
+            if(Main.debugStage == 6)
+                System.out.println("Integer");
             this.name = "integer";
         }
     }
@@ -157,6 +178,8 @@ public class Node
     {
         public BooleanType()
         {
+            if(Main.debugStage == 6)
+                System.out.println("BooleanType");
             this.name = "boolean";
         }
     }
@@ -166,6 +189,8 @@ public class Node
         public Binary(char value, Node[] children)
         {
             super(children);
+            if(Main.debugStage == 6)
+                System.out.println("Binary");
             this.value = value;
             this.name = "Binary";
         }
@@ -176,6 +201,8 @@ public class Node
         public Unary(char value, Node[] children)
         {
             super(children);
+            if(Main.debugStage == 6)
+                System.out.println("Unary");
             this.value = value;
             this.name = "Unary";
         }
@@ -184,6 +211,8 @@ public class Node
     {
         public If(Node[] children) {
             super(children);
+            if(Main.debugStage == 6)
+                System.out.println("If");
             this.name = "If";
         }
     }
@@ -191,6 +220,8 @@ public class Node
     {
         public Actuals() {
             super();
+            if(Main.debugStage == 6)
+                System.out.println("Actuals");
             this.name = "Actuals";
         }
     }
@@ -198,13 +229,15 @@ public class Node
     {
         public FunctionCall(Node[] children) {
             super(children);
+            if(Main.debugStage == 6)
+                System.out.println("FunctionCall");
             this.name = "FunctionCalls";
         }
     }
 
     @Override
     public String toString()
-    {
+    {/*
         StringBuilder sb = new StringBuilder();
         for (int i=0; i < this.children.size(); i++)
         {
@@ -214,11 +247,12 @@ public class Node
             sb.append(" ");
             //sb.append(child.value);
 
-            if(child.children != null)
+            if(child.children.isEmpty())
             {
                 sb.append(child.toString());
             }
         }
-        return String.format(sb.toString());
+        return String.format(sb.toString());*/
+        return name;
     }
 }
