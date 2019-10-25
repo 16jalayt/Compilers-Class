@@ -225,7 +225,7 @@ public class Node
 
     @Override
     public String toString()
-    {
+    {/*
         StringBuilder sb = new StringBuilder();
         for (int i=0; i < this.children.size(); i++)
         {
@@ -235,11 +235,12 @@ public class Node
             sb.append(" ");
             //sb.append(child.value);
 
-            if(child.children != null)
+            if(child.children.isEmpty())
             {
                 sb.append(child.toString());
             }
         }
-        return String.format(sb.toString());
+        return String.format(sb.toString());*/
+        return name;
     }
 }

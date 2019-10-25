@@ -6,7 +6,7 @@ public class Main
 {
     //-1 production, 1 scanner, 3 parser,
     //even with debug prints, odd no prints
-    static int debugStage = 5;
+    static int debugStage = 6;
 
     //can use this line in the code and will mute the debug print
     //if (Main.debugStage>=2) {System.out.println("The stack is: " + stack.toString());}
