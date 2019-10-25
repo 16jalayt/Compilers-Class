@@ -67,7 +67,7 @@ PRINT-STATEMENT     |     |   48  |        |         |     |     |     |     |  
 36. 		 <NOT-FACTOR> ::= not <FACTOR> make-<UNARY>								                            |*| not
 37. 		 <NEG-FACTOR> ::= - <FACTOR> make-<UNARY>								                            |*| -
 38.     <IDENTIFIER-MAIN> ::= <IDENTIFIER> make-<IDENTIFIER> <IDENTIFIER-REST>	                                |*| IDENTIFIER
-39.	    <IDENTIFIER-REST> ::= (<ACTUALS>)                                                                       |*| (
+39.	    <IDENTIFIER-REST> ::= (<ACTUALS>) make-Function-Call                                                    |*| (
 40.                         | ε                                                                                 |*| and * /
 41.             <ACTUALS> ::= ε	                                                                                |*| )
 42.                         | <NONEMPTYACTUALS>									                                |*| if IDENTIFIER ( not NUMBER BOOLEAN -
@@ -76,4 +76,4 @@ PRINT-STATEMENT     |     |   48  |        |         |     |     |     |     |  
 45.                         | make-<ACTUALS>							                                        |*| )
 46.             <LITERAL> ::= <NUMBER> make-<NUMBER>                                                            |*| NUMBER
 47.                         | <BOOLEAN>	make-<BOOLEAN>									                        |*| BOOLEAN
-48.     <PRINT-STATEMENT> ::= print ( <EXPR> ) make-Function-Call								                |*| print
+48.     <PRINT-STATEMENT> ::= print <IDENTIFIER-REST> ( <EXPR> ) make-Function-Call				                |*| print

@@ -68,7 +68,7 @@
 																							|*|																		   |*|
  	<IDENTIFIER-MAIN> ::= <IDENTIFIER> make-<IDENTIFIER> <IDENTIFIER-REST> 					|*|																		   |*|
 																							|*|																		   |*|
- 	<IDENTIFIER-REST> ::= (<ACTUALS>) 														|*|																		   |*|
+ 	<IDENTIFIER-REST> ::= (<ACTUALS>) make-Function-Call	   								|*|																		   |*|
 						| ε																	|*|																		   |*|
 																							|*|																		   |*|
 	        <ACTUALS> ::= ε																	|*|  <ACTUALS> ::= ε
@@ -82,7 +82,7 @@
             <LITERAL> ::= <NUMBER> make-<NUMBER>											|*|  <LITERAL> ::= <NUMBER>
                         | <BOOLEAN>	make-<BOOLEAN>											|*|  			| <BOOLEAN>
 																							|*|																		   |*|
-    <PRINT-STATEMENT> ::= print ( <EXPR> )	make-Function-Call								|*|   <PRINT-STATEMENT> ::= print ( <EXPR> )
+    <PRINT-STATEMENT> ::= print <IDENTIFIER-REST> ( <EXPR> ) make-Function-Call				|*|   <PRINT-STATEMENT> ::= print ( <EXPR> )
 -------------------------------------------------------------------------------------------------------------------------------------------------------
 ***NOTE***
 List of Nodes for AST: <PROGRAM>, <DEF>, <BODY>, <IDENTIFIER>, <FORMALS>, <NONEMPTYFORMALS>, <IDENTIFIER>, integer, boolean, <EXPR>

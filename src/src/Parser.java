@@ -20,6 +20,11 @@ public class Parser
             "colon", "if", "then", "else", "integer", "boolean",
             "function", "Error", "Comment"));
 
+    ArrayList<String> TerminalsForSemanticList = new ArrayList<String>(Arrays.asList(
+        "print", "NUMBER", "BOOLEAN", "not", "and","or", "IDENTIFIER", 
+        "plus", "minus", "divide", "multiply", "equals", "lessThan",
+        "integer", "boolean"));
+
     ArrayList<String> RulesWhichCanNull = new ArrayList<String>(Arrays.asList(
             "DEFINITIONS", "FORMALS", "NEFREST", "EXPRREST", "SIMPLEEXPRREST",
             "TERMREST", "IDENTIFIERREST"));
@@ -98,8 +103,11 @@ public class Parser
                 if (temp.equals("NULL")){
                     stack.pop();
                 }
-                else if(temp.equals(getColumn(next))) {
+                else if(temp.equals(getColumn(next)) && TerminalsForSemanticList.contains(temp)) {
                     semanticStack.push(next.value.toString());
+                    stack.pop();
+                }
+                else if(temp.equals(getColumn(next))) {
                     stack.pop();
                 }
                 else
@@ -249,7 +257,9 @@ public class Parser
                         break;
                     case "make-Function-Call":
                         if(Main.debugStage == 6) System.out.println("NodeStack: " + NodeStack);
-                        NodeStack.push(new Node.FunctionCall(new Node[]{NodeStack.pop()}));
+                        Node id = NodeStack.pop();
+                        Node actuals = NodeStack.pop();
+                        NodeStack.push(new Node.FunctionCall(new Node[]{actuals, id}));
                         break;
                     default:
                         System.out.println("Unknown rule: " + temp);
@@ -653,6 +663,7 @@ public class Parser
         tempList44.add("NONEMPTYACTUALS");
         tempList44.add("comma");
         ruleList.add(tempList44);
+        tempList45.add("make-Function-Call");
         tempList45.add("make-<ACTUALS>");
         ruleList.add(tempList45);
         tempList46.add("make-<NUMBER>");
@@ -665,6 +676,7 @@ public class Parser
         tempList48.add("rightParen");
         tempList48.add("EXPR");
         tempList48.add("leftParen");
+        tempList48.add("make-<IDENTIFIER>");
         tempList48.add("print");
         ruleList.add(tempList48);
     }
