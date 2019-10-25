@@ -46,7 +46,7 @@ public class Parser
     private final int tableY = 30;
 
     private Node tree = new Node();
-    private Node programNode = new Node.Program();
+
 
     public void getTree() {
         tree.Iterate(0);
@@ -160,12 +160,13 @@ public class Parser
                 switch(temp) {
                     //there is static prog node at top, need to set that
                     case "make-<PROGRAM>":
+                        Node programNode = new Node.Program();
                         System.out.println("PROGRAM");
                         System.out.println("NodeStack: " + NodeStack);
                         programNode.children.add(NodeStack.pop());
                         tree.children.add(programNode);
                         //programNode keeps getting overwritten, thus only the last function in a file is made into AST
-                        programNode = new Node();
+
                         return true;
                     case "make-<DEF>":
                         if(Main.debugStage == 6) System.out.println("NodeStack: " + NodeStack);
