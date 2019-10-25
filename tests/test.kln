@@ -1,2 +1,15 @@
-function test1(var : boolean) : boolean
-    true
+(*
+   FILE  : factors.kln
+   AUTHOR: Eugene Wallingford
+   DATE  : 2010/11/11
+   TASK  : all the factors of an integer n less than n
+           and returns n (the largest factor)
+*)
+
+
+
+function remainder( num : integer, den : integer) : integer
+   if num < den then
+      num
+   else
+      remainder( num-den, den)

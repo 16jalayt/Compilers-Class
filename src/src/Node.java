@@ -39,6 +39,10 @@ public class Node
         children.add(0,child);
     }
 
+    public void removeChild(Node n){
+        this.children=null;
+    }
+
     //n is number of indents for children.
     public void Iterate(int n)
     {
@@ -65,6 +69,14 @@ public class Node
             //System.out.println("Child size is:" + this.children.size());
             child.Iterate(n+1);
         }
+    }
+
+    public boolean hasChildren(){
+        if (this.children.size() == 0){
+            return false;
+        }
+        else
+            return true;
     }
 
     public static class Program extends Node

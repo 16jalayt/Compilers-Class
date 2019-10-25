@@ -32,7 +32,9 @@ public class Parser
         "make-<BINARY>", "make-<UNARY>", "make-<if-EXPR>", "make-<ACTUALS>",
         "make-<NUMBER>", "make-<BOOLEAN>", "make-Function-Call", "make-<EXPR>"));
 
-    //TODO: if structure for all symantic atctions. node type hardcoded
+    ArrayList<Node> treeList = new ArrayList<Node>();
+
+    //TODO: if structure for all semantic actions. node type hardcoded
     //move section branch up a level?
 
     private static Scanner scan;
@@ -40,11 +42,14 @@ public class Parser
     private final int tableX = 30;
     private final int tableY = 30;
 
-    private Node tree = new Node.Program();
+    private Node tree = new Node();
+    private Node programNode = new Node.Program();
 
     public void getTree() {
         tree.Iterate(0);
+
     }
+
 
     public Parser(Scanner scan)
     {
@@ -153,7 +158,9 @@ public class Parser
                     case "make-<PROGRAM>":
                         System.out.println("PROGRAM");
                         System.out.println("NodeStack: " + NodeStack);
-                        tree.children.add(NodeStack.pop());
+                        programNode.children.add(NodeStack.pop());
+                        tree.children.add(programNode);
+                        programNode = new Node();
                         return true;
                     case "make-<DEF>":
                         System.out.println("DEF");
