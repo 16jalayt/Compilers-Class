@@ -183,6 +183,7 @@ public class Parser
                         {
                             tmp.addChild(NodeStack.pop());
                         }
+                        System.out.println("tmp: " + tmp);
                         NodeStack.push(tmp);
                         break;
                     case "make-<FORMAL>":
@@ -235,10 +236,11 @@ public class Parser
                         System.out.println("ACTUALS");
                         System.out.println("NodeStack: " + NodeStack);
                         Node tmp2 = new Node.Actuals();
-                        while(NodeStack.peek().name.equals("Formal"))
+                        while(NodeStack.peek().name.equals("Expr"))
                         {
                             tmp2.addChild(NodeStack.pop());
                         }
+                        System.out.println("tmp2: " + tmp2);
                         NodeStack.push(tmp2);
                         break;
                     case "make-<NUMBER>":
