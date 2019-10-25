@@ -1,0 +1,32 @@
+(* This file contains multiple semantic errors, with the goal being that our semantic analyzer catches and returns
+    them. The overall theme of the functions are that our computer is imitating a young child/children.
+    fingerCounter represents a child who can only count on their fingers, so when they are given a number
+    they have to find the value of that number based on the number of 1's they have to add to reach it.
+    imRightYoureWrong represents two siblings arguing about which one of them is right, until their parent angrily
+    reprimands them.
+    notBool and angryParent are helper functions to imRightYoureWrong *)
+*)
+
+(* Identifier t is used instead of Identifier x *)
+function fingerCounter( x : integer ) : integer
+    if t=1
+    then 1
+    else fingerCounter(t-1) + 1
+
+(* Unused second formal *)
+function imRightYoureWrong (b : boolean, k : boolean) : boolean
+    if b=true
+    then notBool(b)
+    else notBool(b)
+
+(* n is never declared, the incorrect number of parameters are passed into angryParent, and the value
+    returned by angryParent is not grabbed by an Identifier *)
+function notBool( c : boolean ) : boolean
+    if n=10
+    then angryParent(n)
+    else imRightYoureWrong(not c)
+
+(* should return an integer, but returns a  boolean *)
+function angryParent() : integer
+    print(false)
+    false
