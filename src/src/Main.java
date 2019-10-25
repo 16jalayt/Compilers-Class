@@ -10,26 +10,27 @@ public class Main
 
     //can use this line in the code and will mute the debug print
     //if (Main.debugStage>=2) {System.out.println("The stack is: " + stack.toString());}
-
-    //just type testing
-    private static void test()
-    {
-        //testing
-        Node.Binary bin = new Node.Binary('g',null);
-        Node nd = bin;
-        bin.value= 'h';
-        System.out.println(bin.value);
-        Node test = new Node(new Node[]{bin, nd});
-    }
-
+    
     public static void main(String[] args)
     {
-        //test();
         if(args.length != 1)
         {
             System.out.println("Correct usage is: program filename.kln");
             return;
         }
+        else if(args.length == 2)
+        {
+            if(args[1].toLowerCase().equals("scan"))
+                debugStage = 1;
+            if(args[1].toLowerCase().equals("validate"))
+                debugStage = 3;
+            if(args[1].toLowerCase().equals("parse"))
+                debugStage = 5;
+            else
+                debugStage = -1;
+        }
+        else
+            debugStage = -1;
 
         try
         {
