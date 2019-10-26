@@ -177,8 +177,18 @@ public class Parser
                         NodeStack.push(new Node.Def(new Node[]{def_four, def_three, def_two, def_one}));
                         break;
                     case "make-<BODY>":
+                        System.out.println("Started to make BODY");
                         if(Main.debugStage == 6) System.out.println("NodeStack: " + NodeStack);
-                        NodeStack.push(new Node.Body(new Node[]{NodeStack.pop()}));
+                        Node tmpBody = new Node.Body();
+                        while(!(NodeStack.peek().name.equals("integer") || NodeStack.peek().name.equals("boolean")))
+                        {
+                            System.out.println("NodeStack.peek().name befor pop: " + NodeStack.peek().name);
+                            System.out.println("!(NodeStack.peek().name.equals(integer) || NodeStack.peek().name.equals(boolean)): " + 
+                            !(NodeStack.peek().name.equals("integer") || NodeStack.peek().name.equals("boolean")));
+                            tmpBody.addChild(NodeStack.pop());
+                            System.out.println("NodeStack.peek().name after pop: " + NodeStack.peek().name);
+                        }
+                        NodeStack.push(tmpBody);
                         break;
                     case "make-<IDENTIFIER>":
                         if(Main.debugStage == 6) System.out.println("SemanticStack:" + semanticStack);
