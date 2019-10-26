@@ -91,8 +91,9 @@ public class Parser
                 Token skip = scan.next();
             }
             String temp = stack.peek();
-            //System.out.println("temp: " + temp);
-            //System.out.println("stack:" + stack);
+            // System.out.println("temp: " + temp);
+            // System.out.println("stack:" + stack);
+            // System.out.println("semanticStack:" + semanticStack);
 
             //if tmp is terminal
             if(Terminals.contains(temp))
@@ -162,8 +163,9 @@ public class Parser
                     case "make-<PROGRAM>":
                         System.out.println("PROGRAM");
                         System.out.println("NodeStack: " + NodeStack);
-                        while(NodeStack.peek().name.equals("Def")) {
+                        while(NodeStack.size() > 0) {
                             tree.children.add(NodeStack.pop());
+                            System.out.println("NodeStack: " + NodeStack);
                         }
                         return true;
                     case "make-<DEF>":
