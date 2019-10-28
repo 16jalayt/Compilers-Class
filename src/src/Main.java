@@ -36,7 +36,7 @@ public class Main
             debugStage = -1;
 
         //**override for debug**
-        debugStage = 8;
+        debugStage = 6;
 
         try
         {
