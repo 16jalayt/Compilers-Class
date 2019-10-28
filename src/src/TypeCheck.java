@@ -7,6 +7,23 @@ public class TypeCheck
 {
     public String symbolTable = "";
 
+    public String traversalHelper(Node tree)
+    {
+        String bodyType;
+        String throwAway;
+        for (int i=0; i < tree.children.size(); i++)
+        {
+            Node child = tree.children.get(i);
+            if (child.name.equals("Body")){
+                bodyType = traversal(child);
+                return bodyType;
+            }
+            else
+                throwAway = traversalHelper(child);
+        }
+        return "";
+    }
+
     public String traversal(Node tree)
     {
         ArrayList<String> nodeType = new ArrayList<String>();
