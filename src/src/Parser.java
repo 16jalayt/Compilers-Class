@@ -184,11 +184,11 @@ public class Parser
                         Node tmpBody = new Node.Body();
                         while(!(NodeStack.peek().name.equals("integer") || NodeStack.peek().name.equals("boolean")))
                         {
-                            System.out.println("NodeStack.peek().name befor pop: " + NodeStack.peek().name);
-                            System.out.println("!(NodeStack.peek().name.equals(integer) || NodeStack.peek().name.equals(boolean)): " +
+                            if(Main.debugStage == 6) System.out.println("NodeStack.peek().name befor pop: " + NodeStack.peek().name);
+                            if(Main.debugStage == 6) System.out.println("!(NodeStack.peek().name.equals(integer) || NodeStack.peek().name.equals(boolean)): " +
                             !(NodeStack.peek().name.equals("integer") || NodeStack.peek().name.equals("boolean")));
                             tmpBody.addChild(NodeStack.pop());
-                            System.out.println("NodeStack.peek().name after pop: " + NodeStack.peek().name);
+                            if(Main.debugStage == 6)  System.out.println("NodeStack.peek().name after pop: " + NodeStack.peek().name);
                         }
                         NodeStack.push(tmpBody);
                         break;
