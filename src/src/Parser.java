@@ -48,8 +48,13 @@ public class Parser
     private Node tree = new Node.Program();
 
 
-    public void getTree() {
+    public void printTree() {
         tree.Iterate(0);
+    }
+
+    public Node getTree()
+    {
+        return tree;
     }
 
     public Parser(Scanner scan)
@@ -160,8 +165,8 @@ public class Parser
                 switch(temp) {
                     //there is static prog node at top, need to set that
                     case "make-<PROGRAM>":
-                        System.out.println("PROGRAM");
-                        System.out.println("NodeStack: " + NodeStack);
+                        if(Main.debugStage == 6) System.out.println("PROGRAM");
+                        if(Main.debugStage == 6) System.out.println("NodeStack: " + NodeStack);
                         while(NodeStack.peek().name.equals("Def")) {
                             tree.children.add(NodeStack.pop());
                         }
