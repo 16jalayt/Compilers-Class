@@ -6,11 +6,13 @@
     printed by this function are all printed on the same line, such that the function call 
     floatPoint(10, 3) would produce 33333333... and so on. I used the MOD function provided
     in class as helper code. *)
+
+
 function floatPoint(x : integer, y : integer) : boolean
 if x-y = y
 then printNum( 0 )
 else 
-	if 0 < x-y < y
+	if (0 < x-y) and  (x-y < y)
 	then 
 		if 0 = MOD((x-y)*10, y)
 		then printNum(((x-y)*10)/y)
@@ -19,7 +21,7 @@ else
 
 function printNum(n : integer) : boolean
 print( n )
-True
+true
 
 function printNumRecurse(n : integer, m : integer) : boolean
 print( n/m )

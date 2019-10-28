@@ -98,8 +98,8 @@ public class Node
     }
     public static class Body extends Node
     {
-        public Body(Node[] children) {
-            super(children);
+        public Body() {
+            super();
             if(Main.debugStage == 6)
                 System.out.println("Body");
             this.name = "Body";
