@@ -9,6 +9,7 @@ public class Node
     public Node parent;
     public String name;
     public Object value;
+    public String type;
     public List<Node> children = new LinkedList<Node>();
 
     //need empty as default
@@ -16,6 +17,7 @@ public class Node
     {
         this.parent = null;
         this.value = null;
+        this.type = null;
     }
 
     public Node(Node[] children_array)
@@ -70,6 +72,45 @@ public class Node
             child.Iterate(n+1);
         }
     }
+
+    // public boolean doChildrenTypesMatch(List<Node> childList){
+    //     String childrenType = "";
+    //     boolean comparison = false;
+
+    //     for(Node child : childList){
+    //         if(childList == "") {
+    //             childrenType = child.type;
+    //             comparison = true;
+    //         } else if(child.type != childrenType) {
+    //             comparison = false;
+    //         }
+    //     }
+    //     return comparison;
+    // }
+
+    // public void setParentType(Node parent, List<Node> childList){
+    //      parent.type = childList.get(0).type;
+    // }
+
+    // public String getLeafType(Node leaf){
+    //     return leaf.type;
+    // }
+
+    // public boolean setASTTypes(Node parent){
+    //     if(parent.hasChildren()){
+    //         for(Node child: parent.children){
+    //             setASTTypes(child);
+    //         }
+    //         if(doChildrenTypesMatch(parent.children)){
+    //             setParentType(parent, parent.children);
+    //         } else {
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
+
+
 
     public boolean hasChildren(){
         if (this.children.size() == 0){
@@ -149,6 +190,7 @@ public class Node
         {
             if(Main.debugStage == 6)
                 System.out.println("Number");
+            this.type = "integer";
             this.value = value;
             this.name = "Number";
         }
@@ -160,6 +202,7 @@ public class Node
         {
             if(Main.debugStage == 6)
                 System.out.println("Boolean");
+            this.type = "boolean";
             this.value = value;
             this.name = "BooleanValue";
         }
@@ -171,6 +214,7 @@ public class Node
         {
             if(Main.debugStage == 6)
                 System.out.println("Integer");
+            this.type = "integer";
             this.name = "integer";
         }
     }
@@ -180,6 +224,7 @@ public class Node
         {
             if(Main.debugStage == 6)
                 System.out.println("BooleanType");
+            this.type = "boolean";
             this.name = "boolean";
         }
     }
