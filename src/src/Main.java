@@ -6,6 +6,7 @@ public class Main
 {
     //-1 production, 1 scanner, 3 parser,
     //even with debug prints, odd no prints
+    //odd values are used for kleinf,kleinp, etc
     //**Do not change here. the override is below the if statement**
     static int debugStage = -1;
 
@@ -76,13 +77,13 @@ public class Main
                 Parser parse = new Parser(scan);
                 parse.parse();
                 TypeCheck checker = new TypeCheck();
-                System.out.println("Type Checker returned: " + checker.check(parse.getTree()));
+                boolean result = checker.check(parse.getTree());
                 if(debugStage == 8)
-                    System.out.println(checker.symbolTable);
+                {
+                    System.out.println("Type Checker returned: " + result);
+                    checker.printSymbolTable();
+                }
             }
-
-
-
 
             //production - full pipeline
             if(debugStage == -1)

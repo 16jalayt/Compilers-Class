@@ -12,6 +12,9 @@ public class Node
     public String type;
     public List<Node> children = new LinkedList<Node>();
 
+    //set to stop reporting errors at higher nodes
+    public boolean childHasError = false;
+
     //need empty as default
     public Node()
     {
@@ -282,22 +285,7 @@ public class Node
 
     @Override
     public String toString()
-    {/*
-        StringBuilder sb = new StringBuilder();
-        for (int i=0; i < this.children.size(); i++)
-        {
-            Node child = this.children.get(i);
-            //Indents each child
-            sb.append(child.name);
-            sb.append(" ");
-            //sb.append(child.value);
-
-            if(child.children.isEmpty())
-            {
-                sb.append(child.toString());
-            }
-        }
-        return String.format(sb.toString());*/
+    {
         return name;
     }
 }

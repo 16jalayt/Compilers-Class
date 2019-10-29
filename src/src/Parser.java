@@ -4,8 +4,6 @@ import java.util.*;
 import src.Node;
 public class Parser
 {
-    //TODO: generate tree as private variable. make instance method to access tree. This way it wont break the true/false tests
-
     ArrayList<String> Rules = new ArrayList<String>(Arrays.asList(
             "PROGRAM", "DEFINITIONS", "DEF", "FORMALS", "NONEMPTYFORMALS",
             "NEFREST", "FORMAL", "BODY", "PRINTBODY", "TYPE", "EXPR",
@@ -36,9 +34,6 @@ public class Parser
         "make-<FORMALS>", "make-<FORMAL>", "make-integer", "make-boolean", 
         "make-<BINARY>", "make-<UNARY>", "make-<if-EXPR>", "make-<ACTUALS>",
         "make-<NUMBER>", "make-<BOOLEAN>", "make-Function-Call", "make-<EXPR>"));
-
-    //TODO: if structure for all symantic atctions. node type hardcoded
-    //move section branch up a level?
 
     private static Scanner scan;
     int table[][];
