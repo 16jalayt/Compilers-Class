@@ -113,8 +113,6 @@ public class TypeCheck {
             // is in error in the code.
             return false;
         }
-        // ToDo: needed this statement to compile.
-        return false;
     }
 
     //Does a comparison for all types of unary nodes by looking into
