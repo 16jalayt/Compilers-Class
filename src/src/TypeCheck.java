@@ -2,6 +2,7 @@ package src;
 
 import java.util.ArrayList;
 import java.util.List;
+import src.Node.If;
 
 public class TypeCheck
 {
@@ -95,4 +96,130 @@ public class TypeCheck
         System.out.println("Type check");
         return true;
     }
+
+    public boolean compareChildrenNodes(Node parent){
+        if (parent.name == "Unary"){
+            return unaryCompareNodes(parent);
+        } else if (parent.name == "Binary") {
+            return binaryCompareNodes(parent);
+        } else if (parent.name == "If") {
+            return compareIfNode(parent);
+        } else if (parent.name == "Identifier") {
+            return compareIdentifierNode(parent);
+        } else if (parent.name == "FunctionCalls") {
+            return compareFunctionCallsNode(parent);
+        } else {
+            // I don't think this should ever be hit
+            // we should be already returning once a node
+            // has not children. If this happens there probably 
+            // is in error in the code.
+            return false;
+        }
+        // ToDo: needed this statement to compile.
+        return false;
+    }
+
+    //Does a comparison for all types of unary nodes by looking into
+    // it first by unary op and then by the type
+    public boolean unaryCompareNodes(Node unaryNode){
+        if(unaryNode.value.toString() == "not"){
+            if(unaryNode.children.get(0).type == "boolean") {
+                unaryNode.type = unaryNode.children.get(0).type;
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if(unaryNode.children.get(0).type == "integer"){
+                unaryNode.type = unaryNode.children.get(0).type;
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    // Does a comparison for all types of binary nodes by comparing
+    // first comparing the two child nodes of the binary parent.
+    // Then it looks at if the child node is right for the parent's op
+    public boolean binaryCompareNodes(Node binaryNode){
+        if(!compare2Nodes(binaryNode.children.get(0), binaryNode.children.get(1))){
+            return false;
+        } else {
+            return compareBinaryOpToType(binaryNode);
+        }
+    }
+
+
+    public boolean compare2Nodes(Node expr1, Node expr2){
+        if(expr1.type == expr2.type){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // You only need one of the nodes since we already know that the Nodes match.
+    // You have three top levels with = which must be true. Then and, or which are 
+    // boolean type. The rest would have to be of integer type including <
+    public boolean compareBinaryOpToType(Node binaryNode){
+        if(binaryNode.value.toString() == "="){
+            binaryNode.type = binaryNode.children.get(0).type;
+            return true;
+        } else if(binaryNode.value.toString() == "and" || binaryNode.value.toString() == "or"){
+            if (binaryNode.children.get(0).type == "boolean"){
+                binaryNode.type = binaryNode.children.get(0).type;
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if (binaryNode.children.get(0).type == "integer"){
+                binaryNode.type = binaryNode.children.get(0).type;
+                return true;
+            }
+                return false;
+        }
+    }
+
+
+
+
+    public boolean compareIfNode(Node If){
+        if(If.children.get(0).type != "boolean" ){
+            return false;
+        } else if(compare2Nodes(If.children.get(1),If.children.get(2))){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean compareIdentifierNode(Node Identifier) {
+        // If Identifier is contained in the Symbol table
+        // for this Def, then true and set type. else false and error message 
+        return true;
+    }
+
+    public boolean compareFunctionCallsNode(Node FunctionCall) {
+        // Call the two different children nodes of Identifier and Actuals.
+        // Ensure the Identifier is a type of Def in the Symbol tables.
+        // Then start checking the expr of the Actuals to see if they match  
+        // with the Formals in the symbol table for the Identifier called.
+        // As long as this checks out then you pass what the FunctionCall's
+        // Type returned. Otherwise complain at the expected point.  
+        return true;
+    }
+
+    public boolean compareActualsToFormals(List<Node> Actuals){
+        // First check if it's the same length, false if not the same.
+        // Now start comparing the different actuals and formals they
+        // respectively come from.
+        return true;
+    }
+
+
+
+
+
 }
