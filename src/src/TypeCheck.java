@@ -6,37 +6,36 @@ public class TypeCheck {
     Map<String, TT_Obj> stable = new HashMap<String, TT_Obj>();
     //stable.put("func", new TT_Obj());
 
-    public String traversalHelper(Node tree)
+    public void traversalHelper(Node tree)
     {
-        String bodyType;
-        String throwAway;
         for (int i=0; i < tree.children.size(); i++)
         {
             Node child = tree.children.get(i);
             if (child.name.equals("Body")){
-                bodyType = traversal(child);
-                return bodyType;
+                traversal(child);
             }
-            else
-                throwAway = traversalHelper(child);
+            else{
+                traversalHelper(child);
+                //add function name and formals to symbol table here
+            }
         }
-        return "";
+        //add coce for function anme an formals here
     }
 
-    public String traversal(Node tree)
+    public void traversal(Node tree)
     {
-        ArrayList<String> nodeType = new ArrayList<String>();
-
         //traverse down AST
         for (int i=0; i < tree.children.size(); i++)
         {
             Node child = tree.children.get(i);
-            nodeType.add(traversal(child));
+            traversal(child);
         }
+        compareChildrenNodes(tree);
 
         //begin type checking
+
         //when we reach body, return its type
-        if (tree.name.equals("Body")) {
+        /*if (tree.name.equals("Body")) {
             return nodeType.get(0);
         }
         else if (tree.name.equals("BooleanValue") || tree.name.equals("boolean")) {
@@ -82,8 +81,9 @@ public class TypeCheck {
             return "Parser error";
 
         //if it gets this far, there was an error
-        return "Type Check Error";
+        return "Type Check Error";*/
     }
+
 
 
 
@@ -95,42 +95,48 @@ public class TypeCheck {
         return true;
     }
 
-    public boolean compareChildrenNodes(Node parent){
-        if (parent.name == "Unary"){
-            return unaryCompareNodes(parent);
-        } else if (parent.name == "Binary") {
-            return binaryCompareNodes(parent);
-        } else if (parent.name == "If") {
-            return compareIfNode(parent);
-        } else if (parent.name == "Identifier") {
-            return compareIdentifierNode(parent);
-        } else if (parent.name == "FunctionCalls") {
-            return compareFunctionCallsNode(parent);
-        } else {
+    public void compareChildrenNodes(Node currentNode){
+        if (currentNode.name.equals("Body")) {
+            compareBodyNode(currentNode); }
+        else if (currentNode.name == "Unary"){
+            unaryCompareNodes(currentNode); }
+        else if (currentNode.name == "Binary") {
+            binaryCompareNodes(currentNode); }
+        else if (currentNode.name == "If") {
+            compareIfNode(currentNode); }
+        else if (currentNode.name.equals("Expr")) {
+            compareExprNode(currentNode); }
+        else if (currentNode.name.equals("Number") || currentNode.name.equals("integer")) {
+            compareNumberNode(currentNode); }
+        else if (currentNode.name.equals("BooleanValue") || currentNode.name.equals("boolean")) {
+            compareBooleanNode(currentNode); }
+        else if (currentNode.name == "Identifier") {
+            compareIdentifierNode(currentNode); }
+        else if (currentNode.name == "FunctionCalls") {
+            compareFunctionCallsNode(currentNode); }
+        else {
             // I don't think this should ever be hit
             // we should be already returning once a node
             // has not children. If this happens there probably
             // is in error in the code.
-            return false;
+
         }
     }
 
     //Does a comparison for all types of unary nodes by looking into
     // it first by unary op and then by the type
-    public boolean unaryCompareNodes(Node unaryNode){
+    public void unaryCompareNodes(Node unaryNode){
         if(unaryNode.value.toString() == "not"){
             if(unaryNode.children.get(0).type == "boolean") {
-                unaryNode.type = unaryNode.children.get(0).type;
-                return true;
-            } else {
-                return false;
-            }
-        } else {
+                unaryNode.type = unaryNode.children.get(0).type; }
+            else {
+                generateError(unaryNode); }
+        }
+        else {
             if(unaryNode.children.get(0).type == "integer"){
-                unaryNode.type = unaryNode.children.get(0).type;
-                return true;
-            } else {
-                return false;
+                unaryNode.type = unaryNode.children.get(0).type; }
+            else {
+                generateError(unaryNode);
             }
         }
     }
@@ -138,63 +144,61 @@ public class TypeCheck {
     // Does a comparison for all types of binary nodes by comparing
     // first comparing the two child nodes of the binary parent.
     // Then it looks at if the child node is right for the parent's op
-    public boolean binaryCompareNodes(Node binaryNode){
+    public void binaryCompareNodes(Node binaryNode){
         if(!compare2Nodes(binaryNode.children.get(0), binaryNode.children.get(1))){
-            return false;
-        } else {
-            return compareBinaryOpToType(binaryNode);
-        }
+            generateError(binaryNode); }
+        else {
+            compareBinaryOpToType(binaryNode); }
     }
 
 
     public boolean compare2Nodes(Node expr1, Node expr2){
-        if(expr1.type == expr2.type){
-            return true;
-        } else {
-            return false;
-        }
+        if(expr1.type.equals(expr2.type)){
+            return true; }
+        else {
+            return false; }
     }
 
     // You only need one of the nodes since we already know that the Nodes match.
     // You have three top levels with = which must be true. Then and, or which are
     // boolean type. The rest would have to be of integer type including <
-    public boolean compareBinaryOpToType(Node binaryNode){
-        if(binaryNode.value.toString() == "="){
-            binaryNode.type = binaryNode.children.get(0).type;
-            return true;
-        } else if(binaryNode.value.toString() == "and" || binaryNode.value.toString() == "or"){
+    public void compareBinaryOpToType(Node binaryNode){
+        if(binaryNode.value.toString().equals("=")){
+            binaryNode.type = binaryNode.children.get(0).type; }
+        else if(binaryNode.value.toString().equals("and") || binaryNode.value.toString().equals("or")){
             if (binaryNode.children.get(0).type == "boolean"){
+                binaryNode.type = binaryNode.children.get(0).type; }
+            else {
+                generateError(binaryNode); }
+        }
+        else {
+            if (binaryNode.children.get(0).type.equals("integer")){
                 binaryNode.type = binaryNode.children.get(0).type;
-                return true;
-            } else {
-                return false;
             }
-        } else {
-            if (binaryNode.children.get(0).type == "integer"){
-                binaryNode.type = binaryNode.children.get(0).type;
-                return true;
-            }
-                return false;
+            else {
+                generateError(binaryNode); }
         }
     }
 
 
-
-
-    public boolean compareIfNode(Node If){
+    public void compareIfNode(Node If){
         if(If.children.get(0).type != "boolean" ){
-            return false;
-        } else if(compare2Nodes(If.children.get(1),If.children.get(2))){
-            return true;
-        } else {
-            return false;
-        }
+            generateError(If); }
+        else if(compare2Nodes(If.children.get(1),If.children.get(2))){
+            If.type = If.children.get(1).type;}
+        else {
+            generateError(If); }
     }
 
-    public boolean compareIdentifierNode(Node Identifier) {
+    public void compareIdentifierNode(Node Identifier) {
         // If Identifier is contained in the Symbol table
         // for this Def, then true and set type. else false and error message
-        return true;
+        if (stable.get(Identifier.value.toString()) != null){
+            Identifier.type = stable.get(Identifier.value.toString()).toString();
+        }
+        else{
+            generateError(Identifier);
+        }
     }
 
     public boolean compareFunctionCallsNode(Node FunctionCall) {
