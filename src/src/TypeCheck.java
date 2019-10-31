@@ -226,6 +226,11 @@ public class TypeCheck {
         addPrintToSymbolTable();
    
         for(Node def: program.children){
+            Object defIdentifierValue = def.children.get(0).value;
+
+            if(stable.containsKey(defIdentifierValue)){
+                //ERROR definition name already exists in symbol table
+            }
             LinkedList<LinkedList<String>> formalsLinkedListWithLinkedList = new LinkedList<LinkedList<String>>();
 
             Node formals = def.children.get(1);
@@ -243,10 +248,15 @@ public class TypeCheck {
                 formalsLinkedListWithLinkedList.add(formalLinkedList);
             }
 
-            Object defIdentifierValue = def.children.get(0).value;
             String defTypeString = def.children.get(2).type;
 
             stable.put(defIdentifierValue, new TT_Obj(formalsLinkedListWithLinkedList, defTypeString));
+        }
+
+        Object main = "main";
+
+        if(!stable.containsKey(main)){
+            // ERROR that there is no main function making it semantically incorrect
         }
     }
 
