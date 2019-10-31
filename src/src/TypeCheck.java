@@ -7,6 +7,16 @@ public class TypeCheck {
     //stable.put("func", new TT_Obj());
     String errorCode = "";
 
+    public void startSemanticCheck(Node tree){
+        createSymbolTable(tree);
+        traversalHelper(tree);
+        if (!errorCode.equals("")){
+            System.out.println(errorCode);
+        }
+        else{
+            System.out.println("No semantic errors found.");
+        }
+    }
     public void traversalHelper(Node tree)
     {
         for (int i = 0; i < tree.children.size(); i++) {
@@ -21,7 +31,6 @@ public class TypeCheck {
             }
         }
     }
-
 
     public void traversal(Node tree)
     {
@@ -163,7 +172,14 @@ public class TypeCheck {
 
     public void compareFunctionCallsNode(Node FunctionCall) {
 
-        Node identifier = FunctionCall.children.get(0);
+        //debug tests
+        Node identifier;
+        if (FunctionCall.children.get(0) != null) {
+            identifier = FunctionCall.children.get(0);
+        }
+        else{
+            identifier = new Node();
+        }
 
         // Check that identifier exists 
         if(!stable.containsKey(identifier.value)) {
@@ -177,8 +193,15 @@ public class TypeCheck {
                 errorCode = temp + errorCode;
             }
         }
-        
-        Node actuals = FunctionCall.children.get(1);
+
+        //debug tests
+        Node actuals;
+        if (FunctionCall.children.get(1) != null) {
+            actuals = FunctionCall.children.get(1);
+        }
+        else{
+            actuals = new Node();
+        }
 
         for(int i = 0; i < actuals.children.size(); i++){
             // compare the type of the actual at i to the formal at i

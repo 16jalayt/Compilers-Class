@@ -37,7 +37,7 @@ public class Main
             debugStage = -1;
 
         //**override for debug**
-        debugStage = 6;
+        debugStage = 8;
 
         try
         {
@@ -77,11 +77,10 @@ public class Main
                 Parser parse = new Parser(scan);
                 parse.parse();
                 TypeCheck checker = new TypeCheck();
-                boolean result = checker.check(parse.getTree());
+                checker.startSemanticCheck(parse.getTree());
                 if(debugStage == 8)
                 {
-                    System.out.println("Type Checker returned: " + result);
-                    checker.printSymbolTable();
+                    //checker.printSymbolTable();
                 }
             }
 
