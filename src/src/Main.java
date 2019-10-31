@@ -80,7 +80,7 @@ public class Main
                 checker.startSemanticCheck(parse.getTree());
                 if(debugStage == 8)
                 {
-                    //checker.printSymbolTable();
+                    checker.printSymbolTable();
                 }
             }
 
@@ -92,7 +92,7 @@ public class Main
                 Parser parse = new Parser(scan);
                 parse.parse();
                 TypeCheck checker = new TypeCheck();
-                checker.check(parse.getTree());
+                checker.createSymbolTable(parse.getTree());
             }
         }
         catch (FileNotFoundException e)

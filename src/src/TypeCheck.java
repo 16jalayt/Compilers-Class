@@ -17,6 +17,15 @@ public class TypeCheck {
             System.out.println("No semantic errors found.");
         }
     }
+    public void printSymbolTable()
+    {
+        Set< Map.Entry< Object,TT_Obj> > set = stable.entrySet();
+        for (Map.Entry< Object,TT_Obj> stable:set)
+        {
+            System.out.println(stable.getKey()+":"+stable.getValue());
+        }
+    }
+
     public void traversalHelper(Node tree)
     {
         for (int i = 0; i < tree.children.size(); i++) {
@@ -42,14 +51,14 @@ public class TypeCheck {
         compareChildrenNodes(tree);
     }
 
-
+/*
     public boolean check(Node tree)
     {
         //need to do dfs down to leaf then percolate the return types back up, then build symbol table
         //pre order traversal
         System.out.println("Type check");
         return true;
-    }
+    }*/
 
     public void compareChildrenNodes(Node currentNode){
         if (currentNode.name.equals("Body")) {
@@ -171,12 +180,12 @@ public class TypeCheck {
     }
 
     public void compareFunctionCallsNode(Node FunctionCall) {
-        
+
         Node identifier = FunctionCall.children.get(0);
 
         System.out.println("Got here 1");
 
-        // Check that identifier exists 
+        // Check that identifier exists
         if(!stable.containsKey(identifier.value)) {
             //The given identifier does not exist in the stable
             FunctionCall.type = "Error";
