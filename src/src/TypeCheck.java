@@ -209,13 +209,15 @@ public class TypeCheck {
         return true;
     }
 
-    public void createSymbolTable(Node program){
+    public void createSymbolTable(Node program) {
 
 
-        for(Node def: program.children){
+        for (Node def : program.children) {
             LinkedList<LinkedList<String>> formalsLinkedListWithLinkedList = new LinkedList<LinkedList<String>>();
 
             Node formals = def.children.get(1);
+        }
+    }
     public void generateError(Node error){
         //Creates a long list of errors, tracing back to the original node which caused the first error
         String temp;
