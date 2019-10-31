@@ -179,45 +179,78 @@ public class TypeCheck {
         }
     }
 
-    // public boolean compareFunctionCallsNode(Node FunctionCall) {
+    public void compareFunctionCallsNode(Node FunctionCall) {
 
+        Node identifier = FunctionCall.children.get(0);
 
+        // Check that identifier exists 
+        if(!stable.containsKey(identifier.value)) {
+            // Some error about the identifier node in the formal not exisiting
+        }
+        
+        Node actuals = FunctionCall.children.get(1);
 
-    //     Node identifier = FunctionCall.children.get(0);
+        for(int i = 0; i < actuals.children.size(); i++){
+            // compare the type of the actual at i to the formal at i
+            if(actuals.children.get(i).type != stable.get(identifier).formals.get(i).get(1)){
+                // Error that the type of the actual doesn't match the type of the formal
+            } 
 
-    //     // First compare the identifier to see that it exists if the function
-    //     // actually exists. Next compare each expression in the actuals to each
-    //     // formal in the formals.
-    //     if(stable.containsKey(identifier.value)) {
-    //         return true;
-    //     }
+        }
 
-
-    //     return true;
-    // }
-
-    // public boolean compareIdentifierOfFunctionCallsNode(Node Identifier) {
-    //     if(stable.containsKey(Identifier.value)) {
-    //         return true;
-    //     }
-    // }
-
-    public boolean compareActualsToFormals(List<Node> Actuals){
-        // First check if it's the same length, false if not the same.
-        // Now start comparing the different actuals and formals they
-        // respectively come from.
-        return true;
+        //After all checks, now we can assign this identifier its type
+        FunctionCall.type = stable.get(identifier).type;
     }
 
-    public void createSymbolTable(Node program) {
 
+    public void createSymbolTable(Node program){
 
-        for (Node def : program.children) {
+        addPrintToSymbolTable();
+   
+        for(Node def: program.children){
             LinkedList<LinkedList<String>> formalsLinkedListWithLinkedList = new LinkedList<LinkedList<String>>();
 
             Node formals = def.children.get(1);
+
+            //The formal is input as a list with [0] being the identifier
+            //and at location 1 the type
+            for(Node formal: formals.children){
+                Object formalIdentifierValue = def.children.get(0).value;
+
+                checkForRepeatedIdentifier(formalsLinkedListWithLinkedList, formalIdentifierValue);
+                
+                LinkedList<String> formalLinkedList = new LinkedList<String>();
+                formalLinkedList.add(formalIdentifierValue.toString());
+                formalLinkedList.add(formal.type);
+                formalsLinkedListWithLinkedList.add(formalLinkedList);
+            }
+
+            Object defIdentifierValue = def.children.get(0).value;
+            String defTypeString = def.children.get(2).type;
+
+            stable.put(defIdentifierValue, new TT_Obj(formalsLinkedListWithLinkedList, defTypeString));
         }
     }
+
+    public void addPrintToSymbolTable(){
+        Object printValue = new Object();
+        LinkedList<LinkedList<String>> printFormals = new LinkedList<LinkedList<String>>();
+        LinkedList<String> printFormal = new LinkedList<String>();
+        
+        printFormal.add("exp");
+        printFormal.add("or");
+        printFormals.add(printFormal);
+        stable.put(printValue, new TT_Obj(printFormals, "or"));
+    }
+
+    public void checkForRepeatedIdentifier(LinkedList<LinkedList<String>> formalsLinkedListWithLinkedList, Object formalIdentifierValue){
+        for(int i = 0; i < formalsLinkedListWithLinkedList.size()-1; i++){
+            if(formalIdentifierValue.toString() == formalsLinkedListWithLinkedList.get(i).get(0)){
+                //TODO ERROR ABOUT REPEATED IDENTIFIER NAME
+            }
+        }
+    }
+
     public void generateError(Node error){
         //Creates a long list of errors, tracing back to the original node which caused the first error
         String temp;
@@ -237,30 +270,6 @@ public class TypeCheck {
                 temp = "Error at " + error.name + "Node, caused by: ";
             }
             errorCode = temp + errorCode;
-        }
-    }
-
-    public void printSymbolTable()
-    {
-        Set< Map.Entry< String,TT_Obj> > set = stable.entrySet();
-
-            //The formal is input as a list with [0] being the identifier
-            //and at location 1 the type
-            for(Node formal: formals.children){
-                Object formalIdentifierValue = def.children.get(0).value;
-
-                // if(formalsHashMap.containsKey(formal.children.get(0).value)){
-                //     //ERROR MESSAGE OF REPEAT identifier name
-                // }
-                LinkedList<String> formalLinkedList = new LinkedList<String>();
-                formalLinkedList.add(formalIdentifierValue.toString());
-                formalLinkedList.add(formal.type);
-                formalsLinkedListWithLinkedList.add(formalLinkedList);
-            }
-            Object defIdentifierValue = def.children.get(0).value;
-            String defTypeString = def.children.get(2).type;
-
-            stable.put(defIdentifierValue, new TT_Obj(formalsLinkedListWithLinkedList, defTypeString));
         }
     }
 }

@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class TT_Obj
 {
-    public LinkedList<LinkedList<String>> formals = LinkedList<LinkedList<String>>();
+    public LinkedList<LinkedList<String>> formals = new LinkedList<LinkedList<String>>();
     public List<String> calledByFunctions = new LinkedList<String>();
     public List<String> callsFunctions = new LinkedList<String>();
     public String type = "null"; 
