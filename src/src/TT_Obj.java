@@ -7,14 +7,14 @@ import java.util.Map;
 
 public class TT_Obj
 {
-    public HashMap<Object, String> formals = new HashMap<Object, String>();
+    public LinkedList<LinkedList<String>> formals = LinkedList<LinkedList<String>>();
     public List<String> calledByFunctions = new LinkedList<String>();
     public List<String> callsFunctions = new LinkedList<String>();
     public String type = "null"; 
 
-    public TT_Obj(HashMap<Object, String> formalsMap, String type)
+    public TT_Obj(LinkedList<LinkedList<String>> formalsLinkedListWithLinkedList, String type)
     {
-        this.formals = formalsMap;
+        this.formals = formalsLinkedListWithLinkedList;
         this.type = type;
         
     }

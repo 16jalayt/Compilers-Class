@@ -201,15 +201,28 @@ public class TypeCheck {
         }
     }
 
-    public boolean compareFunctionCallsNode(Node FunctionCall) {
-        // Call the two different children nodes of Identifier and Actuals.
-        // Ensure the Identifier is a type of Def in the Symbol tables.
-        // Then start checking the expr of the Actuals to see if they match
-        // with the Formals in the symbol table for the Identifier called.
-        // As long as this checks out then you pass what the FunctionCall's
-        // Type returned. Otherwise complain at the expected point.
-        return true;
-    }
+    // public boolean compareFunctionCallsNode(Node FunctionCall) {
+
+        
+
+    //     Node identifier = FunctionCall.children.get(0);
+
+    //     // First compare the identifier to see that it exists if the function 
+    //     // actually exists. Next compare each expression in the actuals to each
+    //     // formal in the formals.
+    //     if(stable.containsKey(identifier.value)) {
+    //         return true; 
+    //     } 
+
+
+    //     return true;
+    // }
+
+    // public boolean compareIdentifierOfFunctionCallsNode(Node Identifier) {
+    //     if(stable.containsKey(Identifier.value)) {
+    //         return true; 
+    //     } 
+    // }
 
     public boolean compareActualsToFormals(List<Node> Actuals){
         // First check if it's the same length, false if not the same.
@@ -222,18 +235,27 @@ public class TypeCheck {
 
         
         for(Node def: program.children){
-            HashMap<Object, String> formalsHashMap = new HashMap<Object, String>();
+            LinkedList<LinkedList<String>> formalsLinkedListWithLinkedList = new LinkedList<LinkedList<String>>();
+
             Node formals = def.children.get(1);
-            Object identifierValue = def.children.get(0).value;
-            String defTypeString = def.children.get(2).type;
+
+            //The formal is input as a list with [0] being the identifier
+            //and at location 1 the type
             for(Node formal: formals.children){
-                if(formalsHashMap.containsKey(formal.children.get(0).value)){
-                    //ERROR MESSAGE OF REPEAT identifier name
-                }
-                //                (identifier node name        ,integer or booleantype node type)  
-                formalsHashMap.put(formal.children.get(0).value, formal.children.get(1).type);
+                Object formalIdentifierValue = def.children.get(0).value;
+
+                // if(formalsHashMap.containsKey(formal.children.get(0).value)){
+                //     //ERROR MESSAGE OF REPEAT identifier name
+                // }
+                LinkedList<String> formalLinkedList = new LinkedList<String>();
+                formalLinkedList.add(formalIdentifierValue.toString());
+                formalLinkedList.add(formal.type);
+                formalsLinkedListWithLinkedList.add(formalLinkedList);
             }
-            stable.put(identifierValue, new TT_Obj(formalsHashMap, defTypeString));
+            Object defIdentifierValue = def.children.get(0).value;
+            String defTypeString = def.children.get(2).type;
+
+            stable.put(defIdentifierValue, new TT_Obj(formalsLinkedListWithLinkedList, defTypeString));
         }
     }
 
