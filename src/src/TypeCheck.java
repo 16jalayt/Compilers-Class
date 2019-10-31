@@ -171,15 +171,10 @@ public class TypeCheck {
     }
 
     public void compareFunctionCallsNode(Node FunctionCall) {
+        
+        Node identifier = FunctionCall.children.get(0);
 
-        //debug tests
-        Node identifier;
-        if (FunctionCall.children.get(0) != null) {
-            identifier = FunctionCall.children.get(0);
-        }
-        else{
-            identifier = new Node();
-        }
+        System.out.println("Got here 1");
 
         // Check that identifier exists 
         if(!stable.containsKey(identifier.value)) {
@@ -193,19 +188,16 @@ public class TypeCheck {
                 errorCode = temp + errorCode;
             }
         }
+        System.out.println("Got here 2");
 
-        //debug tests
-        Node actuals;
-        if (FunctionCall.children.get(1) != null) {
-            actuals = FunctionCall.children.get(1);
-        }
-        else{
-            actuals = new Node();
-        }
+        Node actuals = FunctionCall.children.get(1);
+
+        System.out.println("Got here 3");
 
         for(int i = 0; i < actuals.children.size(); i++){
             // compare the type of the actual at i to the formal at i
-            if(actuals.children.get(i).type != stable.get(identifier).formals.get(i).get(1)){
+            System.out.println("Got here 3.5");
+            if(!actuals.children.get(i).type.equals(stable.get(identifier).formals.get(i).get(1))){
                 // Error that the type of the actual doesn't match the type of the formal
                 FunctionCall.type = "Error";
                 if (errorCode.equals("")){
@@ -222,10 +214,12 @@ public class TypeCheck {
                 }
             }
         }
+        System.out.println("Got here 4");
         //After all checks, now we can assign this identifier its type, unless there was an error
         if (!FunctionCall.type.equals("Error")) {
             FunctionCall.type = stable.get(identifier).type;
         }
+        System.out.println("Got here 5");
     }
 
     public void compareBodyToFunctionType(Node bodyNode, Node typeNode, Node funcName){
