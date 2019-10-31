@@ -3,7 +3,7 @@ package src;
 import java.util.*;
 
 public class TypeCheck {
-    Map<String, TT_Obj> stable = new HashMap<String, TT_Obj>();
+    Map<Object, TT_Obj> stable = new HashMap<Object, TT_Obj>();
     //stable.put("func", new TT_Obj());
 
     public void traversalHelper(Node tree)
@@ -218,16 +218,24 @@ public class TypeCheck {
         return true;
     }
 
-    public void printSymbolTable()
-    {
-        Set< Map.Entry< String,TT_Obj> > set = stable.entrySet();
+    public void createSymbolTable(Node program){
 
-        for (Map.Entry< String,TT_Obj> stable:set)
-        {
-            System.out.println(stable.getKey()+":"+stable.getValue());
+        
+        for(Node def: program.children){
+            HashMap<Object, String> formalsHashMap = new HashMap<Object, String>();
+            Node formals = def.children.get(1);
+            Object identifierValue = def.children.get(0).value;
+            String defTypeString = def.children.get(2).type;
+            for(Node formal: formals.children){
+                if(formalsHashMap.containsKey(formal.children.get(0).value)){
+                    //ERROR MESSAGE OF REPEAT identifier name
+                }
+                //                (identifier node name        ,integer or booleantype node type)  
+                formalsHashMap.put(formal.children.get(0).value, formal.children.get(1).type);
+            }
+            stable.put(identifierValue, new TT_Obj(formalsHashMap, defTypeString));
         }
     }
-
 
 
 
