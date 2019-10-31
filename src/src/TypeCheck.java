@@ -9,37 +9,19 @@ public class TypeCheck {
 
     public void traversalHelper(Node tree)
     {
-        if (tree.name.equals("Body")){
-            traversal(tree);
-        }
-        else if (tree.name.equals("Formals")){
-            formalsTraversal(tree);
-        }
-        else if (tree.name.equals("Program")) {
-            for (int i = 0; i < tree.children.size(); i++) {
-                Node def = tree.children.get(i);
-                traversalHelper(def);
+        for (int i = 0; i < tree.children.size(); i++) {
+            Node child = tree.children.get(i);
+            if (child.name.equals("Body")) {
+                traversal(child);
+                //after body gets a type, check if its the correct type
+                compareBodyToFunctionType(child, tree.children.get(2), tree.children.get(0));
             }
-        }
-        else if (tree.name.equals("Def")){
-            //no idea how to make child#2 into a TT_Obj type
-            //stable.put(tree.children.get(0).value.toString(), tree.children.get(2).value);
-            //formals
-            traversalHelper(tree.children.get(1));
-            //body
-            traversalHelper(tree.children.get(3));
+            else{
+                traversalHelper(child);
+            }
         }
     }
 
-    public void formalsTraversal(Node tree)
-    {
-        for (int i=0; i < tree.children.size(); i++)
-        {
-            Node child = tree.children.get(i);
-            //Not sure how to make second child into a TT_Obj
-            //stable.put(child.children.get(0).value.toString(), child.children.get(1).value);
-        }
-    }
 
     public void traversal(Node tree)
     {
@@ -63,17 +45,17 @@ public class TypeCheck {
     public void compareChildrenNodes(Node currentNode){
         if (currentNode.name.equals("Body")) {
             compareBodyNode(currentNode); }
-        else if (currentNode.name == "Unary"){
+        else if (currentNode.name.equals("Unary")){
             unaryCompareNodes(currentNode); }
-        else if (currentNode.name == "Binary") {
+        else if (currentNode.name.equals("Binary")) {
             binaryCompareNodes(currentNode); }
-        else if (currentNode.name == "If") {
+        else if (currentNode.name.equals("If")) {
             compareIfNode(currentNode); }
         else if (currentNode.name.equals("Expr")) {
             compareExprNode(currentNode); }
-        else if (currentNode.name == "Identifier") {
+        else if (currentNode.name.equals("Identifier")) {
             compareIdentifierNode(currentNode); }
-        else if (currentNode.name == "FunctionCalls") {
+        else if (currentNode.name.equals("FunctionCalls")) {
             compareFunctionCallsNode(currentNode); }
         else {
             // We would hit this if our node is a literal, since those already have their type
@@ -99,14 +81,14 @@ public class TypeCheck {
     // it first by unary op and then by the type
     public void unaryCompareNodes(Node unaryNode){
         if(unaryNode.value.toString() == "not"){
-            if(unaryNode.children.get(0).type == "boolean") {
+            if(unaryNode.children.get(0).type.equals("boolean")) {
                 unaryNode.type = unaryNode.children.get(0).type; }
             else {
                 unaryNode.type = "Error";
                 generateError(unaryNode); }
         }
         else {
-            if(unaryNode.children.get(0).type == "integer"){
+            if(unaryNode.children.get(0).type.equals("integer")){
                 unaryNode.type = unaryNode.children.get(0).type; }
             else {
                 unaryNode.type = "Error";
@@ -140,7 +122,7 @@ public class TypeCheck {
         if(binaryNode.value.toString().equals("=")){
             binaryNode.type = binaryNode.children.get(0).type; }
         else if(binaryNode.value.toString().equals("and") || binaryNode.value.toString().equals("or")){
-            if (binaryNode.children.get(0).type == "boolean"){
+            if (binaryNode.children.get(0).type.equals("boolean")){
                 binaryNode.type = binaryNode.children.get(0).type; }
             else {
                 binaryNode.type = "Error";
@@ -157,7 +139,7 @@ public class TypeCheck {
     }
 
     public void compareIfNode(Node If){
-        if(If.children.get(0).type != "boolean" ){
+        if(!If.children.get(0).type.equals("boolean")){
             If.type = "Error";
             generateError(If); }
         else if(compare2Nodes(If.children.get(1),If.children.get(2))){
@@ -185,7 +167,15 @@ public class TypeCheck {
 
         // Check that identifier exists 
         if(!stable.containsKey(identifier.value)) {
-            // Some error about the identifier node in the formal not exisiting
+            //The given identifier does not exist in the stable
+            FunctionCall.type = "Error";
+            if (errorCode.equals("")){
+                errorCode = "Error, Identifier Node " + identifier + "does not exist.";
+            }
+            else{
+                String temp = "Error, Identifier Node " + identifier + "does not exist: ";
+                errorCode = temp + errorCode;
+            }
         }
         
         Node actuals = FunctionCall.children.get(1);
@@ -194,12 +184,40 @@ public class TypeCheck {
             // compare the type of the actual at i to the formal at i
             if(actuals.children.get(i).type != stable.get(identifier).formals.get(i).get(1)){
                 // Error that the type of the actual doesn't match the type of the formal
-            } 
-
+                FunctionCall.type = "Error";
+                if (errorCode.equals("")){
+                    String temp1 = "Error, Identifier Node " + actuals.children.get(i) + "of type " + actuals.children.get(i).type;
+                    String temp2 = " does not type match" + stable.get(identifier).formals.get(i).get(1) + ".";
+                    errorCode = temp1 + temp2;
+                    break;
+                }
+                else {
+                    String temp1 = "Error, Identifier Node " + actuals.children.get(i) + "of type " + actuals.children.get(i).type;
+                    String temp2 = " does not type match" + stable.get(identifier).formals.get(i).get(1) + ":";
+                    errorCode = temp1 + temp2 + errorCode;
+                    break;
+                }
+            }
         }
+        //After all checks, now we can assign this identifier its type, unless there was an error
+        if (!FunctionCall.type.equals("Error")) {
+            FunctionCall.type = stable.get(identifier).type;
+        }
+    }
 
-        //After all checks, now we can assign this identifier its type
-        FunctionCall.type = stable.get(identifier).type;
+    public void compareBodyToFunctionType(Node bodyNode, Node typeNode, Node funcName){
+        if (!bodyNode.type.equals(typeNode.type)){
+            if (errorCode.equals("")){
+                String temp1 = "Error caused by body's returned type not matching the function ";
+                String temp2 = funcName.name + "'s return type.";
+                errorCode = temp1 + temp2;
+            }
+            else{
+                String temp1 = "Error caused by body's returned type not matching the function ";
+                String temp2 = funcName.name + "'s return type:";
+                errorCode = temp1 + temp2 + errorCode;
+            }
+        }
     }
 
 
@@ -245,8 +263,15 @@ public class TypeCheck {
 
     public void checkForRepeatedIdentifier(LinkedList<LinkedList<String>> formalsLinkedListWithLinkedList, Object formalIdentifierValue){
         for(int i = 0; i < formalsLinkedListWithLinkedList.size()-1; i++){
-            if(formalIdentifierValue.toString() == formalsLinkedListWithLinkedList.get(i).get(0)){
-                //TODO ERROR ABOUT REPEATED IDENTIFIER NAME
+            if(formalIdentifierValue.toString().equals(formalsLinkedListWithLinkedList.get(i).get(0))){
+                //Calls an error about multiple uses of an Identifier name
+                if (errorCode.equals("")) {
+                    errorCode = "Error caused by multiple uses of Identifier name " + formalIdentifierValue.toString() + ".";
+                }
+                else {
+                    String temp = "Error caused by multiple uses of Identifier name " + formalIdentifierValue.toString() + ":";
+                    errorCode = temp + errorCode;
+                }
             }
         }
     }
@@ -256,10 +281,10 @@ public class TypeCheck {
         String temp;
         if (errorCode.equals("")) {
             if (error.value != null) {
-                errorCode = "Error at " + error.name + "Node, with value of " + error.value;
+                errorCode = "Error at " + error.name + "Node, with value of " + error.value + ".";
             }
             else {
-                errorCode = "Error at " + error.name + "Node";
+                errorCode = "Error at " + error.name + "Node.";
             }
         }
         else{
