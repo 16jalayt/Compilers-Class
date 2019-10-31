@@ -7,7 +7,7 @@ public class TypeCheck {
     //stable.put("func", new TT_Obj());
     String errorCode = "";
 
-    public void startSemanticCheck(Node tree){
+    public void check(Node tree){
         createSymbolTable(tree);
         traversalHelper(tree);
         if (!errorCode.equals("")){

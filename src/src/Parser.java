@@ -254,7 +254,16 @@ public class Parser
                     case "make-<NUMBER>":
                         if(Main.debugStage == 6) System.out.println("SemanticStack:" + semanticStack);
                         if(Main.debugStage == 6) System.out.println("NodeStack: " + NodeStack);
-                        NodeStack.push(new Node.Number(Integer.parseInt(semanticStack.pop())));
+
+                        String number = semanticStack.pop();
+                        try
+                        {
+                            NodeStack.push(new Node.Number(Integer.parseInt(number)));
+                        }
+                        catch(NumberFormatException e)
+                        {
+                            System.out.println("The value " + number + "Is either too big or small.");
+                        }
                         break;
                     case "make-<BOOLEAN>":
                         if(Main.debugStage == 6) System.out.println("NodeStack: " + NodeStack);

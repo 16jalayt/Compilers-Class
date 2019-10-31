@@ -77,7 +77,7 @@ public class Main
                 Parser parse = new Parser(scan);
                 parse.parse();
                 TypeCheck checker = new TypeCheck();
-                checker.startSemanticCheck(parse.getTree());
+                checker.check(parse.getTree());
                 if(debugStage == 8)
                 {
                     checker.printSymbolTable();
@@ -92,7 +92,7 @@ public class Main
                 Parser parse = new Parser(scan);
                 parse.parse();
                 TypeCheck checker = new TypeCheck();
-                checker.createSymbolTable(parse.getTree());
+                checker.check(parse.getTree());
             }
         }
         catch (FileNotFoundException e)
