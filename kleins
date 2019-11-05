@@ -1,3 +1,4 @@
 #!/bin/bash
-cd out/production/Compilers-Class
+cd src/
 java src.Main "$@" scan
+cd ../

@@ -7,37 +7,37 @@ public class Main
     //-1 production, 1 scanner, 3 parser,
     //even with debug prints, odd no prints
     //odd values are used for kleinf,kleinp, etc
-    //**Do not change here. the override is below the if statement**
+    //**Do not change here. the override is below**
     static int debugStage = -1;
+    //CHANGE THIS ONE
+    static int debug = 8;
 
     //can use this line in the code and will mute the debug print
     //if (Main.debugStage>=2) {System.out.println("The stack is: " + stack.toString());}
 
     public static void main(String[] args)
     {
-        if(args.length != 1)
+        System.out.println(args[0]);
+        if(args.length == 1)
         {
-            System.out.println("Correct usage is: program filename.kln");
-            return;
+            debugStage = -1;
         }
         else if(args.length == 2)
         {
             if(args[1].toLowerCase().equals("scan"))
                 debugStage = 1;
-            if(args[1].toLowerCase().equals("validate"))
+            else if(args[1].toLowerCase().equals("validate"))
                 debugStage = 3;
-            if(args[1].toLowerCase().equals("parse"))
+            else if(args[1].toLowerCase().equals("parse"))
                 debugStage = 5;
-            if(args[1].toLowerCase().equals("check"))
+            else if(args[1].toLowerCase().equals("check"))
                 debugStage = 7;
+            else if(args[1].toLowerCase().equals("debug"))
+                debugStage = debug;
             else
                 debugStage = -1;
         }
-        else
-            debugStage = -1;
 
-        //**override for debug**
-        debugStage = 8;
 
         try
         {

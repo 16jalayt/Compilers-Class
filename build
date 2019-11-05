@@ -1,0 +1,11 @@
+#! /bin/sh
+echo "... removing any existing classfiles"
+cd src/src/
+rm -f *.class
+echo "... changing to src/ and compiling"
+
+javac *.java
+#echo "... moving classfiles to exe/"
+#mv *.class ../../exe/
+cd ../../
+echo "... build complete"
