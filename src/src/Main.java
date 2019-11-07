@@ -1,6 +1,7 @@
 package src;
 
 import java.io.*;
+import src.Node;
 
 public class Main
 {
@@ -10,14 +11,13 @@ public class Main
     //**Do not change here. the override is below**
     static int debugStage = -1;
     //CHANGE THIS ONE
-    static int debug = 8;
+    static int debug = 10;
 
     //can use this line in the code and will mute the debug print
     //if (Main.debugStage>=2) {System.out.println("The stack is: " + stack.toString());}
 
     public static void main(String[] args)
     {
-        System.out.println(args[0]);
         if(args.length == 1)
         {
             debugStage = -1;
@@ -32,16 +32,21 @@ public class Main
                 debugStage = 5;
             else if(args[1].toLowerCase().equals("check"))
                 debugStage = 7;
+            else if(args[1].toLowerCase().equals("compile"))
+                debugStage = 9;
             else if(args[1].toLowerCase().equals("debug"))
                 debugStage = debug;
             else
                 debugStage = -1;
         }
 
-
         try
         {
-            String fullFile = new java.util.Scanner(new File(args[0])).useDelimiter("\\Z").next();
+            String fileName = args[0];
+            //make sure there is an extension appended
+            if (!args[0].contains(".kln"))
+                fileName += ".kln";
+            String fullFile = new java.util.Scanner(new File(fileName)).useDelimiter("\\Z").next();
 
             //scanner
             if(debugStage == 1 || debugStage == 2)
@@ -83,6 +88,18 @@ public class Main
                     checker.printSymbolTable();
                 }
             }
+            //code gen
+            if(debugStage == 9 || debugStage == 10)
+            {
+                Scanner scan = new Scanner(fullFile);
+                Parser parse = new Parser(scan);
+                parse.parse();
+                TypeCheck checker = new TypeCheck();
+                Node tree = parse.getTree();
+                //checker.check(tree);
+                Generator gen = new Generator();
+                gen.gen(checker.getStable(), tree, fileName);
+            }
 
             //production - full pipeline
             if(debugStage == -1)
@@ -92,7 +109,10 @@ public class Main
                 Parser parse = new Parser(scan);
                 parse.parse();
                 TypeCheck checker = new TypeCheck();
-                checker.check(parse.getTree());
+                Node tree = parse.getTree();
+                checker.check(tree);
+                Generator gen = new Generator();
+                gen.gen(checker.getStable(), tree, fileName);
             }
         }
         catch (FileNotFoundException e)

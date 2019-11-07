@@ -1,0 +1,5 @@
+Registers:
+0 - reserved for 0
+1-5 - available
+6 - reserved for return addresses
+7 - reserved for program counter

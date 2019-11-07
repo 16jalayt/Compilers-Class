@@ -17,6 +17,10 @@ public class TypeCheck {
             System.out.println("No semantic errors found.");
         }
     }
+
+    public Map getStable()
+    {return stable;}
+
     public void printSymbolTable()
     {
         Set< Map.Entry< Object,TT_Obj> > set = stable.entrySet();
