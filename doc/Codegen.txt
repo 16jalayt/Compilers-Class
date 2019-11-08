@@ -1,5 +1,20 @@
 Registers:
 0 - reserved for 0
-1-5 - available
-6 - reserved for return addresses
+1-4 - available
+5 - reserved for return value
+6 - reserved for top of stack
 7 - reserved for program counter
+
+Stack Frame:
+Num arguments
+Arguments
+Num of registers to store
+Register contents
+ret addr
+
+DMEM:
+Check main for number of arguments and store in r6 as top of stack
+
+IMEM:
+It looks like our code will have to go backwards and create all the functions first,
+then main, then the bootstrap.There's not a great way to go back and edit the addresses.
