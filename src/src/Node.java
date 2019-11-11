@@ -76,53 +76,6 @@ public class Node
         }
     }
 
-    // public boolean doChildrenTypesMatch(List<Node> childList){
-    //     String childrenType = "";
-    //     boolean comparison = false;
-
-    //     for(Node child : childList){
-    //         if(childList == "") {
-    //             childrenType = child.type;
-    //             comparison = true;
-    //         } else if(child.type != childrenType) {
-    //             comparison = false;
-    //         }
-    //     }
-    //     return comparison;
-    // }
-
-    // public void setParentType(Node parent, List<Node> childList){
-    //      parent.type = childList.get(0).type;
-    // }
-
-    // public String getLeafType(Node leaf){
-    //     return leaf.type;
-    // }
-
-    // public boolean setASTTypes(Node parent){
-    //     if(parent.hasChildren()){
-    //         for(Node child: parent.children){
-    //             setASTTypes(child);
-    //         }
-    //         if(doChildrenTypesMatch(parent.children)){
-    //             setParentType(parent, parent.children);
-    //         } else {
-    //             return false;
-    //         }
-    //     }
-    //     return true;
-    // }
-
-
-
-    public boolean hasChildren(){
-        if (this.children.size() == 0){
-            return false;
-        }
-        else
-            return true;
-    }
-
     public static class Program extends Node
     {
         public Program() {

@@ -21,7 +21,7 @@ public class TT_Obj
     @Override
     public String toString()
     {
-        return "Type:"+type + " Formals:" + formals + " Called by Functions:" + calledByFunctions +
-        " Calls Functions:" + callsFunctions;
+        return "Type: "+type + ", Formals: " + formals + ", Called by Functions: " + calledByFunctions +
+        ", Calls Functions: " + callsFunctions;
     }
 }

@@ -24,9 +24,11 @@ public class TypeCheck {
     public void printSymbolTable()
     {
         Set< Map.Entry< Object,TT_Obj> > set = stable.entrySet();
+        System.out.println();
+        System.out.println("Printing symbol table now.");
         for (Map.Entry< Object,TT_Obj> stable:set)
         {
-            System.out.println(stable.getKey()+":"+stable.getValue());
+            System.out.println(stable.getKey()+":: "+stable.getValue());
         }
     }
 
@@ -55,14 +57,6 @@ public class TypeCheck {
         compareChildrenNodes(tree);
     }
 
-/*
-    public boolean check(Node tree)
-    {
-        //need to do dfs down to leaf then percolate the return types back up, then build symbol table
-        //pre order traversal
-        System.out.println("Type check");
-        return true;
-    }*/
 
     public void compareChildrenNodes(Node currentNode){
         if (currentNode.name.equals("Body")) {
@@ -174,10 +168,14 @@ public class TypeCheck {
     public void compareIdentifierNode(Node Identifier) {
         // If Identifier is contained in the Symbol table
         // for this Def, then true and set type. else false and error message
-        if (stable.get(Identifier.value.toString()) != null){
-            Identifier.type = stable.get(Identifier.value.toString()).toString();
-        }
-        else{
+        LinkedList<LinkedList<String>> tempListList = new LinkedList<>();
+        LinkedList<String> tempList = new LinkedList<>();
+        tempList.add(Identifier.value.toString());
+        tempListList.add(tempList);
+
+        //If the table does not contain this specific Identifier/type pair, then set its new type to be Error
+        if (!stable.containsValue(new TT_Obj(tempListList, Identifier.type))){
+            System.out.println("Identifier error is " + new TT_Obj(tempListList, Identifier.type));
             Identifier.type = "Error";
             generateError(Identifier);
         }
@@ -187,64 +185,61 @@ public class TypeCheck {
 
         Node identifier = FunctionCall.children.get(0);
 
-        System.out.println("Got here 1");
-
         // Check that identifier exists
         if(!stable.containsKey(identifier.value)) {
             //The given identifier does not exist in the stable
             FunctionCall.type = "Error";
             if (errorCode.equals("")){
-                errorCode = "Error, Identifier Node " + identifier + "does not exist.";
+                errorCode = "Error, Identifier Node " + identifier + " does not exist. ";
             }
             else{
-                String temp = "Error, Identifier Node " + identifier + "does not exist: ";
+                String temp = "Error, Identifier Node " + identifier + " does not exist: ";
                 errorCode = temp + errorCode;
             }
         }
-        System.out.println("Got here 2");
 
         Node actuals = FunctionCall.children.get(1);
 
-        System.out.println("Got here 3");
-
         for(int i = 0; i < actuals.children.size(); i++){
             // compare the type of the actual at i to the formal at i
-            System.out.println("Got here 3.5");
-            if(!actuals.children.get(i).type.equals(stable.get(identifier).formals.get(i).get(1))){
+            System.out.println("Comparing Functions here =>");
+            System.out.println("Actuals type is : " + actuals.children.get(0).type);
+            System.out.println(stable.get(identifier.value));
+            System.out.println("Formals [identifier, type] are : " + stable.get(identifier.value).formals.get(0));
+            if(!actuals.children.get(i).type.equals(stable.get(identifier.value).formals.get(i).get(1))){
                 // Error that the type of the actual doesn't match the type of the formal
                 FunctionCall.type = "Error";
                 if (errorCode.equals("")){
-                    String temp1 = "Error, Identifier Node " + actuals.children.get(i) + "of type " + actuals.children.get(i).type;
-                    String temp2 = " does not type match" + stable.get(identifier).formals.get(i).get(1) + ".";
+                    String temp1 = "Error, " + actuals.children.get(i) + " Node of type " + actuals.children.get(i).type;
+                    String temp2 = " does not type match " + stable.get(identifier.value).formals.get(i).get(1) + ". ";
                     errorCode = temp1 + temp2;
                     break;
                 }
                 else {
-                    String temp1 = "Error, Identifier Node " + actuals.children.get(i) + "of type " + actuals.children.get(i).type;
-                    String temp2 = " does not type match" + stable.get(identifier).formals.get(i).get(1) + ":";
+                    String temp1 = "Error, " + actuals.children.get(i) + " Node of type " + actuals.children.get(i).type;
+                    String temp2 = " does not type match " + stable.get(identifier.value).formals.get(i).get(1) + ": ";
                     errorCode = temp1 + temp2 + errorCode;
                     break;
                 }
             }
         }
-        System.out.println("Got here 4");
+
         //After all checks, now we can assign this identifier its type, unless there was an error
         if (!FunctionCall.type.equals("Error")) {
             FunctionCall.type = stable.get(identifier).type;
         }
-        System.out.println("Got here 5");
     }
 
     public void compareBodyToFunctionType(Node bodyNode, Node typeNode, Node funcName){
         if (!bodyNode.type.equals(typeNode.type)){
             if (errorCode.equals("")){
                 String temp1 = "Error caused by body's returned type not matching the function ";
-                String temp2 = funcName.name + "'s return type.";
+                String temp2 = funcName.value + "'s return type. ";
                 errorCode = temp1 + temp2;
             }
             else{
                 String temp1 = "Error caused by body's returned type not matching the function ";
-                String temp2 = funcName.name + "'s return type:";
+                String temp2 = funcName.value + "'s return type: ";
                 errorCode = temp1 + temp2 + errorCode;
             }
         }
@@ -265,17 +260,30 @@ public class TypeCheck {
 
             Node formals = def.children.get(1);
 
-            //The formal is input as a list with [0] being the identifier
-            //and at location 1 the type
-            for(Node formal: formals.children){
-                Object formalIdentifierValue = def.children.get(0).value;
-
-                checkForRepeatedIdentifier(formalsLinkedListWithLinkedList, formalIdentifierValue);
-                
+            //check if the formals are empty or not
+            if (formals.children.size() == 0){
                 LinkedList<String> formalLinkedList = new LinkedList<String>();
-                formalLinkedList.add(formalIdentifierValue.toString());
-                formalLinkedList.add(formal.type);
+                formalLinkedList.add("Empty");
+                formalLinkedList.add("Null");
                 formalsLinkedListWithLinkedList.add(formalLinkedList);
+            }
+            else {
+                //The formal is input as a list with [0] being the identifier
+                //and at location 1 the type
+                for (Node formal : formals.children) {
+                    //Set the identifier node's type here for later lookup
+                    formal.children.get(0).type = formal.children.get(1).type;
+                    System.out.println("Type1 is " + formal.children.get(1).type);
+
+                    Object formalIdentifierValue = formal.children.get(0).value;
+
+                    checkForRepeatedIdentifier(formalsLinkedListWithLinkedList, formalIdentifierValue);
+
+                    LinkedList<String> formalLinkedList = new LinkedList<String>();
+                    formalLinkedList.add(formalIdentifierValue.toString());
+                    formalLinkedList.add(formal.children.get(1).type);
+                    formalsLinkedListWithLinkedList.add(formalLinkedList);
+                }
             }
 
             String defTypeString = def.children.get(2).type;
@@ -292,6 +300,7 @@ public class TypeCheck {
 
     public void addPrintToSymbolTable(){
         Object printValue = new Object();
+        printValue = "Print_call";
         LinkedList<LinkedList<String>> printFormals = new LinkedList<LinkedList<String>>();
         LinkedList<String> printFormal = new LinkedList<String>();
         
@@ -306,10 +315,10 @@ public class TypeCheck {
             if(formalIdentifierValue.toString().equals(formalsLinkedListWithLinkedList.get(i).get(0))){
                 //Calls an error about multiple uses of an Identifier name
                 if (errorCode.equals("")) {
-                    errorCode = "Error caused by multiple uses of Identifier name " + formalIdentifierValue.toString() + ".";
+                    errorCode = "Error caused by multiple uses of Identifier name " + formalIdentifierValue.toString() + ". ";
                 }
                 else {
-                    String temp = "Error caused by multiple uses of Identifier name " + formalIdentifierValue.toString() + ":";
+                    String temp = "Error caused by multiple uses of Identifier name " + formalIdentifierValue.toString() + ": ";
                     errorCode = temp + errorCode;
                 }
             }
@@ -321,18 +330,18 @@ public class TypeCheck {
         String temp;
         if (errorCode.equals("")) {
             if (error.value != null) {
-                errorCode = "Error at " + error.name + "Node, with value of " + error.value + ".";
+                errorCode = "Error at " + error.name + " Node, with value of " + error.value + ". ";
             }
             else {
-                errorCode = "Error at " + error.name + "Node.";
+                errorCode = "Error at " + error.name + " Node. ";
             }
         }
         else{
             if (error.value != null) {
-                temp = "Error at " + error.name + "Node, with value of " + error.value + ", caused by: ";
+                temp = "Error at " + error.name + " Node, with value of " + error.value + ", caused by: ";
             }
             else {
-                temp = "Error at " + error.name + "Node, caused by: ";
+                temp = "Error at " + error.name + " Node, caused by: ";
             }
             errorCode = temp + errorCode;
         }
