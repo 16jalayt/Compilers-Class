@@ -96,7 +96,7 @@ public class Main
                 parse.parse();
                 TypeCheck checker = new TypeCheck();
                 Node tree = parse.getTree();
-                //checker.check(tree);
+                checker.check(tree);
                 Generator gen = new Generator();
                 gen.gen(checker.getStable(), tree, fileName);
             }

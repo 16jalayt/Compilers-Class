@@ -1,7 +1,5 @@
 package src;
 
-//import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -45,33 +43,41 @@ public class Generator
 
     private void bootStrap() throws IOException
     {
-        //need to start parsing tree at this point.
-        //get number of args from main. set top at this point
-        //top=?
-
+        //Ignore: just get from func tree
         //LD  3,1(0)   ; read command-line arg into MAIN's arg slot
         //needs to be in for loop
 
-        //r6 used for ret addr
+        //r5 used for ret addr
         // +2 = +1 for addr. -1 = -2
-        print("lda", 6,1,7,"jump to main");
+        print("lda", 5,1,7,"jump to main");
 
         //dont know where main is yet
         //print("lda", 7,x,0);
 
-
         ///////MABY keep outputs in linked list for out of order
+        //should work without, if do reverse order
 
         print("out", 6,0,0,"print the return register");
         print("halt", 0,0,0);
     }
     private void main() throws IOException
     {
+        //in mem not reg:
         //8:    ADD  5,0,3    ; store parameter into SQUARE's arg slot
+
+        //in stack frame
         //9:    ST   6,2(0)   ; save return address in DMEM[ [r0]+2 ]
-        //10:    LDA  6,1(7)   ; store return address
+
+        //inc of 1 skips over the branch
+        //10:    LDA  5,1(7)   ; store return address
+
+
         //11:    LDA  7,5(0)   ; branch to SQUARE, at [r0]+5
+
+        //in stackframe
         //12:    ADD  2,0,4    ; copy SQUARE's return value into return slot
+
+        //teardown jump
         //13:    LD   7,2(0)   ; return to address in DMEM[ [r0]+2 ]
     }
 
