@@ -6,6 +6,8 @@ public class TypeCheck {
     Map<Object, TT_Obj> stable = new HashMap<Object, TT_Obj>();
     //stable.put("func", new TT_Obj());
     String errorCode = "";
+    Node functionName;
+    Node functionType;
 
     public void check(Node tree){
         createSymbolTable(tree);
@@ -37,7 +39,11 @@ public class TypeCheck {
         for (int i = 0; i < tree.children.size(); i++) {
             Node child = tree.children.get(i);
             if (child.name.equals("Body")) {
+                //set the current functions name, for later use in compareIdentifier
+                functionName = tree.children.get(0);
+                functionType = tree.children.get(2);
                 traversal(child);
+
                 //after body gets a type, check if its the correct type
                 compareBodyToFunctionType(child, tree.children.get(2), tree.children.get(0));
             }
@@ -171,13 +177,34 @@ public class TypeCheck {
         LinkedList<LinkedList<String>> tempListList = new LinkedList<>();
         LinkedList<String> tempList = new LinkedList<>();
         tempList.add(Identifier.value.toString());
+        tempList.add("integer");
         tempListList.add(tempList);
 
+        System.out.println("Initial lookup is : " + stable.get(functionName.value));
+        System.out.println("Compared lookup is : " + new TT_Obj(tempListList, functionType.type));
+
+        TT_Obj tempObj = stable.get(functionName.value);
+
         //If the table does not contain this specific Identifier/type pair, then set its new type to be Error
-        if (!stable.containsValue(new TT_Obj(tempListList, Identifier.type))){
-            System.out.println("Identifier error is " + new TT_Obj(tempListList, Identifier.type));
-            Identifier.type = "Error";
-            generateError(Identifier);
+        if (stable.get(functionName.value).equals(new TT_Obj(tempListList, functionType.type))){
+        //if (tempObj.formals.contains(tempList)){
+            Identifier.type = "integer";
+        }
+        else {
+            LinkedList<LinkedList<String>> tempListList2 = new LinkedList<>();
+            LinkedList<String> tempList2 = new LinkedList<>();
+            tempList2.add(Identifier.value.toString());
+            tempList2.add("boolean");
+            tempListList2.add(tempList2);
+
+            if (stable.get(functionName.value).equals(new TT_Obj(tempListList2, functionType.type))) {
+            //if (tempObj.formals.contains(tempList2)){
+                Identifier.type = "boolean";
+            }
+            else {
+                Identifier.type = "Error";
+                generateError(Identifier);
+            }
         }
     }
 
@@ -202,10 +229,6 @@ public class TypeCheck {
 
         for(int i = 0; i < actuals.children.size(); i++){
             // compare the type of the actual at i to the formal at i
-            System.out.println("Comparing Functions here =>");
-            System.out.println("Actuals type is : " + actuals.children.get(0).type);
-            System.out.println(stable.get(identifier.value));
-            System.out.println("Formals [identifier, type] are : " + stable.get(identifier.value).formals.get(0));
             if(!actuals.children.get(i).type.equals(stable.get(identifier.value).formals.get(i).get(1))){
                 // Error that the type of the actual doesn't match the type of the formal
                 FunctionCall.type = "Error";
@@ -271,10 +294,6 @@ public class TypeCheck {
                 //The formal is input as a list with [0] being the identifier
                 //and at location 1 the type
                 for (Node formal : formals.children) {
-                    //Set the identifier node's type here for later lookup
-                    formal.children.get(0).type = formal.children.get(1).type;
-                    System.out.println("Type1 is " + formal.children.get(1).type);
-
                     Object formalIdentifierValue = formal.children.get(0).value;
 
                     checkForRepeatedIdentifier(formalsLinkedListWithLinkedList, formalIdentifierValue);
