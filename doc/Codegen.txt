@@ -8,8 +8,7 @@ Registers:
 Stack Frame:
 Num arguments
 Arguments
-Num of registers to store
-Register contents
+Register contents 1-4
 ret addr
 
 DMEM:

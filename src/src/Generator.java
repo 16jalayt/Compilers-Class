@@ -11,7 +11,7 @@ public class Generator
 {
     Map<Object, TT_Obj> stable = new HashMap<Object, TT_Obj>();
     Node tree;
-    BufferedWriter writer;
+    static BufferedWriter writer;
     static int lineNumber = 0;
     private int top=0;
 
@@ -43,35 +43,50 @@ public class Generator
 
     private void bootStrap() throws IOException
     {
+        //Needs to be first
+        //lineNumber = 0;
+
         //Ignore: just get from func tree
         //LD  3,1(0)   ; read command-line arg into MAIN's arg slot
         //needs to be in for loop
 
         //r5 used for ret addr
         // +2 = +1 for addr. -1 = -2
+
+        StackFrame.makeFrame();
+
+        //THE FIRST JUMP IS A KNOWN ADDR
         print("lda", 5,1,7,"jump to main");
 
-        //dont know where main is yet
-        //print("lda", 7,x,0);
-
-        ///////MABY keep outputs in linked list for out of order
-        //should work without, if do reverse order
+        //isolate function from tree
+        int start = parseFunc(new Node());
+        print("lda", 7, start,0);
 
         print("out", 6,0,0,"print the return register");
         print("halt", 0,0,0);
     }
-    private void main() throws IOException
+
+    private int parseFunc(Node func) throws IOException
     {
+        //parse tree for main. should find exp and print
+
+        //exp can just trigger a return for now, will have to get smarter
+
+        //FIGURE OUT WHAT PRINT NODE LOOKS LIKE
+        //print is func call. children (id print) (exp number 1)
+
+
+        //if (node.name == print)
+            //print("out", node.value);
+        //else
+            //System.out.println("Generator: Unknown node type " + node.name);
+
         //in mem not reg:
         //8:    ADD  5,0,3    ; store parameter into SQUARE's arg slot
-
         //in stack frame
         //9:    ST   6,2(0)   ; save return address in DMEM[ [r0]+2 ]
-
         //inc of 1 skips over the branch
         //10:    LDA  5,1(7)   ; store return address
-
-
         //11:    LDA  7,5(0)   ; branch to SQUARE, at [r0]+5
 
         //in stackframe
@@ -79,6 +94,9 @@ public class Generator
 
         //teardown jump
         //13:    LD   7,2(0)   ; return to address in DMEM[ [r0]+2 ]
+
+        //return the start addr of func
+        return 1;
     }
 
     //TODO
@@ -97,31 +115,26 @@ public class Generator
         }
     }
 
-    private void printStatement(int register) throws IOException
-    {
-        print("out", register,0,0,"print a value");
-    }
-
 
     //These functions are for programming convienience and
     //overload depending on what we pass. Would be nice if
     //java had default args insted of just overloading.
 
     //1 op instruction, ex halt
-    private void print(String instruction, String comment) throws IOException
+    public static void print(String instruction, String comment) throws IOException
     {
         print(instruction,0,0,0,comment);
     }
-    private void print(String instruction) throws IOException
+    public static void print(String instruction) throws IOException
     {
         print(instruction,0,0,0,"");
     }
     //instructions with 3 args, or with an offset
-    private void print(String instruction, int r1, int r2, int r3) throws IOException
+    public static void print(String instruction, int r1, int r2, int r3) throws IOException
     {
         print(instruction,r1,r2,r3,"");
     }
-    private void print(String instruction, int r1, int r2, int r3,String comment) throws IOException
+    public static void print(String instruction, int r1, int r2, int r3,String comment) throws IOException
     {
         //pretty print the indentations
         int spaces = 7-instruction.length();
@@ -131,9 +144,16 @@ public class Generator
 
         switch(instruction.toLowerCase())
         {
-            case "ld":
             case "lda":
+            case "ldc":
+            case "ld":
             case "st":
+            case "jeq":
+            case "jne":
+            case "jlt":
+            case "jle":
+            case "jgt":
+            case "jge":
                 lineOut += "(" + r3 + ")";
                 lineNumber++;
                 break;

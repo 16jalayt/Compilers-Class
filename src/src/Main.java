@@ -1,7 +1,6 @@
 package src;
 
 import java.io.*;
-import src.Node;
 
 public class Main
 {
@@ -11,7 +10,7 @@ public class Main
     //**Do not change here. the override is below**
     static int debugStage = -1;
     //CHANGE THIS ONE
-    static int debug = 10;
+    static int debugOverride = 10;
 
     //can use this line in the code and will mute the debug print
     //if (Main.debugStage>=2) {System.out.println("The stack is: " + stack.toString());}
@@ -35,7 +34,7 @@ public class Main
             else if(args[1].toLowerCase().equals("compile"))
                 debugStage = 9;
             else if(args[1].toLowerCase().equals("debug"))
-                debugStage = debug;
+                debugStage = debugOverride;
             else
                 debugStage = -1;
         }

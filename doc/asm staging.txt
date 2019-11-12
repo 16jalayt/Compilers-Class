@@ -1,0 +1,16 @@
+Save Registers:
+st 1,0(6) store r1 at top in dmem
+ldc 6,1(6) inc top by 1
+st 2,0(6) store r2 at top in dmem
+ldc 6,1(6) inc top by 1
+st 3,0(6) store r3 at top in dmem
+ldc 6,1(6) inc top by 1
+st 4,0(6) store r4 at top in dmem
+ldc 6,1(6) inc top by 1
+
+Make Frame:
+Num arguments - have java call x times?
+Arguments
+Save Registers
+return at r7 + 1?
+ldc 6,1(6) inc top by 1
