@@ -1,7 +1,7 @@
 Registers:
 0 - reserved for 0
 1-4 - available
-5 - reserved for return addr
+5 - reserved for stack frame calculations
 6 - reserved for top of stack
 7 - reserved for program counter
 

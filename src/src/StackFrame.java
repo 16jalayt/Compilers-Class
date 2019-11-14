@@ -32,15 +32,22 @@ public class StackFrame
         Generator.print("st", 4,0,6,"store r4 at top in dmem");
     }
 
-    public static void makeFrame() throws IOException
-    {
+    public static void makeFrame(int numberArguments) throws IOException
+    {//stack frame creation is inlined, could be optimized
         //See make frame in asm staging.txt
 
-        //!Not quite right, would be current pos, need to sub some
-        Generator.print("ldc", 6,1,6,"inc top by 1");
-        Generator.print("st", 7,-2,6,"store pc at top in dmem");
         saveRegisters();
-        //save arguments, inc top
-        //
+        //save arguments, incrament top
+        Generator.print("ldc", 5,numberArguments,0,"load numargs into r5");
+        Generator.print("st", 5,1,6,"store number args at top + 1 in dmem");
+        Generator.print("ldc", 6,1,6,"inc top by 1");
+
+        //store arguments
+        /////WHere get args from?
+
+        int offset = 1;/////////Not actually set correct yet
+        Generator.print("add", 5,offset,7,"add offset to pc");
+        Generator.print("st", 5,2,6,"store pc at top + 2 in dmem");
+        Generator.print("ldc", 6,1,6,"inc top by 1");
     }
 }

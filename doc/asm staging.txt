@@ -9,11 +9,11 @@ ldc 6,1(6) inc top by 1
 st 4,0(6) store r4 at top in dmem
 
 Make Frame:
-//Have to do ret addr first as exec has moved on
-return at r7 + 1?
-Num arguments - have java call x times?
-Arguments
 Save Registers
+Num arguments - have java call x times?//move under args, so return knows how far back to go
+Arguments
+//Have to do ret addr last
+return at r7?
 
 
 ldc 6,1(6) inc top by 1
