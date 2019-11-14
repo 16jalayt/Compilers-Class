@@ -11,6 +11,7 @@ public class TypeCheck {
 
     public void check(Node tree){
         createSymbolTable(tree);
+        //printSymbolTable();
         traversalHelper(tree);
         if (!errorCode.equals("")){
             System.out.println(errorCode);
@@ -89,7 +90,12 @@ public class TypeCheck {
         //Added a for loop in case of print statement, might not be needed though
         for (int i=0; i < body.children.size(); i++) {
             Node child = body.children.get(i);
-            if (child.name.equals("Expr")) {
+            if (child.name.equals("FunctionCalls")){
+                if (child.children.get(0).value.equals("print")) {
+                    continue;
+                }
+            }
+            else {
                 body.type = child.type;
             }
         }
@@ -174,82 +180,112 @@ public class TypeCheck {
     public void compareIdentifierNode(Node Identifier) {
         // If Identifier is contained in the Symbol table
         // for this Def, then true and set type. else false and error message
-        LinkedList<LinkedList<String>> tempListList = new LinkedList<>();
-        LinkedList<String> tempList = new LinkedList<>();
-        tempList.add(Identifier.value.toString());
-        tempList.add("integer");
-        tempListList.add(tempList);
+        while (true) {
+            //If the Identifier is a print statement, do nothing.
+            if (Identifier.value.equals("print")) {
+                break;
+            }
+            else if (stable.containsKey(Identifier.value)) {
+                break;
+            }
+            TT_Obj tempObj = stable.get(functionName.value);
 
-        System.out.println("Initial lookup is : " + stable.get(functionName.value));
-        System.out.println("Compared lookup is : " + new TT_Obj(tempListList, functionType.type));
+            //Create List of [Identifier, integer]
+            LinkedList<LinkedList<String>> tempListList = new LinkedList<>();
+            LinkedList<String> tempList = new LinkedList<>();
+            tempList.add(Identifier.value.toString());
+            tempList.add("integer");
+            tempListList.add(tempList);
 
-        TT_Obj tempObj = stable.get(functionName.value);
-
-        //If the table does not contain this specific Identifier/type pair, then set its new type to be Error
-        if (stable.get(functionName.value).equals(new TT_Obj(tempListList, functionType.type))){
-        //if (tempObj.formals.contains(tempList)){
-            Identifier.type = "integer";
-        }
-        else {
+            //Create list of [Identifier, boolean]
             LinkedList<LinkedList<String>> tempListList2 = new LinkedList<>();
             LinkedList<String> tempList2 = new LinkedList<>();
             tempList2.add(Identifier.value.toString());
             tempList2.add("boolean");
             tempListList2.add(tempList2);
 
-            if (stable.get(functionName.value).equals(new TT_Obj(tempListList2, functionType.type))) {
-            //if (tempObj.formals.contains(tempList2)){
-                Identifier.type = "boolean";
+            System.out.println("functionName is : " + functionName.value);
+            System.out.println("formals are : " + tempObj.formals);
+            System.out.println("TempList is : " + tempList);
+
+
+            //if (stable.get(functionName.value).equals(new TT_Obj(tempListList, functionType.type))) {
+            for (LinkedList<String> formal : tempObj.formals) {
+                if (formal.equals(tempList)) {
+                    Identifier.type = "integer";
+                    break;
+                }
+
+                //if (stable.get(functionName.value).equals(new TT_Obj(tempListList2, functionType.type))) {
+                else if (formal.equals(tempList2)) {
+                    Identifier.type = "boolean";
+                    break;
+                }
             }
-            else {
+            if (Identifier.type.equals("integer") || Identifier.type.equals("boolean")){
+                break;
+            }
+            else{
                 Identifier.type = "Error";
                 generateError(Identifier);
+                break;
             }
         }
     }
 
     public void compareFunctionCallsNode(Node FunctionCall) {
+        //break out if function call is a print statement
+        while (true) {
+            Node identifier = FunctionCall.children.get(0);
 
-        Node identifier = FunctionCall.children.get(0);
-
-        // Check that identifier exists
-        if(!stable.containsKey(identifier.value)) {
-            //The given identifier does not exist in the stable
-            FunctionCall.type = "Error";
-            if (errorCode.equals("")){
-                errorCode = "Error, Identifier Node " + identifier + " does not exist. ";
-            }
-            else{
-                String temp = "Error, Identifier Node " + identifier + " does not exist: ";
-                errorCode = temp + errorCode;
-            }
-        }
-
-        Node actuals = FunctionCall.children.get(1);
-
-        for(int i = 0; i < actuals.children.size(); i++){
-            // compare the type of the actual at i to the formal at i
-            if(!actuals.children.get(i).type.equals(stable.get(identifier.value).formals.get(i).get(1))){
-                // Error that the type of the actual doesn't match the type of the formal
+            // Check that identifier exists
+            if (!stable.containsKey(identifier.value)) {
+                //The given identifier does not exist in the stable
                 FunctionCall.type = "Error";
-                if (errorCode.equals("")){
-                    String temp1 = "Error, " + actuals.children.get(i) + " Node of type " + actuals.children.get(i).type;
-                    String temp2 = " does not type match " + stable.get(identifier.value).formals.get(i).get(1) + ". ";
-                    errorCode = temp1 + temp2;
-                    break;
+                if (errorCode.equals("")) {
+                    errorCode = "Error, Identifier Node " + identifier + " does not exist. ";
                 }
                 else {
-                    String temp1 = "Error, " + actuals.children.get(i) + " Node of type " + actuals.children.get(i).type;
-                    String temp2 = " does not type match " + stable.get(identifier.value).formals.get(i).get(1) + ": ";
-                    errorCode = temp1 + temp2 + errorCode;
-                    break;
+                    String temp = "Error, Identifier Node " + identifier + " does not exist: ";
+                    errorCode = temp + errorCode;
                 }
             }
-        }
 
-        //After all checks, now we can assign this identifier its type, unless there was an error
-        if (!FunctionCall.type.equals("Error")) {
-            FunctionCall.type = stable.get(identifier).type;
+            if (identifier.value.equals("print")) {
+                break;
+            }
+
+            Node actuals = FunctionCall.children.get(1);
+
+            for (int i = 0; i < actuals.children.size(); i++) {
+                // compare the type of the actual at i to the formal at i
+                if (!actuals.children.get(i).type.equals(stable.get(identifier.value).formals.get(i).get(1))) {
+                    // Error that the type of the actual doesn't match the type of the formal
+                    FunctionCall.type = "Error";
+                    if (errorCode.equals("")) {
+                        String temp1 = "Error, " + actuals.children.get(i) + " Node of type " + actuals.children.get(i).type;
+                        String temp2 = " does not type match " + stable.get(identifier.value).formals.get(i).get(1) + ". ";
+                        errorCode = temp1 + temp2;
+                        break;
+                    } else {
+                        String temp1 = "Error, " + actuals.children.get(i) + " Node of type " + actuals.children.get(i).type;
+                        String temp2 = " does not type match " + stable.get(identifier.value).formals.get(i).get(1) + ": ";
+                        errorCode = temp1 + temp2 + errorCode;
+                        break;
+                    }
+                }
+            }
+            System.out.println("Identifier name is : " + identifier.value);
+            System.out.println("Fun Type : " + FunctionCall.type);
+            //If FunctionCall.type is still null, there was no error, so we can assign this identifier its type
+            if (FunctionCall.type == null){
+                FunctionCall.type = stable.get(identifier.value).type;
+                break;
+            }
+            //Else there was an error
+            else {
+                break;
+            }
         }
     }
 
@@ -319,7 +355,7 @@ public class TypeCheck {
 
     public void addPrintToSymbolTable(){
         Object printValue = new Object();
-        printValue = "Print_call";
+        printValue = "print";
         LinkedList<LinkedList<String>> printFormals = new LinkedList<LinkedList<String>>();
         LinkedList<String> printFormal = new LinkedList<String>();
         
