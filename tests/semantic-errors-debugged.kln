@@ -1,0 +1,27 @@
+(* This file is the debugged version of semantic-errors.kln. All of the semantic errors have been fixed.
+    The overall theme of the functions are that our computer is imitating a young child/children.
+    fingerCounter represents a child who can only count on their fingers, so when they are given a number
+    they have to find the value of that number based on the number of 1's they have to add to reach it.
+    imRightYoureWrong represents two siblings arguing about which one of them is right, until their parent angrily
+    reprimands them.
+    notBool and angryParent are helper functions to imRightYoureWrong *)
+*)
+
+function fingerCounter( x : integer ) : integer
+    if x=1
+    then 1
+    else fingerCounter(x-1) + 1
+
+function imRightYoureWrong (b : boolean) : boolean
+    if b=true
+    then notBool(b)
+    else notBool(b)
+
+function notBool( c : boolean ) : boolean
+    if c=false
+    then angryParent()
+    else imRightYoureWrong(not c)
+
+function angryParent() : boolean
+    print(false)
+    false

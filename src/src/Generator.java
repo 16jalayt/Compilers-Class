@@ -30,8 +30,8 @@ public class Generator
 
 
             /////Make in reverse order so return addresses work out
-            bootStrap();
-
+            //Moved bootstrap to iterate function
+            iterate(tree);
 
             writer.close();
         }
@@ -39,6 +39,13 @@ public class Generator
        {
            System.out.println("Unable to write to file");
        }
+    }
+
+    public void iterate(Node tree) throws IOException {
+        for (Node child : tree.children) {
+            iterate(child);
+        }
+        bootStrap();
     }
 
     private void bootStrap() throws IOException
