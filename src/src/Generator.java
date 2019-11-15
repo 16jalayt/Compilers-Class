@@ -33,7 +33,7 @@ public class Generator
             //find main to start
             iterateMain(tree);
 
-            //parse functions not main
+            //parse other functions not main
             iterateOthers(tree);
 
             computeOffsets();
