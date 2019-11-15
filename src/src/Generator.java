@@ -60,7 +60,8 @@ public class Generator
         {
             if(child.name.equals("Identifier")) {
                 if (child.value.equals("main")) {
-                    parseFunc(child);
+                    System.out.println("Found main");
+                    parseFunc(tree);
                 }
             }
             else{
