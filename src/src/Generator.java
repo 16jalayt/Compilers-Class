@@ -30,15 +30,11 @@ public class Generator
 
             bootStrap();
 
-            //parse every function not main
-            /////iterate(tree);
+            //find main to start
+            iterateMain(tree);
 
             //parse functions not main
-//            for (Node child : tree.children)
-//            {
-//                if(child.name.compareTo("main")!=0)
-//                    parseFunc(child);
-//            }
+            iterateOthers(tree);
 
             computeOffsets();
 
@@ -55,7 +51,7 @@ public class Generator
     //function addresses as they are parsed
     HashMap<String, Integer> funcs = new HashMap<>();
 
-    private void iterate(Node tree) throws IOException {
+    private void iterateMain(Node tree) throws IOException {
         for (Node child : tree.children)
         {
             if(child.name.equals("Identifier")) {
@@ -65,7 +61,27 @@ public class Generator
                 }
             }
             else{
-                iterate(child);
+                iterateMain(child);
+            }
+        }
+    }
+
+    private void iterateOthers(Node tree) throws IOException {
+        //check for all identifiers that are a function name, except for main and print
+        for (Node child : tree.children)
+        {
+            if(child.name.equals("Identifier")) {
+                if (stable.containsKey(child.value)) {
+                    if (child.value.equals("main") || child.value.equals("print")){
+                        continue;
+                    }
+                    else {
+                        parseFunc(tree.children.get(3));
+                    }
+                }
+            }
+            else{
+                iterateMain(child);
             }
         }
     }
@@ -106,7 +122,6 @@ public class Generator
         int numberArgs = 0;
         /////proj 5 just skip this
         //only wroks for 4 args or less dum into reg and put back in later
-        //would have to write one argument at a time backwards
         //let make stackframe take care of it
         for(int i=1; i<numberArgs;i++)
         {
@@ -129,7 +144,7 @@ public class Generator
 
         //ends up inserting main before end, so dont need for now
         //print("ldc", 7,2,7,"jump to main by offseting by 2");
-        iterate(tree);
+        iterateMain(tree);
         print("out", 6,0,0,"print the return register");
         print("halt", 0,0,0);
 
