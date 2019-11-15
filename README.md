@@ -9,7 +9,8 @@ Use commit when done with chunks of code.
 MAKE SURE YOU PUSH CHANGES and they show up in the repo.
 
 Project 5 additional info:
-A file by the name of
+Klein file of the name "filename.kln" is converted into a Tm file of the name "filename.tm". Output of 
+Generator is stored in "filename.tm".
 
 Classes in this file:
 Main(): Has multiple debug stages. debug=1 is for testing scanner, debug=3 is for testing parser true/false, 
