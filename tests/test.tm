@@ -1,3 +1,5 @@
+*-----Begin bootstrap-----
+*-----Create Stack Frame-----
 0:    LDC  6,1(6)    ;inc top by 1
 1:     ST  1,0(6)    ;store r1 at top in dmem
 2:    LDC  6,1(6)    ;inc top by 1
@@ -9,11 +11,16 @@
 8:    LDC  5,0(0)    ;load numargs into r5
 9:     ST  5,1(6)    ;store number args at top + 1 in dmem
 10:    LDC  6,1(6)    ;inc top by 1
-11:     ST  5,1(6)    ;store number args at top + 1 in dmem
-12:    LDC  6,1(6)    ;inc top by 1
-13:    ADD  5,1,7    ;add offset to pc
-14:     ST  5,1(6)    ;store pc at top + 1 in dmem
-15:    LDC  6,1(6)    ;inc top by 1
-16:    LDC  7,2(7)    ;jump to main by offseting by 2
-17:    OUT  6,0,0    ;print the return register
-18:   HALT  0,0,0    ;
+11:    ADD  5,1,7    ;add offset to pc
+12:     ST  5,1(6)    ;store pc at top + 1 in dmem
+13:    LDC  6,1(6)    ;inc top by 1
+*-----End Stack Frame-----
+
+14:    LDC  7,2(7)    ;jump to main by offseting by 2
+15:    OUT  6,0,0    ;print the return register
+16:   HALT  0,0,0    ;
+*-----End bootstrap-----
+
+*-----Begin compute offsets-----
+*-----End compute offsets-----
+

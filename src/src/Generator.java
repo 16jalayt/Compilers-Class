@@ -77,17 +77,20 @@ public class Generator
         }
     }
 
-    private void computeOffsets()
+    private void computeOffsets() throws IOException
     {
+        printComment("-----Begin compute offsets-----\n");
         //use string label as dict key. Should be able to pass string around?
         //function name gets inserted on creation.
 
         //itter through the structure and match tags, just print like normal
         //print("lda", 5,1,7,"jump to main");
+        printComment("-----End compute offsets-----\n\n");
     }
 
     private void bootStrap() throws IOException
     {
+        printComment("-----Begin bootstrap-----\n");
         //Ignore: just get from func tree
         //LD  3,1(0)   ; read command-line arg into MAIN's arg slot
         //just copy paste known number of times
@@ -102,6 +105,7 @@ public class Generator
         //let make stackframe take care of it
         for(int i=1; i<numberArgs;i++)
         {
+            //////top doesnt work
             print("ld", i, top + i,0);
         }
 
@@ -116,22 +120,23 @@ public class Generator
         //need to send to a seperate function (addr)
         //skip printing line to compute later
         //addr("lda", 5,1,7,"jump to main");
-        Generator.print("ldc", 7,2,7,"jump to main by offseting by 2");
-
+        print("ldc", 7,2,7,"jump to main by offseting by 2");
+        iterate(tree);
         print("out", 6,0,0,"print the return register");
         print("halt", 0,0,0);
 
         //isolate function from tree//need to start at main. itter to find
         ////NEW! skip over line then try and parse pain after bootstrap
-        parseFunc(new Node());
+
+        printComment("-----End bootstrap-----\n\n");
     }
 
 
 
     private void parseFunc(Node func) throws IOException
     {
+        printComment("-----Begin function call-----\n");
         //print block at top of funtion
-
 
         ////////first thing store starting addr to func table
 
@@ -139,7 +144,6 @@ public class Generator
 
         //FIGURE OUT WHAT PRINT NODE LOOKS LIKE
         //print is func call. children (id print) (exp number 1)
-
 
         //!!!!!I think it needs to dig into the tree deeper
         for (Node child : func.children)
@@ -168,7 +172,7 @@ public class Generator
 
         //teardown jump
         //13:    LD   7,2(0)   ; return to address in DMEM[ [r0]+2 ]
-
+        Generator.printComment("-----End function call-----\n\n");
     }
 
     int current = 1;
@@ -195,6 +199,12 @@ public class Generator
     {
         //add to some structure to compute once known
         //use labels?
+    }
+
+    //prints out a line comment
+    public static void printComment(String comment) throws IOException
+    {
+        writer.write("*" +comment);
     }
 
     //1 op instruction, ex halt

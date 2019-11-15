@@ -17,7 +17,7 @@ public class TypeCheck {
             System.out.println(errorCode);
         }
         else{
-            System.out.println("No semantic errors found.");
+            if(Main.debugStage == 8) System.out.println("No semantic errors found.");
         }
     }
 

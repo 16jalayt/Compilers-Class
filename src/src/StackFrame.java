@@ -37,11 +37,12 @@ public class StackFrame
     {//stack frame creation is inlined, could be optimized
         //See make frame in asm staging.txt
 
+        Generator.printComment("-----Create Stack Frame-----\n");
         saveRegisters();
         //save arguments, incrament top
         Generator.print("ldc", 5,numberArguments,0,"load numargs into r5");
-        Generator.print("st", 5,1,6,"store number args at top + 1 in dmem");
-        Generator.print("ldc", 6,1,6,"inc top by 1");
+        //Generator.print("st", 5,1,6,"store number args at top + 1 in dmem");
+        //Generator.print("ldc", 6,1,6,"inc top by 1");
 
         //store arguments
         /////Where get args from?
@@ -54,5 +55,6 @@ public class StackFrame
         Generator.print("add", 5,offset,7,"add offset to pc");
         Generator.print("st", 5,1,6,"store pc at top + 1 in dmem");
         Generator.print("ldc", 6,1,6,"inc top by 1");
+        Generator.printComment("-----End Stack Frame-----\n\n");
     }
 }
