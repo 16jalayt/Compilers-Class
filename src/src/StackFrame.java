@@ -22,6 +22,7 @@ public class StackFrame
     public static void saveRegisters() throws IOException
     {
         //See save register in asm staging.txt
+        //could put in for loop too
         Generator.print("ldc", 6,1,6,"inc top by 1");
         Generator.print("st", 1,0,6,"store r1 at top in dmem");
         Generator.print("ldc", 6,1,6,"inc top by 1");
@@ -43,11 +44,15 @@ public class StackFrame
         Generator.print("ldc", 6,1,6,"inc top by 1");
 
         //store arguments
-        /////WHere get args from?
+        /////Where get args from?
+
+        //store num args again. I think we can remove the first time above
+        Generator.print("st", 5,1,6,"store number args at top + 1 in dmem");
+        Generator.print("ldc", 6,1,6,"inc top by 1");
 
         int offset = 1;/////////Not actually set correct yet
         Generator.print("add", 5,offset,7,"add offset to pc");
-        Generator.print("st", 5,2,6,"store pc at top + 2 in dmem");
+        Generator.print("st", 5,1,6,"store pc at top + 1 in dmem");
         Generator.print("ldc", 6,1,6,"inc top by 1");
     }
 }

@@ -20,19 +20,30 @@ public class Generator
     {
         try
         {
+            //set local vars
             this.stable = stable;
             this.tree = tree;
+
+            //output file setup
             fileName = fileName.substring(0, fileName.lastIndexOf('.')) + ".tm";
             writer =  new BufferedWriter(new FileWriter(new File(fileName)));
 
-            //TEAM NOTE: doesnt matter how the instructions are typed
-            //they will be converted to upper case
-            //print("lda", 6,1,7,"jump to main");
-
-
-            /////Make in reverse order so return addresses work out
             bootStrap();
-            iterate(tree);
+
+            //find main to start
+            for (Node child : tree.children)
+            {
+                if(child.name.compareTo("main")==0)
+                    parseFunc(child);
+            }
+
+            //parse functions not main
+            for (Node child : tree.children)
+            {
+                if(child.name.compareTo("main")!=0)
+                    parseFunc(child);
+            }
+
             computeOffsets();
 
             writer.close();
@@ -43,11 +54,10 @@ public class Generator
        }
     }
 
-    private void iterate(Node tree) throws IOException {
-        for (Node child : tree.children) {
-            iterate(child);
-        }
-    }
+    //stores jumps awaiting an addr
+    LinkedList<WaitingType> object = new LinkedList<WaitingType>();
+    //function addresses as they are parsed
+    HashMap<String, Integer> funcs = new HashMap<>();
 
     private class WaitingType
     {
@@ -60,17 +70,10 @@ public class Generator
         }
     }
 
-    //jumps awaiting an addr
-    LinkedList<WaitingType> object = new LinkedList<WaitingType>();
-    //function addresses as they are parsed
-    HashMap<String, Integer> funcs = new HashMap<>();
-
     private void computeOffsets()
     {
-        //use string label as dict key. SHould be able to pass string around?
+        //use string label as dict key. Should be able to pass string around?
         //function name gets inserted on creation.
-        //use list as waiting for addr
-        //line numbers. make struct as list type
 
         //itter through the structure and match tags, just print like normal
         //print("lda", 5,1,7,"jump to main");
@@ -78,15 +81,12 @@ public class Generator
 
     private void bootStrap() throws IOException
     {
-        //Needs to be first
-        //lineNumber = 0;
-
         //Ignore: just get from func tree
         //LD  3,1(0)   ; read command-line arg into MAIN's arg slot
         //just copy paste known number of times
         //need to move to tmp because will be overwritten by stack frame, unless waste that space
 
-        //is main always slot zero?
+        //is main always slot zero? - no it is not. Have to compare names
         //int numberArgs = tree.children.get(0);
         //hardcoded for now
         int numberArgs = 0;
@@ -106,11 +106,10 @@ public class Generator
         StackFrame.makeFrame(0);
         //jump immediately after
 
-        //need to send to a seperate function (or hook from print?)
-        //skip line and put into some variable to compute later
+        //need to send to a seperate function (addr)
+        //skip printing line to compute later
         //addr("lda", 5,1,7,"jump to main");
         Generator.print("ldc", 7,2,7,"jump to main by offseting by 2");
-
 
         print("out", 6,0,0,"print the return register");
         print("halt", 0,0,0);
@@ -124,7 +123,8 @@ public class Generator
 
     private void parseFunc(Node func) throws IOException
     {
-        //parse tree for main. should find exp and print
+        //print block at top of funtion
+
 
         ////////first thing store starting addr to func table
 
@@ -134,10 +134,19 @@ public class Generator
         //print is func call. children (id print) (exp number 1)
 
 
-        //if (node.name == print)
-            //print("out", node.value);
-        //else
-            //System.out.println("Generator: Unknown node type " + node.name);
+        //!!!!!I think it needs to dig into the tree deeper
+        for (Node child : func.children)
+        {
+            if(child.name.compareTo("FunctionCalls")==0)
+                if(child.children.get(0).name.compareTo("print")==0)
+                    print("out", child.children.get(1).children.get(0).value.toString());
+                else //handle func call
+                    System.out.println("func call");
+                else if(child.name.compareTo("Expr")==0)//handle return
+                    System.out.println("Handle return");
+                else
+                    System.out.println("Unknown node type " + child.name);
+        }
 
         //in mem not reg:
         //8:    ADD  5,0,3    ; store parameter into SQUARE's arg slot
@@ -171,11 +180,11 @@ public class Generator
     }
 
 
-    //These functions are for programming convienience and
+    //These functions are for programming convenience and
     //overload depending on what we pass. Would be nice if
-    //java had default args insted of just overloading.
+    //java had default args instead of just overloading.
 
-    private void addr(String instruction, int r1, int r2, int r3, String coment)
+    private void addr(String instruction, int r1, int r2, int r3, String comment)
     {
         //add to some structure to compute once known
         //use labels?
@@ -194,6 +203,18 @@ public class Generator
     public static void print(String instruction, int r1, int r2, int r3) throws IOException
     {
         print(instruction,r1,r2,r3,"");
+    }
+    //specifying line number
+    public static void print(int line, String instruction, int r1, int r2, int r3) throws IOException
+    {
+        print(line, instruction,r1,r2,r3,"");
+    }
+    public static void print(int line, String instruction, int r1, int r2, int r3,String comment) throws IOException
+    {
+        int tmp = lineNumber;
+        lineNumber = line;
+        print(instruction,r1,r2,r3,comment);
+        lineNumber = tmp;
     }
     public static void print(String instruction, int r1, int r2, int r3,String comment) throws IOException
     {
