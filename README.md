@@ -20,9 +20,11 @@ Parser(): Uses scanner() to take in token after token from a given program, comp
 Node(): Our custom node class. Contains an Iterate() method that iterates through and prints out an AST. All nodes
         have a name associated with them, some have values as well.
 TypeChecker(): Goes through the AST from the Parser and makes sure it is semantically correct. If incorrect,
-               it lets the user know where the error comes frome.
-TT_Obj(): This is the data structure used for each function named in the progam. We want to keep track of the formals, type,
+               it lets the user know where the error comes from.
+TT_Obj(): This is the data structure used for each function named in the program. We want to keep track of the formals, type,
            what functions it called and what functions calls it. 
+Generator(): This class translates a klein program into TM. No Intermediate Representation is currently used. 
+             Currently set up to only work for print-one.kln.
 
 
 How to Use:
@@ -34,14 +36,15 @@ Scanner then goes through that string character by character, building tokens as
 Main then calls Parser.parse(), and if it returns true then Main it calls Parser.getTree(), which
 prints out our programs Abstract Syntax Tree of nodes, with their names, and any values that they may hold.
 The TypeChecker is then run through the AST to ensure semantic correctness and create a symbol table. 
+Generator then uses the symbol table returned by TypeChecker and the AST returned by Parser to generate
+code in TM from a klein file. 
     
 To build: The repo comes with an intellij project. Launching the project is the fastest way to get started. 
 Alternatively, you can cd into the src/src folder and compile with javac Main.java Scanner.java Token.java... 
 and so on for all of the source files in the directory. To launch, you call java Main test.kln where test is 
 the klein program with path.
 
-Current Problems: It's hard to pin down exactly, but there is a combination of failueres from the TypeChecker in 
-                  comparing the types as well when the hashmap symbol table with a key that's the def identifier and its
-                  pair that is a TT_Object. The main issue comes from the functionCall. As a result we didn't get to finishing
-                  much else afterwards. So while there may be comparison of node types, they don't always set what should be
-                  in the symbol table.  
+Current Problems: Most of typeCheckers issues have been fixed, although there are still some minor bugs that 
+                  cause larger klein files to be seen as semantically incorrect when they are not. I think
+                  I know where exactly this issue is though, should have that fixed by the final project due date.
+                  

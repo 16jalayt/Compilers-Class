@@ -31,18 +31,14 @@ public class Generator
             bootStrap();
 
             //find main to start
-            for (Node child : tree.children)
-            {
-                if(child.name.compareTo("main")==0)
-                    parseFunc(child);
-            }
+            iterate(tree);
 
             //parse functions not main
-            for (Node child : tree.children)
-            {
-                if(child.name.compareTo("main")!=0)
-                    parseFunc(child);
-            }
+//            for (Node child : tree.children)
+//            {
+//                if(child.name.compareTo("main")!=0)
+//                    parseFunc(child);
+//            }
 
             computeOffsets();
 
@@ -58,6 +54,17 @@ public class Generator
     LinkedList<WaitingType> object = new LinkedList<WaitingType>();
     //function addresses as they are parsed
     HashMap<String, Integer> funcs = new HashMap<>();
+
+    private void iterate(Node tree) throws IOException {
+        for (Node child : tree.children)
+        {
+            if(child.name.compareTo("main")==0)
+                parseFunc(child);
+            else{
+                iterate(child);
+            }
+        }
+    }
 
     private class WaitingType
     {
