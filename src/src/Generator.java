@@ -30,8 +30,8 @@ public class Generator
 
             bootStrap();
 
-            //find main to start
-            iterate(tree);
+            //parse every function not main
+            /////iterate(tree);
 
             //parse functions not main
 //            for (Node child : tree.children)
@@ -106,6 +106,7 @@ public class Generator
         int numberArgs = 0;
         /////proj 5 just skip this
         //only wroks for 4 args or less dum into reg and put back in later
+        //would have to write one argument at a time backwards
         //let make stackframe take care of it
         for(int i=1; i<numberArgs;i++)
         {
@@ -118,13 +119,16 @@ public class Generator
         // +2 = +1 for addr. -1 = -2
 
         //must be last thing called, so addr calculated right
-        StackFrame.makeFrame(0);
+        ////////stackframes not quite ready yet
+        //StackFrame.makeFrame(0);
         //jump immediately after
 
         //need to send to a seperate function (addr)
         //skip printing line to compute later
         //addr("lda", 5,1,7,"jump to main");
-        print("ldc", 7,2,7,"jump to main by offseting by 2");
+
+        //ends up inserting main before end, so dont need for now
+        //print("ldc", 7,2,7,"jump to main by offseting by 2");
         iterate(tree);
         print("out", 6,0,0,"print the return register");
         print("halt", 0,0,0);
@@ -173,7 +177,12 @@ public class Generator
         {
             if(child.name.compareTo("FunctionCalls")==0)
                 if(child.children.get(0).value.equals("print"))
-                    print("out", child.children.get(1).children.get(0).value.toString());
+                {
+                    int reg = getFreeRegister();
+                    int val = Integer.parseInt(child.children.get(1).children.get(0).value.toString());
+                    print("ldc" ,reg,val,0);
+                    print("out" ,reg,0,0, "Printing value:"+val);
+                }
                 else //handle func call
                     System.out.println("func call");
             else if(child.name.compareTo("Expr")==0)//handle return

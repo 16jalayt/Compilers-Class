@@ -32,6 +32,15 @@ Generator(): This class translates a klein program into TM. No Intermediate Repr
 
 
 How to Use:
+klein file.kln
+
+kleins - scanner only
+kleinf - parser only
+kleinc - compile only
+kleinv - symantic check only
+klein - full generation
+
+How it works:
 Our main function takes in a single parameter as input, that being a klein file name as a string. 
 Main then opens that file and reads its contents into a single large string, then it passes that string to 
     our scanner function.
@@ -43,12 +52,11 @@ The TypeChecker is then run through the AST to ensure semantic correctness and c
 Generator then uses the symbol table returned by TypeChecker and the AST returned by Parser to generate
 code in TM from a klein file. 
     
-To build: The repo comes with an intellij project. Launching the project is the fastest way to get started. 
-Alternatively, you can cd into the src/src folder and compile with javac Main.java Scanner.java Token.java... 
-and so on for all of the source files in the directory. To launch, you call java Main test.kln where test is 
-the klein program with path.
+To build: 
+run ./build
 
-Current Problems: Most of typeCheckers issues have been fixed, although there are still some minor bugs that 
-                  cause larger klein files to be seen as semantically incorrect when they are not. I think
-                  I know where exactly this issue is though, should have that fixed by the final project due date.
+Known bugs: 
+Most of typeCheckers issues have been fixed, although there are still some minor bugs that 
+cause larger klein files to be seen as semantically incorrect when they are not. I think
+I know where exactly this issue is though, should have that fixed by the final project due date.
                   
