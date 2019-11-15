@@ -61,7 +61,7 @@ public class Generator
             if(child.name.equals("Identifier")) {
                 if (child.value.equals("main")) {
                     System.out.println("Found main");
-                    parseFunc(tree);
+                    parseFunc(tree.children.get(3));
                 }
             }
             else{
@@ -150,18 +150,7 @@ public class Generator
         //print is func call. children (id print) (exp number 1)
 
         //!!!!!I think it needs to dig into the tree deeper
-        for (Node child : func.children)
-        {
-            if(child.name.compareTo("FunctionCalls")==0)
-                if(child.children.get(0).name.compareTo("print")==0)
-                    print("out", child.children.get(1).children.get(0).value.toString());
-                else //handle func call
-                    System.out.println("func call");
-                else if(child.name.compareTo("Expr")==0)//handle return
-                    System.out.println("Handle return");
-                else
-                    System.out.println("Unknown node type " + child.name);
-        }
+        parseFuncHelper(func);
 
         //in mem not reg:
         //8:    ADD  5,0,3    ; store parameter into SQUARE's arg slot
@@ -177,6 +166,21 @@ public class Generator
         //teardown jump
         //13:    LD   7,2(0)   ; return to address in DMEM[ [r0]+2 ]
         Generator.printComment("-----End function call-----\n\n");
+    }
+
+    private void parseFuncHelper (Node tree) throws IOException {
+        for (Node child : tree.children)
+        {
+            if(child.name.compareTo("FunctionCalls")==0)
+                if(child.children.get(0).value.equals("print"))
+                    print("out", child.children.get(1).children.get(0).value.toString());
+                else //handle func call
+                    System.out.println("func call");
+            else if(child.name.compareTo("Expr")==0)//handle return
+                System.out.println("Handle return");
+            else
+                System.out.println("Unknown node type " + child.name);
+        }
     }
 
     int current = 1;

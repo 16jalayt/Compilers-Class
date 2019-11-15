@@ -18,13 +18,15 @@
 
 14:    LDC  7,2(7)    ;jump to main by offseting by 2
 *-----Begin function call-----
+15:    OUT  0,0,0    ;1
 *-----End function call-----
 
-15:    OUT  6,0,0    ;print the return register
-16:   HALT  0,0,0    ;
+16:    OUT  6,0,0    ;print the return register
+17:   HALT  0,0,0    ;
 *-----End bootstrap-----
 
 *-----Begin function call-----
+18:    OUT  0,0,0    ;1
 *-----End function call-----
 
 *-----Begin compute offsets-----
