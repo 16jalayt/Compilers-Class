@@ -58,8 +58,11 @@ public class Generator
     private void iterate(Node tree) throws IOException {
         for (Node child : tree.children)
         {
-            if(child.name.compareTo("main")==0)
-                parseFunc(child);
+            if(child.name.equals("Identifier")) {
+                if (child.value.equals("main")) {
+                    parseFunc(child);
+                }
+            }
             else{
                 iterate(child);
             }

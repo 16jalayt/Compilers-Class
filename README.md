@@ -8,6 +8,9 @@ Make sure to use sync when starting.
 Use commit when done with chunks of code.
 MAKE SURE YOU PUSH CHANGES and they show up in the repo.
 
+Project 5 additional info:
+A file by the name of
+
 Classes in this file:
 Main(): Has multiple debug stages. debug=1 is for testing scanner, debug=3 is for testing parser true/false, 
         debug=5 is for testing Parser AST return, and debug=6 is for testing full functionality.
