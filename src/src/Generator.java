@@ -10,7 +10,15 @@ import java.util.Map;
 
 public class Generator
 {
+    //symbol table
     Map<Object, TT_Obj> stable = new HashMap<Object, TT_Obj>();
+    //unknown jumps. -----NOT TTOBJ
+    //redundent to waiting type
+    Map<String, labelObj> unknown = new HashMap<String, labelObj>();
+    //known label locations
+    Map<String, labelObj> known = new HashMap<String, labelObj>();
+
+
     Node tree;
     static BufferedWriter writer;
     static int lineNumber = 0;
@@ -51,6 +59,53 @@ public class Generator
     //function addresses as they are parsed
     HashMap<String, Integer> funcs = new HashMap<>();
 
+    private class WaitingType
+    {
+        public int lineNumber;
+        public String tag;
+        @Override
+        public String toString()
+        {
+            return lineNumber + ":" + tag;
+        }
+    }
+
+    //can do inner class because just used locally
+    private class labelObj
+    {
+        //use different class for known?
+        boolean known;
+        int address;
+        int lineNumber;
+        //might not be needed. label is the key
+        String label;
+
+        public labelObj(int address)
+        {
+            known = true;
+            this.address = address;
+        }
+
+        public labelObj()
+        {
+            known = false;
+            this.address = address;
+        }
+    }
+
+    //need to change inputs. autogen comment?
+    private void addr(String instruction, int r1, int r2, int r3, String comment)
+    {
+        //add to some structure to compute once known
+        //use labels?
+    }
+
+    private void knownAddr(String label)
+    {
+        //add to second array when labels are hit.
+        //look up in addr dict and remove if found
+    }
+
     private void iterateMain(Node tree) throws IOException {
         for (Node child : tree.children)
         {
@@ -83,17 +138,6 @@ public class Generator
             else{
                 iterateMain(child);
             }
-        }
-    }
-
-    private class WaitingType
-    {
-        public int lineNumber;
-        public String tag;
-        @Override
-        public String toString()
-        {
-            return lineNumber + ":" + tag;
         }
     }
 
@@ -135,7 +179,7 @@ public class Generator
 
         //must be last thing called, so addr calculated right
         ////////stackframes not quite ready yet
-        //StackFrame.makeFrame(0);
+        StackFrame.makeFrame(0);
         //jump immediately after
 
         //need to send to a seperate function (addr)
@@ -209,8 +253,14 @@ public class Generator
 
     int current = 1;
     private int getFreeRegister()
-    {//1-4 are general use. would need to allocate and dealloc
-        //I think we are getting algorithm for this
+    {//1-4 are general use.
+        //can do map of vars in what registers
+        //that way can tell if registers redundent
+
+        //if full, write existing one to memory, not sure how to keep track and retrieve.
+        //locality of reference/ next use info
+
+        //or last ditch just keep looping and repeat, and hope no conflict
 
         //if all given out return null
         if(current >=5)
@@ -222,16 +272,18 @@ public class Generator
         }
     }
 
+    //NOTE binary op
+    //ld arg1
+    //ld arg2
+    //op
+    //st
+
 
     //These functions are for programming convenience and
     //overload depending on what we pass. Would be nice if
     //java had default args instead of just overloading.
 
-    private void addr(String instruction, int r1, int r2, int r3, String comment)
-    {
-        //add to some structure to compute once known
-        //use labels?
-    }
+
 
     //prints out a line comment
     public static void printComment(String comment) throws IOException

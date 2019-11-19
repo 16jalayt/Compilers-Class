@@ -13,6 +13,7 @@ Arguments
 
 DMEM:
 Check main for number of arguments and store in r6 as top of stack
+might do register overload at bottom if registers full, since we only have 4 registers available
 
 IMEM:
 It looks like our code will have to go backwards and create all the functions first,
