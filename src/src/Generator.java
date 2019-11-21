@@ -207,7 +207,8 @@ public class Generator
         printComment("-----Begin function call-----\n");
         //print block at top of funtion
 
-        ////////first thing store starting addr to func table
+        ///////////first thing store starting addr to func table and the known label dict tag value.
+        
 
         //exp can just trigger a return for now, will have to get smarter
 
