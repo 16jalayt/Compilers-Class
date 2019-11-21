@@ -12,12 +12,6 @@ public class Generator
 {
     //symbol table
     Map<Object, TT_Obj> stable = new HashMap<Object, TT_Obj>();
-    //unknown jumps. -----NOT TTOBJ
-    //redundent to waiting type
-    Map<String, labelObj> unknown = new HashMap<String, labelObj>();
-    //known label locations
-    Map<String, labelObj> known = new HashMap<String, labelObj>();
-
 
     Node tree;
     static BufferedWriter writer;
@@ -55,55 +49,72 @@ public class Generator
     }
 
     //stores jumps awaiting an addr
-    LinkedList<WaitingType> object = new LinkedList<WaitingType>();
+    LinkedList<WaitingType> waiting = new LinkedList<WaitingType>();
     //function addresses as they are parsed
-    HashMap<String, Integer> funcs = new HashMap<>();
+    HashMap<String, Integer> labels = new HashMap<>();
 
     private class WaitingType
     {
         public int lineNumber;
         public String tag;
+        private String instruction;
+        private int r1;
+        private int r2;
+        private int r3;
+        private String comment;
+        public WaitingType(String instruction, int r1, int r2, int r3, String comment,String tag)
+        {
+            this.lineNumber = Generator.lineNumber;
+            this.tag = tag;
+
+            this.instruction = instruction;
+            this.r1 = r1;
+            this.r2 = r2;
+            this.r3 = r3;
+            this.comment = comment;
+        }
         @Override
         public String toString()
         {
             return lineNumber + ":" + tag;
         }
-    }
-
-    //can do inner class because just used locally
-    private class labelObj
-    {
-        //use different class for known?
-        boolean known;
-        int address;
-        int lineNumber;
-        //might not be needed. label is the key
-        String label;
-
-        public labelObj(int address)
+        public void out() throws IOException
         {
-            known = true;
-            this.address = address;
-        }
-
-        public labelObj()
-        {
-            known = false;
-            this.address = address;
+            int tmp = Generator.lineNumber;
+            print(instruction, r1, r2, r3, comment);
+            Generator.lineNumber = tmp;
         }
     }
 
-    //need to change inputs. autogen comment?
-    private void addr(String instruction, int r1, int r2, int r3, String comment)
+    //Drop in for unknown addr jumps
+    private void addr(String instruction, int r1, int r2, int r3, String tag)
     {
-        //add to some structure to compute once known
-        //use labels?
+        waiting.add(new WaitingType(instruction, r1, r2, r3, "Jump to:"+tag, tag));
     }
 
-    private void knownAddr(String label)
+    //compute all now known offsets
+    private void computeOffsets() throws IOException
     {
-        //add to second array when labels are hit.
-        //look up in addr dict and remove if found
+        printComment("-----Begin compute offsets-----\n");
+
+        //iterate through labels with unknown line numbers and print them
+        for (int i = 0; i<waiting.size(); i++)
+        {
+            if(labels.containsKey(waiting.get(i).tag))
+            {
+                int addr = labels.get(waiting.get(i).tag);
+                print(addr, waiting.get(i).instruction , waiting.get(i).r1 ,waiting.get(i).r2,
+                        waiting.get(i).r3, waiting.get(i).comment);
+                waiting.remove(i);
+            }
+
+            //labels left with unknown addresses
+            if(waiting.size()>0)
+            {
+                System.out.println("Unknown labels list not empty..." + waiting);
+            }
+        }
+        printComment("-----End compute offsets-----\n\n");
     }
 
     private void iterateMain(Node tree) throws IOException {
@@ -141,16 +152,7 @@ public class Generator
         }
     }
 
-    private void computeOffsets() throws IOException
-    {
-        printComment("-----Begin compute offsets-----\n");
-        //use string label as dict key. Should be able to pass string around?
-        //function name gets inserted on creation.
 
-        //itter through the structure and match tags, just print like normal
-        //print("lda", 5,1,7,"jump to main");
-        printComment("-----End compute offsets-----\n\n");
-    }
 
     private void bootStrap() throws IOException
     {
