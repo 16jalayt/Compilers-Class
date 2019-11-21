@@ -8,12 +8,18 @@ st 3,0(6) store r3 at top in dmem
 ldc 6,1(6) inc top by 1
 st 4,0(6) store r4 at top in dmem
 
-Make Frame:
+Make Frame: (out of date)
 Save Registers
 Num arguments - have java call x times?//move under args, so return knows how far back to go
 Arguments
 //Have to do ret addr last
 return at r7?
+
+calling seq
+makeStackframe - caller
+calledFunc - callee - get info out of frame
+returning - callee - put return into (r5?)
+returned - caller - restore reg and deallocate stack
 
 
 ldc 6,1(6) inc top by 1

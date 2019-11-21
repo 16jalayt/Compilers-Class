@@ -181,7 +181,7 @@ public class Generator
 
         //must be last thing called, so addr calculated right
         ////////stackframes not quite ready yet
-        StackFrame.makeFrame(0);
+        StackFrame.makeFrame(new int[]{});
         //jump immediately after
 
         //need to send to a seperate function (addr)
@@ -208,7 +208,7 @@ public class Generator
         //print block at top of funtion
 
         ///////////first thing store starting addr to func table and the known label dict tag value.
-        
+
 
         //exp can just trigger a return for now, will have to get smarter
 

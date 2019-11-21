@@ -8,8 +8,8 @@ Registers:
 Stack Frame:
 ret addr
 Register contents 1-4
-Num arguments
 Arguments
+Num arguments
 
 DMEM:
 Check main for number of arguments and store in r6 as top of stack
