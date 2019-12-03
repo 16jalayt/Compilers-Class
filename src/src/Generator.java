@@ -162,10 +162,10 @@ public class Generator
         //just copy paste known number of times
         //need to move to tmp because will be overwritten by stack frame, unless waste that space
 
-        //is main always slot zero? - no it is not. Have to compare names
         //int numberArgs = tree.children.get(0);
         //hardcoded for now
         int numberArgs = 0;
+
         /////proj 5 just skip this
         //only wroks for 4 args or less dum into reg and put back in later
         //let make stackframe take care of it
@@ -180,8 +180,7 @@ public class Generator
         // +2 = +1 for addr. -1 = -2
 
         //must be last thing called, so addr calculated right
-        ////////stackframes not quite ready yet
-        StackFrame.makeFrame(new int[]{});
+        StackFrame.makeFrame(new int[]{},"boot");
         //jump immediately after
 
         //need to send to a seperate function (addr)
@@ -237,7 +236,7 @@ public class Generator
     private void parseFuncHelper (Node tree) throws IOException {
         for (Node child : tree.children)
         {
-            if(child.name.compareTo("FunctionCalls")==0)
+            if(child.name.equals("FunctionCalls"))
                 if(child.children.get(0).value.equals("print"))
                 {
                     int reg = getFreeRegister();
@@ -247,7 +246,7 @@ public class Generator
                 }
                 else //handle func call
                     System.out.println("func call");
-            else if(child.name.compareTo("Expr")==0)//handle return
+            else if(child.name.equals("Expr"))//handle return
                 System.out.println("Handle return");
             else
                 System.out.println("Unknown node type " + child.name);

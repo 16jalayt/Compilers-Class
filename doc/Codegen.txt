@@ -1,15 +1,17 @@
 Registers:
 0 - reserved for 0
 1-4 - available
-5 - reserved for stack frame calculations
+5 - reserved for stack frame calculations and ret val
 6 - reserved for top of stack
 7 - reserved for program counter
 
 Stack Frame:
-ret addr
-Register contents 1-4
 Arguments
 Num arguments
+ret addr
+Register contents 1-4
+return value
+
 
 DMEM:
 Check main for number of arguments and store in r6 as top of stack

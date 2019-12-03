@@ -7,7 +7,7 @@ import java.util.List;
 
 public class StackFrame
 {
-    public static void makeFrame(int[] args) throws IOException
+    public static void makeFrame(int[] args,String funcName) throws IOException
     {//stack frame creation is inlined, could be optimized
      //See make frame in asm staging.txt
 
@@ -28,9 +28,9 @@ public class StackFrame
         Generator.print("st", 5,1,6,"store number args at top + 1 in dmem");
         Generator.print("ldc", 6,1,6,"inc top by 1");
 
-        //retaddr  - probably need to fix - beg of mf?
+        //retaddr  - probably need to fix - beg of makeframe?
         int offset = 2;/////////Not actually set correct yet
-        Generator.addr("add", 5, offset,7,"stackframe");
+        Generator.addr("add", 5, offset,7,funcName);
         Generator.print("st", 5,1,6,"store pc at top + 1 in dmem");
         Generator.print("ldc", 6,1,6,"inc top by 1");
 
@@ -45,18 +45,20 @@ public class StackFrame
 
         saveRegisters();
         //init data objects
-
+        //not sure what to do
         Generator.printComment("-----End Called Func-----\n\n");
     }
 
-    //put return into (r5?)
     public static void returning() throws IOException
     {
         Generator.printComment("-----Begin Returning-----\n\n");
 
-        //handle ret values
+        //handle ret value
+        //////need to get return from somewhere!!!!!
+        Generator.print("ldc", 5,1,6,"put return val in r5");
         restoreRegisters();
         //make sure top is fully dealloc
+        //how much need to sub?
 
         Generator.printComment("-----End Returning-----\n\n");
     }
@@ -66,7 +68,10 @@ public class StackFrame
     {
         Generator.printComment("-----Begin Returned-----\n");
 
-        //copy ret values to reg
+        //copy ret value to r5
+        Generator.print("ld", 5,0,6,"copy ret val to r5");
+        //delete stackframe
+        Generator.print("ldc", 6,-1,6,"dec top by 1");
 
         Generator.printComment("-----End Returned-----\n\n");
     }
