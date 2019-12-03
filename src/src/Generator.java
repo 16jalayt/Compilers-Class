@@ -49,11 +49,11 @@ public class Generator
     }
 
     //stores jumps awaiting an addr
-    LinkedList<WaitingType> waiting = new LinkedList<WaitingType>();
+    private static LinkedList<WaitingType> waiting = new LinkedList<WaitingType>();
     //function addresses as they are parsed
-    HashMap<String, Integer> labels = new HashMap<>();
+    private static HashMap<String, Integer> labels = new HashMap<>();
 
-    private class WaitingType
+    private static class WaitingType
     {
         public int lineNumber;
         public String tag;
@@ -87,7 +87,7 @@ public class Generator
     }
 
     //Drop in for unknown addr jumps
-    private void addr(String instruction, int r1, int r2, int r3, String tag)
+    public static void addr(String instruction, int r1, int r2, int r3, String tag)
     {
         waiting.add(new WaitingType(instruction, r1, r2, r3, "Jump to:"+tag, tag));
     }
@@ -101,7 +101,7 @@ public class Generator
         for (int i = 0; i<waiting.size(); i++)
         {
             if(labels.containsKey(waiting.get(i).tag))
-            {
+            {/////////Not actually setting addr?
                 int addr = labels.get(waiting.get(i).tag);
                 print(addr, waiting.get(i).instruction , waiting.get(i).r1 ,waiting.get(i).r2,
                         waiting.get(i).r3, waiting.get(i).comment);
