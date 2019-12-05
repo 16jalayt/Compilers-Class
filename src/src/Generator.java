@@ -243,56 +243,60 @@ public class Generator
     private void parseFuncHelper (Node tree) throws IOException {
         for (Node child : tree.children)
         {
-            if(child.name.equals("FunctionCalls")) {
-                if (child.children.get(0).value.equals("print")) {
-                    printTM(child);
-                }
-                //handle func call
-                else {
-                    System.out.println("func call");
-                    functionCallTM(child);
-                }
-                parseFuncHelper(child);
-            }
-            else if(child.name.equals("Expr")) {
-                System.out.println("Handle return");
-                exprTM(child);
-                parseFuncHelper(child);
-            }
-            else if(child.name.equals("Identifier")) {
-                identifierTM(child);
-                parseFuncHelper(child);
-            }
-            else if(child.name.equals("Number")) {
-                numberTM(child);
-                parseFuncHelper(child);
-            }
-            else if(child.name.equals("BooleanValue")) {
-                booleanTM(child);
-                parseFuncHelper(child);
-            }
-            else if(child.name.equals("Binary")) {
-                binaryTM(child);
-                parseFuncHelper(child);
-            }
-            else if(child.name.equals("Unary")) {
-                unaryTM(child);
-                parseFuncHelper(child);
-            }
-            else if(child.name.equals("If")) {
-                ifTM(child);
-                parseFuncHelper(child);
-            }
-            else if(child.name.equals("Actuals")) {
-                actualsTM(child);
-                parseFuncHelper(child);
-            }
-            else {
-                parseFuncHelper(child);
-                //System.out.println("Unknown node type " + child.name);
+            switch (child.name) {
+                case "FunctionCalls":
+                    if (child.children.get(0).value.equals("print")) {
+                        printTM(child);
+                    }
+                    //handle func call
+                    else {
+                        System.out.println("func call");
+                        functionCallTM(child);
+                    }
+                    parseFuncHelper(child);
+                    break;
+                case "Expr":
+                    System.out.println("Handle return");
+                    exprTM(child);
+                    parseFuncHelper(child);
+                    break;
+                case "Identifier":
+                    identifierTM(child);
+                    parseFuncHelper(child);
+                    break;
+                case "Number":
+                    numberTM(child);
+                    parseFuncHelper(child);
+                    break;
+                case "BooleanValue":
+                    booleanTM(child);
+                    parseFuncHelper(child);
+                    break;
+                case "Binary":
+                    binaryTM(child);
+                    parseFuncHelper(child);
+                    break;
+                case "Unary":
+                    unaryTM(child);
+                    parseFuncHelper(child);
+                    break;
+                case "If":
+                    ifTM(child);
+                    parseFuncHelper(child);
+                    break;
+                case "Actuals":
+                    actualsTM(child);
+                    parseFuncHelper(child);
+                    break;
+                default:
+                    parseFuncHelper(child);
+                    //System.out.println("Unknown node type " + child.name);
+                    break;
             }
         }
     }
+
+    //the following 12 functions write out TM statements for their specific node types
 
     private void printTM (Node tree) throws IOException {
         int reg = getFreeRegister();
