@@ -32,11 +32,10 @@ public class Generator
 
             bootStrap();
 
-            //find main to start
-            iterateMain(tree);
-
+            ////////////////Needed, because should parse other funcs if called?
             //parse other functions not main
-            iterateOthers(tree);
+            ////////focus on everything in main
+            //iterateOthers(tree);
 
             computeOffsets();
 
@@ -117,19 +116,21 @@ public class Generator
         printComment("-----End compute offsets-----\n\n");
     }
 
-    private void iterateMain(Node tree) throws IOException {
+    private Node getMain(Node tree) throws IOException {
         for (Node child : tree.children)
         {
             if(child.name.equals("Identifier")) {
                 if (child.value.equals("main")) {
-                    System.out.println("Found main");
-                    parseFunc(tree);
+                    if(Main.debugStage == 10) System.out.println("Found main");
+                    return child;
+                    //parseFunc(tree);
                 }
             }
             else{
-                iterateMain(child);
+                getMain(child);
             }
         }
+        return null;
     }
 
     private void iterateOthers(Node tree) throws IOException {
@@ -163,30 +164,31 @@ public class Generator
     private void bootStrap() throws IOException
     {
         printComment("-----Begin bootstrap-----\n");
+
+        Node main = getMain(tree);
         //Ignore: just get from func tree
         //LD  3,1(0)   ; read command-line arg into MAIN's arg slot
         //just copy paste known number of times
         //need to move to tmp because will be overwritten by stack frame, unless waste that space
 
-        //int numberArgs = tree.children.get(0);
-        //hardcoded for now
         int numberArgs = 0;
+        //numberArgs = main.children.length;
 
-        /////proj 5 just skip this
-        //only wroks for 4 args or less dum into reg and put back in later
-        //let make stackframe take care of it
-        for(int i=1; i<numberArgs;i++)
+        //leave in dmem numberargs+1
+        //top = 1;
+        /*for(int i=1; i<numberArgs;i++)
         {
             //////top doesnt work
             print("ld", i, top + i,0);
-        }
+            print("ldc", 6,1,6,"inc top by 1");
+        }*/
 
+        //top should be end of args
 
-        //r5 used for ret addr
         // +2 = +1 for addr. -1 = -2
 
         //must be last thing called, so addr calculated right
-        StackFrame.makeFrame(new int[]{},"boot");
+        ///////StackFrame.makeFrame(new int[]{},"main");
         //jump immediately after
 
         //need to send to a seperate function (addr)
@@ -195,14 +197,12 @@ public class Generator
 
         //ends up inserting main before end, so dont need for now
         //print("ldc", 7,2,7,"jump to main by offseting by 2");
-        iterateMain(tree);
-        print("out", 6,0,0,"print the return register");
-        print("halt", 0,0,0);
-
-        //isolate function from tree//need to start at main. itter to find
-        ////NEW! skip over line then try and parse pain after bootstrap
-
         printComment("-----End bootstrap-----\n\n");
+        parseFunc(main);
+
+        printComment("-----Ending Program-----\n\n");
+        print("out", 5,0,0,"print the return register");
+        print("halt", 0,0,0);
     }
 
 
