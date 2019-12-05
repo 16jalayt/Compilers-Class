@@ -16,7 +16,7 @@ public class Generator
     Node tree;
     static BufferedWriter writer;
     static int lineNumber = 0;
-    private int top=1;
+    //TODO: top will overwrite variables in mem
 
     public void gen(Map stable, Node tree, String fileName)
     {
@@ -54,7 +54,7 @@ public class Generator
 
     private static class WaitingType
     {
-        public int lineNumber;
+        public int lineNumber = 0;
         public String tag;
         private String instruction;
         private int r1;
@@ -116,17 +116,19 @@ public class Generator
         printComment("-----End compute offsets-----\n\n");
     }
 
-    private Node getMain(Node tree) throws IOException {
+    private Node getMain(Node tree)
+    {
         for (Node child : tree.children)
         {
-            if(child.name.equals("Identifier")) {
-                if (child.value.equals("main")) {
+            if(child.name.equals("Identifier"))
+            {
+                if (child.value.equals("main"))
+                {
                     if(Main.debugStage == 10) System.out.println("Found main");
                     return child;
-                    //parseFunc(tree);
                 }
             }
-            else{
+            else {
                 getMain(child);
             }
         }
@@ -142,7 +144,8 @@ public class Generator
                 } else {
                     parseFunc(child);
                 }
-            } else {
+            }
+            else {
                 iterateOthers(child);
             }
         }
@@ -166,6 +169,12 @@ public class Generator
         printComment("-----Begin bootstrap-----\n");
 
         Node main = getMain(tree);
+        System.out.println(main.value.toString());
+        if (main==null)
+        {
+            System.out.println("Could not find the main function.");
+            System.exit(-1);
+        }
         //Ignore: just get from func tree
         //LD  3,1(0)   ; read command-line arg into MAIN's arg slot
         //just copy paste known number of times
@@ -208,13 +217,15 @@ public class Generator
 
 
     private void parseFunc(Node defNode) throws IOException
-    {
+    {//TODO: optimize by inlining short functions
         printComment("-----Begin function call-----\n");
         //print block at top of function
 
         ///////////first thing store starting addr to func table and the known label dict tag value.
-        labels.put(defNode.children.get(0).value.toString(), lineNumber);
 
+        //TODO:first main being passed is null
+        System.out.println(String.valueOf(defNode));
+        labels.put(defNode.children.get(0).value.toString(), lineNumber);
 
         //exp can just trigger a return for now, will have to get smarter
 
@@ -222,6 +233,7 @@ public class Generator
         //print is func call. children (id print) (exp number 1)
 
         //!!!!!I think it needs to dig into the tree deeper
+        //parseFuncHelper(defNode.child);
         parseFuncHelper(defNode);
 
         //in mem not reg:
@@ -241,6 +253,11 @@ public class Generator
     }
 
     private void parseFuncHelper (Node tree) throws IOException {
+        if(tree.children.isEmpty())
+        {
+            System.out.println("Children are empty for object" + tree.toString());
+            return;
+        }
         for (Node child : tree.children)
         {
             switch (child.name) {
@@ -298,6 +315,14 @@ public class Generator
 
     //the following 12 functions write out TM statements for their specific node types
 
+    //TODO: at each step parse node and put value in dict?
+    //might not need endpoint nodes
+    //should return value? recursive.
+
+    //or ints store at mem bottom and keep track of addr
+    //key name of object, value is value in native type. can typecheck. cast back out
+    private static HashMap<String, Object> variables = new HashMap<>();
+
     private void printTM (Node tree) throws IOException {
         int reg = getFreeRegister();
         int val = Integer.parseInt(tree.children.get(1).children.get(0).value.toString());
@@ -306,47 +331,51 @@ public class Generator
     }
 
     private void exprTM (Node tree) throws IOException {
-
+        System.out.println("Expression not implemented");
     }
 
     private void identifierTM (Node tree) throws IOException {
-
+        System.out.println("Identifier not implemented");
     }
 
     private void formalsTM (Node tree) throws IOException {
-
+        System.out.println("Formals not implemented");
     }
 
     private void formalTM (Node tree) throws IOException {
-
+        System.out.println("Formal not implemented");
     }
 
     private void numberTM (Node tree) throws IOException {
-
+        System.out.println("Number not implemented");
     }
 
     private void booleanTM (Node tree) throws IOException {
-
+        System.out.println("Boolean not implemented");
     }
 
     private void binaryTM (Node tree) throws IOException {
-
+        System.out.println("Binary Expression not implemented");
     }
 
     private void unaryTM (Node tree) throws IOException {
-
+        System.out.println("Unary Expression not implemented");
     }
 
     private void ifTM (Node tree) throws IOException {
-
+        System.out.println("If not implemented");
+        //if(child0 child1 child2)
     }
 
     private void actualsTM (Node tree) throws IOException {
-
+        System.out.println("Actuals not implemented");
     }
 
     private void functionCallTM (Node tree) throws IOException {
-
+        //check exists in symboltable
+        //add to unknown list
+        //call parsefunc
+        System.out.println("Functions not implemented");
     }
 
     int current = 1;
