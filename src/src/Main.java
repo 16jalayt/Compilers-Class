@@ -9,7 +9,8 @@ public class Main
     //odd values are used for kleinf,kleinp, etc
     //**Do not change here. the override is below**
     static int debugStage =-1;
-    //CHANGE THIS ONE
+
+    /////CHANGE THIS ONE
     static int debugOverride = 10;
 
     //can use this line in the code and will mute the debug print
@@ -19,7 +20,7 @@ public class Main
     {
         if(args.length == 1)
         {
-            debugStage = 8;
+            debugStage = -1;
         }
         else if(args.length == 2)
         {
