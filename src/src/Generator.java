@@ -123,7 +123,7 @@ public class Generator
             if(child.name.equals("Identifier")) {
                 if (child.value.equals("main")) {
                     System.out.println("Found main");
-                    parseFunc(tree.children.get(3));
+                    parseFunc(tree);
                 }
             }
             else{
@@ -133,10 +133,20 @@ public class Generator
     }
 
     private void iterateOthers(Node tree) throws IOException {
-        //check for all identifiers that are a function name, except for main and print
-        for (Node child : tree.children)
-        {
-            if(child.name.equals("Identifier")) {
+        //sends all def nodes (except for main) to parseFunc
+        for (Node child : tree.children) {
+            if (child.name.equals("Def")) {
+                if (child.children.get(0).value.equals("Main")) {
+                    continue;
+                } else {
+                    parseFunc(child);
+                }
+            } else {
+                iterateOthers(child);
+            }
+        }
+    }
+                /*if(child.name.equals("Identifier")) {
                 if (stable.containsKey(child.value)) {
                     if (child.value.equals("main") || child.value.equals("print")){
                         continue;
@@ -147,12 +157,8 @@ public class Generator
                 }
             }
             else{
-                iterateMain(child);
-            }
-        }
-    }
-
-
+                iterateOthers(child);
+            }*/
 
     private void bootStrap() throws IOException
     {
@@ -201,12 +207,13 @@ public class Generator
 
 
 
-    private void parseFunc(Node func) throws IOException
+    private void parseFunc(Node defNode) throws IOException
     {
         printComment("-----Begin function call-----\n");
-        //print block at top of funtion
+        //print block at top of function
 
         ///////////first thing store starting addr to func table and the known label dict tag value.
+        labels.put(defNode.children.get(0).value.toString(), lineNumber);
 
 
         //exp can just trigger a return for now, will have to get smarter
@@ -215,7 +222,7 @@ public class Generator
         //print is func call. children (id print) (exp number 1)
 
         //!!!!!I think it needs to dig into the tree deeper
-        parseFuncHelper(func);
+        parseFuncHelper(defNode);
 
         //in mem not reg:
         //8:    ADD  5,0,3    ; store parameter into SQUARE's arg slot
@@ -236,21 +243,106 @@ public class Generator
     private void parseFuncHelper (Node tree) throws IOException {
         for (Node child : tree.children)
         {
-            if(child.name.equals("FunctionCalls"))
-                if(child.children.get(0).value.equals("print"))
-                {
-                    int reg = getFreeRegister();
-                    int val = Integer.parseInt(child.children.get(1).children.get(0).value.toString());
-                    print("ldc" ,reg,val,0);
-                    print("out" ,reg,0,0, "Printing value:"+val);
+            if(child.name.equals("FunctionCalls")) {
+                if (child.children.get(0).value.equals("print")) {
+                    printTM(child);
                 }
-                else //handle func call
+                //handle func call
+                else {
                     System.out.println("func call");
-            else if(child.name.equals("Expr"))//handle return
+                    functionCallTM(child);
+                }
+                parseFuncHelper(child);
+            }
+            else if(child.name.equals("Expr")) {
                 System.out.println("Handle return");
-            else
-                System.out.println("Unknown node type " + child.name);
+                exprTM(child);
+                parseFuncHelper(child);
+            }
+            else if(child.name.equals("Identifier")) {
+                identifierTM(child);
+                parseFuncHelper(child);
+            }
+            else if(child.name.equals("Number")) {
+                numberTM(child);
+                parseFuncHelper(child);
+            }
+            else if(child.name.equals("BooleanValue")) {
+                booleanTM(child);
+                parseFuncHelper(child);
+            }
+            else if(child.name.equals("Binary")) {
+                binaryTM(child);
+                parseFuncHelper(child);
+            }
+            else if(child.name.equals("Unary")) {
+                unaryTM(child);
+                parseFuncHelper(child);
+            }
+            else if(child.name.equals("If")) {
+                ifTM(child);
+                parseFuncHelper(child);
+            }
+            else if(child.name.equals("Actuals")) {
+                actualsTM(child);
+                parseFuncHelper(child);
+            }
+            else {
+                parseFuncHelper(child);
+                //System.out.println("Unknown node type " + child.name);
+            }
         }
+    }
+
+    private void printTM (Node tree) throws IOException {
+        int reg = getFreeRegister();
+        int val = Integer.parseInt(tree.children.get(1).children.get(0).value.toString());
+        print("ldc" ,reg,val,0);
+        print("out" ,reg,0,0, "Printing value:"+val);
+    }
+
+    private void exprTM (Node tree) throws IOException {
+
+    }
+
+    private void identifierTM (Node tree) throws IOException {
+
+    }
+
+    private void formalsTM (Node tree) throws IOException {
+
+    }
+
+    private void formalTM (Node tree) throws IOException {
+
+    }
+
+    private void numberTM (Node tree) throws IOException {
+
+    }
+
+    private void booleanTM (Node tree) throws IOException {
+
+    }
+
+    private void binaryTM (Node tree) throws IOException {
+
+    }
+
+    private void unaryTM (Node tree) throws IOException {
+
+    }
+
+    private void ifTM (Node tree) throws IOException {
+
+    }
+
+    private void actualsTM (Node tree) throws IOException {
+
+    }
+
+    private void functionCallTM (Node tree) throws IOException {
+
     }
 
     int current = 1;

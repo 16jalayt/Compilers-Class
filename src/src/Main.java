@@ -8,7 +8,7 @@ public class Main
     //even with debug prints, odd no prints
     //odd values are used for kleinf,kleinp, etc
     //**Do not change here. the override is below**
-    static int debugStage = -1;
+    static int debugStage =-1;
     //CHANGE THIS ONE
     static int debugOverride = 10;
 
@@ -19,7 +19,7 @@ public class Main
     {
         if(args.length == 1)
         {
-            debugStage = -1;
+            debugStage = 8;
         }
         else if(args.length == 2)
         {

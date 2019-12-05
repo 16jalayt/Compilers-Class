@@ -16,9 +16,9 @@
 13:    LDC  6,1(6)    ;inc top by 1
 *-----End Stack Frame-----
 
-14:    LDC  7,2(7)    ;jump to main by offseting by 2
 *-----Begin function call-----
-15:    OUT  0,0,0    ;1
+14:    LDC  1,1(0)    ;
+15:    OUT  1,0,0    ;Printing value:1
 *-----End function call-----
 
 16:    OUT  6,0,0    ;print the return register
@@ -26,11 +26,13 @@
 *-----End bootstrap-----
 
 *-----Begin function call-----
-18:    OUT  0,0,0    ;1
+18:    LDC  1,1(0)    ;
+19:    OUT  1,0,0    ;Printing value:1
 *-----End function call-----
 
 *-----Begin function call-----
-19:    OUT  0,0,0    ;1
+20:    LDC  1,1(0)    ;
+21:    OUT  1,0,0    ;Printing value:1
 *-----End function call-----
 
 *-----Begin compute offsets-----

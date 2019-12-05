@@ -209,15 +209,15 @@ public class TypeCheck {
             System.out.println("TempList is : " + tempList);
 
 
-            //if (stable.get(functionName.value).equals(new TT_Obj(tempListList, functionType.type))) {
             for (LinkedList<String> formal : tempObj.formals) {
-                if (formal.equals(tempList)) {
+                //if (formal.equals(tempList)) {
+                if (stable.get(functionName.value).equals(new TT_Obj(tempListList, functionType.type))) {
                     Identifier.type = "integer";
                     break;
                 }
 
-                //if (stable.get(functionName.value).equals(new TT_Obj(tempListList2, functionType.type))) {
-                else if (formal.equals(tempList2)) {
+                else if (stable.get(functionName.value).equals(new TT_Obj(tempListList2, functionType.type))) {
+                //else if (formal.equals(tempList2)) {
                     Identifier.type = "boolean";
                     break;
                 }
@@ -278,7 +278,8 @@ public class TypeCheck {
             System.out.println("Identifier name is : " + identifier.value);
             System.out.println("Fun Type : " + FunctionCall.type);
             //If FunctionCall.type is still null, there was no error, so we can assign this identifier its type
-            if (FunctionCall.type == null){
+            //if (FunctionCall.type == null){
+            if (!FunctionCall.type.equals("Error")){
                 FunctionCall.type = stable.get(identifier.value).type;
                 break;
             }

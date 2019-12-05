@@ -129,7 +129,7 @@ public class Node
             this.name = "Formals";
         }
     }
-        public static class Formal extends Node
+    public static class Formal extends Node
     {
         public Formal(Node[] children) { super(children);
             if(Main.debugStage == 6)
