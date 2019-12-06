@@ -45,9 +45,6 @@ public class Node
         children.add(0,child);
     }
 
-    public void removeChild(Node n){
-        this.children=null;
-    }
 
     //n is number of indents for children.
     public void Iterate(int n)

@@ -12,6 +12,9 @@ Project 5 additional info:
 Klein file of the name "filename.kln" is converted into a Tm file of the name "filename.tm". Output of 
 Generator is stored in "filename.tm".
 
+Project 6 additional info:
+Our Klein file for project 6 is titled funWithFractions.kln and is found under the "tests" folder
+
 Classes in this file:
 Main(): Has multiple debug stages. debug=1 is for testing scanner, debug=3 is for testing parser true/false, 
         debug=5 is for testing Parser AST return, and debug=6 is for testing full functionality.
@@ -28,7 +31,7 @@ TypeChecker(): Goes through the AST from the Parser and makes sure it is semanti
 TT_Obj(): This is the data structure used for each function named in the program. We want to keep track of the formals, type,
            what functions it called and what functions calls it. 
 Generator(): This class translates a klein program into TM. No Intermediate Representation is currently used. 
-             Currently set up to only work for print-one.kln.
+             Currently does not work properly.
 
 
 How to Use:
@@ -59,4 +62,5 @@ Known bugs:
 Most of typeCheckers issues have been fixed, although there are still some minor bugs that 
 cause larger klein files to be seen as semantically incorrect when they are not. I think
 I know where exactly this issue is though, should have that fixed by the final project due date.
+Generator doesn't work properly, it is very bare-bones currently.
                   

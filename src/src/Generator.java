@@ -263,8 +263,10 @@ public class Generator
         }
         //////////Andrew, change this to for loop so we can do tree.children.get(x). The tm functions will have to return
         //the node and parsefunchelper will have to overwrite the node
-        for (Node child : tree.children)
+        for (int i=0; i<tree.children.size(); i++)
+        //for (Node child : tree.children)
         {
+            Node child = tree.children.get(i);
             switch (child.name) {
                 case "FunctionCalls":
                     if (child.children.get(0).value.equals("print")) {
@@ -287,7 +289,7 @@ public class Generator
                     parseFuncHelper(child);
                     break;
                 case "Number":
-                    numberTM(child);
+                    Node numNode = numberTM(child);
                     parseFuncHelper(child);
                     break;
                 case "BooleanValue":
@@ -295,11 +297,13 @@ public class Generator
                     parseFuncHelper(child);
                     break;
                 case "Binary":
-                    binaryTM(child);
+                    Node binaryNode = binaryTM(child);
+                    //binaryNode.addChildren(child.children.get());
+                    child = binaryNode;
                     parseFuncHelper(child);
                     break;
                 case "Unary":
-                    unaryTM(child);
+                    Node unaryNode = unaryTM(child);
                     parseFuncHelper(child);
                     break;
                 case "If":
@@ -346,9 +350,10 @@ public class Generator
         System.out.println("Formal not implemented");
     }
 
-    private void numberTM (Node tree) throws IOException {
+    private Node numberTM (Node tree) throws IOException {
         System.out.println("Number work in progress");
         tree = new Node.Returned(Integer.parseInt(tree.value.toString()));
+        return tree;
     }
 
     private void booleanTM (Node tree) throws IOException {
@@ -356,7 +361,7 @@ public class Generator
     }
 
     //chage node to result node and check for
-    private void binaryTM (Node tree) throws IOException {
+    private Node binaryTM (Node tree) throws IOException {
         System.out.println("Binary Expression work in progrss");
         //if(identifier) look up symbol table
         //if(interger) parse int
@@ -365,10 +370,11 @@ public class Generator
         Node two = tree.children.get(1);
         int oneInt = 0;
         int twoInt = 0;
+        int reg = getFreeRegister();
         if (tree.value.toString() == "+")
         {
             if(one.type.equals("Integer") && two.type.equals("Integer"))
-                print("add",getFreeRegister(),Integer.parseInt(one.value.toString()), Integer.parseInt(two.value.toString()));
+                print("add",reg,Integer.parseInt(one.value.toString()), Integer.parseInt(two.value.toString()));
 
             else if(one.type.equals("Identifier") && two.type.equals("Integer"))
             {
@@ -379,17 +385,20 @@ public class Generator
                         oneInt = Integer.parseInt(id);
                     }
 
-                print("add",getFreeRegister(),oneInt, Integer.parseInt(two.value.toString()));
+                print("add",reg,oneInt, Integer.parseInt(two.value.toString()));
             }
         }
+        Node rNode = new Node.Returned(reg);
+        return rNode;
     }
 
-    private void unaryTM (Node tree) throws IOException {
+    private Node unaryTM (Node tree) throws IOException {
         System.out.println("Unary Expression partially");
+        int freeReg = getFreeRegister();
+
         if (tree.value.equals("-")){
             if (tree.children.get(0).name.equals("Number")){
                 int nodeVal = Integer.parseInt(tree.children.get(0).value.toString());
-                int freeReg = getFreeRegister();
                 print("ldc", freeReg, nodeVal, 0);
                 print("sub", freeReg, 0, freeReg);
             }
@@ -399,7 +408,8 @@ public class Generator
                 }
             }
         }
-
+        Node rNode = new Node.Returned(freeReg);
+        return rNode;
     }
 
     private void ifTM (Node tree) throws IOException {
