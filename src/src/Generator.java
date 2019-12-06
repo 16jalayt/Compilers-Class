@@ -227,7 +227,6 @@ public class Generator
 
         ///////////first thing store starting addr to func table and the known label dict tag value.
 
-        //TODO:first main being passed is null
         System.out.println(String.valueOf(defNode));
         labels.put(defNode.children.get(0).value.toString(), lineNumber);
 
@@ -262,6 +261,8 @@ public class Generator
             System.out.println("Children are empty for object" + tree.toString());
             return;
         }
+        //////////Andrew, change this to for loop so we can do tree.children.get(x). The tm functions will have to return
+        //the node and parsefunchelper will have to overwrite the node
         for (Node child : tree.children)
         {
             switch (child.name) {
@@ -346,7 +347,8 @@ public class Generator
     }
 
     private void numberTM (Node tree) throws IOException {
-        System.out.println("Number not implemented");
+        System.out.println("Number work in progress");
+        tree = new Node.Returned(Integer.parseInt(tree.value.toString()));
     }
 
     private void booleanTM (Node tree) throws IOException {

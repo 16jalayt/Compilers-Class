@@ -11,6 +11,7 @@ public class Node
     public Object value;
     public String type;
     public List<Node> children = new LinkedList<Node>();
+    public int returnVal;
 
     //set to stop reporting errors at higher nodes
     public boolean childHasError = false;
@@ -231,6 +232,14 @@ public class Node
             if(Main.debugStage == 6)
                 System.out.println("FunctionCall");
             this.name = "FunctionCalls";
+        }
+    }
+    public static class Returned extends Node
+    {
+        public Returned(int val) {
+            super();
+            this.name = "Returned";
+            this.returnVal = val;
         }
     }
 
