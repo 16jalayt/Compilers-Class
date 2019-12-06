@@ -304,6 +304,7 @@ public class Generator
                     break;
                 case "Unary":
                     Node unaryNode = unaryTM(child);
+                    child = unaryNode;
                     parseFuncHelper(child);
                     break;
                 case "If":
