@@ -277,18 +277,6 @@ public class Generator
                     exprTM(child);
                     parseFuncHelper(child);
                     break;
-                case "Identifier":
-                    identifierTM(child);
-                    parseFuncHelper(child);
-                    break;
-                case "Number":
-                    numberTM(child);
-                    parseFuncHelper(child);
-                    break;
-                case "BooleanValue":
-                    booleanTM(child);
-                    parseFuncHelper(child);
-                    break;
                 case "Binary":
                     binaryTM(child);
                     parseFuncHelper(child);
@@ -334,25 +322,6 @@ public class Generator
         System.out.println("Expression not implemented");
     }
 
-    private void identifierTM (Node tree) throws IOException {
-        System.out.println("Identifier not implemented");
-    }
-
-    private void formalsTM (Node tree) throws IOException {
-        System.out.println("Formals not implemented");
-    }
-
-    private void formalTM (Node tree) throws IOException {
-        System.out.println("Formal not implemented");
-    }
-
-    private void numberTM (Node tree) throws IOException {
-        System.out.println("Number not implemented");
-    }
-
-    private void booleanTM (Node tree) throws IOException {
-        System.out.println("Boolean not implemented");
-    }
 
     private void binaryTM (Node tree) throws IOException {
         System.out.println("Binary Expression not implemented");
@@ -360,6 +329,20 @@ public class Generator
 
     private void unaryTM (Node tree) throws IOException {
         System.out.println("Unary Expression not implemented");
+        if (tree.value.equals("-")){
+            if (tree.children.get(0).name.equals("Number")){
+                int nodeVal = Integer.parseInt(tree.children.get(0).value.toString());
+                int freeReg = getFreeRegister();
+                print("ldc", freeReg, nodeVal, 0);
+                print("sub", freeReg, 0, freeReg);
+            }
+            else if(tree.children.get(0).name.equals("Identifier")){
+                for (String id : stable.get("Main").formals.get(0)){
+                    
+                }
+            }
+        }
+
     }
 
     private void ifTM (Node tree) throws IOException {
