@@ -118,6 +118,8 @@ public class Generator
 
     private Node getMain(Node tree)
     {
+        //go down one level
+        tree = tree.children.get(0);
         for (Node child : tree.children)
         {
             if(child.name.equals("Identifier"))
@@ -125,13 +127,16 @@ public class Generator
                 if (child.value.equals("main"))
                 {
                     if(Main.debugStage == 10) System.out.println("Found main");
-                    return child;
+                    //Hack for out of scope. Should only be set once anyway.
+                    /*main.value = tree.value;
+                    main.children = tree.children;
+                    main.type = tree.type;
+                    main.name = tree.name;*/
+                    return tree;
                 }
             }
-            else {
-                getMain(child);
-            }
         }
+        System.out.println("Main function not found");
         return null;
     }
 
@@ -169,7 +174,6 @@ public class Generator
         printComment("-----Begin bootstrap-----\n");
 
         Node main = getMain(tree);
-        System.out.println(main.value.toString());
         if (main==null)
         {
             System.out.println("Could not find the main function.");
@@ -223,7 +227,6 @@ public class Generator
 
         ///////////first thing store starting addr to func table and the known label dict tag value.
 
-        //TODO:first main being passed is null
         System.out.println(String.valueOf(defNode));
         labels.put(defNode.children.get(0).value.toString(), lineNumber);
 
@@ -258,6 +261,8 @@ public class Generator
             System.out.println("Children are empty for object" + tree.toString());
             return;
         }
+        //////////Andrew, change this to for loop so we can do tree.children.get(x). The tm functions will have to return
+        //the node and parsefunchelper will have to overwrite the node
         for (Node child : tree.children)
         {
             switch (child.name) {
@@ -275,6 +280,18 @@ public class Generator
                 case "Expr":
                     System.out.println("Handle return");
                     exprTM(child);
+                    parseFuncHelper(child);
+                    break;
+				case "Identifier":
+                    identifierTM(child);
+                    parseFuncHelper(child);
+                    break;
+                case "Number":
+                    numberTM(child);
+                    parseFuncHelper(child);
+                    break;
+                case "BooleanValue":
+                    booleanTM(child);
                     parseFuncHelper(child);
                     break;
                 case "Binary":
@@ -303,12 +320,7 @@ public class Generator
 
     //the following 12 functions write out TM statements for their specific node types
 
-    //TODO: at each step parse node and put value in dict?
-    //might not need endpoint nodes
-    //should return value? recursive.
-
-    //or ints store at mem bottom and keep track of addr
-    //key name of object, value is value in native type. can typecheck. cast back out
+    //turn node into return type
     private static HashMap<String, Object> variables = new HashMap<>();
 
     private void printTM (Node tree) throws IOException {
@@ -322,13 +334,58 @@ public class Generator
         System.out.println("Expression not implemented");
     }
 
+    private void identifierTM (Node tree) throws IOException {
+        System.out.println("Identifier not implemented");
+    }
 
+    private void formalsTM (Node tree) throws IOException {
+        System.out.println("Formals not implemented");
+    }
+
+    private void formalTM (Node tree) throws IOException {
+        System.out.println("Formal not implemented");
+    }
+
+    private void numberTM (Node tree) throws IOException {
+        System.out.println("Number work in progress");
+        tree = new Node.Returned(Integer.parseInt(tree.value.toString()));
+    }
+
+    private void booleanTM (Node tree) throws IOException {
+        System.out.println("Boolean not implemented");
+    }
+
+    //chage node to result node and check for
     private void binaryTM (Node tree) throws IOException {
-        System.out.println("Binary Expression not implemented");
+        System.out.println("Binary Expression work in progrss");
+        //if(identifier) look up symbol table
+        //if(interger) parse int
+        //stable.get(identifier.value).formals.get(0) gives linked list of formals
+        Node one = tree.children.get(0);
+        Node two = tree.children.get(1);
+        int oneInt = 0;
+        int twoInt = 0;
+        if (tree.value.toString() == "+")
+        {
+            if(one.type.equals("Integer") && two.type.equals("Integer"))
+                print("add",getFreeRegister(),Integer.parseInt(one.value.toString()), Integer.parseInt(two.value.toString()));
+
+            else if(one.type.equals("Identifier") && two.type.equals("Integer"))
+            {
+                for(String id : stable.get("Main").formals.get(0))
+                    if(id.equals(one.value))
+                    {
+                        System.out.println(one.value);
+                        oneInt = Integer.parseInt(id);
+                    }
+
+                print("add",getFreeRegister(),oneInt, Integer.parseInt(two.value.toString()));
+            }
+        }
     }
 
     private void unaryTM (Node tree) throws IOException {
-        System.out.println("Unary Expression not implemented");
+        System.out.println("Unary Expression partially");
         if (tree.value.equals("-")){
             if (tree.children.get(0).name.equals("Number")){
                 int nodeVal = Integer.parseInt(tree.children.get(0).value.toString());
