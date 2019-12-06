@@ -1,0 +1,26 @@
+(* The purpose of this file is to satisfy the requirements of a new Klein program for project part 6,
+    as well as to allow klein to perform basic mathematical operations of fractions.
+    How to properly enter the fractions: a and x are the first and second numerators, while b and y
+    are the first and second denominators.
+    addFraction adds the two fractions, prints the numerator, and returns the denominator.
+    subFraction subtracts the two fractions, prints the numerator, and returns the denominator.
+    mulFraction multiplies the two fractions, prints the numerator, and returns the denominator.
+    divFraction divides the two fractions, prints the numerator, and returns the denominator
+*)
+
+function addFraction( a : integer, b : integer, x : integer, y : integer) : integer
+    print((a*y) + (b*x))
+    b*y
+
+function subFraction( a : integer, b : integer, x : integer, y : integer) : integer
+    print((a*y) - (b*x))
+    b*y
+
+function mulFraction( a : integer, b : integer, x : integer, y : integer) : integer
+    print(a*x)
+    b*y
+
+function divFraction( a : integer, b : integer, x : integer, y : integer) : integer
+    print(a*y)
+    b*x
+

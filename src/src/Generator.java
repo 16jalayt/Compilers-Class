@@ -338,7 +338,7 @@ public class Generator
             }
             else if(tree.children.get(0).name.equals("Identifier")){
                 for (String id : stable.get("Main").formals.get(0)){
-                    
+
                 }
             }
         }
