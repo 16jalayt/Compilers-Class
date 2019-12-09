@@ -2,6 +2,7 @@
 
 del Compilers-Class.iml
 del .gitignore
+del run_test.bat
 rmdir /S /Q examples
 rmdir /S /Q out
 rmdir /S /Q tools

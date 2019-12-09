@@ -11,7 +11,6 @@ public class Node
     public Object value;
     public String type;
     public List<Node> children = new LinkedList<Node>();
-    public int returnVal;
 
     //set to stop reporting errors at higher nodes
     public boolean childHasError = false;
@@ -231,12 +230,17 @@ public class Node
             this.name = "FunctionCalls";
         }
     }
+
+    //public int returnVal;
+    public int returnReg;
+
     public static class Returned extends Node
     {
-        public Returned(int val) {
+        public Returned(int reg) {
             super();
             this.name = "Returned";
-            this.returnVal = val;
+            //this.returnVal = val;
+            this.returnReg = reg;
         }
     }
 

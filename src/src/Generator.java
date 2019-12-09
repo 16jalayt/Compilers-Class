@@ -261,8 +261,7 @@ public class Generator
             System.out.println("Children are empty for object" + tree.toString());
             return;
         }
-        //////////Andrew, change this to for loop so we can do tree.children.get(x). The tm functions will have to return
-        //the node and parsefunchelper will have to overwrite the node
+        //////////Problem is it parses parents then children
         for (int i=0; i<tree.children.size(); i++)
         //for (Node child : tree.children)
         {
@@ -290,6 +289,7 @@ public class Generator
                     break;
                 case "Number":
                     Node numNode = numberTM(child);
+                    tree.children.set(i,numNode);
                     parseFuncHelper(child);
                     break;
                 case "BooleanValue":
@@ -298,13 +298,12 @@ public class Generator
                     break;
                 case "Binary":
                     Node binaryNode = binaryTM(child);
-                    //binaryNode.addChildren(child.children.get());
-                    child = binaryNode;
+                    tree.children.set(i,binaryNode);
                     parseFuncHelper(child);
                     break;
                 case "Unary":
                     Node unaryNode = unaryTM(child);
-                    child = unaryNode;
+                    tree.children.set(i,unaryNode);
                     parseFuncHelper(child);
                     break;
                 case "If":
@@ -329,10 +328,12 @@ public class Generator
     private static HashMap<String, Object> variables = new HashMap<>();
 
     private void printTM (Node tree) throws IOException {
-        int reg = getFreeRegister();
-        int val = Integer.parseInt(tree.children.get(1).children.get(0).value.toString());
-        print("ldc" ,reg,val,0);
-        print("out" ,reg,0,0, "Printing value:"+val);
+        System.out.println("Print work in progress");
+        int reg = tree.children.get(0).returnReg;
+        //int val = Integer.parseInt(tree.children.get(1).children.get(0).value.toString());
+        //print("ldc" ,reg,val,0);
+        //print("out" ,reg,0,0, "Printing value:"+val);
+        print("out" ,reg,0,0, "Printing value in reg "+reg);
     }
 
     private void exprTM (Node tree) throws IOException {
@@ -353,12 +354,22 @@ public class Generator
 
     private Node numberTM (Node tree) throws IOException {
         System.out.println("Number work in progress");
-        tree = new Node.Returned(Integer.parseInt(tree.value.toString()));
-        return tree;
+        int reg = getFreeRegister();
+        print("ldc",reg,Integer.parseInt(tree.value.toString()),0,"Load number");
+        Node rNode = new Node.Returned(reg);
+        return rNode;
     }
 
-    private void booleanTM (Node tree) throws IOException {
-        System.out.println("Boolean not implemented");
+    private Node booleanTM (Node tree) throws IOException {
+        System.out.println("Boolean work in progress");
+        int reg = getFreeRegister();
+        if(tree.value.toString().equals("true"))
+            print("ldc",reg,1,0,"Boolean true");
+        else if(tree.value.toString().equals("false"))
+            print("ldc",reg,0,0,"Boolean false");
+        else
+            System.out.println("Invalid boolean expression");
+        return new Node.Returned(reg);
     }
 
     //chage node to result node and check for
@@ -389,19 +400,18 @@ public class Generator
                 print("add",reg,oneInt, Integer.parseInt(two.value.toString()));
             }
         }
-        Node rNode = new Node.Returned(reg);
-        return rNode;
+        return new Node.Returned(reg);
     }
 
     private Node unaryTM (Node tree) throws IOException {
-        System.out.println("Unary Expression partially");
-        int freeReg = getFreeRegister();
+        System.out.println("Unary Expression partially Implemented");
+        int reg = getFreeRegister();
 
         if (tree.value.equals("-")){
             if (tree.children.get(0).name.equals("Number")){
                 int nodeVal = Integer.parseInt(tree.children.get(0).value.toString());
-                print("ldc", freeReg, nodeVal, 0);
-                print("sub", freeReg, 0, freeReg);
+                print("ldc", reg, nodeVal, 0);
+                print("sub", reg, 0, reg);
             }
             else if(tree.children.get(0).name.equals("Identifier")){
                 for (String id : stable.get("Main").formals.get(0)){
@@ -409,8 +419,7 @@ public class Generator
                 }
             }
         }
-        Node rNode = new Node.Returned(freeReg);
-        return rNode;
+        return new Node.Returned(reg);
     }
 
     private void ifTM (Node tree) throws IOException {
@@ -441,26 +450,21 @@ public class Generator
         //or last ditch just keep looping and repeat, and hope no conflict
 
         //if all given out return null
-        if(current >=5)
-            return -1;
+        if(current >=4)
+        {
+            current = 1;
+            return current;
+        }
         else
         {
             current++;
-            return 1;
+            return current;
         }
     }
-
-    //NOTE binary op
-    //ld arg1
-    //ld arg2
-    //op
-    //st
-
 
     //These functions are for programming convenience and
     //overload depending on what we pass. Would be nice if
     //java had default args instead of just overloading.
-
 
 
     //prints out a line comment
