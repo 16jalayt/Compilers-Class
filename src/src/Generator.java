@@ -220,7 +220,7 @@ public class Generator
 
         printComment("-----Ending Program-----\n\n");
         System.out.println("Type is: "+returnVal.name+":"+returnVal.returnReg);
-        print("out", 2,0,0,"print the return register");
+        print("out", returnVal.returnReg,0,0,"print the return register");
         print("halt", 0,0,0);
     }
 
@@ -336,7 +336,7 @@ public class Generator
                     break;
             }
         }
-        System.out.println("returnval = "+tree.children.get(0).name);
+        //System.out.println("returnval = "+tree.children.get(0).name);
         returnVal = new Node.Returned(tree.children.get(0).returnReg);
     }
 
@@ -346,7 +346,7 @@ public class Generator
     private static HashMap<String, Object> variables = new HashMap<>();
 
     private void printTM (Node tree) throws IOException {
-        System.out.println("Print work in progress");
+        //System.out.println("Print work in progress");
         int reg = tree.children.get(0).returnReg;
         //int val = Integer.parseInt(tree.children.get(1).children.get(0).value.toString());
         //print("ldc" ,reg,val,0);
@@ -376,7 +376,7 @@ public class Generator
     }
 
     private Node numberTM (Node tree) throws IOException {
-        System.out.println("Number work in progress");
+        //System.out.println("Number work in progress");
         int reg = getFreeRegister();
         print("ldc",reg,Integer.parseInt(tree.value.toString()),0,"Load number");
         Node rNode = new Node.Returned(reg);
@@ -397,35 +397,26 @@ public class Generator
 
     //chage node to result node and check for
     private Node binaryTM (Node tree) throws IOException {
-        System.out.println("Binary Expression work in progrss");
+        //System.out.println("Binary Expression work in progrss");
         //if(identifier) look up symbol table
         //if(interger) parse int
         //stable.get(identifier.value).formals.get(0) gives linked list of formals
         Node one = tree.children.get(0);
         Node two = tree.children.get(1);
-        int oneInt = 0;
-        int twoInt = 0;
-        int reg = getFreeRegister();
-        if (tree.value.toString() == "+")
-        {
-            if(one.type.equals("Integer") && two.type.equals("Integer"))
-                print("add",reg,Integer.parseInt(one.value.toString()), Integer.parseInt(two.value.toString()));
+        //int reg = getFreeRegister();
+        if (tree.value.toString().equals("+"))
+            print("add",two.returnReg,one.returnReg, two.returnReg);
+        if (tree.value.toString().equals("-"))
+            print("sub",two.returnReg,one.returnReg, two.returnReg);
+        if (tree.value.toString().equals("*"))
+            print("mul",two.returnReg,one.returnReg, two.returnReg);
+        if (tree.value.toString().equals("/"))
+            print("div",two.returnReg,one.returnReg, two.returnReg);
 
-            else if(one.type.equals("Identifier") && two.type.equals("Integer"))
-            {
-                for(String id : stable.get("Main").formals.get(0))
-                    if(id.equals(one.value))
-                    {
-                        System.out.println(one.value);
-                        oneInt = Integer.parseInt(id);
-                    }
-
-                print("add",reg,oneInt, Integer.parseInt(two.value.toString()));
-            }
-        }
-        return new Node.Returned(reg);
+        return new Node.Returned(two.returnReg);
     }
-
+//////////////////////////////////////////The child nodes no longer have types.
+// //it is assumed they are already the correct type, so just pull the returnreg
     private Node unaryTM (Node tree) throws IOException {
         System.out.println("Unary Expression partially Implemented");
         int reg = getFreeRegister();
@@ -465,7 +456,8 @@ public class Generator
         return null;
     }
 
-    int current = 1;
+    //set to zero because increments before return
+    int current = 0;
     private int getFreeRegister()
     {//1-4 are general use.
         //can do map of vars in what registers

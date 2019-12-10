@@ -2,9 +2,9 @@
 *-----End bootstrap-----
 
 *-----Begin function call-----
-0:    LDC  2,1(0)    ;Load number
-1:    OUT  0,0,0    ;Printing value in reg 0
-2:    LDC  3,1(0)    ;Load number
+0:    LDC  1,1(0)    ;Load number
+1:    LDC  2,1(0)    ;Load number
+2:    ADD  2,1,2    ;
 *-----End function call-----
 
 *-----Ending Program-----
