@@ -174,6 +174,8 @@ public class Generator
         printComment("-----Begin bootstrap-----\n");
 
         Node main = getMain(tree);
+
+        //troubleshooting guard
         if (main==null)
         {
             System.out.println("Could not find the main function.");
@@ -211,10 +213,14 @@ public class Generator
         //ends up inserting main before end, so dont need for now
         //print("ldc", 7,2,7,"jump to main by offseting by 2");
         printComment("-----End bootstrap-----\n\n");
+        //main is def node, hack to get down to body
+        //main = main.children.get(3).children.get(0);
+        main = main.children.get(3);
         parseFunc(main);
 
         printComment("-----Ending Program-----\n\n");
-        print("out", 5,0,0,"print the return register");
+        System.out.println("Type is: "+returnVal.name+":"+returnVal.returnReg);
+        print("out", 2,0,0,"print the return register");
         print("halt", 0,0,0);
     }
 
@@ -227,8 +233,9 @@ public class Generator
 
         ///////////first thing store starting addr to func table and the known label dict tag value.
 
-        System.out.println(String.valueOf(defNode));
-        labels.put(defNode.children.get(0).value.toString(), lineNumber);
+        //Def
+        System.out.println("value of "+String.valueOf(defNode));
+        //labels.put(defNode.children.get(0).value.toString(), lineNumber);
 
         //exp can just trigger a return for now, will have to get smarter
 
@@ -255,6 +262,7 @@ public class Generator
         Generator.printComment("-----End function call-----\n\n");
     }
 
+    private static Node.Returned returnVal;
     private void parseFuncHelper (Node tree) throws IOException {
         if(tree.children.isEmpty())
         {
@@ -268,6 +276,7 @@ public class Generator
             Node child = tree.children.get(i);
             switch (child.name) {
                 case "FunctionCalls":
+                    parseFuncHelper(child);
                     if (child.children.get(0).value.equals("print")) {
                         printTM(child);
                     }
@@ -276,50 +285,59 @@ public class Generator
                         System.out.println("func call");
                         functionCallTM(child);
                     }
-                    parseFuncHelper(child);
+
                     break;
                 case "Expr":
                     System.out.println("Handle return");
-                    exprTM(child);
                     parseFuncHelper(child);
+                    Node exprnode = exprTM(child);
+                    tree.children.set(i,exprnode);
                     break;
 				case "Identifier":
-                    identifierTM(child);
                     parseFuncHelper(child);
                     break;
                 case "Number":
+                    parseFuncHelper(child);
                     Node numNode = numberTM(child);
                     tree.children.set(i,numNode);
-                    parseFuncHelper(child);
+
                     break;
                 case "BooleanValue":
-                    booleanTM(child);
                     parseFuncHelper(child);
+                    booleanTM(child);
+                    Node node = exprTM(child);
+                    tree.children.set(i,node);
                     break;
                 case "Binary":
+                    parseFuncHelper(child);
                     Node binaryNode = binaryTM(child);
                     tree.children.set(i,binaryNode);
-                    parseFuncHelper(child);
+
                     break;
                 case "Unary":
+                    parseFuncHelper(child);
                     Node unaryNode = unaryTM(child);
                     tree.children.set(i,unaryNode);
-                    parseFuncHelper(child);
+
                     break;
                 case "If":
-                    ifTM(child);
                     parseFuncHelper(child);
+                    ifTM(child);
+
                     break;
                 case "Actuals":
-                    actualsTM(child);
                     parseFuncHelper(child);
+                    Node actnode = actualsTM(child);
+                    tree.children.set(i,actnode);
                     break;
                 default:
                     parseFuncHelper(child);
-                    //System.out.println("Unknown node type " + child.name);
+                    System.out.println("Unknown node type " + child.name);
                     break;
             }
         }
+        System.out.println("returnval = "+tree.children.get(0).name);
+        returnVal = new Node.Returned(tree.children.get(0).returnReg);
     }
 
     //the following 12 functions write out TM statements for their specific node types
@@ -336,20 +354,25 @@ public class Generator
         print("out" ,reg,0,0, "Printing value in reg "+reg);
     }
 
-    private void exprTM (Node tree) throws IOException {
+    private Node exprTM (Node tree) throws IOException {
         System.out.println("Expression not implemented");
+        //shouldnt need to do anything except pass back up
+        return tree.children.get(0);
     }
 
     private void identifierTM (Node tree) throws IOException {
         System.out.println("Identifier not implemented");
+
     }
 
-    private void formalsTM (Node tree) throws IOException {
+    private Node formalsTM (Node tree) throws IOException {
         System.out.println("Formals not implemented");
+        return tree.children.get(0);
     }
 
-    private void formalTM (Node tree) throws IOException {
+    private Node formalTM (Node tree) throws IOException {
         System.out.println("Formal not implemented");
+        return tree.children.get(0);
     }
 
     private Node numberTM (Node tree) throws IOException {
@@ -422,20 +445,24 @@ public class Generator
         return new Node.Returned(reg);
     }
 
-    private void ifTM (Node tree) throws IOException {
+    private Node ifTM (Node tree) throws IOException {
         System.out.println("If not implemented");
         //if(child0 child1 child2)
+        /////not implemented
+        return null;
     }
 
-    private void actualsTM (Node tree) throws IOException {
+    private Node actualsTM (Node tree) throws IOException {
         System.out.println("Actuals not implemented");
+        return tree.children.get(0);
     }
 
-    private void functionCallTM (Node tree) throws IOException {
+    private Node functionCallTM (Node tree) throws IOException {
         //check exists in symboltable
         //add to unknown list
         //call parsefunc
         System.out.println("Functions not implemented");
+        return null;
     }
 
     int current = 1;
