@@ -269,7 +269,6 @@ public class Generator
             System.out.println("Children are empty for object" + tree.toString());
             return;
         }
-        //////////Problem is it parses parents then children
         for (int i=0; i<tree.children.size(); i++)
         //for (Node child : tree.children)
         {
@@ -342,6 +341,9 @@ public class Generator
 
     //the following 12 functions write out TM statements for their specific node types
 
+    //////////////////////////////////////////The child nodes no longer have types.
+    // //it is assumed they are already the correct type, so just pull the returnreg
+
     //turn node into return type
     private static HashMap<String, Object> variables = new HashMap<>();
 
@@ -398,42 +400,40 @@ public class Generator
     //chage node to result node and check for
     private Node binaryTM (Node tree) throws IOException {
         //System.out.println("Binary Expression work in progrss");
-        //if(identifier) look up symbol table
-        //if(interger) parse int
-        //stable.get(identifier.value).formals.get(0) gives linked list of formals
         Node one = tree.children.get(0);
         Node two = tree.children.get(1);
-        //int reg = getFreeRegister();
+
         if (tree.value.toString().equals("+"))
+            //result in the second reg because less likey to be overwritten
             print("add",two.returnReg,one.returnReg, two.returnReg);
-        if (tree.value.toString().equals("-"))
+        else if (tree.value.toString().equals("-"))
             print("sub",two.returnReg,one.returnReg, two.returnReg);
-        if (tree.value.toString().equals("*"))
+        else if (tree.value.toString().equals("*"))
             print("mul",two.returnReg,one.returnReg, two.returnReg);
-        if (tree.value.toString().equals("/"))
+        else if (tree.value.toString().equals("/"))
             print("div",two.returnReg,one.returnReg, two.returnReg);
+        else
+            System.out.println("Unknown binary op: "+tree.value.toString());
 
         return new Node.Returned(two.returnReg);
     }
-//////////////////////////////////////////The child nodes no longer have types.
-// //it is assumed they are already the correct type, so just pull the returnreg
+
     private Node unaryTM (Node tree) throws IOException {
         System.out.println("Unary Expression partially Implemented");
-        int reg = getFreeRegister();
 
-        if (tree.value.equals("-")){
-            if (tree.children.get(0).name.equals("Number")){
-                int nodeVal = Integer.parseInt(tree.children.get(0).value.toString());
-                print("ldc", reg, nodeVal, 0);
-                print("sub", reg, 0, reg);
-            }
-            else if(tree.children.get(0).name.equals("Identifier")){
-                for (String id : stable.get("Main").formals.get(0)){
+        Node one = tree.children.get(0);
 
-                }
-            }
-        }
-        return new Node.Returned(reg);
+        //negate. subtrack value from zero
+        if (tree.value.toString().equals("-"))
+            print("sub",one.returnReg,0, one.returnReg);
+        //not great way to flip bool. would take a few lines of tm
+        //else if (tree.value.toString().equals("not"))
+
+        else
+        System.out.println("Unknown unary op: "+tree.value.toString());
+
+
+        return new Node.Returned(one.returnReg);
     }
 
     private Node ifTM (Node tree) throws IOException {
