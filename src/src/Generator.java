@@ -41,10 +41,10 @@ public class Generator
 
             writer.close();
         }
-       catch(IOException e)
-       {
-           System.out.println("Unable to write to file");
-       }
+        catch(IOException e)
+        {
+            System.out.println("Unable to write to file");
+        }
     }
 
     //stores jumps awaiting an addr
@@ -115,7 +115,7 @@ public class Generator
         }
         printComment("-----End compute offsets-----\n\n");
     }
-
+/*
     private Node getMain(Node tree)
     {
         //go down one level
@@ -126,15 +126,34 @@ public class Generator
             {
                 if (child.value.equals("main"))
                 {
-                    //if(Main.debugStage == 10) System.out.println("Found main");
                     return tree;
                 }
             }
         }
         System.out.println("Main function not found");
         return null;
+    }*/
+
+    private Node getFunc(Node tree, String name)
+    {
+        System.out.println("looking in "+tree.name);
+        //go down one level
+        tree = tree.children.get(0);
+        for (Node child : tree.children)
+        {
+            if(child.name.equals("Identifier"))
+            {
+                if (child.value.equals(name))
+                {
+                    return tree;
+                }
+            }
+        }
+        System.out.println(name+" function not found");
+        return null;
     }
 
+    /*
     private void iterateOthers(Node tree) throws IOException {
         //sends all def nodes (except for main) to parseFunc
         for (Node child : tree.children) {
@@ -149,26 +168,13 @@ public class Generator
                 iterateOthers(child);
             }
         }
-    }
-                /*if(child.name.equals("Identifier")) {
-                if (stable.containsKey(child.value)) {
-                    if (child.value.equals("main") || child.value.equals("print")){
-                        continue;
-                    }
-                    else {
-                        parseFunc(tree.children.get(3));
-                    }
-                }
-            }
-            else{
-                iterateOthers(child);
-            }*/
+    }*/
 
     private void bootStrap() throws IOException
     {
         printComment("-----Begin bootstrap-----\n");
 
-        Node main = getMain(tree);
+        Node main = getFunc(tree,"main");
 
         //troubleshooting guard
         if (main==null)
@@ -276,7 +282,6 @@ public class Generator
                     }
                     //handle func call
                     else {
-                        System.out.println("func call");
                         functionCallTM(child);
                     }
 
@@ -287,7 +292,7 @@ public class Generator
                     Node exprnode = exprTM(child);
                     tree.children.set(i,exprnode);
                     break;
-				case "Identifier":
+                case "Identifier":
                     parseFuncHelper(child);
                     break;
                 case "Number":
@@ -424,11 +429,11 @@ public class Generator
         //negate. subtrack value from zero
         if (tree.value.toString().equals("-"))
             print("sub",one.returnReg,0, one.returnReg);
-        //not great way to flip bool. would take a few lines of tm
-        //else if (tree.value.toString().equals("not"))
+            //not great way to flip bool. would take a few lines of tm
+            //else if (tree.value.toString().equals("not"))
 
         else
-        System.out.println("Unknown unary op: "+tree.value.toString());
+            System.out.println("Unknown unary op: "+tree.value.toString());
 
 
         return new Node.Returned(one.returnReg);
@@ -472,10 +477,15 @@ public class Generator
     }
 
     private Node functionCallTM (Node tree) throws IOException {
-        //check exists in symboltable
+        //check exists in symboltable - i think that is validated already
         //add to unknown list
         //call parsefunc
-        System.out.println("Functions not implemented");
+        System.out.println("Function call work in progress");
+        //pull out func name
+        String funcName = tree.name;
+        System.out.println("trying to get: "+funcName);
+        //labels.put(name);
+
         return null;
     }
 
