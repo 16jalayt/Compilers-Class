@@ -100,7 +100,7 @@ public class Generator
         for (int i = 0; i<waiting.size(); i++)
         {
             if(labels.containsKey(waiting.get(i).tag))
-            {/////////Not actually setting addr?
+            {//TODO: just update r2 with new addr
                 int addr = labels.get(waiting.get(i).tag);
                 print(addr, waiting.get(i).instruction , waiting.get(i).r1 ,waiting.get(i).r2,
                         waiting.get(i).r3, waiting.get(i).comment);
@@ -126,12 +126,7 @@ public class Generator
             {
                 if (child.value.equals("main"))
                 {
-                    if(Main.debugStage == 10) System.out.println("Found main");
-                    //Hack for out of scope. Should only be set once anyway.
-                    /*main.value = tree.value;
-                    main.children = tree.children;
-                    main.type = tree.type;
-                    main.name = tree.name;*/
+                    //if(Main.debugStage == 10) System.out.println("Found main");
                     return tree;
                 }
             }
@@ -219,7 +214,7 @@ public class Generator
         parseFunc(main);
 
         printComment("-----Ending Program-----\n\n");
-        System.out.println("Type is: "+returnVal.name+":"+returnVal.returnReg);
+        //System.out.println("Type is: "+returnVal.name+":"+returnVal.returnReg);
         print("out", returnVal.returnReg,0,0,"print the return register");
         print("halt", 0,0,0);
     }
@@ -234,7 +229,7 @@ public class Generator
         ///////////first thing store starting addr to func table and the known label dict tag value.
 
         //Def
-        System.out.println("value of "+String.valueOf(defNode));
+        //System.out.println("value of "+String.valueOf(defNode));
         //labels.put(defNode.children.get(0).value.toString(), lineNumber);
 
         //exp can just trigger a return for now, will have to get smarter
@@ -266,7 +261,7 @@ public class Generator
     private void parseFuncHelper (Node tree) throws IOException {
         if(tree.children.isEmpty())
         {
-            System.out.println("Children are empty for object" + tree.toString());
+            //System.out.println("Children are empty for object" + tree.toString());
             return;
         }
         for (int i=0; i<tree.children.size(); i++)
@@ -287,7 +282,7 @@ public class Generator
 
                     break;
                 case "Expr":
-                    System.out.println("Handle return");
+                    //System.out.println("Handle return");
                     parseFuncHelper(child);
                     Node exprnode = exprTM(child);
                     tree.children.set(i,exprnode);
@@ -350,30 +345,26 @@ public class Generator
     private void printTM (Node tree) throws IOException {
         //System.out.println("Print work in progress");
         int reg = tree.children.get(0).returnReg;
-        //int val = Integer.parseInt(tree.children.get(1).children.get(0).value.toString());
-        //print("ldc" ,reg,val,0);
-        //print("out" ,reg,0,0, "Printing value:"+val);
         print("out" ,reg,0,0, "Printing value in reg "+reg);
     }
 
     private Node exprTM (Node tree) throws IOException {
-        System.out.println("Expression not implemented");
+        //System.out.println("Expression not implemented");
         //shouldnt need to do anything except pass back up
         return tree.children.get(0);
     }
 
     private void identifierTM (Node tree) throws IOException {
         System.out.println("Identifier not implemented");
-
     }
 
     private Node formalsTM (Node tree) throws IOException {
-        System.out.println("Formals not implemented");
+        //System.out.println("Formals not implemented");
         return tree.children.get(0);
     }
 
     private Node formalTM (Node tree) throws IOException {
-        System.out.println("Formal not implemented");
+        //System.out.println("Formal not implemented");
         return tree.children.get(0);
     }
 
@@ -412,6 +403,13 @@ public class Generator
             print("mul",two.returnReg,one.returnReg, two.returnReg);
         else if (tree.value.toString().equals("/"))
             print("div",two.returnReg,one.returnReg, two.returnReg);
+        else if (tree.value.toString().equals("="))
+            //return copy of same node and let if deal with the op
+            return tree;
+        else if (tree.value.toString().equals(">"))
+            return tree;
+        else if (tree.value.toString().equals("<"))
+            return tree;
         else
             System.out.println("Unknown binary op: "+tree.value.toString());
 
@@ -437,10 +435,35 @@ public class Generator
     }
 
     private Node ifTM (Node tree) throws IOException {
-        System.out.println("If not implemented");
-        //if(child0 child1 child2)
-        /////not implemented
-        return null;
+        System.out.println("If work in progress");
+        //if
+        Node one = tree.children.get(0);
+        //then
+        Node two = tree.children.get(1);
+        //else
+        Node three = tree.children.get(2);
+
+        //get bool node as child, have to parse and eval
+        Node opOne = one.children.get(0);
+        Node opTwo = one.children.get(1);
+        String op = one.value.toString();
+        int result = getFreeRegister();
+        //sub 2 operands to make one zero. See if the other one is equal to zero
+        print("sub",two.returnReg, two.returnReg, one.returnReg,"subtract operands to compare to 0");
+
+
+        //TODO: setup label to match and get lebel working
+        if (op.equals("="))
+            //jump to abs addr
+            addr("JEQ",result, -1, 0,"if");
+        else if (op.equals(">"))
+            addr("JGT",result, -1, 0,"if");
+        else if (op.equals("<"))
+            addr("JLT",result, -1, 0,"if");
+        else
+            System.out.println("Unknown operand: " + op);
+
+        return new Node.Returned(three.returnReg);
     }
 
     private Node actualsTM (Node tree) throws IOException {
@@ -542,7 +565,7 @@ public class Generator
                 lineNumber++;
                 break;
             default:
-                lineOut += "," + r3;
+                lineOut += "," + r3+" ";
                 lineNumber++;
                 break;
         }
