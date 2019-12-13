@@ -17,7 +17,7 @@ public class TypeCheck {
             System.out.println(errorCode);
         }
         else{
-            if(Main.debugStage == 8) System.out.println("No semantic errors found.");
+            System.out.println("No semantic errors found.");
         }
     }
 
@@ -94,6 +94,9 @@ public class TypeCheck {
                 if (child.children.get(0).value.equals("print")) {
                     continue;
                 }
+                else{
+                    body.type = child.type;
+                }
             }
             else {
                 if(Main.debugStage == 8) System.out.println("this is child type: " + child.type);
@@ -109,7 +112,7 @@ public class TypeCheck {
     //Does a comparison for all types of unary nodes by looking into
     // it first by unary op and then by the type
     public void unaryCompareNodes(Node unaryNode){
-        if(unaryNode.value.toString().equals("not")){
+        if(unaryNode.value.toString().equals("n")){
             if(unaryNode.children.get(0).type.equals("boolean")) {
                 unaryNode.type = unaryNode.children.get(0).type; }
             else {
@@ -148,14 +151,22 @@ public class TypeCheck {
     // You have three top levels with = which must be true. Then and, or which are
     // boolean type. The rest would have to be of integer type including <
     public void compareBinaryOpToType(Node binaryNode){
-        if(binaryNode.value.toString().equals("=")){
-            binaryNode.type = binaryNode.children.get(0).type; }
-        else if(binaryNode.value.toString().equals("and") || binaryNode.value.toString().equals("or")){
+        if(binaryNode.value.toString().equals("a") || binaryNode.value.toString().equals("o")){
             if (binaryNode.children.get(0).type.equals("boolean")){
                 binaryNode.type = binaryNode.children.get(0).type; }
             else {
                 binaryNode.type = "Error";
                 generateError(binaryNode); }
+        }
+        else if (binaryNode.value.toString().equals("<") || binaryNode.value.toString().equals("=")){
+            if (binaryNode.children.get(0).type.equals("integer"))
+            {
+                binaryNode.type = "boolean";
+            }
+            else {
+                binaryNode.type = "Error";
+                generateError(binaryNode);
+            }
         }
         else {
             if (binaryNode.children.get(0).type.equals("integer")){
@@ -213,30 +224,17 @@ public class TypeCheck {
             if(Main.debugStage == 8) System.out.println("functionName is : " + functionName.value);
             if(Main.debugStage == 8) System.out.println("formals are : " + tempObj.formals);
 
-            //for (LinkedList<String> formal : tempObj.formals){
-
-
-                if(Main.debugStage == 8) System.out.println("Here is temp list1: " + tempList);
-                if(Main.debugStage == 8) System.out.println("Here is temp list2: " + tempList2);
-
-
-            //if (formal.equals(tempList)) {
-            //if (stable.get(functionName.value).equals(new TT_Obj(tempListList, functionType.type))) {
             if (tempObj.formals.contains(tempList))
             {
 
                 Identifier.type = "integer";
-                System.out.println("Got here 1");
                 break;
             }
 
-            //else if (stable.get(functionName.value).equals(new TT_Obj(tempListList2, functionType.type))) {
-            //else if (formal.equals(tempList2)) {
             else if (tempObj.formals.contains(tempList2))
             {
 
                 Identifier.type = "boolean";
-                System.out.println("Got here 2");
                 break;
             } else
             {
@@ -247,7 +245,8 @@ public class TypeCheck {
             if (Identifier.type.equals("integer") || Identifier.type.equals("boolean"))
             {
                 break;
-            } else if (Identifier.type.equals("Error"))
+            }
+            else if (Identifier.type.equals("Error"))
             {
                 generateError(Identifier);
                 break;
@@ -257,7 +256,6 @@ public class TypeCheck {
 
     public void compareFunctionCallsNode(Node FunctionCall) {
         //break out if function call is a print statement
-        System.out.println("Function call type is :" + FunctionCall.type);
         FunctionCall.type = "Empty";
         while (true) {
             Node identifier = FunctionCall.children.get(0);

@@ -49,6 +49,7 @@ public class Parser
 
     public Node getTree()
     {
+        fixBooleanNodes(tree);
         return tree;
     }
 
@@ -465,6 +466,18 @@ public class Parser
         // add in else for f token.type() is EOF error or comment
         return s;
 
+    }
+
+    private void fixBooleanNodes(Node current){
+        for (Node child : current.children) {
+            fixBooleanNodes(child);
+        }
+        if (current.name.equals("Identifier")){
+            if (current.value.equals("false") || current.value.equals("true")){
+                current.name = "booleanValue";
+                current.type = "boolean";
+            }
+        }
     }
 
     private void createRuleList()
