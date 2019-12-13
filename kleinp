@@ -1,0 +1,4 @@
+#!/bin/bash
+cd src/
+java src.Main "$@" validate
+cd ../

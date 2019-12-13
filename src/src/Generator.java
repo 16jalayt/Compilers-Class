@@ -136,7 +136,7 @@ public class Generator
 
     private Node getFunc(Node tree, String name)
     {
-        System.out.println("looking in "+tree.name);
+        if(Main.debugStage == 8) System.out.println("looking in "+tree.name);
         //go down one level
         tree = tree.children.get(0);
         for (Node child : tree.children)
@@ -271,7 +271,6 @@ public class Generator
             return;
         }
         for (int i=0; i<tree.children.size(); i++)
-        //for (Node child : tree.children)
         {
             Node child = tree.children.get(i);
             switch (child.name) {
@@ -287,13 +286,13 @@ public class Generator
 
                     break;
                 case "Expr":
-                    //System.out.println("Handle return");
                     parseFuncHelper(child);
                     Node exprnode = exprTM(child);
                     tree.children.set(i,exprnode);
                     break;
                 case "Identifier":
-                    parseFuncHelper(child);
+                    Node idnode = identifierTM(child);
+                    tree.children.set(i,idnode);
                     break;
                 case "Number":
                     parseFuncHelper(child);
@@ -359,8 +358,16 @@ public class Generator
         return tree.children.get(0);
     }
 
-    private void identifierTM (Node tree) throws IOException {
-        System.out.println("Identifier not implemented");
+    private Node identifierTM (Node tree) throws IOException {
+        System.out.println("Identifier work in progress");
+        int reg = getFreeRegister();
+        if(tree.value.toString().equals("true"))
+            print("ldc",reg,1,0,"Boolean true");
+        else if(tree.value.toString().equals("false"))
+            print("ldc",reg,0,0,"Boolean false");
+        else
+            System.out.println("Invalid ID expression");
+        return new Node.Returned(reg);
     }
 
     private Node formalsTM (Node tree) throws IOException {
@@ -382,7 +389,8 @@ public class Generator
     }
 
     private Node booleanTM (Node tree) throws IOException {
-        System.out.println("Boolean work in progress");
+        //bool stored as identifier, uses that func insted
+        //System.out.println("Boolean work in progress");
         int reg = getFreeRegister();
         if(tree.value.toString().equals("true"))
             print("ldc",reg,1,0,"Boolean true");
