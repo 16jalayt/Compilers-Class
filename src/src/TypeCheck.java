@@ -27,11 +27,11 @@ public class TypeCheck {
     public void printSymbolTable()
     {
         Set< Map.Entry< Object,TT_Obj> > set = stable.entrySet();
-        System.out.println();
-        System.out.println("Printing symbol table now.");
+        if(Main.debugStage == 8) System.out.println();
+        if(Main.debugStage == 8) System.out.println("Printing symbol table now.");
         for (Map.Entry< Object,TT_Obj> stable:set)
         {
-            System.out.println(stable.getKey()+":: "+stable.getValue());
+            if(Main.debugStage == 8) System.out.println(stable.getKey()+":: "+stable.getValue());
         }
     }
 
@@ -96,7 +96,7 @@ public class TypeCheck {
                 }
             }
             else {
-                System.out.println("this is child type: " + child.type);
+                if(Main.debugStage == 8) System.out.println("this is child type: " + child.type);
                 body.type = child.type;
             }
         }
@@ -185,7 +185,7 @@ public class TypeCheck {
         while (true)
         {
             //If the Identifier is a print statement, do nothing.
-            System.out.println("Identifier is : " + Identifier.value);
+            if(Main.debugStage == 8) System.out.println("Identifier is : " + Identifier.value);
 
             if (Identifier.value.equals("print"))
             {
@@ -210,14 +210,14 @@ public class TypeCheck {
             tempList2.add("boolean");
             tempListList2.add(tempList2);
 
-            System.out.println("functionName is : " + functionName.value);
-            System.out.println("formals are : " + tempObj.formals);
+            if(Main.debugStage == 8) System.out.println("functionName is : " + functionName.value);
+            if(Main.debugStage == 8) System.out.println("formals are : " + tempObj.formals);
 
             //for (LinkedList<String> formal : tempObj.formals){
 
 
-            System.out.println("Here is temp list1: " + tempList);
-            System.out.println("Here is temp list2: " + tempList2);
+                if(Main.debugStage == 8) System.out.println("Here is temp list1: " + tempList);
+                if(Main.debugStage == 8) System.out.println("Here is temp list2: " + tempList2);
 
 
             //if (formal.equals(tempList)) {
@@ -261,12 +261,12 @@ public class TypeCheck {
         FunctionCall.type = "Empty";
         while (true) {
             Node identifier = FunctionCall.children.get(0);
-            System.out.println("Identifier is :" + identifier.value);
+            if(Main.debugStage == 8) System.out.println("Identifier is :" + identifier.value);
 
             // Check that identifier exists
             if (!stable.containsKey(identifier.value)) {
                 //The given identifier does not exist in the stable
-                System.out.println("Error here 1");
+                if(Main.debugStage == 8) System.out.println("Error here 1");
                 FunctionCall.type = "Error";
                 if (errorCode.equals("")) {
                     errorCode = "Error, Identifier Node " + identifier + " does not exist. ";
@@ -287,7 +287,7 @@ public class TypeCheck {
                 // compare the type of the actual at i to the formal at i
                 if (!actuals.children.get(i).type.equals(stable.get(identifier.value).formals.get(i).get(1))) {
                     // Error that the type of the actual doesn't match the type of the formal
-                    System.out.println("Error here 2");
+                    if(Main.debugStage == 8) System.out.println("Error here 2");
                     FunctionCall.type = "Error";
                     if (errorCode.equals("")) {
                         String temp1 = "Error, " + actuals.children.get(i) + " Node of type " + actuals.children.get(i).type;
@@ -303,7 +303,7 @@ public class TypeCheck {
                 }
             }
 
-            System.out.println("Fun Type : " + FunctionCall.type);
+            if(Main.debugStage == 8) System.out.println("Fun Type : " + FunctionCall.type);
             //If FunctionCall.type is still null, there was no error, so we can assign this identifier its type
             //if (FunctionCall.type == null){
             if (!FunctionCall.type.equals("Error")){

@@ -1,4 +1,13 @@
 #! /bin/sh
+echo "... changing all scripts to executable"
+chmod -x clean
+chmod -x klein
+chmod -x kleinc
+chmod -x kleinf
+chmod -x kleinp
+chmod -x kleins
+chmod -x kleinv
+
 echo "... removing any existing classfiles"
 cd src/src/
 rm -f *.class

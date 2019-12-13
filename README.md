@@ -1,19 +1,11 @@
 # Compilers-Class
-Team Argonaut: Layton*, Litterer, Riggs
+Team Argonaut: Layton, Litterer, Riggs
 
 Git notes:
 To create project, click checkout from git, then paste in https://github.com/16jalayt/Compilers-Class.git
 
-Make sure to use sync when starting.
-Use commit when done with chunks of code.
-MAKE SURE YOU PUSH CHANGES and they show up in the repo.
-
-Project 5 additional info:
-Klein file of the name "filename.kln" is converted into a Tm file of the name "filename.tm". Output of 
-Generator is stored in "filename.tm".
-
-Project 6 additional info:
-Our Klein file for project 6 is titled funWithFractions.kln and is found under the "tests" folder
+A Klein file of the name "filename.kln" is converted into a Tm file of the name "filename.tm". The output of 
+the compiler is stored in "filename.tm".
 
 Classes in this file:
 Main(): Has multiple debug stages. debug=1 is for testing scanner, debug=3 is for testing parser true/false, 
@@ -31,7 +23,7 @@ TypeChecker(): Goes through the AST from the Parser and makes sure it is semanti
 TT_Obj(): This is the data structure used for each function named in the program. We want to keep track of the formals, type,
            what functions it called and what functions calls it. 
 Generator(): This class translates a klein program into TM. No Intermediate Representation is currently used. 
-             Currently does not work properly.
+             Currently only partially works.
 
 
 How to Use:
@@ -60,7 +52,8 @@ run ./build
 
 Known bugs: 
 Most of typeCheckers issues have been fixed, although there are still some minor bugs that 
-cause larger klein files to be seen as semantically incorrect when they are not. I think
-I know where exactly this issue is though, should have that fixed by the final project due date.
+cause larger klein files to be seen as semantically incorrect when they are not.
 Generator doesn't work properly, it is very bare-bones currently.
-                  
+
+Optimizations:
+We tried to inline functions, but ran out of time to get it working.         
