@@ -20,7 +20,7 @@ public class Main
     {
         if(args.length == 1)
         {
-            debugStage = 8;
+            debugStage = 7;
         }
         else if(args.length == 2)
         {

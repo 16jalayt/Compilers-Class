@@ -1,18 +1,42 @@
+(*
+   FILE: sieve.kln
+   AUTHOR: Eugene Wallingford
+   DATE  : 2007/09/25
+   TASK  : computes and prints a Sieve of Eratosthenes
+*)
 
-function MOD( m : integer, n : integer ) : integer
-    m - m/n * n
+function main( n : integer ) : boolean
+   sieveAt(2, n)
 
-function multWithAccum(m : integer, n : integer, accum : integer) : integer
-    if n = 0 then
-       accum
-    else if MOD(n, 2) = 1 then
-       multWithAccum(m*2, n/2, accum+m)
-    else
-       multWithAccum(m*2, n/2, accum)
+function sieveAt(current : integer, max : integer) : boolean
+   if max < current then
+      true
+   else
+      doSieveAt(current, max)
 
-function mult(m : integer, n : integer) : integer
-    multWithAccum(m, n, 0)
+(*
+   doSieveAt exists only because calls to print are allowed
+   only as the first expression in the body of function.
+*)
 
-function main(m : integer, n : integer) : integer
-    print(m)
-    mult(m, n)
+function doSieveAt(current : integer, max : integer) : boolean
+   print( if isPrime(current) then current else 0 )
+   sieveAt(current+1, max)
+
+function isPrime( n : integer ) : boolean
+   not hasDivisorFrom(2, n)
+
+function hasDivisorFrom( i : integer, n : integer) : boolean
+   if i < n then
+      divides(i, n) or hasDivisorFrom(i+1, n)
+   else
+      false
+
+function divides( a : integer, b : integer) : boolean
+   rem(b, a) = 0
+
+function rem( num : integer, den : integer) : integer
+   if num < den then
+      num
+   else
+      rem( num-den, den)
