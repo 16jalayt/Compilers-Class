@@ -96,6 +96,7 @@ public class TypeCheck {
                 }
             }
             else {
+                System.out.println("this is child type: " + child.type);
                 body.type = child.type;
             }
         }
@@ -108,7 +109,7 @@ public class TypeCheck {
     //Does a comparison for all types of unary nodes by looking into
     // it first by unary op and then by the type
     public void unaryCompareNodes(Node unaryNode){
-        if(unaryNode.value.toString() == "not"){
+        if(unaryNode.value.toString().equals("not")){
             if(unaryNode.children.get(0).type.equals("boolean")) {
                 unaryNode.type = unaryNode.children.get(0).type; }
             else {
@@ -180,12 +181,15 @@ public class TypeCheck {
     public void compareIdentifierNode(Node Identifier) {
         // If Identifier is contained in the Symbol table
         // for this Def, then true and set type. else false and error message
+        boolean flag = true;
         while (true) {
             //If the Identifier is a print statement, do nothing.
+            System.out.println("Identifier is : " + Identifier.value);
+
             if (Identifier.value.equals("print")) {
                 break;
             }
-            else if (stable.containsKey(Identifier.value)) {
+            else if (stable.containsKey(Identifier.value.toString())) {
                 break;
             }
             TT_Obj tempObj = stable.get(functionName.value);
@@ -206,27 +210,40 @@ public class TypeCheck {
 
             System.out.println("functionName is : " + functionName.value);
             System.out.println("formals are : " + tempObj.formals);
-            System.out.println("TempList is : " + tempList);
+
+            for (LinkedList<String> formal : tempObj.formals)
+            {
+
+                System.out.println("Here is temp list1: " + tempList);
+                System.out.println("Here is temp list2: " + tempList2);
 
 
-            for (LinkedList<String> formal : tempObj.formals) {
                 //if (formal.equals(tempList)) {
                 if (stable.get(functionName.value).equals(new TT_Obj(tempListList, functionType.type))) {
+                //if (tempObj.formals.contains(tempList)){
+
                     Identifier.type = "integer";
+                    System.out.println("Got here 1");
                     break;
                 }
 
                 else if (stable.get(functionName.value).equals(new TT_Obj(tempListList2, functionType.type))) {
                 //else if (formal.equals(tempList2)) {
+                //else if (tempObj.formals.contains(tempList2)){
+
                     Identifier.type = "boolean";
+                    System.out.println("Got here 2");
                     break;
+                } else
+                {
+                    Identifier.type = "Error";
                 }
             }
+
             if (Identifier.type.equals("integer") || Identifier.type.equals("boolean")){
                 break;
             }
-            else{
-                Identifier.type = "Error";
+            else if (Identifier.type.equals("Error")){
                 generateError(Identifier);
                 break;
             }
@@ -235,12 +252,15 @@ public class TypeCheck {
 
     public void compareFunctionCallsNode(Node FunctionCall) {
         //break out if function call is a print statement
+        System.out.println("Function call type is :" + FunctionCall.type);
         while (true) {
             Node identifier = FunctionCall.children.get(0);
+            System.out.println("Identifier is :" + identifier.value);
 
             // Check that identifier exists
             if (!stable.containsKey(identifier.value)) {
                 //The given identifier does not exist in the stable
+                System.out.println("Error here 1");
                 FunctionCall.type = "Error";
                 if (errorCode.equals("")) {
                     errorCode = "Error, Identifier Node " + identifier + " does not exist. ";
@@ -261,6 +281,7 @@ public class TypeCheck {
                 // compare the type of the actual at i to the formal at i
                 if (!actuals.children.get(i).type.equals(stable.get(identifier.value).formals.get(i).get(1))) {
                     // Error that the type of the actual doesn't match the type of the formal
+                    System.out.println("Error here 2");
                     FunctionCall.type = "Error";
                     if (errorCode.equals("")) {
                         String temp1 = "Error, " + actuals.children.get(i) + " Node of type " + actuals.children.get(i).type;
@@ -275,7 +296,7 @@ public class TypeCheck {
                     }
                 }
             }
-            System.out.println("Identifier name is : " + identifier.value);
+
             System.out.println("Fun Type : " + FunctionCall.type);
             //If FunctionCall.type is still null, there was no error, so we can assign this identifier its type
             //if (FunctionCall.type == null){
@@ -401,5 +422,34 @@ public class TypeCheck {
             }
             errorCode = temp + errorCode;
         }
+    }
+
+    public void printAllTypes(Node tree, int n){
+
+        for (int m=0; m<n; m++)
+        {
+            System.out.print("\t");
+        }
+
+
+        System.out.print(tree.name);
+        if (tree.value != null) {
+            System.out.print(" ");
+            System.out.print(tree.value);
+            System.out.print(" ");
+            System.out.println(tree.type);
+        }
+        else{
+            System.out.print(" ");
+            System.out.println(tree.type);
+        }
+
+
+        //Recursively Iterates for each child.
+        for (Node child : tree.children) {
+            //System.out.println("Child size is:" + this.children.size());
+            printAllTypes(child, n + 1);
+        }
+
     }
 }

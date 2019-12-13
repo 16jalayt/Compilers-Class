@@ -20,7 +20,7 @@ public class Main
     {
         if(args.length == 1)
         {
-            debugStage = 10;
+            debugStage = 8;
         }
         else if(args.length == 2)
         {
@@ -82,10 +82,12 @@ public class Main
                 Parser parse = new Parser(scan);
                 parse.parse();
                 TypeCheck checker = new TypeCheck();
-                checker.check(parse.getTree());
+                Node tree = parse.getTree();
+                checker.check(tree);
                 if(debugStage == 8)
                 {
-                    checker.printSymbolTable();
+                    //checker.printSymbolTable();
+                    checker.printAllTypes(tree, 0);
                 }
             }
             //code gen

@@ -20,7 +20,7 @@ public class Node
     {
         this.parent = null;
         this.value = null;
-        this.type = "";
+        this.type = "empty";
     }
 
     public Node(Node[] children_array)
