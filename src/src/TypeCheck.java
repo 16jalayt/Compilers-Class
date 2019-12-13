@@ -181,15 +181,17 @@ public class TypeCheck {
     public void compareIdentifierNode(Node Identifier) {
         // If Identifier is contained in the Symbol table
         // for this Def, then true and set type. else false and error message
-        boolean flag = true;
-        while (true) {
+
+        while (true)
+        {
             //If the Identifier is a print statement, do nothing.
             System.out.println("Identifier is : " + Identifier.value);
 
-            if (Identifier.value.equals("print")) {
+            if (Identifier.value.equals("print"))
+            {
                 break;
-            }
-            else if (stable.containsKey(Identifier.value.toString())) {
+            } else if (stable.containsKey(Identifier.value.toString()))
+            {
                 break;
             }
             TT_Obj tempObj = stable.get(functionName.value);
@@ -211,39 +213,42 @@ public class TypeCheck {
             System.out.println("functionName is : " + functionName.value);
             System.out.println("formals are : " + tempObj.formals);
 
-            for (LinkedList<String> formal : tempObj.formals)
+            //for (LinkedList<String> formal : tempObj.formals){
+
+
+            System.out.println("Here is temp list1: " + tempList);
+            System.out.println("Here is temp list2: " + tempList2);
+
+
+            //if (formal.equals(tempList)) {
+            //if (stable.get(functionName.value).equals(new TT_Obj(tempListList, functionType.type))) {
+            if (tempObj.formals.contains(tempList))
             {
 
-                System.out.println("Here is temp list1: " + tempList);
-                System.out.println("Here is temp list2: " + tempList2);
-
-
-                //if (formal.equals(tempList)) {
-                if (stable.get(functionName.value).equals(new TT_Obj(tempListList, functionType.type))) {
-                //if (tempObj.formals.contains(tempList)){
-
-                    Identifier.type = "integer";
-                    System.out.println("Got here 1");
-                    break;
-                }
-
-                else if (stable.get(functionName.value).equals(new TT_Obj(tempListList2, functionType.type))) {
-                //else if (formal.equals(tempList2)) {
-                //else if (tempObj.formals.contains(tempList2)){
-
-                    Identifier.type = "boolean";
-                    System.out.println("Got here 2");
-                    break;
-                } else
-                {
-                    Identifier.type = "Error";
-                }
-            }
-
-            if (Identifier.type.equals("integer") || Identifier.type.equals("boolean")){
+                Identifier.type = "integer";
+                System.out.println("Got here 1");
                 break;
             }
-            else if (Identifier.type.equals("Error")){
+
+            //else if (stable.get(functionName.value).equals(new TT_Obj(tempListList2, functionType.type))) {
+            //else if (formal.equals(tempList2)) {
+            else if (tempObj.formals.contains(tempList2))
+            {
+
+                Identifier.type = "boolean";
+                System.out.println("Got here 2");
+                break;
+            } else
+            {
+                Identifier.type = "Error";
+            }
+
+
+            if (Identifier.type.equals("integer") || Identifier.type.equals("boolean"))
+            {
+                break;
+            } else if (Identifier.type.equals("Error"))
+            {
                 generateError(Identifier);
                 break;
             }
@@ -253,6 +258,7 @@ public class TypeCheck {
     public void compareFunctionCallsNode(Node FunctionCall) {
         //break out if function call is a print statement
         System.out.println("Function call type is :" + FunctionCall.type);
+        FunctionCall.type = "Empty";
         while (true) {
             Node identifier = FunctionCall.children.get(0);
             System.out.println("Identifier is :" + identifier.value);
