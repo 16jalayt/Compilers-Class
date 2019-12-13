@@ -51,8 +51,6 @@ To build:
 run ./build
 
 Known bugs: 
-Most of typeCheckers issues have been fixed, although there are still some minor bugs that 
-cause larger klein files to be seen as semantically incorrect when they are not.
 Generator doesn't work properly, it is very bare-bones currently.
 
 Optimizations:
